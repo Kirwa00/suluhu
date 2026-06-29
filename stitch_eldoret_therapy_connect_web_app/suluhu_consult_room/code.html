@@ -1,0 +1,235 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Virtual Consult Room | Suluhu Therapy Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-tertiary-fixed-variant": "#004d67",
+                "on-surface-variant": "#424750",
+                "background": "#f8fafb",
+                "on-tertiary-fixed": "#001e2b",
+                "inverse-surface": "#2e3132",
+                "inverse-on-surface": "#eff1f2",
+                "primary": "#00386d",
+                "on-primary": "#ffffff",
+                "on-secondary-container": "#1f705f",
+                "on-primary-container": "#9cc2ff",
+                "primary-fixed": "#d5e3ff",
+                "tertiary": "#003d52",
+                "outline": "#737781",
+                "primary-fixed-dim": "#a7c8ff",
+                "error-container": "#ffdad6",
+                "surface-dim": "#d8dadb",
+                "on-secondary-fixed": "#002019",
+                "surface-container-highest": "#e1e3e4",
+                "success-calm": "#2E8555",
+                "on-primary-fixed-variant": "#0d4784",
+                "on-secondary": "#ffffff",
+                "surface-container-low": "#f2f4f5",
+                "on-tertiary": "#ffffff",
+                "surface": "#f8fafb",
+                "on-tertiary-container": "#7acaf2",
+                "on-background": "#191c1d",
+                "text-rich-slate": "#1C1E21",
+                "surface-container-high": "#e6e8e9",
+                "surface-container-lowest": "#ffffff",
+                "on-error-container": "#93000a",
+                "on-surface": "#191c1d",
+                "tertiary-fixed-dim": "#81d0f8",
+                "tertiary-container": "#005571",
+                "secondary-fixed-dim": "#89d5c0",
+                "on-secondary-fixed-variant": "#005142",
+                "tertiary-fixed": "#c1e8ff",
+                "surface-soothing": "#F0F4F8",
+                "surface-container": "#eceeef",
+                "secondary-container": "#a5f2db",
+                "secondary": "#166a59",
+                "error": "#ba1a1a",
+                "primary-container": "#1b4f8c",
+                "on-primary-fixed": "#001c3b",
+                "accent-teal-light": "#E8F3F1",
+                "outline-variant": "#c2c6d1",
+                "inverse-primary": "#a7c8ff",
+                "surface-variant": "#e1e3e4",
+                "secondary-fixed": "#a5f2db",
+                "surface-tint": "#305f9d",
+                "on-error": "#ffffff",
+                "surface-bright": "#f8fafb"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "section-gap": "80px",
+                "margin-mobile": "16px",
+                "margin-desktop": "40px",
+                "gutter": "24px",
+                "unit": "8px",
+                "container-max": "1200px"
+        },
+        "fontFamily": {
+                "body-md": [
+                        "Inter"
+                ],
+                "headline-md": [
+                        "Manrope"
+                ],
+                "headline-lg-mobile": [
+                        "Manrope"
+                ],
+                "headline-lg": [
+                        "Manrope"
+                ],
+                "label-sm": [
+                        "Inter"
+                ],
+                "label-md": [
+                        "Inter"
+                ],
+                "body-lg": [
+                        "Inter"
+                ],
+                "display-lg": [
+                        "Manrope"
+                ]
+        },
+        "fontSize": {
+                "body-md": [
+                        "16px",
+                        {
+                                "lineHeight": "24px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "headline-md": [
+                        "24px",
+                        {
+                                "lineHeight": "32px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg-mobile": [
+                        "28px",
+                        {
+                                "lineHeight": "36px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "headline-lg": [
+                        "32px",
+                        {
+                                "lineHeight": "40px",
+                                "fontWeight": "600"
+                        }
+                ],
+                "label-sm": [
+                        "12px",
+                        {
+                                "lineHeight": "16px",
+                                "letterSpacing": "0.02em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "label-md": [
+                        "14px",
+                        {
+                                "lineHeight": "20px",
+                                "letterSpacing": "0.01em",
+                                "fontWeight": "500"
+                        }
+                ],
+                "body-lg": [
+                        "18px",
+                        {
+                                "lineHeight": "28px",
+                                "fontWeight": "400"
+                        }
+                ],
+                "display-lg": [
+                        "48px",
+                        {
+                                "lineHeight": "56px",
+                                "letterSpacing": "-0.02em",
+                                "fontWeight": "700"
+                        }
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background h-screen flex flex-col font-body-md text-body-md overflow-hidden">
+<!-- Header (Consultation Mode - Minimal) -->
+<header class="bg-surface text-on-surface py-unit px-gutter flex justify-between items-center z-10 shadow-sm shrink-0">
+<div class="flex items-center gap-unit">
+<span class="font-headline-md text-[20px] font-semibold text-primary">Suluhu Therapy Center</span>
+<span class="w-px h-6 bg-outline-variant mx-2"></span>
+<span class="text-on-surface-variant font-label-md text-label-md">Session with Dr. Amina</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container py-1 px-3 rounded-full shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-success-calm shadow-[0_0_8px_#2E8555]"></span>
+<span class="font-label-md text-label-md text-on-surface-variant">Connection: Strong</span>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-1 relative bg-surface-container-low flex flex-col p-4 md:p-gutter gap-4 overflow-hidden">
+<!-- Video Canvas -->
+<div class="flex-1 relative rounded-[24px] overflow-hidden bg-[#333333] shadow-lg flex items-center justify-center">
+<!-- Therapist Video Placeholder (Main) -->
+<img class="absolute inset-0 w-full h-full object-cover opacity-90 transition-opacity duration-300" data-alt="A high-quality, evenly lit, medium close-up view of a professional, empathetic Kenyan female therapist looking directly into the camera. She has a warm, welcoming expression, conveying safety and trust. She is situated in a minimalist, soft-lit office setting that uses the Suluhu Therapy Center warm color palette. The lighting is diffused, casting soft ambient shadows, avoiding sterile clinical brightness." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyyfRNevwZ9RxMt82jtlwtI9UGGC4QFcgOQejwpm8bcAZ1e0_wflnXj5J56J8_Gv69xjgJSJixIV99zuBJbKivA9bj5AyUtvs4A1Ernj7WgPtDABpv_u74ylxrNoFGJEOdc12jTt8br980gScpGb0EK74S2A5NI9pjazEUgq2erGCS_mVNmRMXFC8GpbOxhBDMHpSKpOBxy-fbdnMuY2NVtYVjKKOG72S7AzyvyMFx7RGcyeC6lJeQzu-ZcW5t7C1bo_uKq-Uyfpg">
+<!-- Therapist Info Overlay -->
+<div class="absolute top-6 left-6 bg-surface/80 backdrop-blur-md px-4 py-2 rounded-xl shadow-[0px_4px_20px_rgba(0,0,0,0.05)] border border-outline-variant/30">
+<p class="font-label-md text-label-md text-on-surface">Dr. Amina</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Psychologist</p>
+</div>
+<!-- Client Video (PiP) -->
+<div class="absolute bottom-6 right-6 w-32 h-48 md:w-48 md:h-64 rounded-xl overflow-hidden shadow-2xl border-2 border-surface bg-surface-container-lowest z-20 group">
+<img class="w-full h-full object-cover" data-alt="A soft-focus, medium close-up of a person representing a client engaged in a therapy session. The client looks attentive and slightly relaxed. The lighting is natural and warm, complementing the overall safe, minimal digital sanctuary aesthetic of the application. The background is a blurred, neutral domestic setting that evokes comfort without clutter." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3uJD2-lFMLp8vZY6w8eN2jFDg3UaIhn6yMc4rkKpGE7gsYhB2W1oKxbEM_L19Opvpqu3RxbMa92Wg7-yTgX5FTANgKfdaE2Pg1MnenAcZsZEHqshX2b19j87DpLMWUynk8pJVhRcK3VyIufH4kom97ClOE46iyaAZqvnEPtY7rBBodZVUaiTwEOTeN8X7S4dNbOeLoOLpAX1eKyJoy15GgyZbh0t7BcFh8sPylO57fgEjpBmN2fwQHslTaFeoP-NTq6J60Vjdot8">
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-2">
+<span class="text-white text-xs font-label-sm">You</span>
+</div>
+</div>
+</div>
+<!-- Controls Toolbar -->
+<div class="shrink-0 flex justify-center pb-4">
+<div class="bg-surface shadow-[0px_4px_20px_rgba(0,0,0,0.05)] rounded-full px-6 py-3 flex items-center gap-6 border border-outline-variant/30">
+<!-- Mute Button -->
+<button class="w-12 h-12 rounded-full bg-secondary-container hover:bg-secondary-fixed-dim transition-colors flex items-center justify-center text-on-secondary-container focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<span class="material-symbols-outlined" data-icon="mic" style="font-variation-settings: 'FILL' 0;">mic</span>
+</button>
+<!-- Video Button -->
+<button class="w-12 h-12 rounded-full bg-secondary-container hover:bg-secondary-fixed-dim transition-colors flex items-center justify-center text-on-secondary-container focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<span class="material-symbols-outlined" data-icon="videocam" style="font-variation-settings: 'FILL' 0;">videocam</span>
+</button>
+<!-- Settings Button -->
+<button class="w-12 h-12 rounded-full bg-secondary-container hover:bg-secondary-fixed-dim transition-colors flex items-center justify-center text-on-secondary-container focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 0;">settings</span>
+</button>
+<div class="w-px h-8 bg-outline-variant mx-2"></div>
+<!-- End Call Button -->
+<a href="{{DATA:SCREEN:SCREEN_14}}" class="bg-error text-on-error hover:bg-[#a01616] shadow-md transition-all duration-200 rounded-full px-6 py-3 flex items-center gap-2 font-label-md text-label-md focus:outline-none focus:ring-2 focus:ring-error focus:ring-offset-2">
+<span class="material-symbols-outlined" data-icon="call_end" style="font-variation-settings: 'FILL' 1;">call_end</span>
+                    End Call
+                </a>
+</div>
+</div>
+</main>
+
+
+</body></html>

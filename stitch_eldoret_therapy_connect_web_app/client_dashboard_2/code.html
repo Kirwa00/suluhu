@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Eldoret Therapy Connect - Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "secondary": "#715b3a",
+                            "error-container": "#ffdad6",
+                            "primary-container": "#e6c9a7",
+                            "on-error": "#ffffff",
+                            "surface-container-high": "#eee7e3",
+                            "tertiary-fixed-dim": "#bac7db",
+                            "tertiary": "#535f70",
+                            "on-secondary-fixed-variant": "#584325",
+                            "primary": "#705b3f",
+                            "on-surface-variant": "#4d453d",
+                            "primary-fixed-dim": "#dec2a0",
+                            "on-secondary-fixed": "#281901",
+                            "on-error-container": "#93000a",
+                            "surface-tint": "#705b3f",
+                            "on-background": "#1e1b19",
+                            "inverse-on-surface": "#f6efeb",
+                            "inverse-primary": "#dec2a0",
+                            "secondary-container": "#fadbb2",
+                            "surface-container-low": "#f9f2ee",
+                            "background": "#fff8f4",
+                            "secondary-fixed": "#fddeb5",
+                            "error": "#ba1a1a",
+                            "outline-variant": "#d1c4b9",
+                            "on-secondary-container": "#765f3e",
+                            "tertiary-container": "#c2cfe3",
+                            "on-tertiary-fixed": "#0f1c2b",
+                            "primary-fixed": "#fcdebb",
+                            "surface": "#fff8f4",
+                            "surface-container-lowest": "#ffffff",
+                            "on-surface": "#1e1b19",
+                            "on-primary-fixed": "#281904",
+                            "on-tertiary-fixed-variant": "#3b4858",
+                            "surface-container-highest": "#e8e1dd",
+                            "secondary-fixed-dim": "#e0c29a",
+                            "tertiary-fixed": "#d6e3f8",
+                            "outline": "#7f756b",
+                            "on-tertiary": "#ffffff",
+                            "on-primary-fixed-variant": "#57432a",
+                            "surface-variant": "#e8e1dd",
+                            "surface-bright": "#fff8f4",
+                            "inverse-surface": "#33302d",
+                            "surface-dim": "#dfd9d5",
+                            "surface-container": "#f3ede8",
+                            "on-tertiary-container": "#4c5869",
+                            "on-secondary": "#ffffff",
+                            "on-primary-container": "#695439",
+                            "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px",
+                            "2xl": "1.5rem"
+                    },
+                    "spacing": {
+                            "lg": "48px",
+                            "gutter": "24px",
+                            "base": "8px",
+                            "sm": "12px",
+                            "xs": "4px",
+                            "md": "24px",
+                            "xl": "80px",
+                            "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                            "body-md": [
+                                    "Atkinson Hyperlegible Next"
+                            ],
+                            "title-lg": [
+                                    "Manrope"
+                            ],
+                            "headline-md-mobile": [
+                                    "Manrope"
+                            ],
+                            "headline-md": [
+                                    "Manrope"
+                            ],
+                            "display-lg": [
+                                    "Manrope"
+                            ],
+                            "body-lg": [
+                                    "Atkinson Hyperlegible Next"
+                            ],
+                            "label-md": [
+                                    "Manrope"
+                            ],
+                            "display-lg-mobile": [
+                                    "Manrope"
+                            ]
+                    },
+                    "fontSize": {
+                            "body-md": [
+                                    "16px",
+                                    {
+                                            "lineHeight": "1.6",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "title-lg": [
+                                    "20px",
+                                    {
+                                            "lineHeight": "1.4",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "headline-md-mobile": [
+                                    "24px",
+                                    {
+                                            "lineHeight": "1.3",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "headline-md": [
+                                    "32px",
+                                    {
+                                            "lineHeight": "1.3",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "display-lg": [
+                                    "48px",
+                                    {
+                                            "lineHeight": "1.2",
+                                            "letterSpacing": "-0.02em",
+                                            "fontWeight": "700"
+                                    }
+                            ],
+                            "body-lg": [
+                                    "18px",
+                                    {
+                                            "lineHeight": "1.6",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "label-md": [
+                                    "14px",
+                                    {
+                                            "lineHeight": "1.2",
+                                            "letterSpacing": "0.01em",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "display-lg-mobile": [
+                                    "32px",
+                                    {
+                                            "lineHeight": "1.2",
+                                            "fontWeight": "700"
+                                    }
+                            ]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+        
+        .pulse-animation {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse-ring {
+            0% {
+                box-shadow: 0 0 0 0 rgba(233, 138, 108, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 15px rgba(233, 138, 108, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(233, 138, 108, 0);
+            }
+        }
+
+        .card-shadow {
+            box-shadow: 0px 4px 20px rgba(95, 54, 208, 0.05);
+        }
+        
+        .card-hover:hover {
+            box-shadow: 0px 8px 24px rgba(95, 54, 208, 0.08);
+            border-color: #C4A882;
+        }
+    </style>
+</head>
+<body class="bg-primary-container text-on-background font-body-md min-h-screen flex flex-col antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 bg-background dark:bg-background flat no shadows w-full sticky z-40 transition-all duration-300">
+<div class="flex justify-between items-center w-full px-gutter py-base max-w-container-max mx-auto h-[72px]">
+<div class="flex items-center gap-sm">
+<span class="text-title-lg font-title-lg font-bold text-primary dark:text-primary-fixed-dim">
+                    Eldoret Therapy Connect
+                </span>
+</div>
+<div class="flex items-center gap-sm">
+<button aria-label="account_circle" class="w-10 h-10 rounded-full flex items-center justify-center text-primary dark:text-primary-fixed-dim hover:bg-surface-variant transition-colors duration-200 Active: scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col w-full max-w-container-max mx-auto px-gutter py-xl pb-[120px] md:pb-xl relative">
+<!-- Greeting Section -->
+<section class="mb-lg w-full max-w-2xl mx-auto md:mx-0">
+<h1 class="text-headline-md-mobile md:text-headline-md font-headline-md-mobile md:font-headline-md text-on-background mb-base">
+                Welcome back, Alex.
+            </h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant">
+                Your digital sanctuary for mental well-being. Take a deep breath, you're in a safe space.
+            </p>
+</section>
+<!-- Main Dashboard Content (Single Column Focused) -->
+<div class="flex flex-col gap-lg w-full max-w-2xl mx-auto md:mx-0">
+<!-- Upcoming Appointment Card -->
+<section aria-labelledby="upcoming-appointment-heading">
+<h2 class="text-title-lg font-title-lg text-on-surface-variant mb-sm" id="upcoming-appointment-heading">Your Next Session</h2>
+<div class="bg-surface-container-lowest rounded-2xl p-md card-shadow border border-transparent card-hover transition-all duration-300 group cursor-pointer relative overflow-hidden flex flex-col sm:flex-row items-start sm:items-center justify-between gap-md">
+<!-- Soft decorative accent -->
+<div class="absolute top-0 left-0 w-2 h-full bg-[#C4A882]"></div>
+<div class="flex items-start gap-md z-10 pl-2">
+<div class="w-14 h-14 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">calendar_today</span>
+</div>
+<div class="flex flex-col gap-xs">
+<span class="text-label-md font-label-md text-primary bg-primary-container/20 px-3 py-1 rounded-full w-fit mb-1">
+                                Video Call
+                            </span>
+<h3 class="text-title-lg font-title-lg text-on-background">Dr. Jane Wambui</h3>
+<div class="flex items-center gap-sm text-body-md font-body-md text-on-surface-variant mt-1">
+<span class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">event</span>
+                                    Oct 24th
+                                </span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">schedule</span>
+                                    2:00 PM
+                                </span>
+</div>
+</div>
+</div>
+<div class="w-full sm:w-auto z-10">
+<button class="w-full sm:w-auto px-6 py-3 rounded-lg border border-[#C4A882] text-primary font-label-md text-label-md hover:bg-[#C4A882]/10 transition-colors duration-200 flex items-center justify-center gap-xs">
+<span class="material-symbols-outlined text-[20px]">videocam</span>
+                            Join Session
+                        </button>
+</div>
+</div>
+</section>
+<!-- Quick Actions / Therapy Progress Snippet (Added to maintain professional UI density without clutter) -->
+<section aria-labelledby="progress-heading">
+<h2 class="text-title-lg font-title-lg text-on-surface-variant mb-sm" id="progress-heading">Recent Reflections</h2>
+<div class="bg-surface-container-lowest rounded-2xl p-md card-shadow border border-transparent">
+<p class="text-body-md font-body-md text-on-surface-variant italic mb-4">
+                         "Feeling slightly more grounded today after the breathing exercises."
+                     </p>
+<div class="flex justify-between items-center border-t border-outline-variant pt-4 mt-2">
+<span class="text-label-md font-label-md text-tertiary">Oct 20th Journal Entry</span>
+<button class="text-primary font-label-md text-label-md hover:text-secondary transition-colors duration-200">View All</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Floating Action Button (FAB) - Book New Appointment -->
+<!-- Positioned above bottom nav on mobile, bottom right on desktop -->
+<div class="fixed bottom-24 md:bottom-12 right-6 md:right-12 z-40">
+<button aria-label="Book New Appointment" class="bg-[#E98A6C] text-white rounded-2xl w-16 h-16 flex items-center justify-center shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 pulse-animation group">
+<span class="material-symbols-outlined text-3xl group-hover:rotate-90 transition-transform duration-300" style="font-variation-settings: 'FILL' 0;">add</span>
+</button>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden docked full-width bottom-0 rounded-t-xl shadow-sm bg-surface-container-low dark:bg-surface-container-low fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter pb-4 pt-2">
+<!-- Active Item: Dashboard -->
+<button class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-6 py-2 Active: scale-95 transition-transform duration-200 group">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-label-md font-label-md">Dashboard</span>
+</button>
+<!-- Inactive Item: Find a Therapist -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-6 py-2 hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all group rounded-full">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">search</span>
+<span class="text-label-md font-label-md group-hover:text-primary transition-colors">Find a Therapist</span>
+</button>
+</nav>
+<!-- Desktop Footer (Hidden on Mobile) -->
+<footer class="hidden md:flex w-full py-xl px-gutter flex-col items-center gap-base bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant dark:border-outline-variant flat no shadows mt-auto">
+<div class="text-label-md font-label-md font-bold text-primary mb-2">
+            Eldoret Therapy Connect
+        </div>
+<div class="flex gap-lg mb-4">
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-body-md font-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Support</a>
+</div>
+<div class="text-body-md font-body-md text-secondary dark:text-secondary-fixed-dim">
+            © 2024 Eldoret Therapy Connect. Your Digital Sanctuary.
+        </div>
+</footer>
+<script>
+        // Simple script to handle potential scroll effects on the top app bar
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-sm');
+            } else {
+                header.classList.remove('shadow-sm');
+            }
+        });
+    </script>
+</body></html>

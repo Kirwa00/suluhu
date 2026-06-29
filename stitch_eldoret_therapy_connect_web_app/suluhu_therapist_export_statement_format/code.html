@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Financial Statement - Suluhu Therapy Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; }
+            .print-container { 
+                box-shadow: none !important; 
+                margin: 0 !important; 
+                width: 100% !important;
+                max-width: none !important;
+            }
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary-fixed-dim": "#a7c8ff",
+                      "error-container": "#ffdad6",
+                      "surface-soothing": "#F0F4F8",
+                      "on-background": "#191c1d",
+                      "on-tertiary-fixed": "#001e2b",
+                      "on-error": "#ffffff",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed": "#001c3b",
+                      "primary-fixed": "#d5e3ff",
+                      "on-primary-fixed-variant": "#0d4784",
+                      "tertiary-container": "#005571",
+                      "surface-tint": "#305f9d",
+                      "on-secondary-container": "#1f705f",
+                      "secondary-fixed": "#a5f2db",
+                      "inverse-surface": "#2e3132",
+                      "on-primary-container": "#9cc2ff",
+                      "tertiary": "#003d52",
+                      "surface-variant": "#e1e3e4",
+                      "secondary": "#166a59",
+                      "inverse-on-surface": "#eff1f2",
+                      "on-tertiary-container": "#7acaf2",
+                      "accent-teal-light": "#E8F3F1",
+                      "tertiary-fixed-dim": "#81d0f8",
+                      "on-secondary-fixed-variant": "#005142",
+                      "primary": "#00386d",
+                      "secondary-container": "#a5f2db",
+                      "error": "#ba1a1a",
+                      "inverse-primary": "#a7c8ff",
+                      "on-tertiary": "#ffffff",
+                      "surface-bright": "#f8fafb",
+                      "surface-dim": "#d8dadb",
+                      "on-tertiary-fixed-variant": "#004d67",
+                      "on-secondary-fixed": "#002019",
+                      "on-error-container": "#93000a",
+                      "surface-container-highest": "#e1e3e4",
+                      "surface-container-low": "#f2f4f5",
+                      "on-surface": "#191c1d",
+                      "on-surface-variant": "#424750",
+                      "outline": "#737781",
+                      "text-rich-slate": "#1C1E21",
+                      "background": "#f8fafb",
+                      "on-primary": "#ffffff",
+                      "surface": "#f8fafb",
+                      "surface-container-high": "#e6e8e9",
+                      "primary-container": "#1b4f8c",
+                      "success-calm": "#2E8555",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#c1e8ff",
+                      "surface-container": "#eceeef",
+                      "secondary-fixed-dim": "#89d5c0",
+                      "outline-variant": "#c2c6d1"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "40px",
+                      "container-max": "1200px",
+                      "unit": "8px",
+                      "section-gap": "80px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg-mobile": ["Manrope"],
+                      "display-lg": ["Manrope"],
+                      "headline-md": ["Manrope"],
+                      "body-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg": ["Manrope"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface-soothing min-h-screen font-body-md text-on-surface">
+<!-- Top Navigation Bar (Hidden on Print) -->
+<header class="no-print fixed top-0 w-full z-50 bg-surface dark:bg-on-background flex justify-between items-center px-margin-mobile h-16 w-full max-w-container-max mx-auto shadow-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+<span class="font-headline-md text-headline-md font-bold text-primary">Practice Manager</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-xl font-label-md text-label-md hover:opacity-90 transition-opacity" onclick="window.print()">
+<span class="material-symbols-outlined text-sm">print</span>
+                Export PDF
+            </button>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">SM</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-4 md:px-margin-desktop">
+<div class="max-w-[800px] mx-auto bg-white shadow-2xl rounded-xl overflow-hidden print-container">
+<!-- Audit Header -->
+<div class="p-10 border-b border-outline-variant bg-surface-bright relative">
+<div class="absolute top-0 right-0 w-32 h-32 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[120px]">account_balance</span>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-start gap-6">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary text-4xl">rebase_edit</span>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">SULUHU</h1>
+</div>
+<div class="space-y-1">
+<h2 class="font-headline-md text-headline-md text-rich-slate">Dr. Silas Mwangi</h2>
+<p class="text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">Consultant Clinical Psychologist</p>
+<p class="text-on-surface-variant text-label-sm">License No: KMPDC-PSY/2023/882</p>
+</div>
+</div>
+<div class="text-left md:text-right space-y-2 bg-accent-teal-light p-4 rounded-xl border border-secondary-fixed">
+<p class="text-on-secondary-fixed-variant font-bold text-label-sm">STATEMENT PERIOD</p>
+<p class="font-headline-md text-headline-md text-secondary">Oct 01 - Oct 31, 2023</p>
+<div class="inline-flex items-center gap-1 px-2 py-1 bg-white rounded border border-secondary text-secondary text-xs font-bold">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+                            AUDIT READY
+                        </div>
+</div>
+</div>
+</div>
+<!-- Executive Summary (Bento Style) -->
+<div class="p-10">
+<h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">summarize</span>
+                    Executive Summary
+                </h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant">
+<p class="text-on-surface-variant font-label-md text-label-md mb-2">Gross Earnings</p>
+<p class="font-headline-lg text-headline-lg text-rich-slate">KES 245,500</p>
+<div class="mt-2 text-xs text-on-surface-variant">42 Completed Sessions</div>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant">
+<p class="text-on-surface-variant font-label-md text-label-md mb-2">Suluhu Service Fee</p>
+<p class="font-headline-lg text-headline-lg text-error">-(73,650)</p>
+<div class="mt-2 text-xs text-on-surface-variant">Standard 30% Platform Rate</div>
+</div>
+<div class="bg-secondary-container p-6 rounded-xl border border-secondary">
+<p class="text-on-secondary-container font-bold text-label-md mb-2">Net Payout</p>
+<p class="font-headline-lg text-headline-lg text-on-secondary-container">KES 171,850</p>
+<div class="mt-2 text-xs text-on-secondary-container">Cleared & Reconciled</div>
+</div>
+</div>
+</div>
+<!-- Transaction Ledger -->
+<div class="px-10 pb-10">
+<h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined">analytics</span>
+                    Clinical Activity Ledger
+                </h3>
+<div class="overflow-hidden rounded-xl border border-outline-variant">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm uppercase tracking-tight">
+<th class="p-4 border-b border-outline-variant">Date/Time</th>
+<th class="p-4 border-b border-outline-variant">Patient ID</th>
+<th class="p-4 border-b border-outline-variant">Service Type</th>
+<th class="p-4 border-b border-outline-variant">Duration</th>
+<th class="p-4 border-b border-outline-variant text-right">Gross (KES)</th>
+<th class="p-4 border-b border-outline-variant text-right">Net (KES)</th>
+</tr>
+</thead>
+<tbody class="text-on-surface font-body-md text-label-md">
+<tr class="hover:bg-surface-container-lowest transition-colors border-b border-outline-variant">
+<td class="p-4">Oct 28, 14:00</td>
+<td class="p-4 font-medium">SLH-882 (M.W.)</td>
+<td class="p-4"><span class="px-2 py-1 bg-accent-teal-light rounded text-xs text-secondary font-bold">Individual</span></td>
+<td class="p-4">50m</td>
+<td class="p-4 text-right">6,500</td>
+<td class="p-4 text-right font-bold text-secondary">4,550</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors border-b border-outline-variant">
+<td class="p-4">Oct 28, 10:30</td>
+<td class="p-4 font-medium">SLH-901 (K.O.)</td>
+<td class="p-4"><span class="px-2 py-1 bg-tertiary-fixed rounded text-xs text-tertiary font-bold">Intake</span></td>
+<td class="p-4">90m</td>
+<td class="p-4 text-right">9,000</td>
+<td class="p-4 text-right font-bold text-secondary">6,300</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors border-b border-outline-variant">
+<td class="p-4">Oct 27, 16:00</td>
+<td class="p-4 font-medium">SLH-744 (J.N.)</td>
+<td class="p-4"><span class="px-2 py-1 bg-accent-teal-light rounded text-xs text-secondary font-bold">Individual</span></td>
+<td class="p-4">50m</td>
+<td class="p-4 text-right">6,500</td>
+<td class="p-4 text-right font-bold text-secondary">4,550</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors border-b border-outline-variant">
+<td class="p-4">Oct 26, 09:00</td>
+<td class="p-4 font-medium">SLH-102 (S.A.)</td>
+<td class="p-4"><span class="px-2 py-1 bg-surface-variant rounded text-xs text-on-surface-variant font-bold">Family</span></td>
+<td class="p-4">60m</td>
+<td class="p-4 text-right">8,500</td>
+<td class="p-4 text-right font-bold text-secondary">5,950</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-4 italic text-on-surface-variant" colspan="4">38 additional records truncated for display...</td>
+<td class="p-4 text-right font-bold">215,000</td>
+<td class="p-4 text-right font-bold text-secondary">150,500</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Disbursement Info -->
+<div class="px-10 pb-10">
+<div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant">
+<h4 class="font-label-md text-label-md text-primary uppercase tracking-widest mb-4">Disbursement Schedule (M-PESA)</h4>
+<div class="space-y-3">
+<div class="flex justify-between items-center py-2 border-b border-outline-variant last:border-0">
+<div>
+<p class="font-bold text-rich-slate">Oct 15, 2023</p>
+<p class="text-xs text-on-surface-variant">TXN: RJK982LL01 • Partial Monthly</p>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-primary">KES 85,000</p>
+<span class="text-xs text-success-calm bg-accent-teal-light px-2 py-0.5 rounded-full font-bold">COMPLETED</span>
+</div>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-outline-variant last:border-0">
+<div>
+<p class="font-bold text-rich-slate">Oct 31, 2023</p>
+<p class="text-xs text-on-surface-variant">TXN: SLH002MM99 • Final Monthly Balance</p>
+</div>
+<div class="text-right">
+<p class="font-headline-md text-headline-md text-primary">KES 86,850</p>
+<span class="text-xs text-success-calm bg-accent-teal-light px-2 py-0.5 rounded-full font-bold">COMPLETED</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer / Compliance -->
+<div class="bg-primary-container p-10 text-on-primary-container">
+<div class="flex flex-col md:flex-row gap-8 justify-between">
+<div class="max-w-md">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-bold tracking-tight">Suluhu Finance Compliance</span>
+</div>
+<p class="text-sm opacity-80 leading-relaxed mb-4">
+                            This document serves as an official financial record for tax and audit purposes in the Republic of Kenya. All figures are inclusive of statutory VAT where applicable and have been reconciled against the Suluhu Payment Gateway.
+                        </p>
+<p class="text-xs opacity-60">
+                            Digital Signature Hash: 8f2a9e...3c1b7d | Generated on Nov 02, 2023, 09:12 AM EAT
+                        </p>
+</div>
+<div class="flex flex-col gap-4 text-sm">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-white/10 rounded-lg">
+<span class="material-symbols-outlined text-4xl">qr_code_2</span>
+</div>
+<div>
+<p class="font-bold">Scan to Verify</p>
+<p class="opacity-70 text-xs">Verify record authenticity via Suluhu Portal</p>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-white/20">
+<p class="font-bold">Suluhu Therapy Center Ltd.</p>
+<p class="text-xs opacity-70">Nairobi, Kenya | support@suluhu.care</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination (Visual only) -->
+<div class="no-print mt-8 flex justify-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-bold shadow-sm">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-white text-on-surface-variant hover:bg-surface-variant transition-colors border border-outline-variant">2</button>
+<button class="px-4 h-10 flex items-center justify-center rounded-lg bg-white text-on-surface-variant hover:bg-surface-variant transition-colors border border-outline-variant font-label-md">Next Page</button>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mobile only, Hidden on Print) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-2 pb-safe bg-surface dark:bg-on-background z-50 shadow-sm no-print">
+<div class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="text-label-sm">Calendar</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-label-sm">Patients</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3">
+<span class="material-symbols-outlined">description</span>
+<span class="text-label-sm">Notes</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl py-1 px-3">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="text-label-sm">Earnings</span>
+</div>
+</nav>
+<script>
+        // Simple interactivity for demonstration
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('click', () => {
+                if (row.classList.contains('bg-secondary-container/10')) {
+                    row.classList.remove('bg-secondary-container/10');
+                } else {
+                    row.classList.add('bg-secondary-container/10');
+                }
+            });
+        });
+    </script>
+</body></html>

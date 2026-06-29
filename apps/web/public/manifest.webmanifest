@@ -1,0 +1,20 @@
+{
+  "name": "Suluhu Therapy Center",
+  "short_name": "Suluhu",
+  "description": "Compliant online mental health care for the Rift Valley.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f8fafb",
+  "theme_color": "#1b4f8c",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu Admin - Alerts History</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#c1e8ff",
+                    "error": "#ba1a1a",
+                    "on-background": "#191c1d",
+                    "on-primary-container": "#9cc2ff",
+                    "accent-teal-light": "#E8F3F1",
+                    "on-error-container": "#93000a",
+                    "on-surface": "#191c1d",
+                    "on-tertiary-container": "#7acaf2",
+                    "surface-container-low": "#f2f4f5",
+                    "inverse-primary": "#a7c8ff",
+                    "outline": "#737781",
+                    "tertiary-fixed-dim": "#81d0f8",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-tertiary-fixed": "#001e2b",
+                    "success-calm": "#2E8555",
+                    "primary": "#00386d",
+                    "surface": "#f8fafb",
+                    "surface-variant": "#e1e3e4",
+                    "on-primary-fixed-variant": "#0d4784",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "inverse-surface": "#2e3132",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d8dadb",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#002019",
+                    "tertiary-container": "#005571",
+                    "background": "#f8fafb",
+                    "surface-tint": "#305f9d",
+                    "secondary-fixed-dim": "#89d5c0",
+                    "on-primary-fixed": "#001c3b",
+                    "tertiary": "#003d52",
+                    "surface-soothing": "#F0F4F8",
+                    "surface-container": "#eceeef",
+                    "surface-container-high": "#e6e8e9",
+                    "surface-bright": "#f8fafb",
+                    "secondary-container": "#a5f2db",
+                    "error-container": "#ffdad6",
+                    "primary-container": "#1b4f8c",
+                    "on-surface-variant": "#424750",
+                    "primary-fixed": "#d5e3ff",
+                    "on-secondary": "#ffffff",
+                    "on-secondary-fixed-variant": "#005142",
+                    "on-primary": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#1f705f",
+                    "secondary-fixed": "#a5f2db",
+                    "secondary": "#166a59",
+                    "text-rich-slate": "#1C1E21",
+                    "inverse-on-surface": "#eff1f2",
+                    "outline-variant": "#c2c6d1",
+                    "on-tertiary-fixed-variant": "#004d67"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "section-gap": "80px",
+                    "container-max": "1200px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Manrope"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Manrope"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "display-lg": ["Manrope"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #f8fafb;
+            color: #191c1d;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .active-alert-border {
+            border-left-width: 4px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-surface-container-low dark:bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="clinical_notes">clinical_notes</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-container">Suluhu Admin</h1>
+</div>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full border-2 border-primary-fixed bg-surface-container flex items-center justify-center overflow-hidden active:scale-95 duration-200 cursor-pointer">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female healthcare administrator with a warm, confident expression. She has dark hair styled neatly and is wearing a dark navy blazer over a teal blouse, reflecting the professional and calm brand identity of Suluhu Wellness. The lighting is soft and studio-quality against a clean, neutral gray background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpwlKTzuYANF3FEPJezPWbfKZI_dPh8qlLxLtq8xrxBUqZf9HHU5RAPLmN3xCfK8SXnP15-TDyGgW75-5jWKgUfw2JZilWWdjamcmIoAVDqYcexYasizYapmY7DpX1Vqd0xV1fRm1MZn5N5cKifZDRRHit_g-GZsD0oN0K0F4yZ7-YEhNdXA75uUUNhAE4W-McMHQLSaYaurO4Rsh4mjdDW94lyAUc-o8gf0eIU-PX9bLsJ_oLaScAPXcX_PkQjDiz5KyMrfXFz8E"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 pb-24 px-4 min-h-screen max-w-md mx-auto">
+<!-- Search & Global Filters -->
+<section class="mb-6 space-y-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-soothing border-none rounded-xl text-body-md focus:ring-2 focus:ring-primary-container transition-all" placeholder="Search patient or ID..." type="text"/>
+</div>
+<!-- Horizontal Scroll Filters -->
+<div class="flex overflow-x-auto gap-2 hide-scrollbar pb-1">
+<button class="flex-none px-4 py-2 rounded-full bg-primary-container text-white text-label-md transition-all active:scale-95">All Alerts</button>
+<button class="flex-none px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-md hover:bg-surface-variant transition-all active:scale-95">Urgency: High</button>
+<button class="flex-none px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-md hover:bg-surface-variant transition-all active:scale-95">Status: Active</button>
+<button class="flex-none px-4 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-md hover:bg-surface-variant transition-all active:scale-95">Resolved</button>
+</div>
+</section>
+<!-- Alerts List Content -->
+<div class="space-y-4">
+<!-- Alert Card 1: High Urgency / Active -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant active-alert-border border-l-error transition-all hover:bg-surface-soothing cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="px-2 py-1 bg-error-container text-on-error-container text-label-sm font-bold rounded uppercase tracking-wider">High Urgency</span>
+<span class="flex items-center gap-1 text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                        2m ago
+                    </span>
+</div>
+<h3 class="font-headline-md text-headline-md leading-tight text-on-background mb-1">Elevated Risk of Self-Harm</h3>
+<div class="flex items-center gap-2 mb-3">
+<p class="font-body-md font-semibold text-primary">Mercy Wanjiku</p>
+<span class="text-on-surface-variant text-label-sm">SLH-882</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="px-3 py-1 bg-primary text-white text-label-sm rounded-full">Active</span>
+<button class="text-primary font-semibold text-label-md flex items-center gap-1 group-active:translate-x-1 transition-transform">
+                        Details
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Alert Card 2: Medium Urgency / Active -->
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant active-alert-border border-l-primary-container transition-all hover:bg-surface-soothing cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="px-2 py-1 bg-primary-fixed text-on-primary-fixed-variant text-label-sm font-bold rounded uppercase tracking-wider">Med Urgency</span>
+<span class="flex items-center gap-1 text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                        14m ago
+                    </span>
+</div>
+<h3 class="font-headline-md text-headline-md leading-tight text-on-background mb-1">Sudden Mood Shift Detected</h3>
+<div class="flex items-center gap-2 mb-3">
+<p class="font-body-md font-semibold text-primary">David Omari</p>
+<span class="text-on-surface-variant text-label-sm">SLH-741</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="px-3 py-1 bg-primary text-white text-label-sm rounded-full">Active</span>
+<button class="text-primary font-semibold text-label-md flex items-center gap-1 group-active:translate-x-1 transition-transform">
+                        Details
+                        <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Alert Card 3: Low Urgency / Resolved -->
+<div class="bg-surface-container-low opacity-80 p-4 rounded-xl shadow-none border border-outline-variant transition-all hover:bg-surface-soothing cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="px-2 py-1 bg-secondary-container text-on-secondary-container text-label-sm font-bold rounded uppercase tracking-wider">Low Urgency</span>
+<span class="flex items-center gap-1 text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                        2h ago
+                    </span>
+</div>
+<h3 class="font-headline-md text-headline-md leading-tight text-on-background mb-1">Missed Check-in</h3>
+<div class="flex items-center gap-2 mb-3">
+<p class="font-body-md font-semibold text-primary">Sarah Kamau</p>
+<span class="text-on-surface-variant text-label-sm">SLH-903</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="px-3 py-1 bg-surface-variant text-on-surface-variant text-label-sm rounded-full">Resolved</span>
+<button class="text-on-surface-variant font-semibold text-label-md flex items-center gap-1">
+                        History
+                        <span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+</button>
+</div>
+</div>
+<!-- Alert Card 4: High Urgency / Resolved -->
+<div class="bg-surface-container-low opacity-80 p-4 rounded-xl shadow-none border border-outline-variant transition-all hover:bg-surface-soothing cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<span class="px-2 py-1 bg-error-container text-on-error-container text-label-sm font-bold rounded uppercase tracking-wider">High Urgency</span>
+<span class="flex items-center gap-1 text-on-surface-variant text-label-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="schedule">schedule</span>
+                        5h ago
+                    </span>
+</div>
+<h3 class="font-headline-md text-headline-md leading-tight text-on-background mb-1">Medication Discrepancy</h3>
+<div class="flex items-center gap-2 mb-3">
+<p class="font-body-md font-semibold text-primary">James Otieno</p>
+<span class="text-on-surface-variant text-label-sm">SLH-112</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="px-3 py-1 bg-surface-variant text-on-surface-variant text-label-sm rounded-full">Resolved</span>
+<button class="text-on-surface-variant font-semibold text-label-md flex items-center gap-1">
+                        History
+                        <span class="material-symbols-outlined text-sm" data-icon="history">history</span>
+</button>
+</div>
+</div>
+</div>
+<!-- FAB for manual alert creation (Contextual) -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center active:scale-90 transition-transform z-40">
+<span class="material-symbols-outlined" data-icon="add_alert">add_alert</span>
+</button>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-surface dark:bg-inverse-surface shadow-[0_-4px_12px_rgba(0,0,0,0.05)] border-none">
+<!-- Overview -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Overview</span>
+</a>
+<!-- Therapists -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-sm text-label-sm mt-1">Therapists</span>
+</a>
+<!-- Financials -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-sm text-label-sm mt-1">Financials</span>
+</a>
+<!-- Audit Logs (Active based on context of 'Alert History') -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-3 py-1 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_turned_in" style="font-variation-settings: 'FILL' 1;">assignment_turned_in</span>
+<span class="font-label-sm text-label-sm mt-1 font-bold">Audit Logs</span>
+</a>
+</nav>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.bg-surface-container-lowest, .bg-surface-container-low');
+            cards.forEach(card => {
+                card.addEventListener('click', () => {
+                    // Feedback on click
+                    card.classList.add('scale-[0.98]');
+                    setTimeout(() => card.classList.remove('scale-[0.98]'), 150);
+                });
+            });
+
+            // Filter button toggles
+            const filters = document.querySelectorAll('button.flex-none');
+            filters.forEach(filter => {
+                filter.addEventListener('click', () => {
+                    filters.forEach(f => {
+                        f.classList.remove('bg-primary-container', 'text-white');
+                        f.classList.add('border', 'border-outline-variant', 'text-on-surface-variant');
+                    });
+                    filter.classList.add('bg-primary-container', 'text-white');
+                    filter.classList.remove('border', 'border-outline-variant', 'text-on-surface-variant');
+                });
+            });
+        });
+    </script>
+</body></html>

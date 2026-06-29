@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu Wellness Library | Mental Health Resources</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#005142",
+                        "on-background": "#191c1d",
+                        "surface-dim": "#d8dadb",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "outline-variant": "#c2c6d1",
+                        "text-rich-slate": "#1C1E21",
+                        "on-tertiary-fixed-variant": "#004d67",
+                        "tertiary-fixed": "#c1e8ff",
+                        "background": "#f8fafb",
+                        "accent-teal-light": "#E8F3F1",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface": "#f8fafb",
+                        "surface-variant": "#e1e3e4",
+                        "on-surface": "#191c1d",
+                        "error-container": "#ffdad6",
+                        "surface-tint": "#305f9d",
+                        "on-surface-variant": "#424750",
+                        "on-primary-fixed": "#001c3b",
+                        "tertiary": "#003d52",
+                        "secondary-container": "#a5f2db",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#005571",
+                        "secondary-fixed": "#a5f2db",
+                        "tertiary-fixed-dim": "#81d0f8",
+                        "primary-container": "#1b4f8c",
+                        "on-secondary-fixed": "#002019",
+                        "primary-fixed": "#d5e3ff",
+                        "on-tertiary-fixed": "#001e2b",
+                        "surface-container-high": "#e6e8e9",
+                        "secondary-fixed-dim": "#89d5c0",
+                        "primary": "#00386d",
+                        "inverse-on-surface": "#eff1f2",
+                        "surface-container": "#eceeef",
+                        "inverse-primary": "#a7c8ff",
+                        "secondary": "#166a59",
+                        "surface-soothing": "#F0F4F8",
+                        "on-secondary-container": "#1f705f",
+                        "surface-bright": "#f8fafb",
+                        "surface-container-low": "#f2f4f5",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "outline": "#737781",
+                        "on-tertiary-container": "#7acaf2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "80px",
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "container-max": "1200px",
+                        "gutter": "24px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "display-lg": ["Manrope"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+<!-- TopNavBar -->
+<nav class="bg-surface-container-low sticky top-0 z-50">
+<div class="flex justify-between items-center px-margin-desktop w-full max-w-container-max mx-auto h-16">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary">Suluhu</span>
+<div class="hidden md:flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Dashboard</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Sessions</a>
+<a class="text-primary font-bold border-b-2 border-primary font-body-md text-body-md" href="#">Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary active:opacity-80 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary active:opacity-80 transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of a calm Kenyan therapist in a bright, modern office with soft natural lighting and warm wood accents, representing the trustworthy and stable identity of the Suluhu brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaUyxeJyvcP9V8HWg7cBtJqxOeAVW4rHZ_r10AGx_P0lrSy5TwfuaS9fUm-wad9bJ0zmh7LaBSKTP-AFnd8nMlMOSa-GHyvhPLDIhq5umQxXCgvxLM_zYL84uILQInrbvV3Ufl3wxKnkoRlOWsaLtWKtcBI1KLP4YV31fbZ4SdB0Q7lsaHOPeIw4-hw6zGPYM_aMs5EM1vZVG8QHXUSg0P3fD6jYgD-EI1kuLjru325cTGYgvgRhwz-xIHoXh2XXyhas-qahAASrM"/>
+</div>
+</div>
+</div>
+</nav>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12">
+<!-- Header -->
+<header class="mb-12">
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Wellness Library</h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant max-w-2xl">
+                Explore evidence-based resources designed to support your mental health journey. Take your time, learn at your pace, and nurture your well-being.
+            </p>
+</header>
+<!-- Search & Filter -->
+<section class="mb-section-gap">
+<div class="flex flex-col md:flex-row gap-6 items-start md:items-center">
+<div class="relative w-full md:max-w-md group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-soothing border-none rounded-xl focus:ring-2 focus:ring-secondary text-body-md font-body-md transition-all" placeholder="Search for topics, articles, or exercises..." type="text"/>
+</div>
+<div class="flex gap-3 overflow-x-auto pb-2 w-full hide-scrollbar">
+<button class="px-6 py-2 bg-secondary-container text-on-secondary-container rounded-full font-label-md text-label-md whitespace-nowrap active:scale-95 transition-all">All</button>
+<button class="px-6 py-2 bg-surface-container text-on-surface-variant hover:bg-surface-variant rounded-full font-label-md text-label-md whitespace-nowrap active:scale-95 transition-all">Anxiety</button>
+<button class="px-6 py-2 bg-surface-container text-on-surface-variant hover:bg-surface-variant rounded-full font-label-md text-label-md whitespace-nowrap active:scale-95 transition-all">Depression</button>
+<button class="px-6 py-2 bg-surface-container text-on-surface-variant hover:bg-surface-variant rounded-full font-label-md text-label-md whitespace-nowrap active:scale-95 transition-all">Mindfulness</button>
+<button class="px-6 py-2 bg-surface-container text-on-surface-variant hover:bg-surface-variant rounded-full font-label-md text-label-md whitespace-nowrap active:scale-95 transition-all">Relationships</button>
+<button class="px-6 py-2 bg-surface-container text-on-surface-variant hover:bg-surface-variant rounded-full font-label-md text-label-md whitespace-nowrap active:scale-95 transition-all">Sleep</button>
+</div>
+</div>
+</section>
+<!-- Featured Hero -->
+<section class="mb-section-gap">
+<div class="relative rounded-3xl overflow-hidden bg-primary min-h-[400px] flex flex-col md:flex-row shadow-sm">
+<div class="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center z-10">
+<span class="inline-block px-3 py-1 bg-secondary text-on-secondary rounded font-label-sm text-label-sm mb-6 w-fit">Article of the Week</span>
+<h2 class="font-headline-lg text-white mb-4">Navigating Stress in Eldoret: A Guide for Local Professionals</h2>
+<p class="text-primary-fixed-dim text-body-md font-body-md mb-8 max-w-md">
+                        Balancing career growth with community expectations can be challenging. Learn culturally-relevant grounding techniques and boundaries.
+                    </p>
+<a class="bg-white text-primary px-8 py-3 rounded-lg font-label-md text-label-md w-fit hover:bg-primary-fixed transition-colors active:scale-95" href="#">Read Article</a>
+</div>
+<div class="absolute inset-0 md:relative md:w-1/2 h-full opacity-40 md:opacity-100">
+<div class="w-full h-full bg-cover bg-center" data-alt="A serene landscape of Eldoret, Kenya, at sunset, showing the gentle rolling hills and distant cityscape under a soft, golden and purple sky, conveying a sense of local peace and grounding for mental wellness." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDzubeY733qfaHFKi_xXm-BXH5iYKEG367fyF4hqu8MD217-iKB63eSeQcVoJRzsIcfGRwNauabF-IFXyhas8e8ClXDuqKtWgJbIcja_Mru2UDwI2myKf3ozy8QukqLQa3ipwKBgA4LLNwRXdTjY-IcS1OUNKsnrWXBNQWa_dv6CDMmKjQy3O-A_aW1YtYcHnjQi9XZqgfDPllHZJIjEZS4bSajko-aOx_t-7nMs4U4xgrRZ_FYV_8kx8gNEB-JANYH4cb1QrpO0pQ')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/50 to-transparent"></div>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Resource Grid -->
+<div class="lg:col-span-8">
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Latest Resources</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Card 1 -->
+<article class="group bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden hover:shadow-lg transition-all duration-300">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A person practicing mindfulness in a quiet, green garden setting with soft morning sunlight filtering through the trees. The atmosphere is calm, organic, and peaceful, using the Suluhu teal and blue color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwYBEzHbpRFflWQQQ5bBVZklx3PTmeGgkN3pXQfbwFmz9rgXR8q8HgxEN1U2gpNexNAFWXqz-stTbRhEpT1Bc3xB6mrt1_21s7X1KVjOvLb1UC_hMsmOW7P8IGxu-QG0oO0-PjcTIwjYat0EVSAVSKF340r1uF2vVBBjM864mo07GDzInjtxrjjBsJUk6XR8MTsSBTwjlGRcqzeRHV_I4ABdRHuYOfNZxvAjHeV8ZFfAT-Wg8F_iMIKXs7kII2RHyau12OqOiglsE"/>
+</div>
+<div class="p-6">
+<span class="text-secondary font-label-sm text-label-sm uppercase tracking-wider mb-2 block">Mindfulness</span>
+<h4 class="font-headline-md text-on-background mb-3 group-hover:text-primary transition-colors">10-Minute Morning Grounding</h4>
+<p class="text-on-surface-variant text-body-md font-body-md mb-6 line-clamp-2">
+                                A quick audio exercise to center yourself before starting your workday in a busy environment.
+                            </p>
+<a class="flex items-center gap-2 text-primary font-label-md text-label-md hover:underline" href="#">
+                                Start Exercise <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="group bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden hover:shadow-lg transition-all duration-300">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Close-up of two hands gently holding a cup of warm tea, symbolizing comfort and connection in relationships. Soft lighting, high-end minimalist corporate aesthetic with deep blues and soft greys." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-J1NWYUST8vRcgzP3wxTKKjcigwqpSQon6480jvqCJqHoU73Tu88fIK1VPkG9-pY3NUZ9EVPbVZ4L-D8p8M3cjji_peCZbzVr8D2MoytPTY7yp7XOZZKxWMcAJzv7pHyaQ5-zXm_TnAc2T1n6M0UiE0jAV2hLA_XkIIjWbmyeTZkPPawZIap3NoKp5WSciFVHoVrQfmqXLsa9ZOME0XOSbxWm8JBEPjg8BthuQkDZnDiKuKHPfaP1prznvcYEPZwkY0BW1B8rRi0"/>
+</div>
+<div class="p-6">
+<span class="text-secondary font-label-sm text-label-sm uppercase tracking-wider mb-2 block">Relationships</span>
+<h4 class="font-headline-md text-on-background mb-3 group-hover:text-primary transition-colors">Effective Communication Tips</h4>
+<p class="text-on-surface-variant text-body-md font-body-md mb-6 line-clamp-2">
+                                Learn how to express your needs clearly and listen actively to your partner or family members.
+                            </p>
+<a class="flex items-center gap-2 text-primary font-label-md text-label-md hover:underline" href="#">
+                                Read More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="group bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden hover:shadow-lg transition-all duration-300">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A peaceful bedroom scene with soft blue lighting and a comfortable bed, emphasizing rest and sleep hygiene. Minimalist, professional design with deep oceanic blue tones and plenty of whitespace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATV4dM_mvsF0BiWoHEli3EQuSS23xNHCr31GXeKvaRR1aHajgtv_DVUtGPy83tUeDM6C_LlWvRaQf46QkqeGelVRlAMHJEla5P-YK1U8E0BNF0yLEfj34RzHNsJAwO1_EFL6C4UpfjheK0Wrv_d9Kg5MBRJUUtv00a79FxZNfjJhpMAuSZ5YhdUj1NHu88Ksf5dXCd6cJpaPS56TwnyVlgugewn40eLknnUo3j0MxCOUIy06bWa9QUYKkRRIMQ-CLaos_y23Vfp0U"/>
+</div>
+<div class="p-6">
+<span class="text-secondary font-label-sm text-label-sm uppercase tracking-wider mb-2 block">Sleep</span>
+<h4 class="font-headline-md text-on-background mb-3 group-hover:text-primary transition-colors">Digital Detox for Better Rest</h4>
+<p class="text-on-surface-variant text-body-md font-body-md mb-6 line-clamp-2">
+                                How blue light and late-night scrolling impact your sleep quality and mental health.
+                            </p>
+<a class="flex items-center gap-2 text-primary font-label-md text-label-md hover:underline" href="#">
+                                Read More <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="group bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden hover:shadow-lg transition-all duration-300">
+<div class="h-48 overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A young student studying calmly at a clean desk with a small plant, representing focus and anxiety management in academic or professional settings. Calm teal and navy blue color scheme." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsI1xaUXUJq_BrfcuQBYzei1eirDA6ZLN06S3a5J40vWgn3R-t_XH5pcAPtu_ZAHDfnyBBH8bINuqcw_-UA6tnJSR4QKhT5QtkezGuhlHuxqhLTNPXaBCYDZq3mnTEor7U11JcLzkG6FBjo6dedg3TZilCIKhjMZwzuf_VOohilBRDTqiAVjqzzKPl6RTmoyvIOJoJPNKfthbokYnt7wsqd1sXarQJG2jmZzck3Rosv73hnw-mOG0NB4mhQCBpOs_TCIaVDOhqXJo"/>
+</div>
+<div class="p-6">
+<span class="text-secondary font-label-sm text-label-sm uppercase tracking-wider mb-2 block">Anxiety</span>
+<h4 class="font-headline-md text-on-background mb-3 group-hover:text-primary transition-colors">Managing Exam &amp; Goal Anxiety</h4>
+<p class="text-on-surface-variant text-body-md font-body-md mb-6 line-clamp-2">
+                                Practical strategies to stay calm when facing high-pressure deadlines or major life transitions.
+                            </p>
+<a class="flex items-center gap-2 text-primary font-label-md text-label-md hover:underline" href="#">
+                                Start Exercise <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</article>
+</div>
+<div class="mt-12 flex justify-center">
+<button class="px-8 py-3 border-2 border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-primary/5 transition-all">Load More Resources</button>
+</div>
+</div>
+<!-- Sidebar: Crisis Support -->
+<aside class="lg:col-span-4">
+<div class="sticky top-24 space-y-6">
+<div class="bg-surface-container-high rounded-2xl p-8 border border-primary/10">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-error text-3xl">emergency_home</span>
+<h3 class="font-headline-md text-on-background">Immediate Support</h3>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">
+                            If you or someone you know is in immediate distress, please reach out. You are not alone.
+                        </p>
+<div class="space-y-4">
+<a class="flex flex-col p-4 bg-white rounded-xl border border-outline-variant hover:border-primary transition-all group" href="tel:+254722178177">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-1">Befrienders Kenya Hotline</span>
+<span class="font-headline-md text-primary group-hover:text-secondary transition-colors">+254 722 178 177</span>
+</a>
+<a class="flex flex-col p-4 bg-white rounded-xl border border-outline-variant hover:border-primary transition-all group" href="#">
+<span class="font-label-sm text-label-sm text-on-surface-variant mb-1">Emergency Services</span>
+<span class="font-headline-md text-primary group-hover:text-secondary transition-colors">999 / 112</span>
+</a>
+</div>
+<div class="mt-8 p-4 bg-secondary-container/20 rounded-xl">
+<p class="text-body-md font-body-md text-on-secondary-container italic">
+                                "Taking the first step to ask for help is a sign of immense strength."
+                            </p>
+</div>
+</div>
+<!-- Newsletter/Signup Box -->
+<div class="bg-primary text-white rounded-2xl p-8 overflow-hidden relative">
+<div class="relative z-10">
+<h4 class="font-headline-md mb-2">Join our Community</h4>
+<p class="font-body-md text-body-md text-primary-fixed-dim mb-6">Receive weekly mental health tips and new resource alerts in your inbox.</p>
+<input class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder:text-white/60 mb-4 focus:ring-white" placeholder="Enter your email" type="email"/>
+<button class="w-full py-3 bg-white text-primary rounded-lg font-label-md text-label-md font-bold hover:bg-secondary-container transition-all">Subscribe Now</button>
+</div>
+<div class="absolute -bottom-10 -right-10 w-32 h-32 bg-secondary opacity-20 rounded-full blur-3xl"></div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-dim mt-section-gap">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-gutter w-full max-w-container-max mx-auto">
+<div class="mb-4 md:mb-0">
+<span class="font-label-md text-label-md font-bold text-primary block mb-1">Suluhu Kenya</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Suluhu Kenya. Professional Mental Health Solutions.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-label-sm text-label-sm" href="#">Legal</a>
+<a class="text-on-surface-variant hover:text-secondary transition-colors font-label-sm text-label-sm" href="#">Privacy Policy</a>
+<a class="text-primary underline font-label-sm text-label-sm" href="tel:+254722178177">Befrienders Kenya Hotline: +254 722 178 177</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interactions for chips
+        const chips = document.querySelectorAll('.hide-scrollbar button');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => {
+                    c.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+                    c.classList.add('bg-surface-container', 'text-on-surface-variant');
+                });
+                chip.classList.remove('bg-surface-container', 'text-on-surface-variant');
+                chip.classList.add('bg-secondary-container', 'text-on-secondary-container');
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.02]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.02]');
+        });
+    </script>
+</body></html>

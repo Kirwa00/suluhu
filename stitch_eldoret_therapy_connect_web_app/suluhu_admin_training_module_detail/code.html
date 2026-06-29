@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Clinical Safety &amp; Triage - Suluhu Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #cbd5e1;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#005142",
+                    "surface-dim": "#d8dadb",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#305f9d",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#a7c8ff",
+                    "on-background": "#191c1d",
+                    "inverse-on-surface": "#eff1f2",
+                    "tertiary-fixed": "#c1e8ff",
+                    "on-secondary": "#ffffff",
+                    "on-tertiary-container": "#7acaf2",
+                    "tertiary-fixed-dim": "#81d0f8",
+                    "on-tertiary-fixed": "#001e2b",
+                    "secondary-fixed": "#a5f2db",
+                    "surface-bright": "#f8fafb",
+                    "tertiary": "#003d52",
+                    "on-secondary-container": "#1f705f",
+                    "on-surface": "#191c1d",
+                    "on-surface-variant": "#424750",
+                    "on-error-container": "#93000a",
+                    "primary": "#00386d",
+                    "surface-container-highest": "#e1e3e4",
+                    "surface-container-high": "#e6e8e9",
+                    "tertiary-container": "#005571",
+                    "outline-variant": "#c2c6d1",
+                    "success-calm": "#2E8555",
+                    "surface-container-low": "#f2f4f5",
+                    "on-primary-fixed-variant": "#0d4784",
+                    "on-primary-fixed": "#001c3b",
+                    "inverse-surface": "#2e3132",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f8fafb",
+                    "surface-container": "#eceeef",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#1b4f8c",
+                    "on-tertiary-fixed-variant": "#004d67",
+                    "secondary-container": "#a5f2db",
+                    "primary-fixed": "#d5e3ff",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#002019",
+                    "on-primary-container": "#9cc2ff",
+                    "outline": "#737781",
+                    "surface-soothing": "#F0F4F8",
+                    "surface": "#f8fafb",
+                    "error-container": "#ffdad6",
+                    "secondary": "#166a59",
+                    "secondary-fixed-dim": "#89d5c0",
+                    "text-rich-slate": "#1C1E21",
+                    "surface-variant": "#e1e3e4",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "accent-teal-light": "#E8F3F1"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "margin-desktop": "40px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "container-max": "1200px",
+                    "section-gap": "80px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "display-lg": ["Manrope"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- Navigation Shell: SideNavBar -->
+<aside class="flex flex-col h-full py-6 px-4 border-r border-outline-variant/30 bg-surface-container-low dark:bg-surface-dim h-screen w-64 fixed left-0 top-0 z-50">
+<div class="mb-10 px-2">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Suluhu Admin</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Backend Portal</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-primary dark:text-primary-fixed-dim font-bold border-r-4 border-primary dark:border-primary-fixed-dim bg-primary-container/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined fill-icon" data-icon="pending_actions">pending_actions</span>
+<span class="font-label-md text-label-md">Applications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-label-md text-label-md">Therapists</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-label-md text-label-md">Verifications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant/20 space-y-1">
+<button class="w-full text-left px-3 py-2 text-primary font-bold hover:bg-surface-container-high transition-all mb-4">
+                Review Pending
+            </button>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="pl-64 min-h-screen">
+<!-- Navigation Shell: TopNavBar -->
+<header class="flex justify-between items-center w-full h-16 pl-8 pr-10 sticky top-0 z-40 bg-surface-bright border-b border-outline-variant/10">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-label-md" placeholder="Search applications..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-6 mr-6">
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Direct Messages</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Audit Log</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</button>
+<button class="bg-primary text-white px-4 py-2 rounded-lg font-label-md hover:opacity-90 transition-opacity">Approve Application</button>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-xs">SA</div>
+</div>
+</div>
+</header>
+<!-- Breadcrumbs & Title Section -->
+<section class="px-10 pt-8 pb-4">
+<nav class="flex items-center gap-2 text-label-sm text-outline mb-4">
+<a class="hover:text-primary" href="#">Applications</a>
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary" href="#">Dr. Sarah Jenkins</a>
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary" href="#">Training</a>
+<span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-medium">Clinical Safety &amp; Triage</span>
+</nav>
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Clinical Safety &amp; Triage</h2>
+<p class="text-body-md text-on-surface-variant mt-1">Detailed performance review for training module ID: #ST-992-CS</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 border border-outline-variant px-4 py-2 rounded-lg text-label-md font-medium hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="print">print</span> Print Report
+                    </button>
+<button class="flex items-center gap-2 border border-outline-variant px-4 py-2 rounded-lg text-label-md font-medium hover:bg-surface-container-low transition-colors text-error">
+<span class="material-symbols-outlined text-lg" data-icon="block">block</span> Revoke Certification
+                    </button>
+</div>
+</div>
+</section>
+<!-- Bento Layout Dashboard -->
+<div class="px-10 pb-10 grid grid-cols-12 gap-gutter">
+<!-- Module Overview Card -->
+<div class="col-span-12 lg:col-span-4 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-6">
+<div>
+<p class="text-label-sm uppercase tracking-wider text-outline mb-1">Module Status</p>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full text-label-sm font-bold">
+<span class="material-symbols-outlined text-sm fill-icon" data-icon="check_circle">check_circle</span>
+                            COMPLETED
+                        </span>
+</div>
+<div class="text-right">
+<p class="text-label-sm uppercase tracking-wider text-outline mb-1">Score</p>
+<p class="text-headline-md font-bold text-success-calm">95%</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/10">
+<span class="text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-outline" data-icon="calendar_today">calendar_today</span> Completed on</span>
+<span class="font-medium">Oct 12, 2023</span>
+</div>
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/10">
+<span class="text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-outline" data-icon="timer">timer</span> Time Spent</span>
+<span class="font-medium">42 Minutes</span>
+</div>
+<div class="flex items-center justify-between py-2">
+<span class="text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-outline" data-icon="rule">rule</span> Attempts</span>
+<span class="font-medium">1 / 1</span>
+</div>
+</div>
+</div>
+<!-- Quiz Breakdown Card -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30">
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Quiz Performance</h3>
+<div class="flex items-center gap-10">
+<div class="relative w-32 h-32">
+<!-- Simple circular progress representation using SVG -->
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<path class="text-outline-variant/20 stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3"></path>
+<path class="text-success-calm stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="95, 100" stroke-linecap="round" stroke-width="3"></path>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="text-headline-md font-bold text-success-calm">19/20</span>
+</div>
+</div>
+<div class="flex-1 grid grid-cols-2 gap-4">
+<div class="bg-surface-container p-4 rounded-lg">
+<p class="text-label-sm text-outline mb-1">Correct Answers</p>
+<p class="text-headline-md font-bold text-success-calm">19</p>
+</div>
+<div class="bg-surface-container p-4 rounded-lg">
+<p class="text-label-sm text-outline mb-1">Incorrect Answers</p>
+<p class="text-headline-md font-bold text-error">1</p>
+</div>
+<div class="bg-surface-container p-4 rounded-lg col-span-2">
+<p class="text-label-sm text-outline mb-2">Category Performance</p>
+<div class="space-y-2">
+<div class="flex items-center justify-between text-label-md">
+<span>Triage Decision Making</span>
+<span class="font-bold">100%</span>
+</div>
+<div class="h-1.5 w-full bg-outline-variant/20 rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 100%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quiz Response Details List -->
+<div class="col-span-12 lg:col-span-9 bg-surface-container-lowest p-8 rounded-xl border border-outline-variant/30">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline-md text-headline-md text-primary">Detailed Quiz Responses</h3>
+<div class="flex items-center gap-2">
+<span class="text-label-sm text-outline">Filter:</span>
+<select class="text-label-sm bg-surface-container-low border-none rounded-md px-3 py-1 font-medium focus:ring-primary">
+<option>All Questions</option>
+<option>Incorrect Only</option>
+</select>
+</div>
+</div>
+<div class="space-y-8">
+<!-- Correct Response 1 -->
+<div class="border-l-4 border-success-calm pl-6 py-2">
+<div class="flex items-start justify-between mb-3">
+<h4 class="font-bold text-body-lg text-rich-slate">Q1: How should a clinician prioritize a patient reporting passive suicidal ideation with no immediate plan?</h4>
+<span class="text-success-calm material-symbols-outlined fill-icon" data-icon="check_circle">check_circle</span>
+</div>
+<div class="grid grid-cols-2 gap-6 text-label-md mb-4">
+<div>
+<p class="text-outline mb-1">Therapist's Answer</p>
+<div class="p-3 bg-secondary-container/10 border border-secondary/20 rounded-lg text-secondary font-medium">
+                                    Schedule a standard follow-up within 48 hours and complete a safety plan.
+                                </div>
+</div>
+<div>
+<p class="text-outline mb-1">Correct Answer</p>
+<div class="p-3 bg-secondary-container/10 border border-secondary/20 rounded-lg text-secondary font-medium">
+                                    Schedule a standard follow-up within 48 hours and complete a safety plan.
+                                </div>
+</div>
+</div>
+<div class="bg-surface-container p-4 rounded-lg">
+<p class="font-bold text-label-sm text-primary mb-1 uppercase tracking-tight">Clinical Rationale</p>
+<p class="text-body-md italic text-on-surface-variant">"While ideation without plan is lower risk than active ideation, Suluhu's protocol mandates a formal safety plan within 48 hours to mitigate escalation risk. This balances safety with appropriate level of care."</p>
+</div>
+</div>
+<!-- Incorrect Response 2 -->
+<div class="border-l-4 border-error pl-6 py-2">
+<div class="flex items-start justify-between mb-3">
+<h4 class="font-bold text-body-lg text-rich-slate">Q7: A client mentions a sudden onset of severe physical symptoms during a trauma-focused session. What is the immediate action?</h4>
+<span class="text-error material-symbols-outlined fill-icon" data-icon="cancel">cancel</span>
+</div>
+<div class="grid grid-cols-2 gap-6 text-label-md mb-4">
+<div>
+<p class="text-outline mb-1">Therapist's Answer</p>
+<div class="p-3 bg-error-container/10 border border-error/20 rounded-lg text-error font-medium">
+                                    Utilize grounding techniques and proceed with the session if symptoms stabilize.
+                                </div>
+</div>
+<div>
+<p class="text-outline mb-1">Correct Answer</p>
+<div class="p-3 bg-secondary-container/10 border border-secondary/20 rounded-lg text-secondary font-medium">
+                                    Pause session immediately and assess for medical emergency (Triage Step 1).
+                                </div>
+</div>
+</div>
+<div class="bg-surface-container p-4 rounded-lg">
+<p class="font-bold text-label-sm text-primary mb-1 uppercase tracking-tight">Clinical Rationale</p>
+<p class="text-body-md italic text-on-surface-variant">"In cases of sudden physical distress, medical stabilization must take precedence over psychological processing to ensure physiological safety before returning to therapeutic work."</p>
+</div>
+</div>
+<!-- Correct Response 3 -->
+<div class="border-l-4 border-success-calm pl-6 py-2">
+<div class="flex items-start justify-between mb-3">
+<h4 class="font-bold text-body-lg text-rich-slate">Q14: When documenting a high-risk triage event, which elements are legally required in the note?</h4>
+<span class="text-success-calm material-symbols-outlined fill-icon" data-icon="check_circle">check_circle</span>
+</div>
+<div class="grid grid-cols-2 gap-6 text-label-md mb-4">
+<div>
+<p class="text-outline mb-1">Therapist's Answer</p>
+<div class="p-3 bg-secondary-container/10 border border-secondary/20 rounded-lg text-secondary font-medium">
+                                    Risk assessment, interventions attempted, and referral/disposition details.
+                                </div>
+</div>
+<div>
+<p class="text-outline mb-1">Correct Answer</p>
+<div class="p-3 bg-secondary-container/10 border border-secondary/20 rounded-lg text-secondary font-medium">
+                                    Risk assessment, interventions attempted, and referral/disposition details.
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Certification & Supervisor Sidebar -->
+<div class="col-span-12 lg:col-span-3 space-y-gutter">
+<!-- Certification Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30">
+<h3 class="font-label-md text-label-md font-bold text-primary mb-4">Module Certification</h3>
+<div class="relative mb-6 group cursor-pointer">
+<div class="aspect-[4/3] bg-surface-container rounded-lg border-2 border-dashed border-outline-variant overflow-hidden flex items-center justify-center p-4">
+<div class="text-center">
+<span class="material-symbols-outlined text-4xl text-outline mb-2" data-icon="card_membership">card_membership</span>
+<p class="text-label-sm text-outline">ST-992-CS-Jenkins.pdf</p>
+</div>
+</div>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-white text-3xl" data-icon="visibility">visibility</span>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-lg font-bold hover:opacity-90 transition-opacity mb-3">
+<span class="material-symbols-outlined" data-icon="download">download</span> Download Certificate
+                    </button>
+<p class="text-[10px] text-outline text-center">Expires: Oct 12, 2025</p>
+</div>
+<!-- Admin Comments -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30">
+<h3 class="font-label-md text-label-md font-bold text-primary mb-4">Supervisor Feedback</h3>
+<div class="space-y-4">
+<div>
+<label class="block text-label-sm text-outline mb-2">Clinical Supervisor Comments</label>
+<textarea class="w-full bg-surface-soothing border border-outline-variant/30 rounded-lg p-3 text-label-md focus:ring-2 focus:ring-primary/20" placeholder="Add internal notes on performance or remediation steps..." rows="6"></textarea>
+</div>
+<div class="flex items-center gap-2">
+<input class="rounded border-outline-variant text-primary focus:ring-primary" id="require-review" type="checkbox"/>
+<label class="text-label-sm text-on-surface-variant font-medium" for="require-review">Flag for Clinical Lead review</label>
+</div>
+<button class="w-full border border-primary text-primary py-2 rounded-lg font-bold hover:bg-primary/5 transition-colors">
+                            Save Comments
+                        </button>
+</div>
+</div>
+<!-- Related Training -->
+<div class="bg-surface-container-low p-4 rounded-xl">
+<h4 class="text-label-sm font-bold text-outline mb-3 uppercase tracking-tighter">Next Training Path</h4>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="medical_information">medical_information</span>
+</div>
+<div>
+<p class="text-label-md font-bold text-on-surface truncate">Advanced PTSD Triage</p>
+<p class="text-[10px] text-outline">Recommended Path</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Space -->
+<footer class="pl-64 py-8 px-10 text-center border-t border-outline-variant/10">
+<p class="text-label-sm text-outline">© 2024 Suluhu Therapy Center Admin System. Confidential Therapist Personnel Record.</p>
+</footer>
+<script>
+        // Micro-interactions and effects
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                el.classList.add('scale-95');
+                setTimeout(() => el.classList.remove('scale-95'), 100);
+            });
+        });
+    </script>
+</body></html>

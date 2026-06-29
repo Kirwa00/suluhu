@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu Admin - Onboarding Dashboard</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#d8dadb",
+                    "secondary": "#166a59",
+                    "inverse-primary": "#a7c8ff",
+                    "surface": "#f8fafb",
+                    "success-calm": "#2E8555",
+                    "surface-tint": "#305f9d",
+                    "on-primary-fixed-variant": "#0d4784",
+                    "surface-container-highest": "#e1e3e4",
+                    "primary-fixed": "#d5e3ff",
+                    "surface-variant": "#e1e3e4",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#424750",
+                    "accent-teal-light": "#E8F3F1",
+                    "surface-container-low": "#f2f4f5",
+                    "surface-container-high": "#e6e8e9",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "primary": "#00386d",
+                    "surface-container": "#eceeef",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#89d5c0",
+                    "outline-variant": "#c2c6d1",
+                    "secondary-fixed": "#a5f2db",
+                    "primary-container": "#1b4f8c",
+                    "secondary-container": "#a5f2db",
+                    "inverse-surface": "#2e3132",
+                    "tertiary-container": "#005571",
+                    "on-surface": "#191c1d",
+                    "on-secondary-fixed": "#002019",
+                    "on-secondary-container": "#1f705f",
+                    "error-container": "#ffdad6",
+                    "background": "#f8fafb",
+                    "on-secondary-fixed-variant": "#005142",
+                    "surface-soothing": "#F0F4F8",
+                    "on-primary-fixed": "#001c3b",
+                    "surface-bright": "#f8fafb",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#004d67",
+                    "on-background": "#191c1d",
+                    "on-tertiary-fixed": "#001e2b",
+                    "inverse-on-surface": "#eff1f2",
+                    "tertiary": "#003d52",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#7acaf2",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#c1e8ff",
+                    "tertiary-fixed-dim": "#81d0f8",
+                    "text-rich-slate": "#1C1E21",
+                    "on-error": "#ffffff",
+                    "outline": "#737781",
+                    "on-primary-container": "#9cc2ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "40px",
+                    "section-gap": "80px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "container-max": "1200px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Manrope"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+
+        body {
+            background-color: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Mobile Frame Simulation */
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background: #f8fafb;
+            border: 12px solid #2e3132;
+            border-radius: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 30px;
+            background: #2e3132;
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            z-index: 100;
+        }
+
+        .content-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 100px;
+            padding-top: 64px; /* Space for fixed TopAppBar */
+            scrollbar-width: none;
+        }
+        .content-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .custom-shadow {
+            box-shadow: 0 24px 48px -12px rgba(27, 79, 140, 0.08);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-dim">
+<div class="phone-frame">
+<div class="phone-notch"></div>
+<!-- TopAppBar (Shared Component) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-surface dark:bg-inverse-surface" style="width: 351px; left: 12px; top: 12px; border-top-left-radius: 28px; border-top-right-radius: 28px;">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-inverse-primary" data-icon="clinical_notes">clinical_notes</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-container">Suluhu Admin</h1>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center text-[10px] text-white font-bold overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate administrator in a clean, modern office setting. The lighting is soft and natural, reflecting a calm and trustworthy atmosphere consistent with the Suluhu brand identity. High-quality photography with shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACK_yQOWUyNyBFAQhSm27IwmSjkpMe0mAfTxVVyNztsAX9HuMoIbOFUdfZe69DXxXISyCiTv6XDlGgol58W6L0Zjec5-uZtVmSOqD-kgLHJFcZeiDxJVxcWxA6NmwISzcoXjCgx5poHD1TU6tEC_ia67X-16uXRuRclGXfbQA9AR4k5YkqN3vz6MD_5xNU22f_fLllZgeXY6gG8R1S31y1pPlxQZQqER7az7w7IWWHI5J0upr_AdyHoCoexPlIheKoST66mCmRwpg"/>
+</div>
+</header>
+<main class="content-scroll px-4">
+<!-- Search Bar -->
+<div class="mt-4 mb-6">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface-soothing border-none rounded-xl text-label-md focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Quick search therapists..." type="text"/>
+</div>
+</div>
+<!-- Stats Overview - Bento Style -->
+<section class="grid grid-cols-2 gap-3 mb-8">
+<div class="col-span-2 bg-primary-container p-5 rounded-2xl text-white relative overflow-hidden custom-shadow">
+<div class="relative z-10">
+<p class="font-label-sm opacity-80 uppercase tracking-wider mb-1">Pending Applications</p>
+<h2 class="text-4xl font-extrabold font-headline-md">24</h2>
+<div class="mt-4 flex items-center gap-2 text-xs bg-white/10 w-fit px-2 py-1 rounded-full">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+<span>12% from last week</span>
+</div>
+</div>
+<!-- Background accent -->
+<div class="absolute -right-4 -bottom-4 w-24 h-24 bg-white/5 rounded-full blur-2xl"></div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 p-4 rounded-2xl flex flex-col justify-between">
+<span class="material-symbols-outlined text-secondary mb-2" data-icon="person_search">person_search</span>
+<div>
+<p class="font-label-sm text-on-surface-variant">Interviewing</p>
+<h3 class="font-headline-md text-xl text-on-surface">08</h3>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 p-4 rounded-2xl flex flex-col justify-between">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="verified">verified</span>
+<div>
+<p class="font-label-sm text-on-surface-variant">Verified (Mo)</p>
+<h3 class="font-headline-md text-xl text-on-surface">15</h3>
+</div>
+</div>
+</section>
+<!-- Pending Actions List -->
+<section>
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline-md text-lg text-on-surface">Pending Actions</h3>
+<button class="text-primary font-label-md hover:underline">View All</button>
+</div>
+<div class="space-y-3">
+<!-- Therapist Item 1 -->
+<div class="bg-white border border-outline-variant/20 p-4 rounded-xl flex items-center justify-between hover:bg-surface-soothing transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-accent-teal-light flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+</div>
+<div>
+<h4 class="font-label-md text-on-surface font-bold">Dr. Sarah Mwangi</h4>
+<p class="text-[12px] text-on-surface-variant">Child Psychology • Oct 12</p>
+</div>
+</div>
+<button class="bg-primary-container/10 text-primary-container px-3 py-1.5 rounded-lg font-label-sm group-hover:bg-primary-container group-hover:text-white transition-all">
+                            Review
+                        </button>
+</div>
+<!-- Therapist Item 2 -->
+<div class="bg-white border border-outline-variant/20 p-4 rounded-xl flex items-center justify-between hover:bg-surface-soothing transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+</div>
+<div>
+<h4 class="font-label-md text-on-surface font-bold">James K. Lutter</h4>
+<p class="text-[12px] text-on-surface-variant">Family Therapy • Oct 11</p>
+</div>
+</div>
+<button class="bg-primary-container/10 text-primary-container px-3 py-1.5 rounded-lg font-label-sm group-hover:bg-primary-container group-hover:text-white transition-all">
+                            Review
+                        </button>
+</div>
+<!-- Therapist Item 3 -->
+<div class="bg-white border border-outline-variant/20 p-4 rounded-xl flex items-center justify-between hover:bg-surface-soothing transition-colors cursor-pointer group">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-lg bg-secondary-fixed flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="self_improvement">self_improvement</span>
+</div>
+<div>
+<h4 class="font-label-md text-on-surface font-bold">Elena Rodriguez</h4>
+<p class="text-[12px] text-on-surface-variant">Trauma Specialist • Oct 10</p>
+</div>
+</div>
+<button class="bg-primary-container/10 text-primary-container px-3 py-1.5 rounded-lg font-label-sm group-hover:bg-primary-container group-hover:text-white transition-all">
+                            Review
+                        </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed bottom-24 right-8 w-14 h-14 bg-primary text-white rounded-2xl shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-transform z-40" style="margin-right: 12px; margin-bottom: 12px;">
+<span class="material-symbols-outlined text-[28px]" data-icon="person_add">person_add</span>
+</button>
+<!-- BottomNavBar (Shared Component) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-surface dark:bg-inverse-surface shadow-sm" style="width: 351px; left: 12px; bottom: 12px; border-bottom-left-radius: 28px; border-bottom-right-radius: 28px;">
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-3 py-1 transition-all active:scale-90">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Overview</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined text-[20px]" data-icon="groups">groups</span>
+<span class="font-label-sm text-label-sm">Therapists</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined text-[20px]" data-icon="payments">payments</span>
+<span class="font-label-sm text-label-sm">Financials</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined text-[20px]" data-icon="assignment_turned_in">assignment_turned_in</span>
+<span class="font-label-sm text-label-sm">Audit Logs</span>
+</div>
+</nav>
+</div>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('.group').forEach(item => {
+            item.addEventListener('touchstart', function() {
+                this.classList.add('bg-surface-soothing');
+            });
+            item.addEventListener('touchend', function() {
+                setTimeout(() => this.classList.remove('bg-surface-soothing'), 100);
+            });
+        });
+
+        // Search highlight effect
+        const searchInput = document.querySelector('input');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+        });
+    </script>
+</body></html>

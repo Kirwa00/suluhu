@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Eldoret Therapy Connect - Find a Therapist</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary": "#715b3a",
+                      "error-container": "#ffdad6",
+                      "primary-container": "#e6c9a7",
+                      "on-error": "#ffffff",
+                      "surface-container-high": "#eee7e3",
+                      "tertiary-fixed-dim": "#bac7db",
+                      "tertiary": "#535f70",
+                      "on-secondary-fixed-variant": "#584325",
+                      "primary": "#705b3f",
+                      "on-surface-variant": "#4d453d",
+                      "primary-fixed-dim": "#dec2a0",
+                      "on-secondary-fixed": "#281901",
+                      "on-error-container": "#93000a",
+                      "surface-tint": "#705b3f",
+                      "on-background": "#1e1b19",
+                      "inverse-on-surface": "#f6efeb",
+                      "inverse-primary": "#dec2a0",
+                      "secondary-container": "#fadbb2",
+                      "surface-container-low": "#f9f2ee",
+                      "background": "#fff8f4",
+                      "secondary-fixed": "#fddeb5",
+                      "error": "#ba1a1a",
+                      "outline-variant": "#d1c4b9",
+                      "on-secondary-container": "#765f3e",
+                      "tertiary-container": "#c2cfe3",
+                      "on-tertiary-fixed": "#0f1c2b",
+                      "primary-fixed": "#fcdebb",
+                      "surface": "#fff8f4",
+                      "surface-container-lowest": "#ffffff",
+                      "on-surface": "#1e1b19",
+                      "on-primary-fixed": "#281904",
+                      "on-tertiary-fixed-variant": "#3b4858",
+                      "surface-container-highest": "#e8e1dd",
+                      "secondary-fixed-dim": "#e0c29a",
+                      "tertiary-fixed": "#d6e3f8",
+                      "outline": "#7f756b",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed-variant": "#57432a",
+                      "surface-variant": "#e8e1dd",
+                      "surface-bright": "#fff8f4",
+                      "inverse-surface": "#33302d",
+                      "surface-dim": "#dfd9d5",
+                      "surface-container": "#f3ede8",
+                      "on-tertiary-container": "#4c5869",
+                      "on-secondary": "#ffffff",
+                      "on-primary-container": "#695439",
+                      "on-primary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "48px",
+                      "gutter": "24px",
+                      "base": "8px",
+                      "sm": "12px",
+                      "xs": "4px",
+                      "md": "24px",
+                      "xl": "80px",
+                      "container-max": "1200px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Atkinson Hyperlegible Next"
+                      ],
+                      "title-lg": [
+                              "Manrope"
+                      ],
+                      "headline-md-mobile": [
+                              "Manrope"
+                      ],
+                      "headline-md": [
+                              "Manrope"
+                      ],
+                      "display-lg": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Atkinson Hyperlegible Next"
+                      ],
+                      "label-md": [
+                              "Manrope"
+                      ],
+                      "display-lg-mobile": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "title-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg-mobile": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen flex flex-col pt-[72px] md:pt-[88px] pb-[80px] md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background dark:bg-background">
+<div class="flex justify-between items-center w-full px-gutter py-base max-w-container-max mx-auto h-[72px] md:h-[88px]">
+<h1 class="text-title-lg font-title-lg font-bold text-primary dark:text-primary-fixed-dim">
+                Eldoret Therapy Connect
+            </h1>
+<!-- Desktop Nav (Hidden on mobile) -->
+<nav class="hidden md:flex gap-md items-center">
+<a class="text-on-surface-variant dark:text-on-surface-variant text-label-md font-label-md hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="#">Dashboard</a>
+<a class="text-primary dark:text-primary-fixed-dim font-bold text-label-md font-label-md hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200" href="#">Find a Therapist</a>
+<button class="text-primary dark:text-primary-fixed-dim hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 flex items-center justify-center p-2 rounded-full">
+<span aria-label="User profile settings" class="material-symbols-outlined">account_circle</span>
+</button>
+</nav>
+<!-- Mobile Trailing Actions -->
+<div class="flex md:hidden items-center gap-sm">
+<button class="text-primary dark:text-primary-fixed-dim hover:text-secondary dark:hover:text-secondary-fixed transition-colors duration-200 flex items-center justify-center p-2 rounded-full">
+<span aria-label="User profile settings" class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-gutter py-lg md:py-xl flex flex-col gap-lg">
+<!-- Search and Filters Section -->
+<section class="flex flex-col gap-md">
+<h2 class="text-headline-md-mobile md:text-headline-md font-headline-md-mobile md:font-headline-md text-primary">Find a Therapist</h2>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-[#F8F8F8] border border-[#F5EFE9] text-on-surface-variant rounded-full pl-12 pr-4 py-3 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-body-md font-body-md" placeholder="Search by name or specialty" type="text"/>
+</div>
+<!-- Filters -->
+<div class="flex flex-col gap-sm">
+<h3 class="text-label-md font-label-md text-on-surface-variant">Specialization</h3>
+<div class="flex flex-wrap gap-sm">
+<button class="bg-primary/20 text-[#333333] px-4 py-1.5 rounded-full text-label-md font-label-md hover:bg-primary/30 transition-colors">Anxiety</button>
+<button class="bg-primary/20 text-[#333333] px-4 py-1.5 rounded-full text-label-md font-label-md hover:bg-primary/30 transition-colors">Depression</button>
+<button class="bg-primary/20 text-[#333333] px-4 py-1.5 rounded-full text-label-md font-label-md hover:bg-primary/30 transition-colors">Trauma</button>
+<button class="bg-primary/20 text-[#333333] px-4 py-1.5 rounded-full text-label-md font-label-md hover:bg-primary/30 transition-colors">Family</button>
+</div>
+</div>
+<div class="flex flex-col gap-sm">
+<h3 class="text-label-md font-label-md text-on-surface-variant">Availability</h3>
+<div class="flex flex-wrap gap-sm">
+<button class="bg-primary/20 text-[#333333] px-4 py-1.5 rounded-full text-label-md font-label-md hover:bg-primary/30 transition-colors">Today</button>
+<button class="bg-primary/20 text-[#333333] px-4 py-1.5 rounded-full text-label-md font-label-md hover:bg-primary/30 transition-colors">This Week</button>
+</div>
+</div>
+</section>
+<!-- Therapist List -->
+<section class="flex flex-col gap-md">
+<!-- Card 1 -->
+<div class="bg-white rounded-[24px] p-[24px] flex flex-col sm:flex-row gap-md items-center sm:items-start transition-all duration-300 hover:-translate-y-1 hover:shadow-[0px_4px_20px_rgba(113,91,58,0.05)] border border-transparent hover:border-[#C4A882]">
+<img class="w-24 h-24 rounded-full object-cover shrink-0 bg-surface-container-high" data-alt="A professional portrait of an African therapist in a warm, inviting, well-lit office. The lighting is soft and natural, emphasizing a compassionate and calm demeanor. The aesthetic aligns with a soft minimalism, featuring subtle neutral tones in the background, promoting a feeling of safety and digital sanctuary." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3Nrf66dgptU0_hTi0tg7VHLUa6tL3cfmqeT0ABG8Z8kdT_twps_lvtGWqRf_0bzZQoBORwprIX5nb50f4_-bv_xKx1yzxz2vb0hDkf5swzsGZ_3id6Dp8ivZprJmkevP1z5VjC-MBu8DHesu4J2Tuaj9IknDBSwU30LLASvPb64K79Ztcuwisa-qCHkSKEHMFh7Hi9A-AARZ4f1axTjvQf3CKXbvPfI9vCbC-I73BQ4aZOAmiufVEvSekhLWTxVGmcIE7Qeabe4Q"/>
+<div class="flex flex-col gap-sm text-center sm:text-left flex-grow w-full">
+<div>
+<h3 class="text-title-lg font-title-lg text-on-surface">Dr. Michael Mutua</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Trauma Specialist</p>
+</div>
+<div class="flex flex-wrap justify-center sm:justify-start gap-xs mt-2">
+<span class="bg-primary/20 text-[#333333] px-2 py-0.5 rounded-full text-xs font-label-md">EMDR</span>
+<span class="bg-primary/20 text-[#333333] px-2 py-0.5 rounded-full text-xs font-label-md">PTSD</span>
+</div>
+</div>
+<button class="w-full sm:w-auto bg-[#E98A6C] text-white px-6 py-3 rounded-lg text-label-md font-label-md hover:bg-[#d67b5e] transition-colors shrink-0 mt-4 sm:mt-0">Book</button>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-[24px] p-[24px] flex flex-col sm:flex-row gap-md items-center sm:items-start transition-all duration-300 hover:-translate-y-1 hover:shadow-[0px_4px_20px_rgba(113,91,58,0.05)] border border-transparent hover:border-[#C4A882]">
+<img class="w-24 h-24 rounded-full object-cover shrink-0 bg-surface-container-high" data-alt="A serene, professional portrait of a female therapist in a softly lit, modern consulting room. The environment is uncluttered and warm, using natural light to create a sense of trust and organic professionalism. The color palette incorporates gentle creams and warm tones, evoking a digital sanctuary feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_ZGiAPp7JcbvACkHVYZgNz8SPDQ9LxsIBvv4pXmjBS0--wb1pkzrrkQZeK1zV5n5QQR19_2GXkZd4EUO5KBggvDY7FLzoSeQCD-1Lw3DbxlfCbez-yxe1sFhNerncFgkQGVfSXSEwllZI2GY2COfdt4a9USgj-SyI9UmTH-Co8ZpD8Cmzo34lch5etrZGnqHAbEmu24yHML81F_rrrVafoMTzoyEK20PtJpWT5B_0sVCb7_8392GKXojL6gstGOrkcuADi1WmZkI"/>
+<div class="flex flex-col gap-sm text-center sm:text-left flex-grow w-full">
+<div>
+<h3 class="text-title-lg font-title-lg text-on-surface">Sarah Ochieng</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Family &amp; Marriage Counselor</p>
+</div>
+<div class="flex flex-wrap justify-center sm:justify-start gap-xs mt-2">
+<span class="bg-primary/20 text-[#333333] px-2 py-0.5 rounded-full text-xs font-label-md">Couples</span>
+<span class="bg-primary/20 text-[#333333] px-2 py-0.5 rounded-full text-xs font-label-md">Mediation</span>
+</div>
+</div>
+<button class="w-full sm:w-auto bg-[#E98A6C] text-white px-6 py-3 rounded-lg text-label-md font-label-md hover:bg-[#d67b5e] transition-colors shrink-0 mt-4 sm:mt-0">Book</button>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-[24px] p-[24px] flex flex-col sm:flex-row gap-md items-center sm:items-start transition-all duration-300 hover:-translate-y-1 hover:shadow-[0px_4px_20px_rgba(113,91,58,0.05)] border border-transparent hover:border-[#C4A882]">
+<img class="w-24 h-24 rounded-full object-cover shrink-0 bg-surface-container-high" data-alt="A welcoming, professional portrait of an East African therapist sitting in a bright, minimalist clinic. Soft, ambient lighting creates a reassuring atmosphere. The visual aesthetic is clean and organic, utilizing a soft white and warm ochre palette to ensure a compassionate, calm presentation." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmlZTvSu4bOabuKuDsV2Dz6QzNhlxrOVHUiFo96ni_B2OUx7XiONy17eKZu43ZGMuGcl5ayBs-NR9qAOIwsnIXLQQJvof2mhf33gy5AxwJOkgw8LhJBnGOzyIbXaAGnJ0C6MU1so2FfhtDk6n1a1EzpqHb7mcvGSZ8InTFZIq-qIlk3rdlyVUyggUb0HF5f3sWfrHaBcaVKesx45dhvLI2_qPN5mrUK-humUaPHRQsmB9k7MYTrTE6HqqdaaO93n5K2PZET6h5G50"/>
+<div class="flex flex-col gap-sm text-center sm:text-left flex-grow w-full">
+<div>
+<h3 class="text-title-lg font-title-lg text-on-surface">David Kiprono</h3>
+<p class="text-body-md font-body-md text-on-surface-variant">Anxiety &amp; Depression Specialist</p>
+</div>
+<div class="flex flex-wrap justify-center sm:justify-start gap-xs mt-2">
+<span class="bg-primary/20 text-[#333333] px-2 py-0.5 rounded-full text-xs font-label-md">CBT</span>
+<span class="bg-primary/20 text-[#333333] px-2 py-0.5 rounded-full text-xs font-label-md">Mindfulness</span>
+</div>
+</div>
+<button class="w-full sm:w-auto bg-[#E98A6C] text-white px-6 py-3 rounded-lg text-label-md font-label-md hover:bg-[#d67b5e] transition-colors shrink-0 mt-4 sm:mt-0">Book</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-gutter pb-4 pt-2 bg-surface-container-low dark:bg-surface-container-low shadow-sm rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-6 py-2 text-label-md font-label-md hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all rounded-full group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform">dashboard</span>
+            Dashboard
+        </a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary-container text-on-secondary-container dark:text-on-secondary-container rounded-full px-6 py-2 text-label-md font-label-md hover:bg-surface-container-highest dark:hover:bg-surface-container-highest transition-all scale-95 duration-200 group" href="#">
+<span class="material-symbols-outlined mb-1 group-hover:scale-110 transition-transform" data-weight="fill" style="font-variation-settings: 'FILL' 1;">search</span>
+            Find a Therapist
+        </a>
+</nav>
+</body></html>

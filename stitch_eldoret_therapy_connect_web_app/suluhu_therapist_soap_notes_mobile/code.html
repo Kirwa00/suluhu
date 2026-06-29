@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu - Mobile SOAP Note Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        h1, h2, h3 {
+            font-family: 'Manrope', sans-serif;
+        }
+        .sticky-footer-shadow {
+            box-shadow: 0 -4px 12px rgba(0, 56, 109, 0.08);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#002019",
+                        "on-secondary-container": "#1f705f",
+                        "error-container": "#ffdad6",
+                        "on-surface": "#191c1d",
+                        "on-primary-fixed": "#001c3b",
+                        "surface-soothing": "#F0F4F8",
+                        "background": "#f8fafb",
+                        "on-secondary-fixed-variant": "#005142",
+                        "tertiary-fixed": "#c1e8ff",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#003d52",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#7acaf2",
+                        "on-tertiary-fixed": "#001e2b",
+                        "on-background": "#191c1d",
+                        "inverse-on-surface": "#eff1f2",
+                        "on-tertiary-fixed-variant": "#004d67",
+                        "surface-bright": "#f8fafb",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#9cc2ff",
+                        "outline": "#737781",
+                        "on-error": "#ffffff",
+                        "text-rich-slate": "#1C1E21",
+                        "tertiary-fixed-dim": "#81d0f8",
+                        "surface": "#f8fafb",
+                        "success-calm": "#2E8555",
+                        "inverse-primary": "#a7c8ff",
+                        "surface-dim": "#d8dadb",
+                        "secondary": "#166a59",
+                        "primary-fixed": "#d5e3ff",
+                        "on-primary-fixed-variant": "#0d4784",
+                        "surface-tint": "#305f9d",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container": "#eceeef",
+                        "primary": "#00386d",
+                        "surface-container-low": "#f2f4f5",
+                        "surface-container-high": "#e6e8e9",
+                        "on-secondary": "#ffffff",
+                        "accent-teal-light": "#E8F3F1",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "on-surface-variant": "#424750",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#005571",
+                        "inverse-surface": "#2e3132",
+                        "secondary-container": "#a5f2db",
+                        "primary-container": "#1b4f8c",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#89d5c0",
+                        "secondary-fixed": "#a5f2db",
+                        "outline-variant": "#c2c6d1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "80px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "unit": "8px",
+                        "container-max": "1200px",
+                        "gutter": "24px"
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface">
+<!-- Clinical Mobile Header -->
+<header class="sticky top-0 z-50 bg-surface shadow-sm px-margin-mobile py-unit border-b border-surface-container">
+<div class="flex justify-between items-start">
+<div>
+<h1 class="text-primary font-headline-md leading-tight">Mercy Wanjiku</h1>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm mt-1">
+<span class="bg-surface-container-high px-2 py-0.5 rounded text-primary font-bold">SLH-8902</span>
+<span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+<span>Oct 24, 2024</span>
+<span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+<span>14:00 CAT</span>
+</div>
+</div>
+<button class="p-2 text-primary">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</header>
+<main class="p-margin-mobile pb-32 space-y-gutter">
+<!-- AI Drafting Assistant -->
+<div class="relative overflow-hidden bg-primary-container text-on-primary text-on-primary-container rounded-xl p-4 flex gap-4 items-start shadow-sm transition-all" id="ai-assistant">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">auto_fix_high</span>
+</div>
+<div class="flex-1">
+<h3 class="font-headline-md text-body-md font-bold mb-1">AI Drafting Assistant</h3>
+<p class="text-label-md opacity-90 mb-3">I've analyzed the 45-minute transcript. I can populate the Subjective and Objective sections for your review.</p>
+<div class="flex gap-2">
+<button class="bg-white text-primary px-4 py-2 rounded-lg font-label-md font-bold active:scale-95 transition-transform" onclick="populateDraft()">Populate Draft</button>
+<button class="text-on-primary-container px-3 py-2 rounded-lg font-label-md" onclick="document.getElementById('ai-assistant').remove()">Dismiss</button>
+</div>
+</div>
+</div>
+<!-- Previous Note Preview (Condensed) -->
+<section>
+<h2 class="text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-2">Previous Session Context</h2>
+<div class="bg-surface-soothing border border-outline-variant/30 p-4 rounded-xl">
+<div class="flex items-center justify-between mb-2">
+<span class="text-label-sm font-bold text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">history</span> Oct 17, 2024
+                    </span>
+<button class="text-primary text-label-sm font-bold">View Full</button>
+</div>
+<p class="text-body-md text-on-surface-variant italic">"Patient reported increased work-related anxiety and difficulty maintaining sleep hygiene. Focused on grounding techniques..."</p>
+</div>
+</section>
+<!-- SOAP Sections (Vertical Stack) -->
+<div class="space-y-4">
+<!-- Subjective -->
+<div class="bg-white border border-outline-variant rounded-xl p-4 focus-within:border-primary transition-colors">
+<div class="flex items-center gap-3 mb-3 text-primary">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-headline-md text-body-md font-bold uppercase tracking-tight">Subjective</span>
+</div>
+<textarea class="w-full border-none p-0 focus:ring-0 bg-transparent text-body-md placeholder-on-surface-variant/50 min-h-[120px]" id="subjective-field" placeholder="Client's self-report, symptoms, and mood..."></textarea>
+</div>
+<!-- Objective -->
+<div class="bg-white border border-outline-variant rounded-xl p-4 focus-within:border-primary transition-colors">
+<div class="flex items-center gap-3 mb-3 text-primary">
+<span class="material-symbols-outlined">visibility</span>
+<span class="font-headline-md text-body-md font-bold uppercase tracking-tight">Objective</span>
+</div>
+<textarea class="w-full border-none p-0 focus:ring-0 bg-transparent text-body-md placeholder-on-surface-variant/50 min-h-[100px]" id="objective-field" placeholder="Measurable signs, appearance, mental status observations..."></textarea>
+</div>
+<!-- Assessment -->
+<div class="bg-white border border-outline-variant rounded-xl p-4 focus-within:border-primary transition-colors">
+<div class="flex items-center gap-3 mb-3 text-primary">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-headline-md text-body-md font-bold uppercase tracking-tight">Assessment</span>
+</div>
+<textarea class="w-full border-none p-0 focus:ring-0 bg-transparent text-body-md placeholder-on-surface-variant/50 min-h-[100px]" placeholder="Clinical interpretation, progress towards goals, diagnosis review..."></textarea>
+</div>
+<!-- Plan -->
+<div class="bg-white border border-outline-variant rounded-xl p-4 focus-within:border-primary transition-colors">
+<div class="flex items-center gap-3 mb-3 text-primary">
+<span class="material-symbols-outlined">edit_calendar</span>
+<span class="font-headline-md text-body-md font-bold uppercase tracking-tight">Plan</span>
+</div>
+<textarea class="w-full border-none p-0 focus:ring-0 bg-transparent text-body-md placeholder-on-surface-variant/50 min-h-[100px]" placeholder="Future sessions, homework, interventions, and referrals..."></textarea>
+</div>
+</div>
+<!-- Risk Assessment -->
+<section class="bg-error-container/20 border border-error/20 rounded-xl p-4">
+<div class="flex items-center gap-3 mb-4 text-error">
+<span class="material-symbols-outlined fill-icon">report_problem</span>
+<span class="font-headline-md text-body-md font-bold uppercase tracking-tight">Risk Assessment</span>
+</div>
+<div class="space-y-4">
+<div class="relative">
+<label class="block text-label-sm font-bold text-on-surface-variant mb-1">Current Safety Level</label>
+<select class="w-full bg-surface-container-lowest border-outline-variant rounded-lg p-3 text-body-md focus:border-error focus:ring-error">
+<option selected="">Low - No immediate risk</option>
+<option>Moderate - Active ideation, no intent</option>
+<option>High - Intent and plan present</option>
+<option>Immediate Emergency Intervention</option>
+</select>
+</div>
+<div class="flex items-start gap-3 bg-white/50 p-3 rounded-lg border border-error/10">
+<span class="material-symbols-outlined text-error text-[20px]">info</span>
+<p class="text-label-md text-on-surface-variant italic">Safety plan active. Emergency contact: Peter Wanjiku (+254 7XX XXX XXX).</p>
+</div>
+</div>
+</section>
+<!-- Next Session Goals -->
+<section>
+<h2 class="text-label-md font-bold text-on-surface-variant uppercase tracking-wider mb-3">Next Session Goals</h2>
+<div class="bg-white border border-outline-variant rounded-xl divide-y divide-outline-variant/30">
+<label class="flex items-center gap-4 p-4 active:bg-surface-container-low transition-colors">
+<input checked="" class="w-6 h-6 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md text-on-surface">Review CBT Thought Log</span>
+</label>
+<label class="flex items-center gap-4 p-4 active:bg-surface-container-low transition-colors">
+<input class="w-6 h-6 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md text-on-surface">Discuss family boundaries</span>
+</label>
+<label class="flex items-center gap-4 p-4 active:bg-surface-container-low transition-colors">
+<input class="w-6 h-6 rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md text-on-surface">Evaluate sleep hygiene progress</span>
+</label>
+<button class="w-full flex items-center justify-center gap-2 p-3 text-primary font-bold text-label-md bg-primary-fixed/20">
+<span class="material-symbols-outlined text-[20px]">add</span> Add Custom Goal
+                </button>
+</div>
+</section>
+</main>
+<!-- Sticky Bottom Actions -->
+<footer class="fixed bottom-0 left-0 right-0 bg-surface px-margin-mobile py-4 border-t border-surface-container sticky-footer-shadow z-[60]">
+<div class="flex gap-3 max-w-container-max mx-auto">
+<button class="flex-1 border-2 border-primary text-primary py-4 rounded-xl font-headline-md text-label-md font-bold active:bg-primary-fixed/20 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">save</span> Save Draft
+            </button>
+<button class="flex-[1.5] bg-primary text-white py-4 rounded-xl font-headline-md text-label-md font-bold active:opacity-90 shadow-md flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">verified</span> Sign &amp; Finalize
+            </button>
+</div>
+</footer>
+<!-- Image for Visual Context (Background Tonal) -->
+<div class="hidden" data-alt="A minimalist, tranquil professional healthcare environment with soft blue tones and plenty of natural light. The setting is clean, clinical but welcoming, featuring soft-focus therapeutic elements like a comfortable chair and a small plant. The lighting is bright and even, reinforcing a sense of transparency, safety, and modern mental health care." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAZb1bqUgIzqF91SvhZ8dTBag85eIIt4V2_nFh2dI_yRvPM9xzajl3rTps7KkwkZb3BAlJPIjNNh5cY_5JsmNF1Pduo3-prUBhp9jufP2OsHEABwZbAoS8aMA9-cEGyRW1l7tbjflZXprrC5n1Nf_9woKjaSKZQ71S5iT1xoh71fcl9gFATMX5wJwtFiHqqdCL5OVVV-9C1yo8XvaCSIctQHbxMQz5AIeaWfj6ZNVhs2ARkifMqZWM3NNuW4vhyMsXxIelAZZve7PQ')"></div>
+<script>
+        function populateDraft() {
+            const subj = document.getElementById('subjective-field');
+            const obj = document.getElementById('objective-field');
+            const button = event.currentTarget;
+            
+            button.innerHTML = '<span class="material-symbols-outlined animate-spin text-[20px]">refresh</span> Drafting...';
+            button.disabled = true;
+
+            setTimeout(() => {
+                subj.value = "Client arrived on time. Reports feeling 'moderately better' since last session but experienced a panic trigger at the supermarket on Tuesday. Sleep has improved to 6 hours average.";
+                obj.value = "Affect is congruent with mood. Maintains good eye contact. Speech is normal rate and volume. No signs of psychomotor agitation observed during the recall of Tuesday's incident.";
+                
+                subj.classList.add('bg-secondary-container/10', 'ring-2', 'ring-secondary-container');
+                obj.classList.add('bg-secondary-container/10', 'ring-2', 'ring-secondary-container');
+                
+                document.getElementById('ai-assistant').innerHTML = `
+                    <div class="bg-success-calm p-2 rounded-lg">
+                        <span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-headline-md text-body-md font-bold mb-1">Draft Applied Successfully</h3>
+                        <p class="text-label-md opacity-90">Please review and edit the Subjective and Objective fields before signing.</p>
+                    </div>
+                `;
+                
+                setTimeout(() => {
+                    subj.classList.remove('bg-secondary-container/10', 'ring-2', 'ring-secondary-container');
+                    obj.classList.remove('bg-secondary-container/10', 'ring-2', 'ring-secondary-container');
+                }, 2000);
+            }, 1200);
+        }
+
+        // Simple haptic feedback simulation for buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (window.navigator.vibrate) {
+                    window.navigator.vibrate(5);
+                }
+            });
+        });
+    </script>
+</body></html>

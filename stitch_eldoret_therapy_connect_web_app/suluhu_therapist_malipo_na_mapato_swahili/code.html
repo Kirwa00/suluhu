@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="light" lang="sw"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu - Malipo ya Tabibu</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "success-calm": "#2E8555",
+                    "on-primary-container": "#9cc2ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed-variant": "#0d4784",
+                    "inverse-on-surface": "#eff1f2",
+                    "primary": "#00386d",
+                    "secondary-fixed-dim": "#89d5c0",
+                    "surface-container-high": "#e6e8e9",
+                    "on-secondary-container": "#1f705f",
+                    "surface-soothing": "#F0F4F8",
+                    "secondary": "#166a59",
+                    "surface-container": "#eceeef",
+                    "inverse-primary": "#a7c8ff",
+                    "inverse-surface": "#2e3132",
+                    "surface-container-low": "#f2f4f5",
+                    "surface-bright": "#f8fafb",
+                    "on-tertiary-container": "#7acaf2",
+                    "outline": "#737781",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "accent-teal-light": "#E8F3F1",
+                    "background": "#f8fafb",
+                    "tertiary-fixed": "#c1e8ff",
+                    "on-tertiary-fixed-variant": "#004d67",
+                    "text-rich-slate": "#1C1E21",
+                    "surface-dim": "#d8dadb",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "outline-variant": "#c2c6d1",
+                    "on-secondary-fixed-variant": "#005142",
+                    "on-background": "#191c1d",
+                    "surface": "#f8fafb",
+                    "on-primary": "#ffffff",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#005571",
+                    "secondary-fixed": "#a5f2db",
+                    "secondary-container": "#a5f2db",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#003d52",
+                    "surface-tint": "#305f9d",
+                    "on-surface-variant": "#424750",
+                    "on-primary-fixed": "#001c3b",
+                    "error-container": "#ffdad6",
+                    "surface-variant": "#e1e3e4",
+                    "on-surface": "#191c1d",
+                    "primary-fixed": "#d5e3ff",
+                    "on-tertiary-fixed": "#001e2b",
+                    "on-secondary-fixed": "#002019",
+                    "primary-container": "#1b4f8c",
+                    "tertiary-fixed-dim": "#81d0f8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "container-max": "1200px",
+                    "margin-desktop": "40px",
+                    "unit": "8px",
+                    "section-gap": "80px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "headline-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .payout-card-gradient {
+            background: linear-gradient(135deg, #1b4f8c 0%, #00386d 100%);
+        }
+        body {
+            background-color: #f8fafb;
+            color: #191c1d;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-surface pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface-container-low dark:bg-surface-container-lowest">
+<div class="flex justify-between items-center px-margin-mobile h-16 w-full max-w-container-max mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="Tabibu" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaTHxwlQT0ZimrLO9T3haWIzLH8NLOD3uhAeZ6C3aWKVs44mGSfMi8irMUS9zuyHCaead78zzXWN167Cr4fHEA880PosNYJGzlQDmEe_BDGPuVu0ZD2PE3bnk9NfM7dB4qvglzh_yLf67aFutPQnXjyEk_PCnrXkyiNiZaXwpG2nU9o3GMi7asH_l4kD3m6jYdeuXZWs759BLR7DUUHG7mqFQS6BoZCOPxUvR4HDoHXKcz3FYCMAeJBScHBZo1DZKnBqZoaCAPw3k"/>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Msimamizi</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant transition-colors active:opacity-80">
+<span class="material-symbols-outlined text-primary">notifications</span>
+</button>
+</div>
+</header>
+<main class="pt-20 px-margin-mobile max-w-md mx-auto space-y-6">
+<!-- Compliance Alert -->
+<div class="flex items-center gap-3 p-4 bg-error-container rounded-xl border-l-4 border-error">
+<span class="material-symbols-outlined text-error">warning</span>
+<div class="flex-1">
+<p class="font-label-md text-on-error-container font-semibold">Hatua ya Utekelezaji Inahitajika</p>
+<p class="font-label-sm text-on-error-container opacity-90">Tafadhali pakia leseni yako iliyohuishwa ili kuhakikisha malipo yanayofuata hayachelewi.</p>
+</div>
+<span class="material-symbols-outlined text-on-error-container opacity-60">chevron_right</span>
+</div>
+<!-- Earnings Overview Card -->
+<section class="payout-card-gradient rounded-3xl p-6 text-white shadow-lg relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-[120px] translate-x-12 -translate-y-6" style="font-variation-settings: 'FILL' 1;">payments</span>
+</div>
+<div class="relative z-10">
+<div class="flex justify-between items-center mb-4">
+<p class="font-label-md opacity-80 uppercase tracking-wider">Jumla Iliyopatikana</p>
+<span class="bg-white/20 px-3 py-1 rounded-full text-[12px] font-medium backdrop-blur-md">Mzunguko wa Okt 2023</span>
+</div>
+<h2 class="text-[36px] font-bold tracking-tight mb-6">KES 84,000.00</h2>
+<div class="grid grid-cols-2 gap-4 border-t border-white/20 pt-6">
+<div>
+<p class="font-label-sm opacity-70 mb-1">Mgao wa Suluhu (30%)</p>
+<p class="font-headline-md text-[18px] font-semibold text-on-primary-container">- KES 25,200</p>
+</div>
+<div>
+<p class="font-label-sm opacity-70 mb-1">Malipo Halisi</p>
+<p class="font-headline-md text-[18px] font-semibold text-secondary-fixed">KES 58,800</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Status & Payout Action -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-3xl p-6 space-y-6">
+<div class="flex justify-between items-center">
+<div class="space-y-1">
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wide">Tarehe Inayofuata ya Malipo</p>
+<p class="font-body-lg font-bold text-primary">Nov 1, 2023</p>
+</div>
+<div class="flex items-center gap-2 px-4 py-1.5 bg-accent-teal-light rounded-full">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="text-on-secondary-container font-label-md font-semibold">Inachakatwa</span>
+</div>
+</div>
+<!-- Primary Action: M-Pesa -->
+<button class="w-full bg-primary-container text-white py-4 rounded-2xl flex items-center justify-center gap-3 shadow-md hover:opacity-90 active:scale-95 transition-all">
+<div class="bg-white/10 p-1.5 rounded-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+<span class="font-label-md font-bold text-lg">Lipa kwa M-Pesa</span>
+</button>
+<p class="text-center font-label-sm text-on-surface-variant italic">Muamala salama unaolindwa na Suluhu SafePay</p>
+</section>
+<!-- Recent Transactions -->
+<section class="space-y-4 pb-12">
+<div class="flex justify-between items-end px-1">
+<h3 class="font-headline-md text-primary">Miamala ya Hivi Karibuni</h3>
+<button class="text-secondary font-label-md hover:underline">Tazama Yote</button>
+</div>
+<div class="space-y-3">
+<!-- Transaction 1 -->
+<div class="bg-white p-4 rounded-2xl border border-outline-variant flex items-center gap-4 hover:shadow-sm transition-shadow">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md font-bold">Malipo ya Okt 15</p>
+<p class="font-label-sm text-on-surface-variant">Imechakatwa kwa Mafanikio</p>
+</div>
+<div class="text-right">
+<p class="font-body-md font-bold text-success-calm">+KES 42,300</p>
+<p class="font-label-sm text-on-surface-variant">Okt 16, 2023</p>
+</div>
+</div>
+<!-- Transaction 2 -->
+<div class="bg-white p-4 rounded-2xl border border-outline-variant flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-outline" style="font-variation-settings: 'FILL' 0;">schedule</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md font-bold">Malipo ya Okt 01</p>
+<p class="font-label-sm text-on-surface-variant">Uhakiki wa M-Pesa</p>
+</div>
+<div class="text-right">
+<p class="font-body-md font-bold text-primary">+KES 51,200</p>
+<p class="font-label-sm text-on-surface-variant">Okt 02, 2023</p>
+</div>
+</div>
+<!-- Transaction 3 -->
+<div class="bg-white p-4 rounded-2xl border border-outline-variant flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-1">
+<p class="font-body-md font-bold">Malipo ya Sept 15</p>
+<p class="font-label-sm text-on-surface-variant">Imechakatwa kwa Mafanikio</p>
+</div>
+<div class="text-right">
+<p class="font-body-md font-bold text-success-calm">+KES 38,900</p>
+<p class="font-label-sm text-on-surface-variant">Sept 16, 2023</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-2 pb-safe bg-surface border-t border-outline-variant z-50">
+<button class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-accent-teal-light transition-colors scale-95 duration-150">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-sm text-label-sm-mobile">Kalenda</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-accent-teal-light transition-colors scale-95 duration-150">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-sm text-label-sm-mobile">Wagonjwa</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant py-1 px-3 hover:bg-accent-teal-light transition-colors scale-95 duration-150">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-sm text-label-sm-mobile">Maelezo</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-xl py-1 px-3 scale-95 duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-label-sm text-label-sm-mobile font-bold">Mapato</span>
+</button>
+</nav>
+<script>
+    // Micro-interactions for button presses
+    document.querySelectorAll('button').forEach(button => {
+        button.addEventListener('mousedown', () => {
+            button.classList.add('scale-95');
+        });
+        button.addEventListener('mouseup', () => {
+            button.classList.remove('scale-95');
+        });
+        button.addEventListener('mouseleave', () => {
+            button.classList.remove('scale-95');
+        });
+    });
+
+    // Subtle entrance animation
+    window.onload = () => {
+        const sections = document.querySelectorAll('main > *');
+        sections.forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(10px)';
+            el.style.transition = 'all 0.4s ease-out';
+            el.style.transitionDelay = `${index * 0.1}s`;
+            setTimeout(() => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    };
+</script>
+</body></html>

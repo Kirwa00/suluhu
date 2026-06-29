@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Clinical Session Note | Suluhu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "error-container": "#ffdad6",
+                "primary-fixed": "#d5e3ff",
+                "tertiary-fixed-dim": "#81d0f8",
+                "surface": "#f8fafb",
+                "outline-variant": "#c2c6d1",
+                "on-primary-fixed": "#001c3b",
+                "secondary-container": "#a5f2db",
+                "on-secondary-fixed": "#002019",
+                "tertiary-fixed": "#c1e8ff",
+                "secondary": "#166a59",
+                "on-surface": "#191c1d",
+                "tertiary": "#003d52",
+                "success-calm": "#2E8555",
+                "on-secondary-fixed-variant": "#005142",
+                "on-secondary-container": "#1f705f",
+                "on-tertiary-fixed": "#001e2b",
+                "on-surface-variant": "#424750",
+                "inverse-on-surface": "#eff1f2",
+                "on-secondary": "#ffffff",
+                "surface-variant": "#e1e3e4",
+                "accent-teal-light": "#E8F3F1",
+                "tertiary-container": "#005571",
+                "inverse-primary": "#a7c8ff",
+                "on-primary-container": "#9cc2ff",
+                "surface-container-high": "#e6e8e9",
+                "text-rich-slate": "#1C1E21",
+                "error": "#ba1a1a",
+                "surface-bright": "#f8fafb",
+                "primary-container": "#1b4f8c",
+                "background": "#f8fafb",
+                "secondary-fixed-dim": "#89d5c0",
+                "surface-tint": "#305f9d",
+                "surface-container-lowest": "#ffffff",
+                "surface-soothing": "#F0F4F8",
+                "inverse-surface": "#2e3132",
+                "on-primary-fixed-variant": "#0d4784",
+                "on-primary": "#ffffff",
+                "primary-fixed-dim": "#a7c8ff",
+                "secondary-fixed": "#a5f2db",
+                "on-tertiary": "#ffffff",
+                "on-tertiary-fixed-variant": "#004d67",
+                "surface-container-highest": "#e1e3e4",
+                "on-error": "#ffffff",
+                "outline": "#737781",
+                "on-error-container": "#93000a",
+                "surface-dim": "#d8dadb",
+                "on-background": "#191c1d",
+                "on-tertiary-container": "#7acaf2",
+                "surface-container-low": "#f2f4f5",
+                "surface-container": "#eceeef",
+                "primary": "#00386d"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "section-gap": "80px",
+                "margin-desktop": "40px",
+                "unit": "8px",
+                "gutter": "24px",
+                "container-max": "1200px",
+                "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                "display-lg": ["Manrope"],
+                "body-md": ["Inter"],
+                "body-lg": ["Inter"],
+                "label-md": ["Inter"],
+                "label-sm": ["Inter"],
+                "headline-md": ["Manrope"],
+                "headline-lg": ["Manrope"]
+            },
+            "fontSize": {
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .soap-card {
+            transition: all 0.2s ease-in-out;
+            border: 1px solid #E2E8F0;
+        }
+        .soap-card:focus-within {
+            border-color: #2E86AB;
+            background-color: #ffffff;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F0F4F8;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface custom-scrollbar">
+<!-- Top Navigation Shell -->
+<header class="bg-surface-container-low w-full h-16 flex justify-between items-center px-margin-desktop max-w-container-max mx-auto z-50">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary">Suluhu</span>
+<div class="hidden md:flex gap-6 ml-10">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-primary font-label-md text-label-md font-bold border-b-2 border-primary" href="#">Sessions</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors" href="#">Resources</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">settings</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female therapist with a warm smile, wearing business casual attire. She is in a bright, modern office with soft natural light and lush indoor plants in the background. The aesthetic is clean, professional, and calming, reflecting the Suluhu brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEy_JAVIAd239QvNOU1YzaiAXDra1LKRlDMRfp-IusRJlAQpSOCJb2KPwAXBAsDQynNwnXxE299XAa-wnFXYYFrSujKJAzWMThSFgaOCmyuM7gRbVmvVWb1qW4PvTU1p-bCpMMVR6sTraR9u4Qx3_Y2lmnEhsrTzeSqUvtf8leDigQFrsmRVWCiNFdd5d_DjjIkzyi_WiBAqMqhWkteKPdsGjrOkIkIri19zAp-aKJjHt3m04sc_9ModfJvrS8KnjWM1OUxexbCEo"/>
+</div>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-margin-desktop py-8">
+<!-- Patient Summary Header -->
+<div class="bg-surface-container-lowest rounded-xl p-gutter mb-8 flex flex-col md:flex-row justify-between items-start md:items-center border border-outline-variant/30">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold text-lg">
+                    MW
+                </div>
+<div>
+<h1 class="font-headline-md text-headline-md text-text-rich-slate">Clinical Session Note</h1>
+<p class="text-label-md font-label-md text-on-surface-variant">Patient: <span class="text-on-surface font-semibold">Mercy Wanjiku</span> • ID: <span class="text-on-surface font-semibold">SLH-8902</span></p>
+</div>
+</div>
+<div class="mt-4 md:mt-0 flex gap-3 text-label-sm font-label-sm">
+<div class="px-3 py-1 bg-accent-teal-light text-secondary rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">calendar_today</span>
+                    Oct 24, 2023
+                </div>
+<div class="px-3 py-1 bg-accent-teal-light text-secondary rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+                    14:00 - 15:00
+                </div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: SOAP Form -->
+<div class="lg:col-span-8 space-y-6">
+<!-- AI Assistant Banner -->
+<div class="bg-primary-container text-white p-4 rounded-lg flex items-center justify-between mb-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">auto_awesome</span>
+<div>
+<p class="font-label-md text-label-md font-semibold">AI Drafting Assistant Available</p>
+<p class="text-xs opacity-90">I've analyzed the session transcript. Click to populate initial SOAP sections.</p>
+</div>
+</div>
+<button class="bg-white text-primary px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-surface-soothing transition-all active:scale-95">
+                        Populate Draft
+                    </button>
+</div>
+<!-- Subjective -->
+<div class="soap-card bg-surface-soothing p-6 rounded-xl">
+<div class="flex items-center justify-between mb-3">
+<label class="font-headline-md text-label-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">forum</span>
+                            S: Subjective
+                        </label>
+<span class="text-label-sm font-label-sm text-outline">Client's report of current status</span>
+</div>
+<textarea class="w-full min-h-[120px] bg-transparent border-none focus:ring-0 text-body-md font-body-md placeholder:text-outline-variant resize-none" placeholder="Document the client's current feelings, concerns, and progress since the last session..."></textarea>
+</div>
+<!-- Objective -->
+<div class="soap-card bg-surface-soothing p-6 rounded-xl">
+<div class="flex items-center justify-between mb-3">
+<label class="font-headline-md text-label-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">visibility</span>
+                            O: Objective
+                        </label>
+<span class="text-label-sm font-label-sm text-outline">Observable clinical data</span>
+</div>
+<textarea class="w-full min-h-[120px] bg-transparent border-none focus:ring-0 text-body-md font-body-md placeholder:text-outline-variant resize-none" placeholder="Note appearance, affect, behavioral observations, and mental status exam findings..."></textarea>
+</div>
+<!-- Assessment -->
+<div class="soap-card bg-surface-soothing p-6 rounded-xl">
+<div class="flex items-center justify-between mb-3">
+<label class="font-headline-md text-label-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">psychology</span>
+                            A: Assessment
+                        </label>
+<span class="text-label-sm font-label-sm text-outline">Clinical interpretation & progress</span>
+</div>
+<textarea class="w-full min-h-[120px] bg-transparent border-none focus:ring-0 text-body-md font-body-md placeholder:text-outline-variant resize-none" placeholder="Clinical impression, diagnosis consideration, and analysis of themes from today's session..."></textarea>
+</div>
+<!-- Plan -->
+<div class="soap-card bg-surface-soothing p-6 rounded-xl">
+<div class="flex items-center justify-between mb-3">
+<label class="font-headline-md text-label-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">event_repeat</span>
+                            P: Plan
+                        </label>
+<span class="text-label-sm font-label-sm text-outline">Next steps & interventions</span>
+</div>
+<textarea class="w-full min-h-[120px] bg-transparent border-none focus:ring-0 text-body-md font-body-md placeholder:text-outline-variant resize-none" placeholder="Document interventions used, homework assigned, and focus for the next session..."></textarea>
+</div>
+</div>
+<!-- Right Column: Sidebar Actions & Controls -->
+<div class="lg:col-span-4 space-y-gutter">
+<!-- Risk Assessment Card -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30">
+<h3 class="font-label-md text-label-md font-bold text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-error">report_problem</span>
+                        Risk Assessment
+                    </h3>
+<div class="space-y-4">
+<div>
+<label class="block text-label-sm font-label-sm text-outline mb-1">Safety Level</label>
+<select class="w-full rounded-lg border-outline-variant bg-surface-soothing text-body-md font-body-md focus:border-secondary focus:ring-secondary/20">
+<option value="low">Low - No immediate risk</option>
+<option value="moderate">Moderate - Monitoring closely</option>
+<option value="high">High - Safety plan active</option>
+<option value="severe">Severe - Crisis intervention</option>
+</select>
+</div>
+<div class="p-3 bg-error-container/20 rounded-lg border border-error-container">
+<p class="text-xs text-on-error-container flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] mt-0.5">info</span>
+                                Ensure a safety plan is updated if 'High' or 'Severe' is selected.
+                            </p>
+</div>
+</div>
+</div>
+<!-- Next Session Goals -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30">
+<h3 class="font-label-md text-label-md font-bold text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">checklist</span>
+                        Next Session Goals
+                    </h3>
+<div class="space-y-3">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary/20" type="checkbox"/>
+<span class="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">Review CBT Thought Log</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary/20" type="checkbox"/>
+<span class="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">Discuss family boundaries</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline-variant text-secondary focus:ring-secondary/20" type="checkbox"/>
+<span class="text-body-md font-body-md text-on-surface-variant group-hover:text-on-surface">Practice grounding techniques</span>
+</label>
+<div class="pt-2">
+<button class="text-secondary text-label-sm font-label-sm flex items-center gap-1 hover:underline">
+<span class="material-symbols-outlined text-[18px]">add</span> Add custom goal
+                            </button>
+</div>
+</div>
+</div>
+<!-- Session Context -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30">
+<h3 class="font-label-md text-label-md font-bold text-on-surface mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">history</span>
+                        Previous Session Note
+                    </h3>
+<div class="bg-surface-soothing p-4 rounded-lg">
+<p class="text-xs text-outline mb-1">Oct 17, 2023</p>
+<p class="text-label-sm font-label-sm text-on-surface-variant line-clamp-3 italic">
+                            "Client expressed significant anxiety regarding work-life balance. Focus was on identifying trigger points..."
+                        </p>
+<button class="mt-2 text-primary font-label-sm text-label-sm hover:underline">View Full Note</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Bottom Actions -->
+<div class="fixed bottom-0 left-0 right-0 bg-surface/95 backdrop-blur-sm border-t border-outline-variant/20 py-4 z-40">
+<div class="max-w-container-max mx-auto px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-3 text-label-sm font-label-sm text-outline">
+<span class="flex h-2 w-2 rounded-full bg-secondary"></span>
+                    Autosaved 2 minutes ago
+                </div>
+<div class="flex items-center gap-4 w-full md:w-auto">
+<button class="flex-1 md:flex-none px-6 py-3 border border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-primary/5 transition-colors">
+                        Save Note
+                    </button>
+<button class="flex-1 md:flex-none px-8 py-3 bg-primary-container text-white rounded-lg font-label-md text-label-md font-bold shadow-md hover:bg-primary transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[20px]">draw</span>
+                        Sign & Finalize
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- Spacer for Sticky Footer -->
+<div class="h-24"></div>
+<!-- Footer Shell -->
+<footer class="bg-surface-dim mt-section-gap py-gutter w-full">
+<div class="max-w-container-max mx-auto px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex flex-col items-center md:items-start">
+<span class="font-label-md text-label-md font-bold text-primary">Suluhu Kenya</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Suluhu Kenya. Professional Mental Health Solutions.</p>
+</div>
+<div class="flex gap-6">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Legal</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Hotline: +254 722 178 177</span>
+</div>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for auto-save simulation
+        let saveText = document.querySelector('.text-outline .flex');
+        let saveStatus = document.querySelector('.text-outline span:last-child');
+        
+        setInterval(() => {
+            saveStatus.textContent = 'Autosaving...';
+            setTimeout(() => {
+                saveStatus.textContent = 'Autosaved just now';
+            }, 1000);
+        }, 60000);
+
+        // Interaction for AI Draft button
+        const draftBtn = document.querySelector('.bg-white.text-primary');
+        draftBtn.addEventListener('click', () => {
+            const textareas = document.querySelectorAll('textarea');
+            const placeholders = [
+                "Client presented with symptoms of generalized anxiety. Reports trouble sleeping and racing thoughts related to family dynamics. Mentions being 'at a breaking point' with work responsibilities.",
+                "Client was well-groomed, cooperative, and engaged. Speech was pressured but coherent. Affect was anxious and congruent with mood. No suicidal ideation reported during today's assessment.",
+                "Progress is steady but hindered by external stressors. Client exhibits improved self-awareness regarding cognitive distortions. Diagnosis of Anxiety Disorder remains consistent with presentation.",
+                "Continuing CBT techniques. Homework: Complete 3 thought logs focusing on work triggers. Next session scheduled for Oct 31 to review family boundary exercise."
+            ];
+            
+            textareas.forEach((ta, idx) => {
+                let i = 0;
+                ta.value = '';
+                const typeEffect = setInterval(() => {
+                    if (i < placeholders[idx].length) {
+                        ta.value += placeholders[idx].charAt(i);
+                        i++;
+                    } else {
+                        clearInterval(typeEffect);
+                    }
+                }, 10);
+            });
+            
+            draftBtn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span> Drafted';
+            draftBtn.classList.add('opacity-50', 'pointer-events-none');
+        });
+    </script>
+</body></html>

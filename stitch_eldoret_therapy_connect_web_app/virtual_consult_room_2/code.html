@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Virtual Consult Room - Eldoret Therapy Connect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#57432a",
+                    "primary-container": "#e6c9a7",
+                    "on-primary-fixed": "#281904",
+                    "on-secondary-fixed": "#281901",
+                    "surface-container-highest": "#e8e1dd",
+                    "surface": "#fff8f4",
+                    "surface-variant": "#e8e1dd",
+                    "on-tertiary-container": "#4c5869",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#dec2a0",
+                    "surface-container-low": "#f9f2ee",
+                    "outline-variant": "#d1c4b9",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#fddeb5",
+                    "on-background": "#1e1b19",
+                    "tertiary-fixed-dim": "#bac7db",
+                    "on-error": "#ffffff",
+                    "on-surface": "#1e1b19",
+                    "surface-bright": "#fff8f4",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#eee7e3",
+                    "surface-tint": "#705b3f",
+                    "secondary-fixed-dim": "#e0c29a",
+                    "on-secondary-fixed-variant": "#584325",
+                    "on-tertiary-fixed": "#0f1c2b",
+                    "on-surface-variant": "#4d453d",
+                    "background": "#fff8f4",
+                    "on-tertiary-fixed-variant": "#3b4858",
+                    "tertiary-container": "#c2cfe3",
+                    "primary-fixed": "#fcdebb",
+                    "on-primary-container": "#695439",
+                    "on-primary": "#ffffff",
+                    "primary": "#705b3f",
+                    "on-secondary-container": "#765f3e",
+                    "inverse-surface": "#33302d",
+                    "inverse-on-surface": "#f6efeb",
+                    "primary-fixed-dim": "#dec2a0",
+                    "tertiary-fixed": "#d6e3f8",
+                    "outline": "#7f756b",
+                    "surface-container": "#f3ede8",
+                    "tertiary": "#535f70",
+                    "surface-dim": "#dfd9d5",
+                    "error": "#ba1a1a",
+                    "secondary": "#715b3a",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#fadbb2"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "container-max": "1200px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "body-md": ["Manrope"],
+                    "display-lg-mobile": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "display-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        body {
+            background-color: #fff8f4;
+            overflow: hidden;
+        }
+        .video-container {
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+            background-color: #1e1b19;
+        }
+        .glass-overlay {
+            background: rgba(255, 248, 244, 0.85);
+            backdrop-filter: blur(8px);
+        }
+        .pip-shadow {
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        .control-btn {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .control-btn:active {
+            transform: scale(0.92);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Virtual Consult Room Main Canvas -->
+<main class="video-container flex flex-col items-center justify-center">
+<!-- Large Central Video Feed (Therapist: Dr. Amina) -->
+<div class="absolute inset-0 w-full h-full overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="A professional therapist, Dr. Amina, an African woman in her late 30s with a warm and empathetic expression, sitting in a softly lit, modern office. The background features warm wood tones, a few green plants, and a bookshelf, creating a sanctuary-like, calming atmosphere. The lighting is soft and natural, emphasizing a high-quality video call aesthetic with professional warmth and clarity." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC0KBG8ZdGCGG42wB1naSomlth4bxPOiQFv89orvRKQNfcGS0WsGgMOBkVnHvw3hp3CXc-mZuLXP4WouN2h-O2xIgHpB18Lbv1mW11jMXkFnKonGUVNXzW8ihxLzFNZdDvVAu86Rp3vUGqOAiRPmRpzfpSlyXcQNyOkiCLpPqNoxsdjrK8a_89KIFtTITwjk1DZsjEhROKmiy2vh0INQR9HhFVhL2DnHdN0uZfCmvLUKpuxoZf2GLOFFkfkAcDBpU9roVxplBpc6ls')">
+</div>
+<!-- Therapist Name Tag (Soft Cream Overlay) -->
+<div class="absolute bottom-32 left-gutter glass-overlay px-stack-md py-stack-sm rounded-xl border border-outline-variant">
+<span class="font-headline-md text-primary block">Dr. Amina</span>
+<span class="font-label-sm text-on-surface-variant">Clinical Psychologist</span>
+</div>
+</div>
+<!-- Top Right Indicators -->
+<div class="absolute top-gutter right-gutter z-20 flex flex-col items-end gap-stack-sm">
+<div class="glass-overlay flex items-center gap-2 px-4 py-2 rounded-full border border-outline-variant shadow-sm">
+<span class="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></span>
+<span class="font-label-sm text-on-surface-variant">Connection: <span class="font-bold text-primary">Strong</span></span>
+</div>
+<div class="glass-overlay px-3 py-1 rounded-lg border border-outline-variant">
+<span class="font-label-sm text-on-surface-variant tracking-widest">42:15</span>
+</div>
+</div>
+<!-- Smaller PiP View (Client) -->
+<div class="absolute top-gutter left-gutter z-20 w-48 h-64 md:w-56 md:h-72 rounded-2xl overflow-hidden pip-shadow border-2 border-surface-container-highest">
+<div class="w-full h-full bg-cover bg-center" data-alt="A POV shot of a young adult client in a domestic setting, visible from the shoulders up, looking attentively at the screen. The room behind them is slightly out of focus, showing soft white walls and warm interior lighting. The overall visual style is intimate, calm, and private, matching the sanctuary theme of the therapy app." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCs3wFm2FuV08Ldyn93xoXtuThMo6dE7Z6U4FlhijECDxU7vjMqo_qdR5SfpfszQQN7BufR3R_Q6Fmnz-_sfhd3-dmxn_C6teKbiUOddbbPiwTt9_83WTPon4sZ79p5x_nCk1p-_4A_leAwouWmveQqUeMfAEZtjI4Z0deQbv9hRnqhelzvZp2uxQoyJ5bYz6ZvoKPQhiMKlRxGkGzJbSslOdoYL2eCOtEglUqSp-LorIbaN12trZv9LfhRLlW7kG8vdeYOhNF59dY')">
+</div>
+<!-- Client Mute Indicator (Optional Micro-UI) -->
+<div class="absolute bottom-2 right-2 bg-black/40 p-1 rounded-md backdrop-blur-md">
+<span class="material-symbols-outlined text-white text-sm">mic</span>
+</div>
+</div>
+<!-- Bottom Control Bar -->
+<div class="absolute bottom-stack-lg left-0 w-full flex justify-center z-30 px-margin-mobile">
+<nav class="glass-overlay flex items-center gap-stack-md px-stack-lg py-4 rounded-3xl border border-outline-variant shadow-lg max-w-fit">
+<!-- Toggle Mic -->
+<button class="control-btn w-12 h-12 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center hover:bg-surface-container-highest" onclick="toggleControl(this)">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+</button>
+<!-- Toggle Video -->
+<button class="control-btn w-12 h-12 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center hover:bg-surface-container-highest" onclick="toggleControl(this)">
+<span class="material-symbols-outlined" data-icon="videocam">videocam</span>
+</button>
+<!-- Settings -->
+<button class="control-btn w-12 h-12 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center hover:bg-surface-container-highest">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<!-- End Call -->
+<button class="control-btn h-14 px-8 rounded-2xl bg-error text-on-error flex items-center gap-2 font-label-sm active:scale-95 transition-transform" onclick="confirmEndCall()">
+<span class="material-symbols-outlined fill-icon" data-icon="call_end" style="font-variation-settings: 'FILL' 1;">call_end</span>
+<span class="hidden sm:inline">End Session</span>
+</button>
+</nav>
+</div>
+</main>
+<!-- Overlay Micro-interactions -->
+<script>
+        function toggleControl(btn) {
+            const icon = btn.querySelector('.material-symbols-outlined');
+            const isOff = btn.classList.contains('bg-error-container');
+            
+            if (!isOff) {
+                btn.classList.replace('bg-surface-container-high', 'bg-error-container');
+                btn.classList.replace('text-on-surface-variant', 'text-error');
+                // Simple logical mapping for toggle icons if needed, but per prompt we keep the base icons
+            } else {
+                btn.classList.replace('bg-error-container', 'bg-surface-container-high');
+                btn.classList.replace('text-error', 'text-on-surface-variant');
+            }
+        }
+
+        function confirmEndCall() {
+            if(confirm('Are you sure you want to end this session?')) {
+                // Return to dashboard logic
+                window.location.reload();
+            }
+        }
+
+        // Add a subtle entrance animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const main = document.querySelector('main');
+            main.style.opacity = '0';
+            main.style.transition = 'opacity 1s ease-in-out';
+            setTimeout(() => main.style.opacity = '1', 100);
+        });
+    </script>
+<!-- Modal for Settings (Hidden by default) -->
+<div class="hidden fixed inset-0 z-50 flex items-center justify-center p-gutter" id="settings-modal">
+<div class="absolute inset-0 bg-on-background/20 backdrop-blur-sm"></div>
+<div class="relative bg-surface rounded-xl p-stack-lg w-full max-w-md border border-outline-variant shadow-xl">
+<h3 class="font-headline-md text-primary mb-stack-md">Audio & Video Settings</h3>
+<div class="space-y-stack-md">
+<div class="p-4 bg-surface-container-low rounded-lg border border-outline-variant">
+<label class="font-label-sm text-on-surface-variant block mb-2">Microphone</label>
+<select class="w-full bg-surface border-outline-variant rounded-md font-body-md">
+<option>Built-in Microphone</option>
+<option>External USB Mic</option>
+</select>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg border border-outline-variant">
+<label class="font-label-sm text-on-surface-variant block mb-2">Camera</label>
+<select class="w-full bg-surface border-outline-variant rounded-md font-body-md">
+<option>FaceTime HD Camera</option>
+<option>Logitech StreamCam</option>
+</select>
+</div>
+</div>
+<button class="mt-stack-lg w-full py-4 bg-primary text-on-primary rounded-xl font-label-sm" onclick="document.getElementById('settings-modal').classList.add('hidden')">Save Changes</button>
+</div>
+</div>
+</body></html>

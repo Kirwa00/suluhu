@@ -1,0 +1,13 @@
+node_modules
+**/node_modules
+**/dist
+**/.next
+**/.turbo
+**/coverage
+.git
+.github
+*.md
+stitch_eldoret_therapy_connect_web_app
+.env
+.env.*
+!.env.example

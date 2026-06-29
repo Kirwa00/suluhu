@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="light" lang="sw"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu - Rekodi ya Afya ya Mgonjwa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-primary": "#a7c8ff",
+                    "secondary": "#166a59",
+                    "surface-dim": "#d8dadb",
+                    "success-calm": "#2E8555",
+                    "surface": "#f8fafb",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-primary-fixed-variant": "#0d4784",
+                    "surface-tint": "#305f9d",
+                    "primary-fixed": "#d5e3ff",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "surface-container-low": "#f2f4f5",
+                    "surface-container-high": "#e6e8e9",
+                    "on-secondary": "#ffffff",
+                    "accent-teal-light": "#E8F3F1",
+                    "on-surface-variant": "#424750",
+                    "surface-variant": "#e1e3e4",
+                    "on-primary": "#ffffff",
+                    "surface-container": "#eceeef",
+                    "primary": "#00386d",
+                    "secondary-container": "#a5f2db",
+                    "primary-container": "#1b4f8c",
+                    "secondary-fixed": "#a5f2db",
+                    "outline-variant": "#c2c6d1",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#89d5c0",
+                    "tertiary-container": "#005571",
+                    "inverse-surface": "#2e3132",
+                    "on-secondary-fixed": "#002019",
+                    "on-secondary-container": "#1f705f",
+                    "error-container": "#ffdad6",
+                    "on-surface": "#191c1d",
+                    "surface-soothing": "#F0F4F8",
+                    "on-secondary-fixed-variant": "#005142",
+                    "background": "#f8fafb",
+                    "on-primary-fixed": "#001c3b",
+                    "inverse-on-surface": "#eff1f2",
+                    "on-tertiary-fixed": "#001e2b",
+                    "on-background": "#191c1d",
+                    "on-tertiary-fixed-variant": "#004d67",
+                    "surface-bright": "#f8fafb",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#c1e8ff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-container": "#7acaf2",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#003d52",
+                    "on-error": "#ffffff",
+                    "text-rich-slate": "#1C1E21",
+                    "tertiary-fixed-dim": "#81d0f8",
+                    "on-primary-container": "#9cc2ff",
+                    "outline": "#737781"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "80px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "unit": "8px",
+                    "container-max": "1200px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "display-lg": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #f8fafb;
+            color: #191c1d;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .bento-card {
+            background: #ffffff;
+            border: 1px solid #e1e3e4;
+            transition: all 0.3s ease;
+        }
+        .bento-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(27, 79, 140, 0.05);
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Anchor -->
+<nav class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-surface dark:bg-surface-dim">
+<div class="flex items-center gap-3">
+<button class="p-2 hover:bg-primary-container/10 rounded-full active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary truncate max-w-[200px]">Rekodi ya Afya</h1>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline">lock</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional close-up medical profile photograph of an African female patient with a calm expression, soft studio lighting, high resolution, minimalist aesthetic, using a professional clinical palette of soft blues and white." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhdKMi4JhMuskR30ywFRvcgFWWOqLOigT32p6t00g6lAbPETN6TxbwCv2QvqTTSMdSsLNVvYpWj7IOWvTuJ_G4irn6wO5an-dXTWpqfJiVq2Uq_1PtbfcQteDvWQKWDp5Qo-XlK1TmrE0ikNl0bpsL7mWSnN7d4hDiXdzw34s3rV0IK0ww0aaoKmQ52TOiKjgqpgA341vn96gM5SwTV0LporFFyMb2wZ3dMLQytv6X-DsH-mPE2_MJKwlTtObJqce-5bmxP4ZV4Lo"/>
+</div>
+</div>
+</nav>
+<main class="pt-20 pb-28 px-4 max-w-lg mx-auto space-y-6">
+<!-- Patient Header Card -->
+<section class="bento-card rounded-xl p-5 flex items-center gap-4">
+<div class="relative">
+<div class="w-20 h-20 rounded-2xl overflow-hidden border-2 border-primary-container/20">
+<img class="w-full h-full object-cover" data-alt="A portrait of Mercy Wanjiku, a middle-aged Kenyan woman with a gentle and trustworthy smile, wearing professional yet casual attire. The background is a soft-focus clinical setting with warm, natural sunlight filtering through, creating a sense of psychological safety and stability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc1kP6Emxr8bKc1Zqt-fC9jYhKHKTME0K3X2CkWxMSBYRSqwlkG5235rHtUNeGFa4xIWObhn33Iz295aFqGywM_do_Bsyq1CNodBQWEM0MGF8hHBXamUGylr-m0tzhdGIotQmUI9ypTvWktbMD8z426bLKXPeJYgGHWrwJ6ZxGJngkN6_95KvzFWIYe-3_XeGzAQGxO_GH4rVYbVKo3As-VyEUBDL_yifBCtXKPrgDEgXus9rqPZklH0C9OS-x00wgPVNGmZrtvAM"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-success-calm w-4 h-4 rounded-full border-2 border-surface"></div>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Mercy Wanjiku</h2>
+<p class="font-label-md text-label-md text-outline">ID: SLH-2024-0892</p>
+<div class="flex gap-2 mt-2">
+<span class="px-2 py-0.5 bg-secondary-container text-on-secondary-container rounded-full font-label-sm text-label-sm">Inatendeka</span>
+</div>
+</div>
+</section>
+<!-- Clinical Alerts (Priority Section) -->
+<section class="space-y-3">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-error">notification_important</span>
+                    Tahadhari za Kliniki
+                </h3>
+</div>
+<div class="bg-error-container/30 border border-error/20 rounded-xl p-4 flex items-start gap-3">
+<span class="material-symbols-outlined text-error mt-0.5" style="font-variation-settings: 'FILL' 1;">warning</span>
+<div>
+<h4 class="font-label-md text-label-md text-on-error-container font-semibold">Hatari ya Kujidhuru - Chini</h4>
+<p class="font-body-md text-body-md text-on-surface-variant leading-tight">Mgonjwa ameonyesha utulivu, lakini ufuatiliaji wa karibu unahitajika katika mazingira ya nyumbani.</p>
+</div>
+</div>
+</section>
+<!-- Vitals Grid (Bento Style) -->
+<section class="space-y-3">
+<h3 class="font-headline-md text-headline-md text-on-surface">Viashiria Muhimu vya Afya</h3>
+<div class="grid grid-cols-2 gap-3">
+<!-- Heart Rate -->
+<div class="bento-card rounded-xl p-4 flex flex-col justify-between aspect-square">
+<div class="w-10 h-10 rounded-lg bg-error-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-error">favorite</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-outline">Mapigo ya Moyo</p>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-primary">72</span>
+<span class="font-label-sm text-label-sm text-outline">bpm</span>
+</div>
+</div>
+</div>
+<!-- Blood Pressure -->
+<div class="bento-card rounded-xl p-4 flex flex-col justify-between aspect-square">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">blood_pressure</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-outline">Shinikizo la Damu</p>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-primary">120/80</span>
+<span class="font-label-sm text-label-sm text-outline">mmHg</span>
+</div>
+</div>
+</div>
+<!-- Weight -->
+<div class="bento-card rounded-xl p-4 flex flex-col justify-between col-span-2 h-32">
+<div class="flex justify-between items-start">
+<div class="w-10 h-10 rounded-lg bg-secondary-container/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">scale</span>
+</div>
+<span class="text-success-calm font-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_down</span> -0.5kg
+                        </span>
+</div>
+<div class="flex justify-between items-end">
+<div>
+<p class="font-label-sm text-label-sm text-outline">Uzito</p>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-primary">68.4</span>
+<span class="font-label-sm text-label-sm text-outline">kg</span>
+</div>
+</div>
+<div class="h-12 w-32 flex items-end gap-1 pb-1">
+<div class="w-2 h-4 bg-primary-container/20 rounded-full"></div>
+<div class="w-2 h-6 bg-primary-container/20 rounded-full"></div>
+<div class="w-2 h-8 bg-primary-container/40 rounded-full"></div>
+<div class="w-2 h-5 bg-primary-container/20 rounded-full"></div>
+<div class="w-2 h-10 bg-primary-container rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Medication History -->
+<section class="space-y-3">
+<h3 class="font-headline-md text-headline-md text-on-surface">Historia ya Matumizi ya Dawa</h3>
+<div class="space-y-2">
+<div class="bento-card rounded-xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-soothing flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">pill</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Sertraline</p>
+<p class="font-label-sm text-label-sm text-outline">50mg - Mara moja kwa siku</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+<div class="bento-card rounded-xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-soothing flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">pill</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-semibold">Propranolol</p>
+<p class="font-label-sm text-label-sm text-outline">10mg - Inapohitajika (Kiwewe)</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Session History -->
+<section class="space-y-3">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-headline-md text-on-surface">Kumbukumbu za Huduma</h3>
+<button class="font-label-md text-label-md text-primary">Ona Zote</button>
+</div>
+<div class="space-y-3">
+<div class="relative pl-6 border-l-2 border-outline-variant ml-2 space-y-6">
+<!-- Session 1 -->
+<div class="relative">
+<div class="absolute -left-[33px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-surface"></div>
+<div class="bento-card rounded-xl p-4">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-outline">12 Okt, 2024</span>
+<span class="px-2 py-0.5 bg-accent-teal-light text-secondary rounded-full font-label-sm text-label-sm">Imekamilika</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface font-bold">Tiba ya CBT</h4>
+<div class="flex items-center gap-2 mt-2">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a friendly-looking African therapist, male, wearing a clean white clinical coat over a formal shirt. The lighting is bright and airy, symbolizing professional medical care and psychological support." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBnBSs9U4qpPdczcVdEkBTXLUMd4iW31Lbp2p676n-QyOR5doP0BitFqKqRNE1MYZPk2dSkE4SjRGwCCTP_3n3HqnI3xS2fQ4yOEdqTYmuGS-2HIuheKI2RfYhhF20sDa0G5_D4qk7skMy9WOvIUOASxhMjVCCfl2RRQSXiMznFC-6K1qzLMfVZwDlQtV9-MSUTH98jSiOcIz8XNIUFOV9U2qFPXEi13UdBL3mRIR8xO2zzUKu8qo7QQMeRaLMyPCvnlXj6NLee1vo"/>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Dkt. Amara Okoro</p>
+</div>
+</div>
+</div>
+<!-- Session 2 -->
+<div class="relative">
+<div class="absolute -left-[33px] top-0 w-4 h-4 rounded-full bg-outline-variant border-4 border-surface"></div>
+<div class="bento-card rounded-xl p-4">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-outline">28 Sep, 2024</span>
+<span class="px-2 py-0.5 bg-surface-container text-outline rounded-full font-label-sm text-label-sm">Imekamilika</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-surface font-bold">Tathmini ya Awali</h4>
+<div class="flex items-center gap-2 mt-2">
+<div class="w-6 h-6 rounded-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged Kenyan male psychologist with glasses, looking attentive and professional. Neutral clinical background, soft high-key lighting, modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC6JKtMu3-lr1rdNbFRuqPREBEDd4Dm48_ewL522h55r2X2xbwA_fYpDk82FG-4S6w2_v29dulO2Bw4cQk2vQz9Ao_7ZYj3_xePxNiRTRzQeO9ogE9Z9S-2yXNANgu7dRupNaSqUmawj3gkFWYNq-ni3x5ykBv2W_b9TnYlV3QywGtAPyfvsXGouDZVxeLs3mjq_iMvNE1FPoTISAt1hBymNO2H5J8zq7cZ-FMKqF1BdAgq5pIgek-K_OLNAh7HVtDQ49qoDg2pkk"/>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Dkt. Samuel Maina</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Quick Actions -->
+<section class="grid grid-cols-2 gap-3 pt-4">
+<button class="flex items-center justify-center gap-2 bg-primary text-on-primary py-4 px-4 rounded-xl font-label-md text-label-md active:scale-95 transition-transform">
+<span class="material-symbols-outlined">download</span>
+                Pakua Nakala ya Rekodi
+            </button>
+<button class="flex items-center justify-center gap-2 border-2 border-primary text-primary py-4 px-4 rounded-xl font-label-md text-label-md active:scale-95 transition-transform">
+<span class="material-symbols-outlined">add_alert</span>
+                Weka Tahadhari
+            </button>
+</section>
+</main>
+<!-- Bottom Navigation Shell -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface dark:bg-surface-dim shadow-sm rounded-t-xl border-t border-outline-variant">
+<a class="flex flex-col items-center justify-center text-outline p-2 active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-sm text-label-sm">Notes</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+<span class="font-label-sm text-label-sm">Patients</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline p-2 active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-sm text-label-sm">Calendar</span>
+</a>
+<a class="flex flex-col items-center justify-center text-outline p-2 active:opacity-80 transition-opacity" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</footer>
+<script>
+        // Micro-interaction for vitals update simulation
+        document.querySelectorAll('.bento-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.classList.add('scale-[0.98]');
+                setTimeout(() => {
+                    this.classList.remove('scale-[0.98]');
+                }, 150);
+            });
+        });
+    </script>
+</body></html>

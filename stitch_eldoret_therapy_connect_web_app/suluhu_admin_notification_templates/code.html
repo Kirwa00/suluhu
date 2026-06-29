@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu Admin - Notification Templates</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#e1e3e4",
+                        "inverse-primary": "#a7c8ff",
+                        "secondary-fixed-dim": "#89d5c0",
+                        "outline": "#737781",
+                        "tertiary-container": "#005571",
+                        "primary": "#00386d",
+                        "on-surface": "#191c1d",
+                        "surface-bright": "#f8fafb",
+                        "secondary-container": "#a5f2db",
+                        "on-secondary-fixed-variant": "#005142",
+                        "on-primary-fixed": "#001c3b",
+                        "surface-container-high": "#e6e8e9",
+                        "tertiary": "#003d52",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#002019",
+                        "on-surface-variant": "#424750",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary": "#166a59",
+                        "background": "#f8fafb",
+                        "surface-soothing": "#F0F4F8",
+                        "accent-teal-light": "#E8F3F1",
+                        "on-tertiary-container": "#7acaf2",
+                        "on-tertiary-fixed": "#001e2b",
+                        "secondary-fixed": "#a5f2db",
+                        "on-background": "#191c1d",
+                        "on-secondary-container": "#1f705f",
+                        "surface-container": "#eceeef",
+                        "tertiary-fixed-dim": "#81d0f8",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "surface-dim": "#d8dadb",
+                        "inverse-surface": "#2e3132",
+                        "text-rich-slate": "#1C1E21",
+                        "primary-fixed": "#d5e3ff",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#9cc2ff",
+                        "surface": "#f8fafb",
+                        "success-calm": "#2E8555",
+                        "inverse-on-surface": "#eff1f2",
+                        "on-primary-fixed-variant": "#0d4784",
+                        "on-secondary": "#ffffff",
+                        "surface-container-low": "#f2f4f5",
+                        "outline-variant": "#c2c6d1",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed-variant": "#004d67",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#c1e8ff",
+                        "primary-container": "#1b4f8c",
+                        "surface-tint": "#305f9d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "margin-desktop": "40px",
+                        "unit": "8px",
+                        "margin-mobile": "16px",
+                        "section-gap": "80px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c2c6d1;
+            border-radius: 10px;
+        }
+        .iphone-frame {
+            box-shadow: 0 0 0 10px #2e3132, 0 0 0 12px #424750;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Sidebar Navigation -->
+<nav class="flex flex-col h-screen fixed left-0 top-0 py-gutter px-4 z-40 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline w-64 h-full left-0">
+<div class="mb-8 px-2">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Admin Console</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Secure Portal</p>
+</div>
+<div class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-accent-teal-light dark:hover:bg-tertiary-container transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Financial Overview
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-accent-teal-light dark:hover:bg-tertiary-container transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+                Revenue Trends
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-accent-teal-light dark:hover:bg-tertiary-container transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                Payment Methods
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-accent-teal-light dark:hover:bg-tertiary-container transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Therapist Payouts
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary-container text-on-primary-container font-bold rounded-lg font-label-md text-label-md translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                Audit Logs
+            </a>
+</div>
+<button class="mb-8 w-full py-2 px-4 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity">
+            Export Reports
+        </button>
+<div class="pt-4 border-t border-outline-variant">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Sign Out
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- Top App Bar -->
+<header class="flex justify-between items-center w-full px-margin-desktop h-16 sticky top-0 z-50 bg-surface-bright dark:bg-inverse-surface border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Suluhu Therapy Center</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low transition-colors p-2 rounded-full cursor-pointer" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low transition-colors p-2 rounded-full cursor-pointer" data-icon="settings">settings</span>
+<span class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-low transition-colors p-2 rounded-full cursor-pointer" data-icon="help">help</span>
+</div>
+<div class="flex items-center gap-3 pl-6 border-l border-outline-variant">
+<div class="text-right">
+<p class="font-label-md text-label-md font-bold">Admin User</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Super Administrator</p>
+</div>
+<img class="w-10 h-10 rounded-full object-cover border-2 border-primary-fixed" data-alt="A professional headshot of a confident African male executive wearing a sharp navy blue business suit. He is smiling warmly against a soft-focus corporate office background. The lighting is crisp and clean, reflecting a high-end light-mode UI aesthetic with professional clarity and stable, calm tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDX30bcOi2hovlTxegn0W-C-hVXPhlIgyZ_25dHZxFhygRpGNFQsGckQNzJbG6Fs_Axbhco-EDJoNC1fTyuP83ArAGmJQg3oqrlFpqTTnR_ZRHe9rc2R50dclwUIQlytSfZ8ZTZAKwkrxwpWzWk6xAAfpGSKLxOWSEO0Lp6e-nYx5Hw8YgS4JokBOiL-W8VghOKD8j-R8HZ8fjOj6OhyGFKdikA5J7PJ4_Q_pAfWxi25d2p1YZYhGECQVTayyV3hxmUtVscCh8rRak"/>
+</div>
+</div>
+</header>
+<!-- Breadcrumbs & Actions -->
+<div class="px-margin-desktop py-8 bg-surface-bright">
+<div class="flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Notification Center</h2>
+<p class="text-on-surface-variant font-body-md">Manage automated communications sent to the therapist community.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-6 py-2.5 border border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-accent-teal-light transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="send">send</span>
+                        Send Test
+                    </button>
+<button class="flex items-center gap-2 px-8 py-2.5 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:opacity-90 shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[20px]" data-icon="save">save</span>
+                        Save Changes
+                    </button>
+</div>
+</div>
+</div>
+<!-- Main Configuration Grid -->
+<div class="px-margin-desktop pb-section-gap">
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Left Column: Notification Triggers -->
+<div class="col-span-3 space-y-gutter">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden">
+<div class="p-4 bg-surface-container-low border-b border-outline-variant">
+<h3 class="font-label-md text-label-md font-bold text-primary">Notification Triggers</h3>
+</div>
+<div class="p-2 space-y-1">
+<button class="w-full flex items-center gap-3 px-3 py-3 text-left rounded-lg text-on-surface-variant hover:bg-surface-soothing transition-colors">
+<span class="material-symbols-outlined text-success-calm" data-icon="check_circle">check_circle</span>
+<span class="font-label-md text-label-md">Successful Verification</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-3 text-left rounded-lg bg-error-container text-on-error-container border border-error/20 ring-2 ring-error/10">
+<span class="material-symbols-outlined" data-icon="payouts" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-label-md text-label-md font-bold">Payout Frozen</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-3 text-left rounded-lg text-on-surface-variant hover:bg-surface-soothing transition-colors">
+<span class="material-symbols-outlined text-orange-500" data-icon="warning">warning</span>
+<span class="font-label-md text-label-md">Credential Expiry Warning</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-3 text-left rounded-lg text-on-surface-variant hover:bg-surface-soothing transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="mail">mail</span>
+<span class="font-label-md text-label-md">New Message Received</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-3 text-left rounded-lg text-on-surface-variant hover:bg-surface-soothing transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="event">event</span>
+<span class="font-label-md text-label-md">Session Confirmation</span>
+</button>
+</div>
+</div>
+<!-- Variable Tags -->
+<div class="bg-surface-soothing rounded-xl p-6 border border-outline-variant/30">
+<h4 class="font-label-md text-label-md font-bold text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="code">code</span>
+                            Available Variables
+                        </h4>
+<div class="flex flex-wrap gap-2">
+<span class="px-2 py-1 bg-white border border-outline-variant rounded text-[12px] font-mono text-secondary cursor-pointer hover:border-secondary transition-colors" title="Click to insert">{{therapist_name}}</span>
+<span class="px-2 py-1 bg-white border border-outline-variant rounded text-[12px] font-mono text-secondary cursor-pointer hover:border-secondary transition-colors" title="Click to insert">{{expiry_date}}</span>
+<span class="px-2 py-1 bg-white border border-outline-variant rounded text-[12px] font-mono text-secondary cursor-pointer hover:border-secondary transition-colors" title="Click to insert">{{payout_amount}}</span>
+<span class="px-2 py-1 bg-white border border-outline-variant rounded text-[12px] font-mono text-secondary cursor-pointer hover:border-secondary transition-colors" title="Click to insert">{{action_link}}</span>
+<span class="px-2 py-1 bg-white border border-outline-variant rounded text-[12px] font-mono text-secondary cursor-pointer hover:border-secondary transition-colors" title="Click to insert">{{document_type}}</span>
+</div>
+<p class="mt-4 text-[11px] text-on-surface-variant italic">Click a tag to insert it into the active editor cursor position.</p>
+</div>
+</div>
+<!-- Center Column: Editor -->
+<div class="col-span-5 space-y-gutter">
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant flex flex-col h-[700px]">
+<div class="p-4 border-b border-outline-variant flex items-center justify-between">
+<div class="flex gap-4">
+<button class="font-label-md text-label-md font-bold border-b-2 border-primary pb-1 text-primary">Email Content</button>
+<button class="font-label-md text-label-md text-on-surface-variant pb-1 hover:text-primary transition-colors">SMS Content</button>
+</div>
+<div class="flex gap-2">
+<button class="p-1.5 hover:bg-surface-soothing rounded"><span class="material-symbols-outlined text-[20px]" data-icon="format_bold">format_bold</span></button>
+<button class="p-1.5 hover:bg-surface-soothing rounded"><span class="material-symbols-outlined text-[20px]" data-icon="format_italic">format_italic</span></button>
+<button class="p-1.5 hover:bg-surface-soothing rounded"><span class="material-symbols-outlined text-[20px]" data-icon="link">link</span></button>
+</div>
+</div>
+<div class="p-6 flex-1 space-y-6">
+<div>
+<label class="block text-[12px] font-bold text-on-surface-variant uppercase mb-2">Subject Line</label>
+<input class="w-full bg-surface-soothing border-none rounded-lg focus:ring-2 focus:ring-primary py-3 px-4 font-body-md" type="text" value="URGENT: Your Suluhu Payouts are Temporarily Frozen"/>
+</div>
+<div class="flex-1 flex flex-col">
+<label class="block text-[12px] font-bold text-on-surface-variant uppercase mb-2">Body Text</label>
+<textarea class="w-full flex-1 bg-surface-soothing border-none rounded-lg focus:ring-2 focus:ring-primary py-3 px-4 font-body-md resize-none custom-scrollbar" placeholder="Enter notification content...">Dear {{therapist_name}},
+
+We are writing to inform you that your therapist payouts have been temporarily frozen as of today. 
+
+Our records indicate that your Professional Indemnity insurance expired on {{expiry_date}}. To maintain our community standards and ensure the safety of both you and your clients, we require an updated certificate to resume payments.
+
+Please upload your new documentation via the Suluhu Therapist Portal immediately to avoid further disruption to your weekly payout schedule.
+
+Warm regards,
+The Suluhu Administration Team</textarea>
+</div>
+<div>
+<label class="block text-[12px] font-bold text-on-surface-variant uppercase mb-2">CTA Button Text</label>
+<input class="w-full bg-surface-soothing border-none rounded-lg focus:ring-2 focus:ring-primary py-3 px-4 font-body-md" type="text" value="Upload New Certificate"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Previews -->
+<div class="col-span-4 space-y-gutter">
+<!-- Email Preview -->
+<div class="bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden">
+<div class="px-4 py-2 bg-surface-container border-b border-outline-variant flex items-center justify-between">
+<span class="text-[11px] font-bold text-on-surface-variant uppercase tracking-tighter">Live Email Preview</span>
+<div class="flex gap-1">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<div class="w-2 h-2 rounded-full bg-yellow-400"></div>
+<div class="w-2 h-2 rounded-full bg-success-calm"></div>
+</div>
+</div>
+<div class="p-0 h-[400px] overflow-y-auto custom-scrollbar bg-slate-50">
+<!-- In-App Email Simulation -->
+<div class="max-w-[400px] mx-auto my-8 bg-white shadow-sm border border-slate-200">
+<div class="bg-primary p-6 text-center">
+<div class="text-white font-headline-md font-bold">Suluhu</div>
+<div class="text-secondary-fixed text-[10px] uppercase tracking-widest mt-1">Therapy Center</div>
+</div>
+<div class="p-8">
+<h1 class="text-primary font-bold text-lg mb-4">Payout Status Update</h1>
+<p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                        Dear <span class="bg-primary-fixed/30 text-primary font-mono text-[12px] px-1 rounded">Dr. Jane Smith</span>,
+                                    </p>
+<p class="text-slate-600 text-sm leading-relaxed mb-4">
+                                        We are writing to inform you that your therapist payouts have been temporarily frozen as of today.
+                                    </p>
+<p class="text-slate-600 text-sm leading-relaxed mb-6">
+                                        Our records indicate that your Professional Indemnity insurance expired on <span class="bg-primary-fixed/30 text-primary font-mono text-[12px] px-1 rounded">October 24, 2023</span>. To maintain our community standards and ensure the safety of both you and your clients, we require an updated certificate to resume payments.
+                                    </p>
+<div class="text-center py-4">
+<a class="inline-block bg-primary text-white font-bold text-sm px-8 py-3 rounded-lg" href="#">Upload New Certificate</a>
+</div>
+<hr class="my-8 border-slate-100"/>
+<p class="text-slate-400 text-[11px] text-center italic">
+                                        Suluhu Therapy Center, 12th Floor, Westlands Square, Nairobi.<br/>
+                                        You are receiving this because you are a registered Suluhu therapist.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+<!-- SMS Preview -->
+<div class="flex justify-center">
+<div class="iphone-frame relative w-[240px] h-[440px] bg-black rounded-[40px] border-[6px] border-[#2e3132] overflow-hidden">
+<div class="absolute top-0 inset-x-0 h-6 bg-black z-10">
+<div class="w-20 h-4 bg-black mx-auto rounded-b-xl"></div>
+</div>
+<div class="h-full w-full bg-cover bg-center pt-8 px-4" data-alt="A clean, minimalist blurred background of a serene natural landscape with soft morning light, featuring gentle teal and deep blue atmospheric gradients. The style is modern, professional, and tranquil, designed to evoke psychological safety and calmness within a high-end corporate UI framework." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAmqC0Fz1VlPumBGsv2HEc3-cc6Eo6e9qZQB-uTZt14M7vj28VqENx2sq7oazEzijsk-kbfwmzQUXO7m5S5mgNZny4p1k2Evd9qi_-rAA-zQ5sCxNShyn2yD89wOiKrSBqZtbm6BI1I8wUEvlrRLi-IYXeoY804nah60qQeMr110CBOwQeN48K7mL4cHVNgPF-H6PQOPj8uxusggAoWXAUtiTyH4xX3vv0d2eybuQdyedfH47le_zG7FsONEzgQ7okVNf-fTsYllzk')">
+<div class="mt-4 space-y-4">
+<!-- SMS Bubble -->
+<div class="bg-white/90 backdrop-blur-md rounded-2xl p-4 shadow-lg text-[11px] leading-snug">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-5 h-5 rounded-full bg-primary flex items-center justify-center text-[8px] text-white font-bold">S</div>
+<span class="font-bold text-primary">Suluhu Admin</span>
+<span class="text-[9px] text-on-surface-variant ml-auto">now</span>
+</div>
+<p class="text-on-surface">
+                                            URGENT: Your Suluhu payouts are frozen. Your insurance expired on <span class="font-bold text-primary">24 Oct</span>. Upload new cert here: <span class="text-primary underline">slhu.co/upld-cert</span>
+</p>
+</div>
+<!-- Lock Screen Notification Style -->
+<div class="text-center mt-12">
+<div class="text-white/80 text-[32px] font-light">10:45</div>
+<div class="text-white/60 text-[10px] uppercase tracking-widest">Monday, October 24</div>
+</div>
+</div>
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 w-20 h-1 bg-white/40 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for Quick Actions - Contextually Hidden based on task but adding for completeness of UI if needed, suppressed per mandate as this is a "Details" style screen -->
+<script>
+        // Micro-interactions for Variable Tags
+        document.querySelectorAll('.font-mono').forEach(tag => {
+            tag.addEventListener('click', () => {
+                const textarea = document.querySelector('textarea');
+                const tagText = tag.innerText;
+                const start = textarea.selectionStart;
+                const end = textarea.selectionEnd;
+                const text = textarea.value;
+                textarea.value = text.substring(0, start) + tagText + text.substring(end);
+                textarea.focus();
+                textarea.selectionStart = textarea.selectionEnd = start + tagText.length;
+            });
+        });
+
+        // Toggle between Email and SMS editor view logic
+        const editTabs = document.querySelectorAll('.font-label-md.text-label-md');
+        editTabs.forEach(tab => {
+            tab.addEventListener('click', (e) => {
+                if(e.target.innerText.includes('SMS')) {
+                    // Visual Switch (Simulation)
+                    alert('Switching to SMS Template Editor...');
+                }
+            });
+        });
+    </script>
+</body></html>

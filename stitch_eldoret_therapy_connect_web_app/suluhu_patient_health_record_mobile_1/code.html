@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu Admin - Patient Health Record</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-on-surface": "#eff1f2",
+                      "on-tertiary-fixed-variant": "#004d67",
+                      "outline-variant": "#c2c6d1",
+                      "secondary-fixed": "#a5f2db",
+                      "on-secondary-container": "#1f705f",
+                      "text-rich-slate": "#1C1E21",
+                      "secondary": "#166a59",
+                      "on-primary": "#ffffff",
+                      "on-tertiary": "#ffffff",
+                      "primary-container": "#1b4f8c",
+                      "on-surface-variant": "#424750",
+                      "on-secondary-fixed-variant": "#005142",
+                      "primary-fixed": "#d5e3ff",
+                      "on-secondary": "#ffffff",
+                      "surface-bright": "#f8fafb",
+                      "error-container": "#ffdad6",
+                      "secondary-container": "#a5f2db",
+                      "surface-container-high": "#e6e8e9",
+                      "surface-container": "#eceeef",
+                      "on-primary-fixed": "#001c3b",
+                      "surface-tint": "#305f9d",
+                      "secondary-fixed-dim": "#89d5c0",
+                      "surface-soothing": "#F0F4F8",
+                      "tertiary": "#003d52",
+                      "surface-dim": "#d8dadb",
+                      "tertiary-container": "#005571",
+                      "background": "#f8fafb",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed": "#002019",
+                      "primary-fixed-dim": "#a7c8ff",
+                      "inverse-surface": "#2e3132",
+                      "on-error": "#ffffff",
+                      "surface-variant": "#e1e3e4",
+                      "on-primary-fixed-variant": "#0d4784",
+                      "success-calm": "#2E8555",
+                      "primary": "#00386d",
+                      "on-tertiary-fixed": "#001e2b",
+                      "surface": "#f8fafb",
+                      "outline": "#737781",
+                      "tertiary-fixed-dim": "#81d0f8",
+                      "inverse-primary": "#a7c8ff",
+                      "surface-container-highest": "#e1e3e4",
+                      "on-tertiary-container": "#7acaf2",
+                      "on-surface": "#191c1d",
+                      "surface-container-low": "#f2f4f5",
+                      "on-error-container": "#93000a",
+                      "on-primary-container": "#9cc2ff",
+                      "accent-teal-light": "#E8F3F1",
+                      "tertiary-fixed": "#c1e8ff",
+                      "error": "#ba1a1a",
+                      "on-background": "#191c1d"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "margin-desktop": "40px",
+                      "unit": "8px",
+                      "section-gap": "80px",
+                      "container-max": "1200px"
+              },
+              "fontFamily": {
+                      "label-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Manrope"],
+                      "label-md": ["Inter"],
+                      "headline-md": ["Manrope"],
+                      "headline-lg-mobile": ["Manrope"],
+                      "body-lg": ["Inter"],
+                      "headline-lg": ["Manrope"]
+              },
+              "fontSize": {
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen pb-32">
+<!-- Top AppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface dark:bg-inverse-surface">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary font-headline-md text-headline-md">clinical_notes</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-container">Suluhu Admin</h1>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate administrator in a modern office, featuring soft studio lighting, a calm expression, and a clinical color palette of deep blues and soft whites, embodying reliability and trust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCs5yBW2_t0cgKpQAJgRd0358AXcCQmGqbJY1jk9yF6byZbKwyDjs0ck4DtTPuuriroQRmdTdWe4Mrys_Lr1upznYe4yJ0C80Z5jDSEfegWKMVNZh_RZpT426aJMVUgnIrIIc_TjCp-4vPtUJWbKiZnn_TOtcMPWayVHcKXC_Q7XPlvZPyPNRRnbqSH8oVVeVBJqhoiv63jdhulA9-FfEJAkgSD9NJNuBEivJ1Jfs9U5Qw-ss9yX0W0bXePoHMpvUjorZpNg2JK9IU"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 px-margin-mobile space-y-gutter">
+<!-- Patient Header Section -->
+<section class="flex items-center gap-4 py-4">
+<div class="relative">
+<div class="w-20 h-20 rounded-xl overflow-hidden border-2 border-primary shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Close-up portrait of Mercy Wanjiku, a young adult African woman with a serene and dignified expression, soft natural lighting against a neutral clinical background, conveying a sense of patient-centered care and professionalism in a mental health context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjUll51JpKgzjVqVlAvEameUvFKJmNUcL_SI_MLApBM4dxfPFX4riqkBonbTNdTVzhIP9wfoQN_8A6jNf6bA0wdffXTIniNkqG9185TPpd9PrtM0Gc2BUod-ex8rhDAPN5O5J_-k9PyZRsINclmtrDqhdPWRG2AdUlMzei2804GWonrkOpaL00PxVH1r20TJVy4A4ODmy0MLgd6Gg8e_0f--SdImex8wfZwTxYYJSgKb3ZBZqWY3f5Ea75YhmQV0a1GYXdoqKulqU"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-5 h-5 bg-success-calm border-2 border-surface rounded-full"></div>
+</div>
+<div class="flex-1">
+<h2 class="font-headline-md text-headline-md text-text-rich-slate">Mercy Wanjiku</h2>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-sm text-label-sm bg-surface-container-high px-2 py-0.5 rounded text-on-surface-variant">ID: SLH-882</span>
+<span class="font-label-sm text-label-sm text-success-calm flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-success-calm"></span> Active
+                    </span>
+</div>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</section>
+<!-- Clinical Alert Section (Critical) -->
+<section>
+<div class="bg-error-container p-4 rounded-xl border-l-4 border-error flex items-start gap-4">
+<div class="mt-1">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-md text-label-md text-error font-bold uppercase tracking-wider">Clinical Alert</span>
+<span class="font-label-sm text-label-sm bg-error text-on-error px-2 py-0.5 rounded-full">High Urgency</span>
+</div>
+<p class="font-body-md text-on-error-container font-semibold">Elevated Risk of Self-Harm</p>
+<p class="font-label-sm text-label-sm text-on-error-container opacity-80 mt-1">Identified during intake assessment on Oct 24, 2023.</p>
+</div>
+</div>
+</section>
+<!-- Health Summary Grid -->
+<section class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/30">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Last Session</p>
+<p class="font-body-lg text-body-lg font-bold text-primary">Oct 21, 2023</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Dr. Silas Mwangi</p>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border border-outline-variant/30">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-1">Safety Level</p>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-error"></span>
+<p class="font-body-lg text-body-lg font-bold text-error">Tier 3</p>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Intensive Monitoring</p>
+</div>
+</section>
+<!-- Quick Tabs for Filtering History -->
+<nav class="flex gap-2 overflow-x-auto no-scrollbar py-2">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-full font-label-md text-label-md flex-shrink-0 transition-transform active:scale-95">All Records</button>
+<button class="bg-surface-container text-on-surface-variant px-4 py-2 rounded-full font-label-md text-label-md flex-shrink-0 transition-transform active:scale-95">Session Notes</button>
+<button class="bg-surface-container text-on-surface-variant px-4 py-2 rounded-full font-label-md text-label-md flex-shrink-0 transition-transform active:scale-95">Diagnosis</button>
+<button class="bg-surface-container text-on-surface-variant px-4 py-2 rounded-full font-label-md text-label-md flex-shrink-0 transition-transform active:scale-95">Assessments</button>
+</nav>
+<!-- Clinical Timeline -->
+<section class="space-y-6 relative before:absolute before:left-[19px] before:top-4 before:bottom-0 before:w-0.5 before:bg-outline-variant/30">
+<!-- Diagnosis Update -->
+<div class="relative pl-12">
+<div class="absolute left-0 top-1 w-10 h-10 bg-tertiary-container rounded-full flex items-center justify-center z-10 border-4 border-surface">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant text-sm" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<div class="bg-white p-4 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Today, 09:15 AM</span>
+<span class="font-label-sm text-label-sm bg-accent-teal-light text-secondary px-2 py-0.5 rounded">Diagnosis</span>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-text-rich-slate">Generalized Anxiety Disorder (F41.1)</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Confirmed primary diagnosis following GAD-7 score of 18.</p>
+</div>
+</div>
+<!-- Session Note -->
+<div class="relative pl-12">
+<div class="absolute left-0 top-1 w-10 h-10 bg-primary-container rounded-full flex items-center justify-center z-10 border-4 border-surface">
+<span class="material-symbols-outlined text-on-primary-container text-sm" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</div>
+<div class="bg-white p-4 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 21, 2023</span>
+<span class="font-label-sm text-label-sm bg-surface-container-high text-on-surface-variant px-2 py-0.5 rounded">Session Note</span>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-text-rich-slate">Dr. Silas Mwangi</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2 line-clamp-3">Patient reported increased physiological symptoms during public speaking. We practiced box breathing techniques...</p>
+<button class="mt-2 text-primary font-label-md text-label-md flex items-center gap-1">Read Full Note <span class="material-symbols-outlined text-sm">arrow_forward_ios</span></button>
+</div>
+</div>
+<!-- Risk Alert -->
+<div class="relative pl-12">
+<div class="absolute left-0 top-1 w-10 h-10 bg-error-container rounded-full flex items-center justify-center z-10 border-4 border-surface">
+<span class="material-symbols-outlined text-error text-sm" style="font-variation-settings: 'FILL' 1;">priority_high</span>
+</div>
+<div class="bg-error-container/30 p-4 rounded-xl border border-error/20 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Oct 19, 2023</span>
+<span class="font-label-sm text-label-sm bg-error text-on-error px-2 py-0.5 rounded">Alert Added</span>
+</div>
+<h3 class="font-body-md text-body-md font-bold text-error">Crisis Intervention Triggered</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">Mobile crisis team notified following intake questionnaire flags.</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Floating Action Buttons Layer (Mobile Specific) -->
+<div class="fixed bottom-24 right-margin-mobile flex flex-col gap-3 z-50">
+<button class="w-14 h-14 bg-error text-on-error rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-all group">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">add_alert</span>
+<span class="absolute right-16 bg-error text-on-error px-3 py-1.5 rounded-lg text-label-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Add Alert</span>
+</button>
+<button class="w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center active:scale-95 transition-all group">
+<span class="material-symbols-outlined text-2xl">edit_square</span>
+<span class="absolute right-16 bg-primary text-on-primary px-3 py-1.5 rounded-lg text-label-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">New Note</span>
+</button>
+</div>
+<!-- Quick Action Bar -->
+<div class="fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant/30 px-margin-mobile py-4 z-40">
+<button class="w-full bg-primary text-on-primary h-14 rounded-xl font-headline-md text-headline-md flex items-center justify-center gap-2 shadow-sm active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined">calendar_today</span>
+            Book Session
+        </button>
+</div>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface dark:bg-inverse-surface flex justify-around items-center px-2 py-3 shadow-sm md:hidden">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Overview</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-3 py-1 transition-all active:scale-90">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-sm text-label-sm">Therapists</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-sm text-label-sm">Financials</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+<span class="font-label-sm text-label-sm">Audit Logs</span>
+</div>
+</nav>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple scroll observer for sticky header effect
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('shadow-md', 'bg-white/95', 'backdrop-blur-md');
+            } else {
+                header.classList.remove('shadow-md', 'bg-white/95', 'backdrop-blur-md');
+            }
+        });
+
+        // Touch feedback for cards
+        document.querySelectorAll('.bg-white.p-4.rounded-xl').forEach(card => {
+            card.addEventListener('touchstart', () => {
+                card.style.transform = 'scale(0.98)';
+                card.style.transition = 'transform 0.2s ease';
+            });
+            card.addEventListener('touchend', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

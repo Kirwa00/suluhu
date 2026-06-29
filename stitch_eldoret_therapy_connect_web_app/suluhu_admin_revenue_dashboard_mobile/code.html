@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu Admin - Revenue Dashboard</title>
+<!-- Google Fonts: Manrope for headlines, Inter for body -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#d8dadb",
+                    "secondary": "#166a59",
+                    "inverse-primary": "#a7c8ff",
+                    "surface": "#f8fafb",
+                    "success-calm": "#2E8555",
+                    "surface-tint": "#305f9d",
+                    "on-primary-fixed-variant": "#0d4784",
+                    "surface-container-highest": "#e1e3e4",
+                    "primary-fixed": "#d5e3ff",
+                    "surface-variant": "#e1e3e4",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#424750",
+                    "accent-teal-light": "#E8F3F1",
+                    "surface-container-low": "#f2f4f5",
+                    "surface-container-high": "#e6e8e9",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "primary": "#00386d",
+                    "surface-container": "#eceeef",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-fixed-dim": "#89d5c0",
+                    "outline-variant": "#c2c6d1",
+                    "secondary-fixed": "#a5f2db",
+                    "primary-container": "#1b4f8c",
+                    "secondary-container": "#a5f2db",
+                    "inverse-surface": "#2e3132",
+                    "tertiary-container": "#005571",
+                    "on-surface": "#191c1d",
+                    "on-secondary-fixed": "#002019",
+                    "on-secondary-container": "#1f705f",
+                    "error-container": "#ffdad6",
+                    "background": "#f8fafb",
+                    "on-secondary-fixed-variant": "#005142",
+                    "surface-soothing": "#F0F4F8",
+                    "on-primary-fixed": "#001c3b",
+                    "surface-bright": "#f8fafb",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#004d67",
+                    "on-background": "#191c1d",
+                    "on-tertiary-fixed": "#001e2b",
+                    "inverse-on-surface": "#eff1f2",
+                    "tertiary": "#003d52",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#7acaf2",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#c1e8ff",
+                    "tertiary-fixed-dim": "#81d0f8",
+                    "text-rich-slate": "#1C1E21",
+                    "on-error": "#ffffff",
+                    "outline": "#737781",
+                    "on-primary-container": "#9cc2ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "40px",
+                    "section-gap": "80px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "container-max": "1200px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Manrope"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Manrope"],
+                    "headline-lg": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafb; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .bento-card {
+            background-color: #ffffff;
+            border: 1px solid #e1e3e4;
+            transition: all 0.2s ease;
+        }
+        .bento-card:active {
+            transform: scale(0.98);
+        }
+        
+        .revenue-gradient {
+            background: linear-gradient(135deg, #00386d 0%, #1b4f8c 100%);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background">
+<!-- Mobile Device Container -->
+<div class="max-w-[430px] mx-auto min-h-screen bg-surface relative pb-24 shadow-2xl">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full max-w-[430px] z-50 flex justify-between items-center px-4 h-16 bg-surface-container-low">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="clinical_notes">clinical_notes</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Suluhu Admin</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border-2 border-primary/10">
+<img class="w-full h-full object-cover" data-alt="A close-up professional headshot of a corporate administrator, featuring warm lighting, neutral office background, and a calm, trustworthy expression. The style is clean, modern, and aligned with a professional healthcare brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhMENyXngbnBenpHY0WHEzgDvuODoDwx5b8NLjzHxB7Vf8oqM2iKzak9kEgnn6b18IYbV_AjFm-hbxAWrAREjgBUjRD0dAwIFpNRfqIFNQVe928cMryQwVn5ZFYz6hbrp11n54OFRFj3SLHmgnbLBnwVXN0SOL_6iCovx9_Dr59D7otVWZsh4m9obfN4eIDqEJgOk3rEBMDmPLuuJqfORi6O16Ghijy9VplHeSUaGRxrupg7iyJ00VgVay_hFNoKN3cSU69uoAZxw"/>
+</div>
+</header>
+<main class="pt-20 px-4 space-y-6">
+<!-- Date Filter Section -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 bg-surface-container-high px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant" data-icon="calendar_month">calendar_month</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Last 30 Days</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="filter_list">filter_list</span>
+</button>
+</div>
+<!-- Revenue Hero Card -->
+<section class="revenue-gradient rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
+<div class="relative z-10 space-y-6">
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-sm text-label-sm text-white/70">Current Balance</p>
+<h2 class="font-display-lg text-[32px] font-bold leading-tight mt-1">KES 284,500.00</h2>
+</div>
+<div class="bg-white/20 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
+<span class="font-label-sm text-label-sm">12%</span>
+</div>
+</div>
+<div class="flex items-end justify-between gap-4">
+<div class="flex-1">
+<p class="font-label-sm text-label-sm text-white/70">This Month's Revenue</p>
+<p class="font-headline-md text-headline-md font-semibold">KES 1,142,000</p>
+</div>
+<!-- Mini Trend Chart Simulation -->
+<div class="flex items-end gap-1 h-12 w-24">
+<div class="w-2 bg-white/30 rounded-t-sm h-[40%]"></div>
+<div class="w-2 bg-white/40 rounded-t-sm h-[60%]"></div>
+<div class="w-2 bg-white/50 rounded-t-sm h-[50%]"></div>
+<div class="w-2 bg-white/70 rounded-t-sm h-[80%]"></div>
+<div class="w-2 bg-white rounded-t-sm h-[100%]"></div>
+</div>
+</div>
+</div>
+<!-- Abstract Glow Element -->
+<div class="absolute -right-10 -top-10 w-40 h-40 bg-secondary/20 rounded-full blur-3xl"></div>
+</section>
+<!-- Payout Status Bento Section -->
+<section class="grid grid-cols-2 gap-4">
+<div class="bento-card rounded-2xl p-4 flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 rounded-lg bg-accent-teal-light flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="pending_actions">pending_actions</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Pending Payouts</p>
+</div>
+<p class="font-headline-md text-headline-md text-primary mt-2">12</p>
+</div>
+<div class="bento-card rounded-2xl p-4 flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="event_upcoming">event_upcoming</span>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Next Payout</p>
+</div>
+<p class="font-label-md text-label-md font-bold text-on-surface mt-2">Oct 24, 2023</p>
+</div>
+</section>
+<!-- Recent Transactions -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md text-[20px] text-on-surface">Recent Transactions</h3>
+<button class="text-secondary font-label-md text-label-md">View All</button>
+</div>
+<div class="space-y-3">
+<!-- Transaction Item 1 -->
+<div class="bento-card rounded-2xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="payments">payments</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Sarah Mitchell</p>
+<div class="flex items-center gap-2">
+<span class="bg-accent-teal-light text-secondary text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">M-Pesa</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Session #4921</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md font-bold text-success-calm">+3,500.00</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">2h ago</p>
+</div>
+</div>
+<!-- Transaction Item 2 -->
+<div class="bento-card rounded-2xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="account_balance_wallet">account_balance_wallet</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Dr. James Okoro</p>
+<div class="flex items-center gap-2">
+<span class="bg-gray-100 text-on-surface-variant text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Payout</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Sept Earnings</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md font-bold text-error">-42,000.00</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Yesterday</p>
+</div>
+</div>
+<!-- Transaction Item 3 -->
+<div class="bento-card rounded-2xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="credit_card">credit_card</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Elena Rodriguez</p>
+<div class="flex items-center gap-2">
+<span class="bg-blue-50 text-primary text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">Card</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Session #4933</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md font-bold text-success-calm">+4,200.00</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Yesterday</p>
+</div>
+</div>
+<!-- Transaction Item 4 -->
+<div class="bento-card rounded-2xl p-4 flex items-center justify-between opacity-80">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="payments">payments</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-surface">Anonymous Client</p>
+<div class="flex items-center gap-2">
+<span class="bg-accent-teal-light text-secondary text-[10px] px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">M-Pesa</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Emergency Relief</span>
+</div>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-label-md font-bold text-success-calm">+2,000.00</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Oct 12</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full max-w-[430px] z-50 flex justify-around items-center px-2 py-3 bg-surface-container-low shadow-[0_-4px_16px_rgba(0,0,0,0.05)] rounded-t-3xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm mt-1">Overview</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-label-sm text-label-sm mt-1">Therapists</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-2 transition-all active:scale-90 shadow-lg shadow-primary/20" href="#">
+<span class="material-symbols-outlined" data-icon="payments" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-label-sm text-label-sm mt-1">Financials</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="assignment_turned_in">assignment_turned_in</span>
+<span class="font-label-sm text-label-sm mt-1">Audit Logs</span>
+</a>
+</nav>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mousedown', () => {
+                el.classList.add('scale-95');
+            });
+            el.addEventListener('mouseup', () => {
+                el.classList.remove('scale-95');
+            });
+            el.addEventListener('mouseleave', () => {
+                el.classList.remove('scale-95');
+            });
+        });
+
+        // Simple Fade-in Animation for Cards
+        window.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.bento-card, section');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(10px)';
+                card.style.transition = `all 0.4s ease ${index * 0.05}s`;
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 50);
+            });
+        });
+    </script>
+</body></html>

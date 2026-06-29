@@ -1,0 +1,29 @@
+# SULUHU THERAPY CENTER - SDLC DOCUMENTATION SUMMARY
+
+## Project Overview
+Suluhu Therapy Center is a licensed mental health clinic in Eldoret, Kenya, transitioning to a comprehensive digital platform.
+
+## Key Objectives
+- HIPAA-equivalent and Kenya Data Protection Act (2019) compliance.
+- M-Pesa, Airtel Money, and card payment integration.
+- AI-powered triage (PHQ-9, GAD-7) and outcome tracking.
+- Swahili and English language support.
+
+## Visual Identity (Section 11)
+- **Philosophy:** Calm, trustworthy, clinical but approachable. Avoids visual stress.
+- **Primary Colors:** 
+  - #1B4F8C (Deep Trust Blue)
+  - #0E6655 (Calm Teal)
+  - #2E86AB (Action Accent)
+- **Typography:** Inter (High readability).
+- **Components:** Custom components based on Radix UI + Tailwind.
+
+## Core Workflows
+1. **Patient Onboarding:** Registration -> OTP -> AI Intake -> Therapist Match -> Booking -> Payment.
+2. **Therapist Session:** Dashboard -> Intake Review -> Video Room -> SOAP Notes -> Outcome Tracking.
+3. **Admin/Governance:** Compliance audits, therapist onboarding, revenue tracking.
+
+## Technical Stack
+- **Frontend:** React.js, Tailwind CSS, TanStack Query, i18next (Swahili/English).
+- **Video:** Daily.co HIPAA-compliant API.
+- **Payments:** Safaricom M-Pesa Daraja API.

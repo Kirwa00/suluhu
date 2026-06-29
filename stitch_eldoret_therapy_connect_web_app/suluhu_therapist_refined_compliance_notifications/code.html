@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Credential Management - Suluhu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#1b4f8c",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-secondary-container": "#1f705f",
+                    "surface-dim": "#d8dadb",
+                    "secondary-container": "#a5f2db",
+                    "text-rich-slate": "#1C1E21",
+                    "surface-variant": "#e1e3e4",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container": "#eceeef",
+                    "outline-variant": "#c2c6d1",
+                    "on-secondary-fixed-variant": "#005142",
+                    "tertiary": "#003d52",
+                    "surface-soothing": "#F0F4F8",
+                    "on-tertiary-fixed-variant": "#004d67",
+                    "on-tertiary-container": "#7acaf2",
+                    "on-surface": "#191c1d",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#a7c8ff",
+                    "secondary-fixed-dim": "#89d5c0",
+                    "on-background": "#191c1d",
+                    "surface": "#f8fafb",
+                    "success-calm": "#2E8555",
+                    "on-tertiary": "#ffffff",
+                    "inverse-surface": "#2e3132",
+                    "surface-container-high": "#e6e8e9",
+                    "surface-tint": "#305f9d",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "surface-container-low": "#f2f4f5",
+                    "primary-fixed": "#d5e3ff",
+                    "on-secondary": "#ffffff",
+                    "on-primary-fixed-variant": "#0d4784",
+                    "surface-bright": "#f8fafb",
+                    "on-error-container": "#93000a",
+                    "accent-teal-light": "#E8F3F1",
+                    "tertiary-fixed-dim": "#81d0f8",
+                    "primary": "#00386d",
+                    "error-container": "#ffdad6",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed": "#c1e8ff",
+                    "on-primary-fixed": "#001c3b",
+                    "secondary": "#166a59",
+                    "on-surface-variant": "#424750",
+                    "outline": "#737781",
+                    "on-tertiary-fixed": "#001e2b",
+                    "inverse-on-surface": "#eff1f2",
+                    "background": "#f8fafb",
+                    "tertiary-container": "#005571",
+                    "on-primary-container": "#9cc2ff",
+                    "on-secondary-fixed": "#002019",
+                    "secondary-fixed": "#a5f2db",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "section-gap": "80px",
+                    "margin-desktop": "40px",
+                    "container-max": "1200px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-md": [
+                            "Inter"
+                    ],
+                    "body-lg": [
+                            "Inter"
+                    ],
+                    "headline-lg-mobile": [
+                            "Manrope"
+                    ],
+                    "headline-md": [
+                            "Manrope"
+                    ],
+                    "headline-lg": [
+                            "Manrope"
+                    ],
+                    "display-lg": [
+                            "Manrope"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "label-sm": [
+                            "Inter"
+                    ]
+            },
+            "fontSize": {
+                    "label-md": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.01em",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "body-lg": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "28px",
+                            {
+                                    "lineHeight": "36px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-md": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "32px",
+                            {
+                                    "lineHeight": "40px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "display-lg": [
+                            "48px",
+                            {
+                                    "lineHeight": "56px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "700"
+                            }
+                    ],
+                    "body-md": [
+                            "16px",
+                            {
+                                    "lineHeight": "24px",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "label-sm": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.02em",
+                                    "fontWeight": "500"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex">
+<!-- SideNavBar (Desktop) -->
+<nav class="hidden md:flex flex-col h-full py-unit px-4 gap-4 docked h-screen left-0 w-64 bg-surface-container-low dark:bg-inverse-surface border-r border-outline-variant/30 fixed">
+<!-- Header -->
+<div class="flex items-center gap-3 px-2 py-4 mb-4">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold text-lg">
+                S
+            </div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Suluhu</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Mental Health Support</p>
+</div>
+</div>
+<!-- Main Navigation -->
+<div class="flex flex-col gap-1 flex-grow"><a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-on-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="#"><span class="material-symbols-outlined" data-icon="dashboard">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></a><a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-on-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="#"><span class="material-symbols-outlined" data-icon="event_available">event_available</span><span class="font-label-md text-label-md">Sessions</span></a><a class="flex items-center gap-3 px-3 py-3 text-primary dark:text-inverse-primary font-bold bg-secondary-container/30 rounded-lg transition-all duration-200 ease-in-out" href="#"><span class="material-symbols-outlined" data-icon="verified_user">verified_user</span><span class="font-label-md text-label-md">Credentials</span></a><a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-on-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="#"><span class="material-symbols-outlined" data-icon="library_books">library_books</span><span class="font-label-md text-label-md">Resources</span></a></div>
+<!-- Footer Navigation -->
+<div class="flex flex-col gap-1 mt-auto pt-4 border-t border-outline-variant/30">
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-on-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-variant dark:hover:bg-on-surface-variant rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<div class="flex-grow flex flex-col md:ml-64 min-h-screen">
+<!-- TopNavBar (Mobile & Desktop) -->
+<header class="flex justify-between items-center px-margin-mobile md:px-margin-desktop w-full mx-auto h-16 bg-surface dark:bg-on-surface docked full-width top-0 z-10 sticky shadow-sm border-b border-surface-container-low dark:border-surface-container-highest">
+<!-- Mobile Brand (Hidden on Desktop) -->
+<div class="md:hidden flex items-center gap-2">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">Suluhu</h1>
+</div>
+<!-- Desktop Nav Links (Hidden on Mobile) -->
+<div class="hidden md:flex items-center gap-6">
+<!-- Navigation is primarily handled by SideNav on Desktop for this layout, but TopNavBar structure is maintained as per request -->
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4 ml-auto">
+<button class="p-2 text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors rounded-full hover:bg-surface-variant/50 relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-4 h-4 bg-error text-on-error text-[10px] flex items-center justify-center rounded-full border-2 border-surface">1</span></button>
+<button class="p-2 text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors rounded-full hover:bg-surface-variant/50">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant ml-2">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional headshot of a female therapist in a well-lit, modern office setting with calming blue and teal accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCctRYCPEhTFR8y-eHtJxqb14Pc23CqmqSNr2dIKzzKfRdTVgkuHJGcRwffNUUQgWYdEumwJMxBSviOH6oe3pEc1qLifa68szMXeAMxLz8yFqHPsRQitpPpAD21zsM7yBymGrzC4pOIeWBZRciAxJh04V93jLtVXZS-bQssYd6tB46hT7Klr8RUqQq9k_gBLCHKpOzv5Tjq93B_ACcYwlQomDM_ZukGfWfZvLN76Uhp9tIEHhJpfC2U7vqgF_b1WOb5IcqGKCISI6Y"/>
+</div>
+</div>
+</header>
+<!-- Main Dashboard Content -->
+<main class="flex-grow p-margin-mobile md:p-margin-desktop space-y-8 max-w-container-max mx-auto w-full"><div class="bg-error-container text-on-error-container p-4 rounded-xl flex items-center gap-4 mb-8 border border-error/20"><span class="material-symbols-outlined text-error">error</span><div class="flex-grow"><p class="font-label-md font-bold">Urgent Action Required</p><p class="font-label-sm">Your Professional Indemnity insurance has expired. Please upload a valid document to maintain your Tier 2 verification status.</p></div><button class="px-4 py-2 bg-error text-on-error rounded-lg font-label-md">Resolve Now</button></div><div class="mb-8"> <h2 class="font-headline-lg text-headline-lg font-bold text-primary">Credential Management</h2> <p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Manage your professional profile and verification documents.</p> </div> <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter"> <div class="md:col-span-7 space-y-6"> <section class="bg-surface-container-lowest border border-surface-container rounded-xl p-6"> <h3 class="font-headline-md text-headline-md font-semibold text-primary mb-6">Professional Profile</h3> <div class="space-y-4"> <div> <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Full Name</label> <input class="w-full p-3 rounded-lg border border-outline-variant bg-surface focus:border-primary outline-none transition-colors" type="text" value="Dr. Ndeta"/> </div> <div> <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">KMPDC License Number</label> <input class="w-full p-3 rounded-lg border border-outline-variant bg-surface focus:border-primary outline-none transition-colors" type="text" value="KMPDC/2023/8842"/> </div> <div> <label class="block font-label-sm text-label-sm text-on-surface-variant mb-1">Primary Specialization</label> <select class="w-full p-3 rounded-lg border border-outline-variant bg-surface focus:border-primary outline-none transition-colors"> <option>Clinical Psychology</option> <option>Psychiatry</option> <option>Counseling</option> </select> </div> <button class="mt-4 px-6 py-2 bg-primary text-on-primary rounded-lg font-label-md hover:bg-primary-container transition-colors">Update Profile</button> </div> </section> <section class="bg-surface-container-lowest border border-surface-container rounded-xl p-6"> <h3 class="font-headline-md text-headline-md font-semibold text-primary mb-6">Document Management</h3> <div class="space-y-4"> <div class="flex items-center justify-between p-4 rounded-lg bg-surface-soothing border border-outline-variant/20"> <div class="flex items-center gap-3"> <span class="material-symbols-outlined text-primary" data-icon="description">description</span> <div> <p class="font-label-md text-on-surface">Medical License</p> <p class="font-label-sm text-on-surface-variant">Expires: Dec 2024</p> </div> </div> <span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full font-label-sm font-semibold">Verified</span> </div> <div class="flex items-center justify-between p-4 rounded-lg bg-surface-soothing border border-outline-variant/20"> <div class="flex items-center gap-3"> <span class="material-symbols-outlined text-primary" data-icon="badge">badge</span> <div> <p class="font-label-md text-on-surface">Identity Proof</p> <p class="font-label-sm text-on-surface-variant">National ID / Passport</p> </div> </div> <span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full font-label-sm font-semibold">Verified</span> </div> <div class="flex items-center justify-between p-4 rounded-lg bg-surface-soothing border border-outline-variant/20"> <div class="flex items-center gap-3"> <span class="material-symbols-outlined text-error" data-icon="warning">warning</span> <div> <p class="font-label-md text-on-surface">Professional Indemnity</p> <div class="flex flex-col"><p class="font-label-sm text-error font-semibold">Expired: Oct 15, 2023</p><a class="text-primary font-label-sm underline flex items-center gap-1 mt-1" href="#"><span class="material-symbols-outlined text-xs">info</span> Renewal Guide</a></div> </div> </div> <button class="px-6 py-2 bg-primary text-on-primary rounded-lg font-label-md hover:bg-primary-container transition-all shadow-sm">Upload</button> </div> </div> </section> </div> <div class="md:col-span-5 space-y-6"> <section class="bg-primary text-on-primary rounded-xl p-6"> <h3 class="font-headline-md text-headline-md font-semibold mb-4">Verification Progress</h3><div class="flex items-center gap-2 mb-6 cursor-pointer hover:text-primary-fixed-dim transition-colors"><span class="material-symbols-outlined text-sm">notifications_active</span><span class="font-label-sm underline">Manage Notification Settings</span></div> <div class="space-y-6"> <div> <div class="flex justify-between mb-2"> <span class="font-label-md">Tier 1: General Practice</span> <span class="font-label-md">100%</span> </div> <div class="h-2 bg-primary-container rounded-full overflow-hidden"> <div class="h-full bg-secondary-fixed w-full"></div> </div> </div> <div> <div class="flex justify-between mb-2"> <span class="font-label-md">Tier 2: Specialized Care</span> <span class="font-label-md">65%</span> </div> <div class="h-2 bg-primary-container rounded-full overflow-hidden"> <div class="h-full bg-secondary-fixed w-[65%]"></div> </div> <p class="mt-2 font-label-sm text-primary-fixed-dim">Pending: Indemnity Insurance verification</p> </div> </div> </section> <section class="bg-surface-container-lowest border border-surface-container rounded-xl p-6"> <h3 class="font-headline-md text-headline-md font-semibold text-primary mb-4">Quick Upload</h3> <div class="border-2 border-dashed border-outline-variant rounded-xl p-8 flex flex-col items-center justify-center text-center hover:border-primary transition-colors cursor-pointer"> <span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2" data-icon="cloud_upload">cloud_upload</span> <p class="font-label-md text-on-surface">Drag and drop files here</p> <p class="font-label-sm text-on-surface-variant mt-1">or click to browse (PDF, JPG, PNG)</p> </div> </section> </div> </div><section class="bg-surface-container-lowest border border-surface-container rounded-xl p-6 mt-8"><h3 class="font-headline-md text-headline-md font-semibold text-primary mb-4">Compliance History</h3><div class="space-y-3"><div class="flex justify-between items-center py-2 border-b border-outline-variant/20"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-success-calm">check_circle</span><span class="font-label-md">Medical License Verified</span></div><span class="font-label-sm text-on-surface-variant">Dec 12, 2023</span></div><div class="flex justify-between items-center py-2 border-b border-outline-variant/20"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-success-calm">check_circle</span><span class="font-label-md">Identity Proof Verified</span></div><span class="font-label-sm text-on-surface-variant">Nov 05, 2023</span></div></div></section></main>
+</div>
+</body></html>

@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Therapist Onboarding | Suluhu Therapy Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#1f705f",
+                    "on-surface-variant": "#424750",
+                    "on-tertiary-container": "#7acaf2",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#001e2b",
+                    "accent-teal-light": "#E8F3F1",
+                    "outline": "#737781",
+                    "on-secondary-fixed": "#002019",
+                    "primary-container": "#1b4f8c",
+                    "on-surface": "#191c1d",
+                    "background": "#f8fafb",
+                    "tertiary": "#003d52",
+                    "on-background": "#191c1d",
+                    "tertiary-fixed-dim": "#81d0f8",
+                    "surface-container-highest": "#e1e3e4",
+                    "surface-variant": "#e1e3e4",
+                    "surface-container-lowest": "#ffffff",
+                    "success-calm": "#2E8555",
+                    "on-secondary-fixed-variant": "#005142",
+                    "on-tertiary-fixed-variant": "#004d67",
+                    "on-primary-fixed": "#001c3b",
+                    "surface-soothing": "#F0F4F8",
+                    "inverse-on-surface": "#eff1f2",
+                    "on-error-container": "#93000a",
+                    "surface": "#f8fafb",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "surface-dim": "#d8dadb",
+                    "on-primary-container": "#9cc2ff",
+                    "outline-variant": "#c2c6d1",
+                    "surface-container-high": "#e6e8e9",
+                    "surface-bright": "#f8fafb",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f2f4f5",
+                    "tertiary-fixed": "#c1e8ff",
+                    "primary": "#00386d",
+                    "secondary-fixed-dim": "#89d5c0",
+                    "text-rich-slate": "#1C1E21",
+                    "secondary-fixed": "#a5f2db",
+                    "surface-tint": "#305f9d",
+                    "secondary": "#166a59",
+                    "surface-container": "#eceeef",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#d5e3ff",
+                    "inverse-primary": "#a7c8ff",
+                    "on-primary-fixed-variant": "#0d4784",
+                    "secondary-container": "#a5f2db",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#005571",
+                    "inverse-surface": "#2e3132",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "section-gap": "80px",
+                    "margin-mobile": "16px",
+                    "unit": "8px",
+                    "container-max": "1200px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Manrope"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Manrope"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .step-active {
+            @apply text-primary font-bold border-r-4 border-primary bg-primary-container/10;
+        }
+        .form-input-focus {
+            @apply focus:ring-2 focus:ring-secondary focus:border-secondary;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            @apply bg-outline-variant rounded-full;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased">
+<div class="flex min-h-screen">
+<!-- Sidebar Navigation (The Anchor) -->
+<!-- Based on JSON: SideNavBar mapping -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low border-r border-outline-variant/30 flex flex-col py-8 px-4 z-50">
+<div class="mb-12 px-2">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Suluhu</h1>
+<p class="font-label-sm text-on-surface-variant uppercase tracking-wider">Therapist Onboarding</p>
+</div>
+<nav class="flex-1 space-y-2">
+<!-- Step 1 Active -->
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold border-r-4 border-primary bg-primary-container/10 transition-all duration-200 cursor-default" id="nav-step-1">
+<span class="material-symbols-outlined">pending_actions</span>
+<span class="font-label-md">Professional Info</span>
+</div>
+<!-- Step 2 Inactive -->
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer opacity-60 pointer-events-none" id="nav-step-2">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-label-md">Profile Setup</span>
+</div>
+<!-- Future Steps (Disabled) -->
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg text-outline-variant cursor-not-allowed">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label-md">Verification</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg text-outline-variant cursor-not-allowed">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md">Availability</span>
+</div>
+</nav>
+<div class="mt-auto border-t border-outline-variant/30 pt-6">
+<div class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Help Center</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 bg-surface-bright min-h-screen">
+<!-- Top Bar -->
+<header class="h-16 flex justify-between items-center px-10 sticky top-0 z-40 bg-surface-bright/80 backdrop-blur-md">
+<div class="flex items-center gap-4">
+<span class="font-label-md text-on-surface-variant">Step 1 of 4</span>
+<div class="w-48 h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-1/4 transition-all duration-500 ease-out" id="progress-bar"></div>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant font-label-md hover:text-primary transition-colors">Save Draft</button>
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold">JD</div>
+</div>
+</header>
+<!-- Form Content Canvas -->
+<div class="max-w-4xl mx-auto py-16 px-10">
+<!-- STEP 1: Professional Information -->
+<section class="transition-opacity duration-300" id="section-step-1">
+<div class="mb-10">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Professional Information</h2>
+<p class="font-body-md text-on-surface-variant">We need to verify your credentials to ensure the highest standard of care for our community.</p>
+</div>
+<form class="space-y-8" id="form-step-1">
+<div class="grid grid-cols-2 gap-8">
+<!-- Full Name -->
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant" for="full-name">Full Legal Name</label>
+<input class="w-full px-4 py-3 bg-surface-soothing border-none rounded-lg focus:ring-2 focus:ring-secondary text-body-md placeholder:text-outline-variant" id="full-name" placeholder="Dr. Jane Doe" type="text"/>
+</div>
+<!-- License Number -->
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant" for="license-number">KMPDC / Clinical License Number</label>
+<input class="w-full px-4 py-3 bg-surface-soothing border-none rounded-lg focus:ring-2 focus:ring-secondary text-body-md placeholder:text-outline-variant" id="license-number" placeholder="KMPDC-XXXXX" type="text"/>
+</div>
+<!-- Specialization -->
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant" for="specialization">Primary Specialization</label>
+<select class="w-full px-4 py-3 bg-surface-soothing border-none rounded-lg focus:ring-2 focus:ring-secondary text-body-md appearance-none cursor-pointer" id="specialization">
+<option disabled="" selected="" value="">Select your field</option>
+<option>Clinical Psychology</option>
+<option>Child &amp; Adolescent Therapy</option>
+<option>Marriage &amp; Family Therapy</option>
+<option>Addiction Counseling</option>
+<option>Trauma Specialist</option>
+</select>
+</div>
+<!-- Experience -->
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant" for="experience">Years of Experience</label>
+<input class="w-full px-4 py-3 bg-surface-soothing border-none rounded-lg focus:ring-2 focus:ring-secondary text-body-md placeholder:text-outline-variant" id="experience" min="0" placeholder="e.g. 5" type="number"/>
+</div>
+</div>
+<!-- Document Upload Grid -->
+<div class="grid grid-cols-2 gap-8 pt-4">
+<div class="space-y-3">
+<label class="font-label-md text-on-surface-variant block">Valid License Document</label>
+<div class="border-2 border-dashed border-outline-variant/50 rounded-xl p-8 flex flex-col items-center justify-center bg-surface-container-lowest hover:bg-accent-teal-light/20 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-outline-variant mb-2 group-hover:text-secondary transition-colors">upload_file</span>
+<p class="font-label-md text-on-surface-variant">Click to upload or drag &amp; drop</p>
+<p class="text-[10px] text-outline-variant uppercase mt-1">PDF, JPG, PNG (Max 5MB)</p>
+</div>
+</div>
+<div class="space-y-3">
+<label class="font-label-md text-on-surface-variant block">National ID / Passport</label>
+<div class="border-2 border-dashed border-outline-variant/50 rounded-xl p-8 flex flex-col items-center justify-center bg-surface-container-lowest hover:bg-accent-teal-light/20 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-outline-variant mb-2 group-hover:text-secondary transition-colors">badge</span>
+<p class="font-label-md text-on-surface-variant">Click to upload or drag &amp; drop</p>
+<p class="text-[10px] text-outline-variant uppercase mt-1">PDF, JPG, PNG (Max 5MB)</p>
+</div>
+</div>
+</div>
+<div class="pt-8 flex justify-end">
+<button class="px-10 py-4 bg-primary text-white font-label-md rounded-lg hover:shadow-lg transition-all active:scale-95 flex items-center gap-2" onclick="goToStep(2)" type="button">
+                                Continue to Profile
+                                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</form>
+</section>
+<!-- STEP 2: Profile Setup -->
+<section class="hidden opacity-0 transition-opacity duration-300" id="section-step-2">
+<div class="mb-10">
+<button class="flex items-center gap-2 text-on-surface-variant font-label-md hover:text-primary mb-6 group" onclick="goToStep(1)">
+<span class="material-symbols-outlined text-sm group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                            Back to Professional Information
+                        </button>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Profile Setup</h2>
+<p class="font-body-md text-on-surface-variant">This information will be displayed to potential clients. Let them know who you are.</p>
+</div>
+<div class="grid grid-cols-12 gap-10">
+<!-- Left: Form Fields -->
+<div class="col-span-8 space-y-8">
+<!-- Bio -->
+<div class="space-y-2">
+<label class="font-label-md text-on-surface-variant" for="bio">Short Bio</label>
+<textarea class="w-full px-4 py-3 bg-surface-soothing border-none rounded-lg focus:ring-2 focus:ring-secondary text-body-md placeholder:text-outline-variant resize-none" id="bio" placeholder="Describe your therapeutic approach, philosophy, and how you help clients..." rows="6"></textarea>
+<p class="text-right font-label-sm text-outline-variant">0 / 500 characters</p>
+</div>
+<!-- Languages -->
+<div class="space-y-3">
+<label class="font-label-md text-on-surface-variant">Languages Offered</label>
+<div class="flex flex-wrap gap-3">
+<button class="px-5 py-2 rounded-full border border-secondary text-secondary bg-secondary/10 font-label-md flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        English
+                                    </button>
+<button class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:border-secondary hover:text-secondary transition-colors font-label-md" type="button">
+                                        Swahili
+                                    </button>
+<button class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant hover:border-secondary hover:text-secondary transition-colors font-label-md" type="button">
+                                        French
+                                    </button>
+<button class="px-3 py-2 rounded-full border border-dashed border-outline-variant text-outline-variant hover:text-secondary hover:border-secondary transition-colors font-label-md flex items-center gap-1" type="button">
+<span class="material-symbols-outlined text-sm">add</span>
+                                        Other
+                                    </button>
+</div>
+</div>
+</div>
+<!-- Right: Photo Upload -->
+<div class="col-span-4">
+<div class="sticky top-24 space-y-4">
+<label class="font-label-md text-on-surface-variant block text-center">Profile Photo</label>
+<div class="relative group mx-auto w-48 h-48">
+<div class="w-full h-full rounded-2xl overflow-hidden bg-surface-container border-2 border-outline-variant/30 flex items-center justify-center">
+<img class="hidden w-full h-full object-cover" data-alt="A professional headshot of a friendly and approachable therapist in a brightly lit, clean, and minimalist office setting. The style is soft-focus portraiture with a warm, empathetic atmosphere. The therapist is wearing a professional yet casual attire like a blazer over a simple shirt. Light mode aesthetic with soft blue and teal tones in the background." id="profile-preview" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANXSJcUiwBM0lnEt3H7EAAHexWDyKFsWMyw3pPZ7h8a9cW_Ju-sffiKRpV4RrYyCn6ZPFVaMPs63elDISJmfY0p148NoE0VAZ6w06660gwU8GcLdwMHZmi61aJAFzN3C1cvpQRdbP9v4jgQAu63wBq4m6acrIpz2ccHdX1NUxMgDmXmo5t2-Py7vBApOKby7ysfrduJf_BOTcx8JkcftKVlRR6kyYqO9NGI02bti65Ic-auevr4m2AZH-bH_9vIfT-x9rWHAcDnho"/>
+<span class="material-symbols-outlined text-6xl text-outline-variant" id="profile-placeholder">person</span>
+</div>
+<button class="absolute -bottom-2 -right-2 w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform active:scale-95">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+</button>
+</div>
+<p class="text-center font-label-sm text-outline-variant px-4">Upload a clear, professional photo. Clients connect best with a friendly face.</p>
+</div>
+</div>
+</div>
+<div class="pt-12 mt-12 border-t border-outline-variant/20 flex justify-end gap-4">
+<button class="px-8 py-4 border border-outline-variant text-on-surface-variant font-label-md rounded-lg hover:bg-surface-container transition-colors" onclick="goToStep(1)" type="button">
+                            Previous Step
+                        </button>
+<button class="px-10 py-4 bg-primary text-white font-label-md rounded-lg hover:shadow-lg transition-all active:scale-95" type="button">
+                            Submit Profile for Review
+                        </button>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+        function goToStep(step) {
+            const step1Section = document.getElementById('section-step-1');
+            const step2Section = document.getElementById('section-step-2');
+            const nav1 = document.getElementById('nav-step-1');
+            const nav2 = document.getElementById('nav-step-2');
+            const progressBar = document.getElementById('progress-bar');
+            const stepCounter = document.querySelector('header .font-label-md');
+
+            if (step === 2) {
+                // Animate transition
+                step1Section.classList.add('opacity-0');
+                setTimeout(() => {
+                    step1Section.classList.add('hidden');
+                    step2Section.classList.remove('hidden');
+                    setTimeout(() => {
+                        step2Section.classList.remove('opacity-0');
+                    }, 50);
+                }, 300);
+
+                // Update Progress Shell
+                progressBar.style.width = '50%';
+                stepCounter.innerText = 'Step 2 of 4';
+
+                // Update Sidebar Styles
+                nav1.className = 'flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer';
+                nav1.onclick = () => goToStep(1);
+                
+                nav2.className = 'flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold border-r-4 border-primary bg-primary-container/10 transition-all duration-200 cursor-default';
+                nav2.style.opacity = '1';
+                nav2.style.pointerEvents = 'auto';
+            } else {
+                // Animate transition
+                step2Section.classList.add('opacity-0');
+                setTimeout(() => {
+                    step2Section.classList.add('hidden');
+                    step1Section.classList.remove('hidden');
+                    setTimeout(() => {
+                        step1Section.classList.remove('opacity-0');
+                    }, 50);
+                }, 300);
+
+                // Update Progress Shell
+                progressBar.style.width = '25%';
+                stepCounter.innerText = 'Step 1 of 4';
+
+                // Update Sidebar Styles
+                nav2.className = 'flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors cursor-pointer';
+                nav1.className = 'flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold border-r-4 border-primary bg-primary-container/10 transition-all duration-200 cursor-default';
+            }
+            
+            // Scroll to top of content
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Language toggle simulation
+        document.querySelectorAll('.flex.flex-wrap.gap-3 button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.innerText.includes('Other')) return;
+                
+                const isSelected = this.classList.contains('bg-secondary/10');
+                if (isSelected) {
+                    this.classList.remove('bg-secondary/10', 'text-secondary', 'border-secondary');
+                    this.classList.add('border-outline-variant', 'text-on-surface-variant');
+                    const icon = this.querySelector('span');
+                    if (icon) icon.remove();
+                } else {
+                    this.classList.add('bg-secondary/10', 'text-secondary', 'border-secondary');
+                    this.classList.remove('border-outline-variant', 'text-on-surface-variant');
+                    const icon = document.createElement('span');
+                    icon.className = 'material-symbols-outlined text-sm';
+                    icon.style.fontVariationSettings = "'FILL' 1";
+                    icon.innerText = 'check_circle';
+                    this.prepend(icon);
+                }
+            });
+        });
+    </script>
+</body></html>

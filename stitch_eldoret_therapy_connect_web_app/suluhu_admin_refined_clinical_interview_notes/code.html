@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu Admin | Therapist Application Review</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Config -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#1f705f",
+                    "on-surface-variant": "#424750",
+                    "on-tertiary-container": "#7acaf2",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#001e2b",
+                    "accent-teal-light": "#E8F3F1",
+                    "outline": "#737781",
+                    "on-secondary-fixed": "#002019",
+                    "primary-container": "#1b4f8c",
+                    "on-surface": "#191c1d",
+                    "background": "#f8fafb",
+                    "tertiary": "#003d52",
+                    "on-background": "#191c1d",
+                    "tertiary-fixed-dim": "#81d0f8",
+                    "surface-container-highest": "#e1e3e4",
+                    "surface-variant": "#e1e3e4",
+                    "surface-container-lowest": "#ffffff",
+                    "success-calm": "#2E8555",
+                    "on-secondary-fixed-variant": "#005142",
+                    "on-tertiary-fixed-variant": "#004d67",
+                    "on-primary-fixed": "#001c3b",
+                    "surface-soothing": "#F0F4F8",
+                    "inverse-on-surface": "#eff1f2",
+                    "on-error-container": "#93000a",
+                    "surface": "#f8fafb",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "surface-dim": "#d8dadb",
+                    "on-primary-container": "#9cc2ff",
+                    "outline-variant": "#c2c6d1",
+                    "surface-container-high": "#e6e8e9",
+                    "surface-bright": "#f8fafb",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f2f4f5",
+                    "tertiary-fixed": "#c1e8ff",
+                    "primary": "#00386d",
+                    "secondary-fixed-dim": "#89d5c0",
+                    "text-rich-slate": "#1C1E21",
+                    "secondary-fixed": "#a5f2db",
+                    "surface-tint": "#305f9d",
+                    "secondary": "#166a59",
+                    "surface-container": "#eceeef",
+                    "on-tertiary": "#ffffff",
+                    "primary-fixed": "#d5e3ff",
+                    "inverse-primary": "#a7c8ff",
+                    "on-primary-fixed-variant": "#0d4784",
+                    "secondary-container": "#a5f2db",
+                    "on-error": "#ffffff",
+                    "tertiary-container": "#005571",
+                    "inverse-surface": "#2e3132",
+                    "error-container": "#ffdad6",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "section-gap": "80px",
+                    "margin-mobile": "16px",
+                    "unit": "8px",
+                    "container-max": "1200px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "display-lg": ["Manrope"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Manrope"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #f8fafb;
+            color: #191c1d;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c2c6d1;
+            border-radius: 10px;
+        }
+        .doc-card-hover:hover {
+            border-color: #1b4f8c;
+            transform: translateY(-2px);
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- SideNavBar Anchor -->
+<aside class="bg-surface-container-low dark:bg-surface-dim h-screen w-64 fixed left-0 top-0 flex flex-col py-6 px-4 border-r border-outline-variant/30 z-50">
+<div class="mb-8 px-2">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Suluhu Admin</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Backend Portal</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Active State Logic: Applications is active -->
+<a class="flex items-center gap-3 px-3 py-2 text-primary dark:text-primary-fixed-dim font-bold border-r-4 border-primary dark:border-primary-fixed-dim bg-primary-container/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="pending_actions">pending_actions</span>
+<span class="font-label-md text-label-md">Applications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-label-md text-label-md">Therapists</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-label-md text-label-md">Verifications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1 pt-6 border-t border-outline-variant/30">
+<button class="w-full text-left flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</button>
+<button class="w-full text-left flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</button>
+</div>
+</aside>
+<!-- TopNavBar Anchor -->
+<header class="bg-surface-bright dark:bg-surface-container-lowest flex justify-between items-center w-full h-16 pl-72 pr-6 sticky top-0 z-40">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-60">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-soothing border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-label-md" placeholder="Search applications..." type="text"/>
+</div>
+<div class="hidden md:flex items-center gap-6 ml-4">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Direct Messages</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Audit Log</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-md transition-transform active:scale-95">
+                Approve Application
+            </button>
+<div class="flex items-center gap-3 border-l border-outline-variant/30 pl-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<div class="w-8 h-8 rounded-full bg-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a middle-aged administrative professional with a friendly smile, wearing corporate attire against a soft-focus office background. The lighting is bright and clean, fitting a modern light-mode business dashboard aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp355vX4EKVTr8W_FkEdJ8sbBAlK34Oj_03aW9XZbd7jBa7a5UjP1l8H4sHtOTlX2OOzKXKCIGkFwKgZQTzxnPxcC974PByV8PuAOhlT_Q7MhaJ7ryDxi9bszFgP1iQn8_1r79aSfBg1az8sCHRfavKZ_hf2v7MXdOmWAgtV-5xGN5mypDsdf25pxPUXgznkLZOPpFtxefqOMsIpCGEFVArVQgm4BOfGBch9cO91fa-NvJbthKSuDyC6S6mC6ncWi_0KbdI4Jmdis"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pl-64 pt-4 pb-20 bg-background min-h-screen">
+<div class="max-w-[1200px] mx-auto px-10 py-8">
+<!-- Breadcrumbs & Header -->
+<div class="mb-10">
+<div class="flex items-center gap-2 text-label-sm text-outline mb-2">
+<span>Applications</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-on-surface">Dr. Sarah Jenkins Review</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-1">Application Review</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Reviewing credentials for Child &amp; Adolescent Specialization</p>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full text-label-sm">Application ID: #ATH-8821</span>
+<span class="px-3 py-1 bg-accent-teal-light text-on-secondary-container rounded-full text-label-sm">Pending Verification</span>
+</div>
+</div>
+</div>
+<!-- Bento Layout Content -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Left Column: Documents -->
+<div class="col-span-12 lg:col-span-8 space-y-6">
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">folder_shared</span>
+                                Required Documentation
+                            </h3>
+<span class="text-label-sm text-outline">2 Documents Uploaded</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- License Card -->
+<div class="p-4 border border-outline-variant rounded-lg doc-card-hover group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-soothing flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">description</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Medical License</p>
+<p class="text-[12px] text-outline">license_v4_Jenkins.pdf</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">visibility</span>
+</button>
+</div>
+<div class="w-full h-40 bg-surface-soothing rounded overflow-hidden mb-4 relative">
+<img class="w-full h-full object-cover opacity-60" data-alt="A realistic digital scan of a professional medical license document. The paper has official seals, faint watermarks of a caduceus, and neatly typed serif text. The document is shown at an angle, resting on a clean white surface with soft blue ambient shadows, conveying authenticity and professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNoOOtx6Sei57mLTpl7qX3wdvcM-hQ4V-Ll4UXaeeI4UeyPh3UAo-zDXpVaVMH9W5lsyrXecYn0FHUPUNgRme5Mhqh5lBz4e799jgSdHqmQFzPrU19e_nQiOA055263d6zck6VbxBCrUtxkvMWKDaSJrDg-Y_XNCa52vPR0qq2LqE91x0Rapb3dRjJk5OklNV87op3iZEhO5Qkemsi9Dm0d4SyeJuneGn5c53L9It_g2fb8M6qJYIurNy-CxksWBGsmpe63wV8N2s"/>
+<div class="absolute inset-0 flex items-center justify-center bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-white px-4 py-2 rounded shadow-sm text-label-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">zoom_in</span> Preview
+                                        </button>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 bg-success-calm/10 text-success-calm rounded text-label-sm font-semibold hover:bg-success-calm/20 transition-colors">Approve</button>
+<button class="flex-1 py-2 bg-error/10 text-error rounded text-label-sm font-semibold hover:bg-error/20 transition-colors">Request Revision</button>
+</div>
+</div>
+<!-- ID Card -->
+<div class="p-4 border border-outline-variant rounded-lg doc-card-hover group">
+<div class="flex justify-between items-start mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-soothing flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">badge</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Identity Proof</p>
+<p class="text-[12px] text-outline">gov_id_ Jenkins_front.jpg</p>
+</div>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">visibility</span>
+</button>
+</div>
+<div class="w-full h-40 bg-surface-soothing rounded overflow-hidden mb-4 relative">
+<img class="w-full h-full object-cover opacity-60" data-alt="A high-resolution photograph of a standard government-issued identification card. The card features a clear portrait photo, holograms, and micro-text, laid out on a professional grey backdrop. The lighting is even and bright, highlighting security features without causing glare, following the clean and trustworthy brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJr5cuzBJ3B_QwLyLm8jrgnptsTple-InZmZVKMTrGPH3c-I3KNBCQPjjar9kNR1eRpF9eXhf3xHW_esdR09TVf296YvkqwYcPrzoSkSIQF4OZqSM35qgBruJxAziW3c3ds4UiLLDtN7ftZlw2bbjacFRScGnmKSk_6sYWljlgM8dDmG-Jwho2ZziIeg3qVdQWBJ7Zu9v4kL_xNg743NQaV-BTcpfBEVD0Z9-wz7Bc7_O8Bae2yHMOSO-i8OTalrGzz-NDU0Kp8_o"/>
+<div class="absolute inset-0 flex items-center justify-center bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-white px-4 py-2 rounded shadow-sm text-label-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">zoom_in</span> Preview
+                                        </button>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 py-2 bg-success-calm/10 text-success-calm rounded text-label-sm font-semibold hover:bg-success-calm/20 transition-colors">Approve</button>
+<button class="flex-1 py-2 bg-error/10 text-error rounded text-label-sm font-semibold hover:bg-error/20 transition-colors">Request Revision</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Background Check Section -->
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-weight="fill">verified</span>
+                                Background Check Status
+                            </h3>
+<span class="flex items-center gap-1.5 text-label-sm px-2 py-0.5 bg-surface-soothing text-primary rounded border border-primary/20"><span class="material-symbols-outlined text-[16px]">verified_user</span>Verified Provider: Checkr Inc.</span>
+</div>
+<div class="bg-surface-soothing p-6 rounded-lg">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6">
+<div class="flex items-center gap-5">
+<div class="w-16 h-16 rounded-full bg-white flex items-center justify-center border-4 border-success-calm">
+<span class="material-symbols-outlined text-[32px] text-success-calm">done_all</span>
+</div>
+<div>
+<p class="font-headline-md text-headline-md text-success-calm">Passed</p>
+<p class="text-label-sm text-on-surface-variant">Completed Oct 24, 2023 at 14:30 EAT</p>
+</div>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-md hover:bg-tertiary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined">download</span>
+            Download Full Report
+        </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
+<div class="flex items-center gap-2 p-3 bg-white rounded-lg border border-success-calm/20">
+<span class="material-symbols-outlined text-success-calm text-[20px]">check_circle</span>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-outline font-bold">Identity</span>
+<span class="text-label-sm font-semibold text-on-surface">PASSED</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-3 bg-white rounded-lg border border-success-calm/20">
+<span class="material-symbols-outlined text-success-calm text-[20px]">check_circle</span>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-outline font-bold">Criminal Records</span>
+<span class="text-label-sm font-semibold text-on-surface">CLEAR</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-3 bg-white rounded-lg border border-success-calm/20">
+<span class="material-symbols-outlined text-success-calm text-[20px]">check_circle</span>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-outline font-bold">Global Watchlist</span>
+<span class="text-label-sm font-semibold text-on-surface">CLEAR</span>
+</div>
+</div>
+<div class="flex items-center gap-2 p-3 bg-white rounded-lg border border-success-calm/20">
+<span class="material-symbols-outlined text-success-calm text-[20px]">check_circle</span>
+<div class="flex flex-col">
+<span class="text-[10px] uppercase tracking-wider text-outline font-bold">Professional License</span>
+<span class="text-label-sm font-semibold text-on-surface">VALIDATED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Alternative State Mockups (Hidden Logic) -->
+<div class="hidden mt-4 flex gap-4">
+<div class="flex-1 p-4 border border-outline-variant rounded-lg opacity-40">Pending</div>
+<div class="flex-1 p-4 border border-error rounded-lg bg-error/5 opacity-40">Failed</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Notes & Summary -->
+<div class="col-span-12 lg:col-span-4 space-y-6">
+<!-- Applicant Profile Mini -->
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm">
+<div class="flex flex-col items-center text-center">
+<div class="w-24 h-24 rounded-full border-4 border-accent-teal-light mb-4 p-1">
+<div class="w-full h-full rounded-full overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of Dr. Sarah Jenkins, a therapist in her late 30s. She has a gentle, empathetic expression and is wearing a smart casual teal blazer. The background is a brightly lit, minimalist office with subtle indoor plants, maintaining a calm and trustworthy atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIXZa6QVfoBkb5x2U5ZU3VK9MP7Hcjf8k4nn6y6AeJiKSZMvmtYhy5ZYu86kRpB3Fd2c0xPTGMuxe9-ES4zT9wLxMCHj0Z4pIMuf7U_iNnsue8yCw9tRjTtVoDB3fC39VpaawVYxeJfxucDB8dbOYM4ZNOVEWVSg0pGAWzYLzBGBlXIXci93_TGZzPQf6JivhEaf5_xE9NAZ_iS_970fKV6IFtXpZpHwoKVjmKmmUmTDO5z0TsoNP8OJX6MmHa4StkhmIjVU0lpcE"/>
+</div>
+</div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Dr. Sarah Jenkins</h4>
+<p class="text-label-md text-on-surface-variant mb-4">Child Psychologist • 8+ Years exp.</p>
+<div class="w-full space-y-3 pt-4 border-t border-outline-variant/30 text-left">
+<div class="flex justify-between items-center">
+<span class="text-label-sm text-outline">Email:</span>
+<span class="text-label-sm text-on-surface">s.jenkins@clinic.com</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-label-sm text-outline">Location:</span>
+<span class="text-label-sm text-on-surface">Nairobi, KE</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-label-sm text-outline">Language:</span>
+<span class="text-label-sm text-on-surface">English, Swahili</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Internal Notes -->
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 shadow-sm h-fit">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider mb-4">Internal Admin Notes</h3><div class="mb-6"><label class="block text-[11px] font-bold text-outline uppercase tracking-wider mb-1.5">Review Status</label><div class="relative"><select class="w-full p-2.5 bg-surface-soothing border border-outline-variant rounded-lg text-label-sm focus:ring-primary focus:border-primary appearance-none cursor-pointer"><option>Pending Review</option><option>Requires Clarification</option><option selected="">Recommended for Approval</option><option>Not Recommended</option></select><span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span></div></div>
+<div class="space-y-4 mb-6 max-h-64 overflow-y-auto custom-scrollbar pr-2">
+<div class="p-3 bg-surface-soothing rounded border-l-4 border-primary">
+<p class="text-label-sm text-on-surface mb-1">Checked license against registry—everything looks valid. Suggesting approval for youth counseling tier.</p>
+<div class="flex justify-between items-center opacity-60"><div class="flex flex-col gap-0.5"><span class="text-[11px] font-bold">Admin: James W.</span><span class="text-[10px] px-1.5 py-0.5 bg-primary/5 text-primary rounded w-fit">Lead Clinical Reviewer</span></div><span class="text-[11px]">2 hours ago</span></div>
+</div>
+<div class="p-3 bg-surface-soothing rounded">
+<p class="text-label-sm text-on-surface mb-1">Applicant mentioned specialized training in trauma during the interview phase.</p>
+<div class="flex justify-between items-center opacity-60"><div class="flex flex-col gap-0.5"><span class="text-[11px] font-bold">Admin: Rita M.</span><span class="text-[10px] px-1.5 py-0.5 bg-secondary/5 text-secondary rounded w-fit">Compliance Officer</span></div><span class="text-[11px]">Yesterday</span></div>
+</div>
+</div>
+<div class="space-y-3 border-t border-outline-variant/30 pt-4"><div class="flex items-center justify-between mb-1"><label class="text-label-sm font-semibold text-on-surface">Add Interview Feedback</label><div class="flex items-center gap-2"><span class="text-[11px] text-outline">Mark as Critical</span><button class="w-8 h-4 bg-outline-variant rounded-full relative transition-colors hover:bg-error/40"><div class="absolute left-0.5 top-0.5 w-3 h-3 bg-white rounded-full shadow-sm"></div></button></div></div><div class="relative"><textarea class="w-full p-3 bg-surface-soothing border border-outline-variant rounded-lg text-label-sm focus:ring-primary focus:border-primary min-h-[120px] resize-none" placeholder="Enter detailed feedback from the interview..."></textarea><div class="absolute bottom-2 right-3 text-[10px] text-outline">0 / 500</div></div><div class="flex gap-2"><button class="flex-1 flex items-center justify-center gap-2 py-2 bg-primary text-on-primary rounded-lg font-label-sm transition-all active:scale-95"><span class="material-symbols-outlined text-[18px]">send</span> Post Note</button><button class="flex-1 flex items-center justify-center gap-2 py-2 border border-primary text-primary rounded-lg font-label-sm hover:bg-primary/5 transition-colors"><span class="material-symbols-outlined text-[18px]">event_repeat</span> Follow-up</button></div></div>
+</section>
+</div>
+</div>
+</div>
+<!-- Sticky Footer Actions -->
+<div class="fixed bottom-0 right-0 left-64 bg-surface-bright/80 backdrop-blur-md border-t border-outline-variant/30 py-4 px-10 flex justify-between items-center z-50">
+<div class="flex items-center gap-4">
+<button class="flex items-center gap-2 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors font-label-md">
+<span class="material-symbols-outlined">arrow_back</span>
+                    Back to List
+                </button>
+<span class="h-6 w-px bg-outline-variant/50"></span>
+<p class="text-label-sm text-on-surface-variant">Last saved: 12 minutes ago</p>
+</div>
+<div class="flex items-center gap-4">
+<button class="px-6 py-2.5 border border-error text-error font-label-md rounded-lg hover:bg-error/5 transition-colors">
+                    Reject Application
+                </button>
+<button class="px-8 py-2.5 bg-primary text-on-primary font-label-md rounded-lg shadow-lg shadow-primary/20 hover:bg-tertiary-container transition-all active:scale-95">
+                    Final Approval &amp; Grant System Access
+                </button>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions for document status buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.innerText === 'Approve' || this.innerText === 'Request Revision') {
+                    const originalColor = this.style.backgroundColor;
+                    this.style.opacity = '0.7';
+                    setTimeout(() => {
+                        this.style.opacity = '1';
+                        // Visual feedback could go here
+                    }, 200);
+                }
+            });
+        });
+
+        // Simulating some atmospheric interactivity
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('section').forEach(section => {
+            section.classList.add('transition-all', 'duration-700', 'ease-out', 'opacity-0', 'translate-y-4');
+            observer.observe(section);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu | Patient Profile: Mercy Wanjiku</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-container": "#ffdad6",
+                    "primary-fixed": "#d5e3ff",
+                    "tertiary-fixed-dim": "#81d0f8",
+                    "surface": "#f8fafb",
+                    "outline-variant": "#c2c6d1",
+                    "on-primary-fixed": "#001c3b",
+                    "secondary-container": "#a5f2db",
+                    "on-secondary-fixed": "#002019",
+                    "tertiary-fixed": "#c1e8ff",
+                    "secondary": "#166a59",
+                    "on-surface": "#191c1d",
+                    "tertiary": "#003d52",
+                    "success-calm": "#2E8555",
+                    "on-secondary-fixed-variant": "#005142",
+                    "on-secondary-container": "#1f705f",
+                    "on-tertiary-fixed": "#001e2b",
+                    "on-surface-variant": "#424750",
+                    "inverse-on-surface": "#eff1f2",
+                    "on-secondary": "#ffffff",
+                    "surface-variant": "#e1e3e4",
+                    "accent-teal-light": "#E8F3F1",
+                    "tertiary-container": "#005571",
+                    "inverse-primary": "#a7c8ff",
+                    "on-primary-container": "#9cc2ff",
+                    "surface-container-high": "#e6e8e9",
+                    "text-rich-slate": "#1C1E21",
+                    "error": "#ba1a1a",
+                    "surface-bright": "#f8fafb",
+                    "primary-container": "#1b4f8c",
+                    "background": "#f8fafb",
+                    "secondary-fixed-dim": "#89d5c0",
+                    "surface-tint": "#305f9d",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-soothing": "#F0F4F8",
+                    "inverse-surface": "#2e3132",
+                    "on-primary-fixed-variant": "#0d4784",
+                    "on-primary": "#ffffff",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "secondary-fixed": "#a5f2db",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed-variant": "#004d67",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-error": "#ffffff",
+                    "outline": "#737781",
+                    "on-error-container": "#93000a",
+                    "surface-dim": "#d8dadb",
+                    "on-background": "#191c1d",
+                    "on-tertiary-container": "#7acaf2",
+                    "surface-container-low": "#f2f4f5",
+                    "surface-container": "#eceeef",
+                    "primary": "#00386d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "80px",
+                    "margin-desktop": "40px",
+                    "unit": "8px",
+                    "gutter": "24px",
+                    "container-max": "1200px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Manrope"],
+                    "headline-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .mood-chart-gradient {
+            background: linear-gradient(180deg, rgba(27, 79, 140, 0.1) 0%, rgba(27, 79, 140, 0) 100%);
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar (Shared Component) -->
+<aside class="hidden md:flex flex-col h-full py-unit px-4 gap-4 bg-surface-container-low border-r border-outline-variant w-64 shrink-0">
+<div class="flex flex-col gap-1 px-2 py-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Suluhu</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Mental Health Support</p>
+</div>
+<nav class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-primary font-bold bg-secondary-container/30 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">event_available</span>
+<span class="font-label-md text-label-md">Sessions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">library_books</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+</nav>
+<div class="flex flex-col gap-2 pt-4 border-t border-outline-variant">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-variant rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-grow overflow-y-auto hide-scrollbar">
+<!-- TopNavBar (Shared Component) -->
+<header class="sticky top-0 z-30 bg-surface/80 backdrop-blur-md flex justify-between items-center px-margin-desktop w-full h-16 border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Patient Profile: Mercy Wanjiku</h2>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:flex items-center gap-4">
+<span class="font-label-md text-label-md text-success-calm bg-secondary-container/20 px-3 py-1 rounded-full flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-success-calm animate-pulse"></span>
+                            Active Care Plan
+                        </span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female therapist in her 40s, wearing a neutral-toned blazer. She is smiling warmly in a bright, modern office with soft natural lighting and plants in the background. The aesthetic is clean, corporate, and trustworthy, with a soft oceanic blue accent." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvJrwF0tZ_4xN8mSjySTXoWrU_V5MvOwnQWy1g9uGquKtU1i_5aavngHyZiB9H7Di4410PWcQHGAtReg2kiznvLesMEJs-gYZvrjSooyuycnC9nknYzYxz3uBxcHYYFHaUInVThSLJkB9qmz9MYO42rABJUhZfaYX2vLoK7s5vvRwVrtFO3thyAsdbzAIxd8xdxD2x7qSuMaWuYqjzd2GkewT2wgZekhC51ylURCLzW0Un_IL2ZsfXc9rqP4MuepCbT21GQeuKJhg"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="p-margin-desktop max-w-container-max mx-auto space-y-gutter">
+<!-- Action Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-surface-soothing p-6 rounded-xl border border-outline-variant">
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 rounded-full border-2 border-primary overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A close-up portrait of Mercy Wanjiku, a Kenyan woman in her late 20s with a calm and thoughtful expression. She has natural hair styled neatly. The lighting is soft and warm, reflecting a serene atmosphere. The background is a blurred, tranquil home environment with soft teal tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSQdhri5U9vu_9iDHJIZJyrc9i7kwocWtmjor1-DweeWohGj_RY9HQTTaG6DMLHxZr_EE-w8mB5u13IrNZgMwsWz5rsmws71cPIxztyhyVFoSsITdUk30Guus-yq79UrLyTNSE31uMUaRXNjNOTipQaewJ7mZIX5eAltqxN_EGvPkkosGp8oGeS4w8i8DfvfEiFzwzEHQ278Z_LOKD6Jqrg1h37VMMiAjWMdIhwSq273VF_lxsJdmH_amAtvRm1aWJiPw3doGaGrY"/>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-text-rich-slate">Mercy Wanjiku</h3>
+<p class="text-on-surface-variant font-label-md">Last seen: 4 days ago • Case ID: #SL-78219</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-surface-container-lowest text-primary border border-primary px-6 py-2.5 rounded-lg font-label-md hover:bg-primary-fixed transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined">history</span>
+                            View Previous Notes
+                        </button>
+<button class="bg-primary-container text-on-primary px-6 py-2.5 rounded-lg font-label-md hover:opacity-90 transition-all flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                            Start Session
+                        </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Sidebar: Patient Info & Vitals -->
+<div class="lg:col-span-4 space-y-gutter">
+<!-- Patient Vitals Card -->
+<div class="bg-white p-6 rounded-xl border border-error/20 shadow-sm space-y-4 mb-gutter">
+<div class="flex items-center justify-between">
+<h4 class="font-label-md text-label-md text-error uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">report</span>
+      Clinical Alerts
+    </h4>
+<span class="text-label-sm text-on-surface-variant">2 Active</span>
+</div>
+<div class="space-y-3">
+<!-- High Urgency Alert -->
+<div class="flex items-center justify-between p-3 bg-error-container/10 border border-error/20 rounded-lg">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+<div>
+<p class="font-label-md text-error font-bold">Risk of Self-Harm</p>
+<p class="text-label-sm text-on-surface-variant">High Urgency • Active</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-error">priority_high</span>
+</div>
+<!-- Medium Urgency Alert -->
+<div class="flex items-center justify-between p-3 bg-surface-container-low border border-outline-variant/30 rounded-lg">
+<div class="flex items-center gap-3">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<div>
+<p class="font-label-md text-text-rich-slate font-bold">Recent High Anxiety</p>
+<p class="text-label-sm text-on-surface-variant">Medium Urgency • Reported 2h ago</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline">warning</span>
+</div>
+</div>
+</div><div class="bg-white p-6 rounded-xl border border-outline-variant space-y-6">
+<h4 class="font-label-md text-label-md text-primary uppercase tracking-wider">Patient Vitals</h4>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container-low rounded-lg border border-outline-variant/30">
+<span class="text-on-surface-variant font-label-sm block mb-1">Age</span>
+<span class="font-headline-md text-text-rich-slate">28</span>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg border border-outline-variant/30">
+<span class="text-on-surface-variant font-label-sm block mb-1">Gender</span>
+<span class="font-headline-md text-text-rich-slate">Female</span>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg border border-outline-variant/30">
+<span class="text-on-surface-variant font-label-sm block mb-1">Last Mood</span>
+<span class="flex items-center gap-1 font-headline-md text-success-calm">
+<span class="material-symbols-outlined">sentiment_satisfied</span>
+                                        7/10
+                                    </span>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg border border-outline-variant/30">
+<span class="text-on-surface-variant font-label-sm block mb-1">Risk Level</span>
+<span class="font-headline-md text-on-secondary-container">Low</span>
+</div>
+</div>
+<div class="space-y-4 pt-4 border-t border-outline-variant">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-outline">call</span>
+<div>
+<p class="font-label-sm text-on-surface-variant">Contact</p>
+<p class="text-body-md font-medium text-text-rich-slate">+254 700 000 000</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-outline">mail</span>
+<div>
+<p class="font-label-sm text-on-surface-variant">Email</p>
+<p class="text-body-md font-medium text-text-rich-slate">mercy.w@provider.com</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-outline">location_on</span>
+<div>
+<p class="font-label-sm text-on-surface-variant">Location</p>
+<p class="text-body-md font-medium text-text-rich-slate">Nairobi, Kenya</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Emergency Contacts -->
+<div class="bg-error-container/10 p-6 rounded-xl border border-error/20">
+<h4 class="font-label-md text-label-md text-error flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined">warning</span>
+                                Emergency Contact
+                            </h4>
+<p class="font-medium text-text-rich-slate">John Mwangi (Brother)</p>
+<p class="text-body-md text-on-surface-variant">+254 711 222 333</p>
+</div>
+</div>
+<!-- Main Content Area -->
+<div class="lg:col-span-8 space-y-gutter">
+<!-- Mood Trends Chart -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-end mb-8">
+<div>
+<h4 class="font-headline-md text-text-rich-slate">Mood Trends</h4>
+<p class="text-on-surface-variant text-label-md">Self-reported mood over last 30 days</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded text-label-sm bg-primary-container text-white">30D</button>
+<button class="px-3 py-1 rounded text-label-sm hover:bg-surface-container transition-colors">90D</button>
+</div>
+</div>
+<!-- Placeholder for actual chart logic (SVG Line) -->
+<div class="h-48 w-full relative">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 200">
+<defs>
+<lineargradient id="chartFill" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#1B4F8C" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="#1B4F8C" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,150 Q100,140 200,100 T400,120 T600,80 T800,40 T1000,60 V200 H0 Z" fill="url(#chartFill)"></path>
+<path d="M0,150 Q100,140 200,100 T400,120 T600,80 T800,40 T1000,60" fill="none" stroke="#1B4F8C" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+<div class="absolute bottom-0 left-0 right-0 flex justify-between pt-4 border-t border-outline-variant/30 text-label-sm text-on-surface-variant">
+<span>May 01</span>
+<span>May 10</span>
+<span>May 20</span>
+<span>Today</span>
+</div>
+</div>
+</div>
+<!-- Treatment Plan Card -->
+<div class="bg-white p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-headline-md text-text-rich-slate">Treatment Plan</h4>
+<button class="text-primary font-label-md flex items-center gap-1">
+<span class="material-symbols-outlined">edit</span> Update Plan
+                                </button>
+</div>
+<div class="space-y-6">
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<span class="font-label-md text-on-surface">Coping with Anxiety</span>
+<span class="text-label-sm font-bold text-primary">75%</span>
+</div>
+<div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-3/4 rounded-full transition-all duration-1000"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="p-4 bg-accent-teal-light rounded-lg border border-secondary/10">
+<h5 class="font-label-md text-secondary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">target</span>
+                                            Primary Goal
+                                        </h5>
+<p class="text-body-md text-on-secondary-container">Developing mindfulness triggers to manage panic attacks before they escalate.</p>
+</div>
+<div class="p-4 bg-tertiary-fixed/20 rounded-lg border border-tertiary/10">
+<h5 class="font-label-md text-tertiary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+                                            Modality
+                                        </h5>
+<p class="text-body-md text-on-tertiary-fixed-variant">Cognitive Behavioral Therapy (CBT) with Interpersonal Therapy focus.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Clinical Timeline -->
+<div class="space-y-6">
+<h4 class="font-headline-md text-text-rich-slate">Clinical Timeline</h4>
+<div class="relative border-l-2 border-outline-variant ml-4 space-y-8 pb-8">
+<!-- Timeline Item -->
+<div class="relative pl-8">
+<div class="absolute -left-[11px] top-1 w-5 h-5 bg-primary-container rounded-full border-4 border-surface ring-4 ring-primary/5"></div>
+<div class="bg-white p-5 rounded-xl border border-outline-variant shadow-sm hover:border-primary/40 transition-colors">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h5 class="font-label-md text-text-rich-slate">CBT Session: Emotional Regulation</h5>
+<p class="text-label-sm text-on-surface-variant">May 24, 2024 • 50 mins • Virtual</p>
+</div>
+<span class="bg-surface-container-high px-3 py-1 rounded-full text-label-sm text-on-surface-variant">Complete</span>
+</div>
+<p class="text-body-md text-on-surface-variant line-clamp-2">Patient reported significant progress in identifying early physical symptoms of anxiety. We practiced the 5-4-3-2-1 grounding technique...</p>
+<button class="mt-4 text-primary font-label-md hover:underline">Read Full Clinical Note</button>
+</div>
+</div>
+<!-- Timeline Item -->
+<div class="relative pl-8">
+<div class="absolute -left-[11px] top-1 w-5 h-5 bg-outline-variant rounded-full border-4 border-surface"></div>
+<div class="bg-white p-5 rounded-xl border border-outline-variant shadow-sm hover:border-primary/40 transition-colors opacity-80">
+<div class="flex justify-between items-start mb-3">
+<div>
+<h5 class="font-label-md text-text-rich-slate">Initial Intake Assessment</h5>
+<p class="text-label-sm text-on-surface-variant">May 10, 2024 • 90 mins • In-person</p>
+</div>
+<span class="bg-surface-container-high px-3 py-1 rounded-full text-label-sm text-on-surface-variant">Complete</span>
+</div>
+<p class="text-body-md text-on-surface-variant line-clamp-2">Comprehensive assessment of family history, current stressors, and symptom mapping. GAD-7 score: 14 (Moderate)...</p>
+<button class="mt-4 text-primary font-label-md hover:underline">Read Full Clinical Note</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer (Shared Component) -->
+<footer class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-gutter w-full mt-section-gap bg-surface-container-high">
+<div class="flex flex-col md:flex-row items-center gap-6">
+<p class="font-label-md text-label-md font-bold text-primary">Suluhu Kenya</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Suluhu Kenya. Professional Mental Health Solutions.</p>
+</div>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Legal</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-primary font-bold" href="tel:+254722178177">Befrienders Kenya Hotline: +254 722 178 177</a>
+</div>
+</footer>
+</main>
+</div>
+<!-- Micro-interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animate progress bars on load
+            const progressBars = document.querySelectorAll('.bg-secondary');
+            progressBars.forEach(bar => {
+                const targetWidth = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 300);
+            });
+
+            // Hover effects for clinical notes
+            const timelineItems = document.querySelectorAll('.relative.pl-8');
+            timelineItems.forEach(item => {
+                item.addEventListener('mouseenter', () => {
+                    const dot = item.querySelector('.absolute');
+                    dot.style.transform = 'scale(1.2)';
+                    dot.style.transition = 'transform 0.2s ease';
+                });
+                item.addEventListener('mouseleave', () => {
+                    const dot = item.querySelector('.absolute');
+                    dot.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body></html>

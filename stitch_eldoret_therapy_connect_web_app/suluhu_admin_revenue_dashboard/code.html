@@ -1,0 +1,537 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Suluhu Therapy Center - Admin Revenue Dashboard</title>
+<!-- Google Fonts: Manrope for headlines, Inter for body -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "accent-teal-light": "#E8F3F1",
+                    "surface-dim": "#d8dadb",
+                    "secondary-container": "#a5f2db",
+                    "primary-container": "#1b4f8c",
+                    "tertiary-fixed-dim": "#81d0f8",
+                    "inverse-on-surface": "#eff1f2",
+                    "on-tertiary-container": "#7acaf2",
+                    "on-primary-container": "#9cc2ff",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#001c3b",
+                    "primary": "#00386d",
+                    "tertiary": "#003d52",
+                    "outline-variant": "#c2c6d1",
+                    "on-tertiary-fixed": "#001e2b",
+                    "surface-bright": "#f8fafb",
+                    "inverse-surface": "#2e3132",
+                    "tertiary-fixed": "#c1e8ff",
+                    "surface-soothing": "#F0F4F8",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#191c1d",
+                    "on-secondary-fixed": "#002019",
+                    "success-calm": "#2E8555",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-fixed-variant": "#0d4784",
+                    "tertiary-container": "#005571",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-error-container": "#93000a",
+                    "surface-tint": "#305f9d",
+                    "on-surface-variant": "#424750",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "on-tertiary-fixed-variant": "#004d67",
+                    "secondary": "#166a59",
+                    "surface-container-high": "#e6e8e9",
+                    "background": "#f8fafb",
+                    "text-rich-slate": "#1C1E21",
+                    "surface": "#f8fafb",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed-dim": "#89d5c0",
+                    "surface-variant": "#e1e3e4",
+                    "on-background": "#191c1d",
+                    "surface-container-low": "#f2f4f5",
+                    "surface-container": "#eceeef",
+                    "inverse-primary": "#a7c8ff",
+                    "secondary-fixed": "#a5f2db",
+                    "on-error": "#ffffff",
+                    "on-secondary-container": "#1f705f",
+                    "primary-fixed": "#d5e3ff",
+                    "outline": "#737781",
+                    "on-secondary-fixed-variant": "#005142"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "container-max": "1200px",
+                    "section-gap": "80px",
+                    "gutter": "24px",
+                    "margin-desktop": "40px",
+                    "unit": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "display-lg": ["Manrope"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Manrope"],
+                    "headline-lg-mobile": ["Manrope"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #f8fafb;
+            color: #191c1d;
+            font-family: 'Inter', sans-serif;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid #e2e8f0;
+        }
+        .table-row-hover:hover {
+            background-color: #f0f4f8;
+            transition: background-color 0.2s ease;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- SideNavBar (from JSON Command) -->
+<aside class="flex flex-col h-screen fixed left-0 top-0 py-gutter px-4 z-40 bg-surface-container-low border-r border-outline-variant w-64">
+<div class="mb-8 px-2">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">spa</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Suluhu Center</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Secure Portal</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Financial Overview - ACTIVE -->
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-bold rounded-lg translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Financial Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-accent-teal-light transition-all rounded-lg" href="#revenue-trends">
+<span class="material-symbols-outlined">trending_up</span>
+<span class="font-label-md text-label-md">Revenue Trends</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-accent-teal-light transition-all rounded-lg" href="#payment-methods">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Payment Methods</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-accent-teal-light transition-all rounded-lg" href="#therapist-payouts">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Therapist Payouts</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary hover:bg-accent-teal-light transition-all rounded-lg" href="#audit-logs">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md text-label-md">Audit Logs</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-outline-variant space-y-1">
+<button class="w-full mb-4 py-2 px-4 bg-primary text-white font-label-md rounded-lg hover:opacity-90 transition-opacity">
+                Export Reports
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-primary transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-error transition-all rounded-lg" href="{{DATA:SCREEN:SCREEN_7}}">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-md text-label-md">Client View</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar (from JSON Command) -->
+<header class="flex justify-between items-center w-full px-margin-desktop h-16 sticky top-0 z-50 bg-surface-bright border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Suluhu Therapy Center</h1>
+<div class="hidden md:flex bg-surface-container-low px-4 py-1.5 rounded-full border border-outline-variant items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-label-md w-48" placeholder="Search transactions..." type="text">
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface-bright"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="flex items-center gap-3 pl-6 border-l border-outline-variant">
+<div class="text-right">
+<p class="font-label-md text-label-md font-bold">Admin Console</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Kenya Region</p>
+</div>
+<img class="w-10 h-10 rounded-full border border-primary-fixed bg-surface-dim object-cover" data-alt="A professional headshot of a female African administrator with a warm, confident expression, wearing professional corporate attire in deep blue. The lighting is soft and high-key, creating a clean, trustworthy professional atmosphere consistent with a modern healthcare center aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAP5DU5Nsfudxecd49h48dnhGweZE9cBcHthwo-4ZonejoQTjqja755bSjyf76qTB-9yFg3GLsxeK_mWsq9DuOReFyfNC0WMvmAuBy0D7sWX0LIjW7zrjabnJZMxiZxv9NfB3VMao86LAvDDkI7ZzRqG5pv_SJJ9miPkM203jMS35tbb80hDdks-k7fzlw6vw0PgTF1fAgpoarL4Bs0IGaiAifo7n4pAoJBRDZBXfvunV-GhkIVGslU1FZZxPIQKUJYc7_ggQfb34I">
+</div>
+</div>
+</header>
+<!-- Dashboard Body -->
+<div class="p-margin-desktop space-y-gutter max-w-container-max mx-auto">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Financial Overview</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Real-time revenue monitoring and therapist payout orchestration.</p>
+</div>
+<div class="flex items-center gap-3 bg-surface-container p-1 rounded-lg">
+<button class="px-4 py-1.5 font-label-md text-label-md rounded bg-surface-bright shadow-sm text-primary">Daily</button>
+<button class="px-4 py-1.5 font-label-md text-label-md text-on-surface-variant hover:bg-surface-bright/50 transition-all">Weekly</button>
+<button class="px-4 py-1.5 font-label-md text-label-md text-on-surface-variant hover:bg-surface-bright/50 transition-all">Monthly</button>
+</div>
+</div>
+<!-- Bento Stats Grid -->
+<div class="bento-grid">
+<!-- Main Stat Card -->
+<div class="col-span-12 md:col-span-4 p-gutter rounded-xl bg-white border border-outline-variant flex flex-col justify-between h-48 hover:shadow-lg transition-shadow" style="opacity: 1; transform: translateY(0px); transition: 0.5s ease-out;">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Gross Revenue</span>
+<span class="material-symbols-outlined text-success-calm">trending_up</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg mt-4 text-text-rich-slate">KES 1,240,500</h3>
+</div>
+<div class="flex items-center gap-2 text-success-calm bg-accent-teal-light px-3 py-1 rounded-full w-fit">
+<span class="font-label-sm text-label-sm font-bold">+12.5% from last month</span>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 p-gutter rounded-xl bg-white border border-outline-variant flex flex-col justify-between h-48 hover:shadow-lg transition-shadow" style="opacity: 1; transform: translateY(0px); transition: 0.5s ease-out;">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Net Profit (30% Split)</span>
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg mt-4 text-text-rich-slate">KES 372,150</h3>
+</div>
+<div class="flex items-center gap-2 text-primary bg-primary-fixed px-3 py-1 rounded-full w-fit">
+<span class="font-label-sm text-label-sm font-bold">Processed securely</span>
+</div>
+</div>
+<div class="col-span-12 md:col-span-4 p-gutter rounded-xl bg-white border border-outline-variant flex flex-col justify-between h-48 hover:shadow-lg transition-shadow" style="opacity: 1; transform: translateY(0px); transition: 0.5s ease-out;">
+<div>
+<div class="flex justify-between items-start">
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Pending Payouts</span>
+<span class="material-symbols-outlined text-error">hourglass_empty</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg mt-4 text-text-rich-slate">KES 184,200</h3>
+</div>
+<div class="flex items-center gap-2 text-error bg-error-container px-3 py-1 rounded-full w-fit">
+<span class="font-label-sm text-label-sm font-bold">14 Transfers Ready</span>
+</div>
+</div>
+<!-- Revenue by Channel Asymmetric Card -->
+<div class="col-span-12 md:col-span-5 p-gutter rounded-xl glass-card" style="opacity: 1; transform: translateY(0px); transition: 0.5s ease-out;">
+<h4 class="font-headline-md text-headline-md text-primary mb-6">Revenue by Channel</h4>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-md text-label-md flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-success-calm"></span> M-Pesa (B2C/C2B)
+                                </span>
+<span class="font-label-md text-label-md font-bold">78%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-success-calm h-full" style="width: 78%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-md text-label-md flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span> Credit/Debit Cards
+                                </span>
+<span class="font-label-md text-label-md font-bold">15%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 15%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-md text-label-md flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-tertiary"></span> Airtel Money
+                                </span>
+<span class="font-label-md text-label-md font-bold">7%</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full" style="width: 7%"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-surface-soothing rounded-lg border border-outline-variant/30">
+<p class="font-label-sm text-label-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] align-text-top mr-1">info</span>
+                            M-Pesa remains the primary payment rail for Suluhu clients in the East African region.
+                        </p>
+</div>
+</div>
+<!-- Recent Transactions Table -->
+<div class="col-span-12 md:col-span-7 p-gutter rounded-xl bg-white border border-outline-variant" style="opacity: 1; transform: translateY(0px); transition: 0.5s ease-out;">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-headline-md text-headline-md text-primary">Recent Transactions</h4>
+<button class="text-primary font-label-md hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="border-b border-outline-variant">
+<th class="pb-4 font-label-md text-on-surface-variant">Date</th>
+<th class="pb-4 font-label-md text-on-surface-variant">Patient</th>
+<th class="pb-4 font-label-md text-on-surface-variant">Amount</th>
+<th class="pb-4 font-label-md text-on-surface-variant">Method</th>
+<th class="pb-4 font-label-md text-on-surface-variant">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/50">
+<tr class="table-row-hover">
+<td class="py-4 font-body-md text-body-md">Oct 24, 14:20</td>
+<td class="py-4 font-body-md text-body-md">Sarah Wambui</td>
+<td class="py-4 font-body-md text-body-md font-bold">KES 3,500</td>
+<td class="py-4 font-body-md text-body-md">M-Pesa</td>
+<td class="py-4">
+<span class="px-2 py-1 bg-accent-teal-light text-success-calm rounded font-label-sm text-label-sm font-bold uppercase">Success</span>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td class="py-4 font-body-md text-body-md">Oct 24, 13:45</td>
+<td class="py-4 font-body-md text-body-md">John Doe</td>
+<td class="py-4 font-body-md text-body-md font-bold">KES 5,000</td>
+<td class="py-4 font-body-md text-body-md">Card</td>
+<td class="py-4">
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant rounded font-label-sm text-label-sm font-bold uppercase">Pending</span>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td class="py-4 font-body-md text-body-md">Oct 24, 12:10</td>
+<td class="py-4 font-body-md text-body-md">Mercy Kibaki</td>
+<td class="py-4 font-body-md text-body-md font-bold">KES 3,500</td>
+<td class="py-4 font-body-md text-body-md">M-Pesa</td>
+<td class="py-4">
+<span class="px-2 py-1 bg-accent-teal-light text-success-calm rounded font-label-sm text-label-sm font-bold uppercase">Success</span>
+</td>
+</tr>
+<tr class="table-row-hover">
+<td class="py-4 font-body-md text-body-md">Oct 24, 11:30</td>
+<td class="py-4 font-body-md text-body-md">David Kamau</td>
+<td class="py-4 font-body-md text-body-md font-bold">KES 7,500</td>
+<td class="py-4 font-body-md text-body-md">Airtel</td>
+<td class="py-4">
+<span class="px-2 py-1 bg-accent-teal-light text-success-calm rounded font-label-sm text-label-sm font-bold uppercase">Success</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Therapist Payout Management Section -->
+<div class="col-span-12 p-gutter rounded-xl bg-white border border-outline-variant" style="opacity: 1; transform: translateY(0px); transition: 0.5s ease-out;">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h4 class="font-headline-md text-headline-md text-primary">Therapist Payout Management</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Automated M-Pesa B2C disbursement for therapy partners.</p>
+</div>
+<button class="flex items-center gap-2 bg-success-calm text-white px-6 py-2 rounded-lg font-label-md hover:shadow-lg transition-all">
+<span class="material-symbols-outlined">send_money</span>
+                            Bulk Disburse
+                        </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Therapist Payout Card 1 -->
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-bright flex flex-col justify-between">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<h5 class="font-label-md text-label-md font-bold">Dr. Amina Juma</h5>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Clinical Psychologist</p>
+</div>
+</div>
+<div class="space-y-2 mb-6">
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">Total Earnings:</span>
+<span class="font-bold">KES 84,000</span>
+</div>
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">Suluhu Split (30%):</span>
+<span class="text-error font-medium">- KES 25,200</span>
+</div>
+<div class="pt-2 border-t border-outline-variant flex justify-between text-body-md font-bold text-primary">
+<span class="">Net Payout:</span>
+<span class="">KES 58,800</span>
+</div>
+</div>
+<button class="w-full py-2 bg-primary-container text-on-primary-container font-label-md rounded-lg hover:bg-primary transition-all hover:text-white">
+                                Disburse via M-Pesa
+                            </button>
+</div>
+<!-- Therapist Payout Card 2 -->
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-bright flex flex-col justify-between">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<h5 class="font-label-md text-label-md font-bold">Dr. Brian Kipruto</h5>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Family Counselor</p>
+</div>
+</div>
+<div class="space-y-2 mb-6">
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">Total Earnings:</span>
+<span class="font-bold">KES 62,500</span>
+</div>
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">Suluhu Split (20%):</span>
+<span class="text-error font-medium">- KES 12,500</span>
+</div>
+<div class="pt-2 border-t border-outline-variant flex justify-between text-body-md font-bold text-primary">
+<span class="">Net Payout:</span>
+<span class="">KES 50,000</span>
+</div>
+</div>
+<button class="w-full py-2 bg-primary-container text-on-primary-container font-label-md rounded-lg hover:bg-primary transition-all hover:text-white">
+                                Disburse via M-Pesa
+                            </button>
+</div>
+<!-- Therapist Payout Card 3 -->
+<div class="p-6 rounded-xl border border-outline-variant bg-surface-bright flex flex-col justify-between">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<h5 class="font-label-md text-label-md font-bold">Lucy Otieno</h5>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Youth Specialist</p>
+</div>
+</div>
+<div class="space-y-2 mb-6">
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">Total Earnings:</span>
+<span class="font-bold">KES 45,000</span>
+</div>
+<div class="flex justify-between text-label-md">
+<span class="text-on-surface-variant">Suluhu Split (30%):</span>
+<span class="text-error font-medium">- KES 13,500</span>
+</div>
+<div class="pt-2 border-t border-outline-variant flex justify-between text-body-md font-bold text-primary">
+<span class="">Net Payout:</span>
+<span class="">KES 31,500</span>
+</div>
+</div>
+<div class="flex items-center justify-center gap-2 py-2 px-4 bg-accent-teal-light text-success-calm rounded-lg font-label-md">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+                                Paid Oct 24
+                            </div>
+</div>
+</div>
+</div>
+<!-- Compliance & Audit Status -->
+<div class="col-span-12 flex items-center justify-between p-6 bg-surface-soothing rounded-xl border border-outline-variant" style="opacity: 1; transform: translateY(0px); transition: 0.5s ease-out;">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">gavel</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-primary">Compliance &amp; Data Protection</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Data handled according to Kenya Data Protection Act (2019). High-grade TLS encryption active.</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Last Audit</p>
+<p class="font-label-md text-label-md font-bold">24 Oct, 2023</p>
+</div>
+<div class="h-10 w-px bg-outline-variant"></div>
+<div class="text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant">System Status</p>
+<div class="flex items-center gap-1 text-success-calm font-bold font-label-md">
+<span class="w-2 h-2 rounded-full bg-success-calm animate-pulse"></span>
+                                Healthy
+                            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Spacing -->
+<div class="h-20"></div>
+</div>
+</main>
+<!-- Custom Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.bento-grid > div');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // Ripple effect on buttons
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    let x = e.clientX - e.target.offsetLeft;
+                    let y = e.clientY - e.target.offsetTop;
+                    let ripple = document.createElement('span');
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    // ripple styling omitted for brevity, handled by tailwind transition mostly
+                });
+            });
+        });
+    </script>
+
+
+</body></html>

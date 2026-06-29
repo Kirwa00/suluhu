@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Select Time Slot - Suluhu Therapy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#424750",
+                        "primary": "#00386d",
+                        "outline-variant": "#c2c6d1",
+                        "background": "#f8fafb",
+                        "on-primary-fixed": "#001c3b",
+                        "surface-container-high": "#e6e8e9",
+                        "outline": "#737781",
+                        "secondary-fixed": "#a5f2db",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eff1f2",
+                        "surface-container-low": "#f2f4f5",
+                        "surface": "#f8fafb",
+                        "accent-teal-light": "#E8F3F1",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#89d5c0",
+                        "tertiary-fixed": "#c1e8ff",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary": "#166a59",
+                        "primary-container": "#1b4f8c",
+                        "on-secondary-container": "#1f705f",
+                        "on-tertiary-fixed": "#001e2b",
+                        "on-background": "#191c1d",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-dim": "#d8dadb",
+                        "on-primary-fixed-variant": "#0d4784",
+                        "primary-fixed": "#d5e3ff",
+                        "on-secondary-fixed-variant": "#005142",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-fixed-dim": "#81d0f8",
+                        "surface-container": "#eceeef",
+                        "secondary-container": "#a5f2db",
+                        "on-secondary-fixed": "#002019",
+                        "on-tertiary-fixed-variant": "#004d67",
+                        "surface-soothing": "#F0F4F8",
+                        "tertiary-container": "#005571",
+                        "on-surface": "#191c1d",
+                        "on-tertiary-container": "#7acaf2",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#9cc2ff",
+                        "success-calm": "#2E8555",
+                        "surface-variant": "#e1e3e4",
+                        "surface-tint": "#305f9d",
+                        "tertiary": "#003d52",
+                        "inverse-primary": "#a7c8ff",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#f8fafb",
+                        "error-container": "#ffdad6",
+                        "text-rich-slate": "#1C1E21",
+                        "error": "#ba1a1a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "container-max": "1200px",
+                        "margin-desktop": "40px",
+                        "section-gap": "80px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "display-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .slot-pill:hover {
+            border-color: #1B4F8C;
+        }
+        .slot-pill.selected {
+            background-color: #00386d;
+            color: white;
+            border-color: #00386d;
+        }
+        .date-cell.selected {
+            background-color: #00386d;
+            color: white;
+        }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface-container-lowest shadow-[0_4px_24px_rgba(0,56,109,0.05)] flex justify-between items-center w-full px-margin-desktop py-4 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-primary transition-transform active:scale-95">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Suluhu Therapy</h1>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6">
+<a class="text-on-surface-variant font-medium hover:bg-surface-container-low transition-colors duration-200 px-3 py-1 rounded" href="#">Dashboard</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Sessions</a>
+<a class="text-on-surface-variant font-medium hover:bg-surface-container-low transition-colors duration-200 px-3 py-1 rounded" href="#">Resources</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary cursor-pointer hover:bg-surface-container-low p-2 rounded-full transition-colors">notifications</span>
+<span class="material-symbols-outlined text-primary cursor-pointer hover:bg-surface-container-low p-2 rounded-full transition-colors">help</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional and friendly portrait of a young adult therapy seeker with a calm expression, wearing a neutral-toned organic cotton shirt. The background is a soft, blurred domestic interior with warm, natural lighting, reflecting a safe and stable environment consistent with the Suluhu brand's professional and grounded aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD8T-vNvIPWort5FBNrRig5C8CrwefdTrDwfyRDlQdKw2vOq78D23y__blKY0xLTg16IkgwJ2A5pbjycpGICEecw5v7TevFAE-OArjky-mAUvrI9R9e-11rVXR0tgRAdkOtXlKgNGCZiaQjkFtkkzIrAqO2DaFr_unDSzWQgO-dk_Y-gbK3PUaIwOqr7KOQd5hU-AV3YXNcoM2SKPjsfTzrTdrhsP5ENu8NIXGf7n9Zyo05UwKm4BQ1qbzXOW2hJmx_YB_rztaW2M"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1200px] mx-auto px-margin-mobile md:px-margin-desktop py-10">
+<!-- Progress Steps -->
+<div class="flex items-center justify-center mb-10 gap-2 md:gap-4">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-success-calm text-white flex items-center justify-center font-bold text-label-md">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="text-label-md text-success-calm font-semibold hidden md:inline">Profile</span>
+</div>
+<div class="h-px w-8 md:w-16 bg-outline-variant"></div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-label-md">2</div>
+<span class="text-label-md text-primary font-bold">Schedule</span>
+</div>
+<div class="h-px w-8 md:w-16 bg-outline-variant"></div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-label-md">3</div>
+<span class="text-label-md text-on-surface-variant font-medium hidden md:inline">Payment</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Left Column: Therapist Summary & Selection -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Therapist Card -->
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant flex flex-col md:flex-row gap-6 items-center md:items-start">
+<div class="w-24 h-24 md:w-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of Dr. Amara Okoro, a Clinical Psychologist of African descent. She has a warm, confident, and empathetic smile, wearing professional business casual attire in deep blue. The lighting is soft and flattering against a neutral, high-key studio background, conveying trust, expertise, and psychological safety." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJJ8M1PYLtrKxDcR5z6fTXiepWF3zcxZWtFiIkQzbgCQKmxEf2Ozcxtk0NRxLfFotO96jhVY4d8FtZ5OYAsyUooJURwjHFk_frQ20nGR1SsHsaAdP5VGJaZFwotGeLRf5Xs5RTXqtjs8AlK9dfNWsLi8J_Zc_tll-G55gy1kSaTZjavgLvsnhykxnXPB3MTna4dI2mYR628qKMLXC6wWKb8wk5P54ED9gnmXRBL8vEP_JRUSdHmmNjiGT9TM9zpbpchix1GVfFIgM"/>
+</div>
+<div class="text-center md:text-left">
+<div class="flex flex-col md:flex-row md:items-center gap-2 mb-2">
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Dr. Amara Okoro</h2>
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-full font-label-sm text-label-sm self-center md:self-auto">Clinical Psychologist</span>
+</div>
+<p class="text-on-surface-variant font-body-md mb-4 max-w-xl">Specializing in trauma-informed care and cognitive behavioral therapy for anxiety and depression. 12+ years of experience helping individuals find their 'Suluhu'.</p>
+<div class="flex flex-wrap justify-center md:justify-start gap-4 text-label-md text-on-surface-variant">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-[20px]">language</span>
+<span>English, Swahili</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-primary text-[20px]">verified</span>
+<span>KMPDC Registered</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Calendar View -->
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md text-primary">Select Date</h3>
+<div class="flex items-center gap-4">
+<span class="font-label-md text-on-surface font-bold">November 2024</span>
+<div class="flex gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-low border border-outline-variant text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-2 rounded-full hover:bg-surface-container-low border border-outline-variant text-primary transition-all active:scale-95">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<div class="calendar-grid text-center font-label-md text-on-surface-variant border-b border-outline-variant pb-4 mb-4">
+<div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
+</div>
+<div class="calendar-grid text-center gap-y-2">
+<!-- Simplified Calendar for November starting Friday -->
+<div class="text-outline/30 py-3">27</div><div class="text-outline/30 py-3">28</div><div class="text-outline/30 py-3">29</div><div class="text-outline/30 py-3">30</div><div class="text-outline/30 py-3">31</div>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">1</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">2</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">3</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">4</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">5</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">6</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">7</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">8</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">9</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">10</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">11</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">12</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">13</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">14</button>
+<button class="py-3 rounded-lg bg-primary text-white font-bold ring-2 ring-primary ring-offset-2">15</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">16</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">17</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">18</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">19</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">20</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">21</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">22</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">23</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">24</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">25</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">26</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">27</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">28</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">29</button>
+<button class="py-3 rounded-lg hover:bg-surface-container-low text-on-surface transition-colors">30</button>
+</div>
+</section>
+</div>
+<!-- Right Column: Time Slots & Summary -->
+<div class="lg:col-span-4 space-y-6">
+<section class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant h-fit">
+<h3 class="font-headline-md text-headline-md text-primary mb-6">Available Slots</h3>
+<div class="space-y-6">
+<!-- Morning -->
+<div>
+<div class="flex items-center gap-2 mb-3 text-on-surface-variant font-bold text-label-md">
+<span class="material-symbols-outlined text-[18px]">light_mode</span>
+<span>Morning</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="slot-pill px-4 py-2 rounded-lg border border-outline-variant text-on-surface font-label-md transition-all active:scale-95 text-center" onclick="selectSlot(this)">09:00 AM</button>
+<button class="slot-pill px-4 py-2 rounded-lg border border-outline-variant text-on-surface font-label-md transition-all active:scale-95 text-center" onclick="selectSlot(this)">10:30 AM</button>
+</div>
+</div>
+<!-- Afternoon -->
+<div>
+<div class="flex items-center gap-2 mb-3 text-on-surface-variant font-bold text-label-md">
+<span class="material-symbols-outlined text-[18px]">wb_sunny</span>
+<span>Afternoon</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="slot-pill px-4 py-2 rounded-lg border border-outline-variant text-on-surface font-label-md transition-all active:scale-95 text-center" onclick="selectSlot(this)">01:30 PM</button>
+<button class="slot-pill px-4 py-2 rounded-lg border border-outline-variant text-on-surface font-label-md transition-all active:scale-95 text-center" onclick="selectSlot(this)">03:00 PM</button>
+<button class="px-4 py-2 rounded-lg border border-outline-variant/30 text-outline-variant font-label-md text-center cursor-not-allowed bg-surface-container-low" disabled="">04:30 PM</button>
+</div>
+</div>
+<!-- Evening -->
+<div>
+<div class="flex items-center gap-2 mb-3 text-on-surface-variant font-bold text-label-md">
+<span class="material-symbols-outlined text-[18px]">bedtime</span>
+<span>Evening</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<button class="slot-pill px-4 py-2 rounded-lg border border-outline-variant text-on-surface font-label-md transition-all active:scale-95 text-center" onclick="selectSlot(this)">06:00 PM</button>
+<button class="slot-pill px-4 py-2 rounded-lg border border-outline-variant text-on-surface font-label-md transition-all active:scale-95 text-center" onclick="selectSlot(this)">07:30 PM</button>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant">
+<div class="flex justify-between items-center mb-4">
+<span class="text-on-surface-variant font-medium">Session Fee</span>
+<span class="font-headline-md text-primary font-bold">KSh 4,500</span>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg mb-6 border border-dashed border-outline">
+<p class="text-label-sm text-on-surface-variant italic">Please select a time slot above to proceed with your booking for November 15, 2024.</p>
+</div>
+<button class="w-full py-4 rounded-xl bg-outline-variant text-white font-bold text-body-md transition-all cursor-not-allowed flex items-center justify-center gap-2" disabled="" id="paymentBtn">
+<span>Continue to Payment</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-container-highest w-full px-margin-desktop py-section-gap flex flex-col md:flex-row justify-between items-center gap-4 border-t border-outline-variant mt-20">
+<div class="flex flex-col gap-2">
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Suluhu Therapy</h2>
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Suluhu Therapy Center. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors" href="#">Emergency Hotlines</a>
+<a class="text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors" href="#">Contact Us</a>
+</div>
+</footer>
+<script>
+        function selectSlot(element) {
+            // Remove selection from others
+            document.querySelectorAll('.slot-pill').forEach(btn => {
+                btn.classList.remove('selected', 'bg-primary', 'text-white', 'border-primary');
+                btn.classList.add('bg-transparent', 'text-on-surface', 'border-outline-variant');
+            });
+
+            // Add selection to clicked
+            element.classList.add('selected', 'bg-primary', 'text-white', 'border-primary');
+            element.classList.remove('bg-transparent', 'text-on-surface', 'border-outline-variant');
+
+            // Enable Payment Button
+            const paymentBtn = document.getElementById('paymentBtn');
+            paymentBtn.disabled = false;
+            paymentBtn.classList.remove('bg-outline-variant', 'cursor-not-allowed');
+            paymentBtn.classList.add('bg-primary-container', 'hover:opacity-90', 'active:scale-[0.98]', 'cursor-pointer');
+            
+            // Update summary helper text
+            const helperText = document.querySelector('.italic');
+            helperText.innerHTML = `You have selected <strong>${element.innerText}</strong> on Friday, November 15.`;
+            helperText.parentElement.classList.remove('bg-surface-container-low', 'border-dashed');
+            helperText.parentElement.classList.add('bg-accent-teal-light', 'border-secondary-container', 'border-solid');
+        }
+
+        // Simple animation for the payment button state change
+        const paymentBtn = document.getElementById('paymentBtn');
+        paymentBtn.addEventListener('click', () => {
+            if (!paymentBtn.disabled) {
+                paymentBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Processing...';
+                setTimeout(() => {
+                    alert('Redirecting to secure payment gateway...');
+                    window.location.reload();
+                }, 1500);
+            }
+        });
+    </script>
+</body></html>

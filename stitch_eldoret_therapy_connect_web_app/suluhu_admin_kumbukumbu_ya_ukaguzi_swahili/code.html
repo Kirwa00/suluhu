@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+<html class="light" lang="sw"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu Admin | Audit Log</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-fixed-dim": "#89d5c0",
+                        "secondary": "#166a59",
+                        "error-container": "#ffdad6",
+                        "surface-soothing": "#F0F4F8",
+                        "surface": "#f8fafb",
+                        "outline": "#737781",
+                        "accent-teal-light": "#E8F3F1",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "surface-variant": "#e1e3e4",
+                        "text-rich-slate": "#1C1E21",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#eceeef",
+                        "background": "#f8fafb",
+                        "on-primary-container": "#9cc2ff",
+                        "on-secondary-fixed": "#002019",
+                        "on-error": "#ffffff",
+                        "primary-fixed": "#d5e3ff",
+                        "secondary-container": "#a5f2db",
+                        "on-tertiary-fixed-variant": "#004d67",
+                        "primary-container": "#1b4f8c",
+                        "tertiary-container": "#005571",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container-high": "#e6e8e9",
+                        "primary": "#00386d",
+                        "on-error-container": "#93000a",
+                        "on-surface-variant": "#424750",
+                        "on-surface": "#191c1d",
+                        "on-secondary-container": "#1f705f",
+                        "tertiary": "#003d52",
+                        "surface-bright": "#f8fafb",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2e3132",
+                        "on-primary-fixed": "#001c3b",
+                        "surface-container-low": "#f2f4f5",
+                        "on-primary-fixed-variant": "#0d4784",
+                        "success-calm": "#2E8555",
+                        "outline-variant": "#c2c6d1",
+                        "inverse-on-surface": "#eff1f2",
+                        "on-background": "#191c1d",
+                        "inverse-primary": "#a7c8ff",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#305f9d",
+                        "surface-dim": "#d8dadb",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#005142",
+                        "secondary-fixed": "#a5f2db",
+                        "on-tertiary-fixed": "#001e2b",
+                        "tertiary-fixed-dim": "#81d0f8",
+                        "on-tertiary-container": "#7acaf2",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#c1e8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "40px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "container-max": "1200px",
+                        "section-gap": "80px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c2c6d1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #737781;
+        }
+        .bento-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bento-card:hover {
+            box-shadow: 0 12px 24px -8px rgba(27, 79, 140, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container flex flex-col py-margin-desktop z-50">
+<div class="px-6 mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Suluhu Admin</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Mental Health Clinic</p>
+</div>
+<nav class="flex-1 px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md text-label-md">Therapists</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Financials</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary font-bold border-r-4 border-primary bg-surface-container-highest/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+<span class="font-label-md text-label-md">Audit Log</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-surface-variant/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary-container text-white py-3 rounded-lg font-label-md text-label-md flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-[18px]">summarize</span>
+                Tengeneza Ripoti
+            </button>
+</div>
+</aside>
+<!-- TopAppBar Shell -->
+<header class="flex justify-between items-center h-16 px-gutter w-[calc(100%-16rem)] ml-64 fixed top-0 bg-surface z-40">
+<div class="flex items-center flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-soothing border-none rounded-full pl-10 pr-4 py-2 text-label-md focus:ring-2 focus:ring-primary/20 placeholder:text-outline-variant" placeholder="Tafuta kumbukumbu, watendaji, au wagonjwa..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 border-r border-outline-variant pr-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="font-label-md text-label-md font-semibold text-on-surface">Admin User</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Super Admin</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-primary-fixed object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJOE0pXr-ZgysmB1wZcMq2x0oZ0WvXiUsMn6zzKBSE8qt5YzNba8qEASQIAA4KcOFhVzANvd2Zcl4hqDmKMoEf0Ipw3caFpyFW-VXpOpQJW7rR20_Iq_9UMoIR8M1vmw0vM0bEXWM31Jt5VvkFDHDEG87esxNF1GlgktsOA88qm1E3u_9SY8FahX1NMFNfvfqgFtgL_zCnaoFkEH2VzR5ZsQlYTlMblrPkRp_n38tg4Sk9vvTcP1DE5YSJ_QbpIsfr4gRYHB1TvR8"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-margin-desktop min-h-[calc(100vh-4rem)]">
+<!-- Header & Summary Section -->
+<section class="mb-gutter flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<nav class="flex items-center gap-2 text-label-sm text-on-surface-variant mb-2">
+<span>Admin</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-primary font-medium">Usimamizi wa Ukaguzi</span>
+</nav>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Kumbukumbu ya Ukaguzi wa Kliniki na Utawala</h2>
+<p class="text-on-surface-variant font-body-md mt-1">Uangalizi wa moja kwa moja wa shughuli za mfumo na mwingiliano kati ya daktari na mteja.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2.5 rounded-lg border border-primary text-primary font-label-md flex items-center gap-2 hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                    Hamisha Kumbukumbu
+                </button>
+</div>
+</section>
+<!-- Stats Bento Grid -->
+<section class="grid grid-cols-1 gap-6 mb-section-gap md:grid-cols-4">
+<div class="bento-card bg-surface-container-lowest border border-outline-variant p-6 rounded-xl flex items-center gap-5">
+<div class="w-14 h-14 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[32px]">analytics</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-tight">JUMLA YA MATUKIO</p>
+<p class="font-headline-md text-headline-md text-primary">12,504</p>
+</div>
+</div>
+<div class="bento-card bg-surface-container-lowest border border-outline-variant p-6 rounded-xl flex items-center gap-5">
+<div class="w-14 h-14 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined text-[32px]">fact_check</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-tight">HATUA ZA UTEKELEZAJI</p>
+<p class="font-headline-md text-headline-md text-tertiary">142</p>
+</div>
+</div>
+<div class="bento-card bg-surface-container-lowest border border-outline-variant p-6 rounded-xl flex items-center gap-5">
+<div class="w-14 h-14 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[32px]">cloud_done</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-tight">MUDA WA MFUMO</p>
+<p class="font-headline-md text-headline-md text-secondary">99.9%</p>
+</div>
+</div>
+<div class="bento-card bg-surface-container-lowest border border-outline-variant p-6 rounded-xl flex items-center gap-5">
+<div class="w-14 h-14 rounded-full bg-error-container flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[32px]">warning</span>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-tight">TAHADHARI ZA KLINIKI</p>
+<p class="font-headline-md text-headline-md text-error">14 Amilifu</p>
+</div>
+</div>
+</section>
+<!-- Filter Bar -->
+<section class="bg-surface-soothing/50 rounded-xl p-4 mb-6 border border-outline-variant/30 flex flex-wrap items-center gap-4">
+<div class="flex-1 min-w-[200px] relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">filter_list</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-lg pl-10 pr-4 py-2 text-label-md focus:ring-primary focus:border-primary" placeholder="Chuja kwa Mtendaji au ID..." type="text"/>
+</div>
+<div class="flex items-center gap-4 overflow-x-auto pb-1 md:pb-0">
+<div class="flex items-center gap-2">
+<label class="text-label-sm text-on-surface-variant whitespace-nowrap">Kundi:</label>
+<select class="bg-surface-container-lowest border border-outline-variant rounded-lg text-label-md py-2 pl-3 pr-8 focus:ring-primary">
+<option>Makundi Yote</option>
+<option>Tahadhari za Kliniki</option>
+<option>Malipo</option>
+<option>Vitambulisho</option>
+<option>Mfumo</option>
+</select>
+</div>
+<div class="flex items-center gap-2">
+<label class="text-label-sm text-on-surface-variant whitespace-nowrap">Tarehe:</label>
+<div class="flex items-center bg-surface-container-lowest border border-outline-variant rounded-lg px-3 py-2 gap-3">
+<input class="border-none p-0 text-label-md focus:ring-0 bg-transparent" type="date"/>
+<span class="text-outline-variant">—</span>
+<input class="border-none p-0 text-label-md focus:ring-0 bg-transparent" type="date"/>
+</div>
+</div>
+</div>
+<button class="bg-white border border-outline-variant px-4 py-2 rounded-lg text-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors">
+                Futa Vichujio
+            </button>
+</section>
+<!-- Data Table Section -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low/50">
+<tr>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">MUDA</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">MTENDAJI</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">KUNDI</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">MAELEZO</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">ANUANI YA IP</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider text-right">HATUA</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-surface-soothing/30 transition-colors">
+<td class="px-6 py-4">
+<p class="font-label-md text-on-surface">Jun 12, 2024</p>
+<p class="text-label-sm text-on-surface-variant opacity-70">15:45:22</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold text-[10px]">SJ</div>
+<div>
+<p class="font-label-md text-on-surface">Admin Sarah J.</p>
+<p class="text-[11px] text-on-surface-variant">Afisa wa Uhakiki</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-tertiary-container text-on-tertiary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary mr-2"></span>Utekelezaji
+                                </span>
+</td>
+<td class="px-6 py-4 max-w-xs">
+<p class="font-body-md text-on-surface">Imehakiki Leseni ya Matibabu na Utambulisho wa Dr. Amina J. Mwangi. Amepangiwa Daraja la 'Kiwango cha Juu'.</p>
+</td>
+<td class="px-6 py-4">
+<code class="text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded">10.0.4.82</code>
+</td>
+<td class="px-6 py-4 text-right flex justify-end gap-2">
+<button class="text-primary hover:bg-primary-fixed p-2 rounded-lg transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+<button class="text-primary hover:bg-primary-fixed p-2 rounded-lg transition-colors"><span class="material-symbols-outlined">file_download</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-soothing/30 transition-colors">
+<td class="px-6 py-4">
+<p class="font-label-md text-on-surface">Jun 12, 2024</p>
+<p class="text-label-sm text-on-surface-variant opacity-70">15:10:05</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant font-bold text-[10px]">SYS</div>
+<div>
+<p class="font-label-md text-on-surface">Mfumo</p>
+<p class="text-[11px] text-on-surface-variant">Mchakato wa Kiotomatiki</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-secondary-container text-on-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary mr-2"></span>Mafunzo
+                                </span>
+</td>
+<td class="px-6 py-4 max-w-xs">
+<p class="font-body-md text-on-surface">Moduli ya Usalama wa Kliniki imekamilishwa na Dr. Silas Okoth kwa alama 95%.</p>
+</td>
+<td class="px-6 py-4">
+<code class="text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded">internal::lms</code>
+</td>
+<td class="px-6 py-4 text-right flex justify-end gap-2">
+<button class="text-primary hover:bg-primary-fixed p-2 rounded-lg transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-soothing/30 transition-colors">
+<td class="px-6 py-4">
+<p class="font-label-md text-on-surface">Jun 12, 2024</p>
+<p class="text-label-sm text-on-surface-variant opacity-70">14:55:12</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold text-[10px]">SJ</div>
+<div>
+<p class="font-label-md text-on-surface">Admin Sarah J.</p>
+<p class="text-[11px] text-on-surface-variant">Afisa wa Uhakiki</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-surface-container-highest text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline mr-2"></span>Mfumo
+                                </span>
+</td>
+<td class="px-6 py-4 max-w-xs">
+<p class="font-body-md text-on-surface">Cheti #STC-2024-8821 kimetolewa kwa ajili ya Dr. Amina J. Mwangi.</p>
+</td>
+<td class="px-6 py-4">
+<code class="text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded">10.0.4.82</code>
+</td>
+<td class="px-6 py-4 text-right flex justify-end gap-2">
+<button class="text-primary hover:bg-primary-fixed p-2 rounded-lg transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+<button class="text-primary hover:bg-primary-fixed p-2 rounded-lg transition-colors"><span class="material-symbols-outlined">file_download</span></button>
+</td>
+</tr>
+<tr class="hover:bg-surface-soothing/30 transition-colors">
+<td class="px-6 py-4">
+<p class="font-label-md text-on-surface">Jun 12, 2024</p>
+<p class="text-label-sm text-on-surface-variant opacity-70">14:30:12</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img class="w-8 h-8 rounded-full object-cover border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoWPMPcxzMCCO0O9pEWDrgLGwn5WpylmDF2oD7dQrpCnP1OaxV3tCj792yiDxPG0tI2Mp4RWqCqcXJ5WgJnaAu7JH6AhyM323tY0HyeXiAq_Ew5m7PEnktZVdGE95RX-KY65hn4NEvbvO5ZUr2AtykXto70ws23-BV9nUoB_OxslYpf0MIB-jMptLVFT8-n_J6HU2m8g381fX-Nh6uAp3dLLKDXMjo44UC3r99bC9jwF2AS9bWkshjLZ6QJpa1Ph_TevgtLJ7ZYlw"/>
+<div>
+<p class="font-label-md text-on-surface">Dr. Silas Mwangi</p>
+<p class="text-[11px] text-on-surface-variant">ID ya Daktari: #TH-0042</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-error-container text-on-error-container">
+<span class="w-1.5 h-1.5 rounded-full bg-error mr-2"></span>Tahadhari ya Kliniki
+                                </span>
+</td>
+<td class="px-6 py-4 max-w-xs">
+<p class="font-body-md text-on-surface truncate-2-lines">Imeongezwa Tahadhari ya Dharura: Hatari ya Kujidhuru kwa Mgonjwa #SL-78219</p>
+</td>
+<td class="px-6 py-4">
+<code class="text-label-sm text-on-surface-variant bg-surface-container px-2 py-1 rounded">192.168.1.104</code>
+</td>
+<td class="px-6 py-4 text-right flex justify-end gap-2">
+<button class="text-primary hover:bg-primary-fixed p-2 rounded-lg transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 bg-surface-container-lowest border-t border-outline-variant flex items-center justify-between">
+<span class="text-label-sm text-on-surface-variant">Inaonyesha 1 hadi 4 kati ya matukio 12,504</span>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant text-outline hover:bg-surface-container transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white text-label-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container transition-colors text-label-sm">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container transition-colors text-label-sm">3</button>
+<span class="px-1 text-outline">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container transition-colors text-label-sm">3,121</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Interactive Layer for Micro-interactions -->
+<script>
+        // Simple hover effect for table rows
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.transform = 'translateX(4px)';
+                row.style.transition = 'transform 0.2s ease-out';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.transform = 'translateX(0)';
+            });
+        });
+
+        // Add active state scaling to buttons
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('mousedown', () => {
+                btn.style.transform = 'scale(0.96)';
+            });
+            btn.addEventListener('mouseup', () => {
+                btn.style.transform = 'scale(1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

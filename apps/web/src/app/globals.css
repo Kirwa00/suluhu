@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * Semantic theme tokens consumed by the shared Tailwind preset
+ * (packages/ui). Values come straight from the Suluhu Wellness System palette.
+ * Light is the default; `.dark` flips to an accessible dark variant.
+ */
+:root {
+  --background: #f8fafb; /* surface */
+  --foreground: #191c1d; /* on-surface */
+
+  --card: #ffffff; /* surface-container-lowest */
+  --card-foreground: #191c1d;
+
+  --popover: #ffffff;
+  --popover-foreground: #191c1d;
+
+  --muted: #eceeef; /* surface-container */
+  --muted-foreground: #424750; /* on-surface-variant */
+
+  --accent: #e8f3f1; /* accent-teal-light */
+  --accent-foreground: #166a59; /* secondary */
+
+  --destructive: #ba1a1a; /* error */
+  --destructive-foreground: #ffffff;
+
+  --border: #c2c6d1; /* outline-variant */
+  --input: #c2c6d1;
+  --ring: #2e86ab; /* action accent */
+
+  --brand: #1b4f8c; /* primary-container */
+  --brand-foreground: #ffffff;
+}
+
+.dark {
+  --background: #111c2c;
+  --foreground: #ebf1ff;
+
+  --card: #1a2638;
+  --card-foreground: #ebf1ff;
+
+  --popover: #1a2638;
+  --popover-foreground: #ebf1ff;
+
+  --muted: #263142;
+  --muted-foreground: #c2c6d1;
+
+  --accent: #15302b;
+  --accent-foreground: #a5f2db;
+
+  --destructive: #ffb4ab;
+  --destructive-foreground: #690005;
+
+  --border: #424750;
+  --input: #424750;
+  --ring: #7acaf2;
+
+  --brand: #9cc2ff;
+  --brand-foreground: #00386d;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Respect users who prefer reduced motion (WCAG 2.1, SDLC §11.4). */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}

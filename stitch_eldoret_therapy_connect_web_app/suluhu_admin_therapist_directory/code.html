@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Therapists Directory | Suluhu Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab-indicator {
+            transition: all 0.2s ease-in-out;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#1f705f",
+                        "on-surface-variant": "#424750",
+                        "on-tertiary-container": "#7acaf2",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed": "#001e2b",
+                        "accent-teal-light": "#E8F3F1",
+                        "outline": "#737781",
+                        "on-secondary-fixed": "#002019",
+                        "primary-container": "#1b4f8c",
+                        "on-surface": "#191c1d",
+                        "background": "#f8fafb",
+                        "tertiary": "#003d52",
+                        "on-background": "#191c1d",
+                        "tertiary-fixed-dim": "#81d0f8",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-variant": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "success-calm": "#2E8555",
+                        "on-secondary-fixed-variant": "#005142",
+                        "on-tertiary-fixed-variant": "#004d67",
+                        "on-primary-fixed": "#001c3b",
+                        "surface-soothing": "#F0F4F8",
+                        "inverse-on-surface": "#eff1f2",
+                        "on-error-container": "#93000a",
+                        "surface": "#f8fafb",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "surface-dim": "#d8dadb",
+                        "on-primary-container": "#9cc2ff",
+                        "outline-variant": "#c2c6d1",
+                        "surface-container-high": "#e6e8e9",
+                        "surface-bright": "#f8fafb",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f2f4f5",
+                        "tertiary-fixed": "#c1e8ff",
+                        "primary": "#00386d",
+                        "secondary-fixed-dim": "#89d5c0",
+                        "text-rich-slate": "#1C1E21",
+                        "secondary-fixed": "#a5f2db",
+                        "surface-tint": "#305f9d",
+                        "secondary": "#166a59",
+                        "surface-container": "#eceeef",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#d5e3ff",
+                        "inverse-primary": "#a7c8ff",
+                        "on-primary-fixed-variant": "#0d4784",
+                        "secondary-container": "#a5f2db",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#005571",
+                        "inverse-surface": "#2e3132",
+                        "error-container": "#ffdad6",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "section-gap": "80px",
+                        "margin-mobile": "16px",
+                        "unit": "8px",
+                        "container-max": "1200px",
+                        "margin-desktop": "40px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Manrope"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- SideNavBar Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-low dark:bg-surface-dim flex flex-col py-gutter px-4 border-r border-outline-variant/30 z-50">
+<div class="mb-10 px-2">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Suluhu Admin</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Backend Portal</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">pending_actions</span>
+                Applications
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-primary dark:text-primary-fixed-dim font-bold border-r-4 border-primary dark:border-primary-fixed-dim bg-primary-container/10 transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">psychology</span>
+                Therapists
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+                Verifications
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant dark:text-outline-variant hover:bg-surface-container-high dark:hover:bg-surface-container transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto border-t border-outline-variant/20 pt-4 space-y-1">
+<button class="w-full text-left flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined">help</span>
+                Help Center
+            </button>
+<button class="w-full text-left flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors font-label-md text-label-md">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="pl-64">
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center w-full h-16 px-gutter bg-surface-bright dark:bg-surface-container-lowest sticky top-0 z-40">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-soothing border-none rounded-lg focus:ring-2 focus:ring-primary/20 text-body-md transition-all" placeholder="Search therapists by name or ID..." type="text"/>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Direct Messages</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Audit Log</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md hover:opacity-90 active:scale-95 transition-all">
+                    Approve Application
+                </button>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant/30">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a corporate administrator in a modern office. The subject is a person in their late 40s with a kind, professional expression, wearing a tailored navy blazer. The lighting is soft and high-key, emphasizing a light-mode aesthetic of trust and reliability consistent with the Suluhu brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5Nu2ZDNnWZZpc3CyIGMWF0IMwhEwV9Mgl-iSkwqSDNcSCqZhVvGpfV7Ox1WKPr_3Z3d8XfreI9oo0XmIP-maCP_SGlu-7-VQAKq_4GCjOK3HVAv-4H9hFFDgCTb3e3iZpC-xM9OZ6DW3UPCeOjDPYL3vwBzntG0vWKbiEOBF45KpgpgIz3xplxJM1dXhbnMzPE7Syl951W9_Dn9PklZcJKVw1LLtGS8lTtpMA9VBYdHaBxgwDj-Gt3EcgbwO6bRL3zErSFTXTmZs"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-gutter max-w-container-max mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-section-gap gap-6">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Therapist Directory</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Manage the global network of specialized professionals. Review credentials, monitor active sessions, and update therapist statuses.</p>
+</div>
+<div class="flex gap-2 p-1 bg-surface-container-low rounded-xl">
+<button class="px-6 py-2 rounded-lg font-label-md text-label-md bg-surface-bright text-primary shadow-sm">All (124)</button>
+<button class="px-6 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors">Active</button>
+<button class="px-6 py-2 rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors">Onboarding</button>
+</div>
+</div>
+<!-- Stats Overview (Atmospheric Bento Cards) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-12">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 bg-primary-fixed text-on-primary-fixed-variant rounded-lg">
+<span class="material-symbols-outlined">groups</span>
+</span>
+<span class="text-success-calm font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +12%
+                        </span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">Total Therapists</p>
+<h3 class="font-headline-md text-headline-md text-primary mt-1">1,284</h3>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 bg-secondary-container text-on-secondary-container rounded-lg">
+<span class="material-symbols-outlined">verified</span>
+</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">Verified Today</p>
+<h3 class="font-headline-md text-headline-md text-primary mt-1">18</h3>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-lg">
+<span class="material-symbols-outlined">schedule</span>
+</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">Avg. Response Time</p>
+<h3 class="font-headline-md text-headline-md text-primary mt-1">4.2h</h3>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30">
+<div class="flex justify-between items-start mb-4">
+<span class="p-2 bg-error-container text-on-error-container rounded-lg">
+<span class="material-symbols-outlined">pending</span>
+</span>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant">Pending Review</p>
+<h3 class="font-headline-md text-headline-md text-primary mt-1">24</h3>
+</div>
+</div>
+<!-- Table Controls -->
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 overflow-hidden">
+<div class="p-6 flex flex-col md:flex-row justify-between items-center gap-4 border-b border-outline-variant/20">
+<div class="flex items-center gap-4 w-full md:w-auto">
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                            Filters
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-outline-variant rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                            Export
+                        </button>
+</div>
+<p class="text-on-surface-variant font-label-md text-label-md">Showing <span class="font-bold text-on-surface">1-10</span> of 124 therapists</p>
+</div>
+<!-- Table Section -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant border-b border-outline-variant/20">
+<div class="flex items-center gap-2 cursor-pointer hover:text-primary transition-colors">
+                                        Name <span class="material-symbols-outlined text-[16px]">arrow_downward</span>
+</div>
+</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant border-b border-outline-variant/20">Specialty</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant border-b border-outline-variant/20">Status</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant border-b border-outline-variant/20">Verification</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant border-b border-outline-variant/20">Last Active</th>
+<th class="px-6 py-4 font-label-md text-label-md text-on-surface-variant border-b border-outline-variant/20 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-soothing transition-colors cursor-pointer group" onclick="window.location.hash = 'profile/dr-sarah-juma'">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-primary-fixed flex items-center justify-center text-on-primary-fixed font-bold">
+                                            SJ
+                                        </div>
+<div>
+<p class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">Dr. Sarah Juma</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">sarah.j@suluhu.com</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-1 bg-accent-teal-light text-on-secondary-container rounded font-label-sm text-[11px] uppercase tracking-wider">Clinical Psychology</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 font-label-md text-label-md text-success-calm">
+<span class="w-2 h-2 bg-success-calm rounded-full"></span> Active
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-1 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        Verified
+                                    </div>
+</td>
+<td class="px-6 py-5 font-label-md text-label-md text-on-surface-variant">2 mins ago</td>
+<td class="px-6 py-5 text-right">
+<button class="text-primary hover:underline font-label-md text-label-md">Manage</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-soothing transition-colors cursor-pointer group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed font-bold">
+                                            MK
+                                        </div>
+<div>
+<p class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">Marcus Kwaye</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">m.kwaye@therapy.org</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-1 bg-accent-teal-light text-on-secondary-container rounded font-label-sm text-[11px] uppercase tracking-wider">CBT Specialist</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 font-label-md text-label-md text-on-surface-variant">
+<span class="w-2 h-2 bg-outline-variant rounded-full"></span> Inactive
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-1 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        Verified
+                                    </div>
+</td>
+<td class="px-6 py-5 font-label-md text-label-md text-on-surface-variant">Oct 12, 2023</td>
+<td class="px-6 py-5 text-right">
+<button class="text-primary hover:underline font-label-md text-label-md">Manage</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-soothing transition-colors cursor-pointer group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed font-bold">
+                                            AO
+                                        </div>
+<div>
+<p class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">Amina Okoro</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">amina.o@health.co</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-1 bg-accent-teal-light text-on-secondary-container rounded font-label-sm text-[11px] uppercase tracking-wider">Family Therapy</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 font-label-md text-label-md text-on-tertiary-container bg-tertiary-container/10 px-3 py-1 rounded-full">
+                                        Onboarding
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-1 text-error font-label-md text-label-md">
+<span class="material-symbols-outlined text-[18px]">error</span>
+                                        Pending
+                                    </div>
+</td>
+<td class="px-6 py-5 font-label-md text-label-md text-on-surface-variant">Never</td>
+<td class="px-6 py-5 text-right">
+<button class="text-primary hover:underline font-label-md text-label-md">Manage</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-soothing transition-colors cursor-pointer group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-variant flex items-center justify-center text-on-surface-variant font-bold">
+                                            BL
+                                        </div>
+<div>
+<p class="font-label-md text-label-md text-on-surface group-hover:text-primary transition-colors">Benjamin Lee</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">ben.lee@clinical.net</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<div class="flex flex-wrap gap-1">
+<span class="px-2 py-1 bg-accent-teal-light text-on-secondary-container rounded font-label-sm text-[11px] uppercase tracking-wider">Trauma/PTSD</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 font-label-md text-label-md text-success-calm">
+<span class="w-2 h-2 bg-success-calm rounded-full"></span> Active
+                                    </span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-1 text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        Verified
+                                    </div>
+</td>
+<td class="px-6 py-5 font-label-md text-label-md text-on-surface-variant">1 hour ago</td>
+<td class="px-6 py-5 text-right">
+<button class="text-primary hover:underline font-label-md text-label-md">Manage</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-6 bg-surface-container-low/30 flex justify-between items-center">
+<button class="px-4 py-2 border border-outline-variant rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors flex items-center gap-1 disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span> Previous
+                    </button>
+<div class="flex gap-1">
+<button class="w-10 h-10 rounded-lg bg-primary text-on-primary font-label-md text-label-md">1</button>
+<button class="w-10 h-10 rounded-lg text-on-surface-variant hover:bg-surface-container-low font-label-md text-label-md transition-colors">2</button>
+<button class="w-10 h-10 rounded-lg text-on-surface-variant hover:bg-surface-container-low font-label-md text-label-md transition-colors">3</button>
+<span class="w-10 h-10 flex items-center justify-center text-on-surface-variant">...</span>
+<button class="w-10 h-10 rounded-lg text-on-surface-variant hover:bg-surface-container-low font-label-md text-label-md transition-colors">12</button>
+</div>
+<button class="px-4 py-2 border border-outline-variant rounded-lg text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors flex items-center gap-1">
+                        Next <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Contextual Help / Tips -->
+<div class="mt-12 p-8 bg-surface-soothing rounded-2xl border border-primary/10 flex flex-col md:flex-row items-center gap-8">
+<div class="w-16 h-16 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-[32px]">lightbulb</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-primary mb-2">Did you know?</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">You can bulk-approve therapists by selecting their names in the list and clicking "Approve Application" at the top of the screen. Ensure all identity verifications are marked as "Verified" before final approval.</p>
+</div>
+<button class="px-6 py-2 border border-primary text-primary rounded-lg font-label-md text-label-md hover:bg-primary/5 transition-colors whitespace-nowrap">
+                    View Verification Guide
+                </button>
+</div>
+</div>
+<footer class="mt-section-gap py-gutter border-t border-outline-variant/20 px-gutter">
+<div class="flex justify-between items-center text-on-surface-variant font-label-sm text-label-sm">
+<p>© 2023 Suluhu Therapy Center. Admin Portal v2.4.0</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">System Status</a>
+</div>
+</div>
+</footer>
+</main>
+<script>
+        // Micro-interactions and Lightweight atmospheric effects
+        document.addEventListener('DOMContentLoaded', () => {
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach((row, index) => {
+                row.style.opacity = '0';
+                row.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    row.style.transition = 'all 0.4s ease-out';
+                    row.style.opacity = '1';
+                    row.style.transform = 'translateY(0)';
+                }, index * 50);
+            });
+
+            // Smooth ripple effect simulation on buttons
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(btn => {
+                btn.addEventListener('mousedown', function() {
+                    this.style.transform = 'scale(0.98)';
+                });
+                btn.addEventListener('mouseup', function() {
+                    this.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body></html>

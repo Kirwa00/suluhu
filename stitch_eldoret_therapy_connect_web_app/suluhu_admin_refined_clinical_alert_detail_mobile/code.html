@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu Admin - Clinical Alert Detail</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Manrope:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Design System Tokens & Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#d8dadb",
+                        "secondary": "#166a59",
+                        "inverse-primary": "#a7c8ff",
+                        "surface": "#f8fafb",
+                        "success-calm": "#2E8555",
+                        "surface-tint": "#305f9d",
+                        "on-primary-fixed-variant": "#0d4784",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary-fixed": "#d5e3ff",
+                        "surface-variant": "#e1e3e4",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#424750",
+                        "accent-teal-light": "#E8F3F1",
+                        "surface-container-low": "#f2f4f5",
+                        "surface-container-high": "#e6e8e9",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "primary": "#00386d",
+                        "surface-container": "#eceeef",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#89d5c0",
+                        "outline-variant": "#c2c6d1",
+                        "secondary-fixed": "#a5f2db",
+                        "primary-container": "#1b4f8c",
+                        "secondary-container": "#a5f2db",
+                        "inverse-surface": "#2e3132",
+                        "tertiary-container": "#005571",
+                        "on-surface": "#191c1d",
+                        "on-secondary-fixed": "#002019",
+                        "on-secondary-container": "#1f705f",
+                        "error-container": "#ffdad6",
+                        "background": "#f8fafb",
+                        "on-secondary-fixed-variant": "#005142",
+                        "surface-soothing": "#F0F4F8",
+                        "on-primary-fixed": "#001c3b",
+                        "surface-bright": "#f8fafb",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#004d67",
+                        "on-background": "#191c1d",
+                        "on-tertiary-fixed": "#001e2b",
+                        "inverse-on-surface": "#eff1f2",
+                        "tertiary": "#003d52",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#7acaf2",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#c1e8ff",
+                        "tertiary-fixed-dim": "#81d0f8",
+                        "text-rich-slate": "#1C1E21",
+                        "on-error": "#ffffff",
+                        "outline": "#737781",
+                        "on-primary-container": "#9cc2ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "section-gap": "80px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "container-max": "1200px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Manrope"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Mobile Frame Simulation */
+        .mobile-viewport {
+            width: 375px;
+            height: 812px;
+            margin: 20px auto;
+            border: 12px solid #2e3132;
+            border-radius: 40px;
+            overflow: hidden;
+            position: relative;
+            background: #f8fafb;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .scroll-container {
+            height: 100%;
+            overflow-y: auto;
+            padding-bottom: 100px; /* Space for fixed actions */
+            scrollbar-width: none;
+        }
+        .scroll-container::-webkit-scrollbar { display: none; }
+
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            bottom: 0;
+            width: 2px;
+            background: #e1e3e4;
+        }
+
+        .alert-pulse {
+            animation: pulse-red 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-red {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .7; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface-dim flex items-center justify-center min-h-screen p-4">
+<!-- Mobile Frame -->
+<div class="mobile-viewport bg-surface">
+<!-- TopAppBar (From Shared JSON) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-4 h-16 bg-surface-container-low dark:bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="clinical_notes">clinical_notes</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Suluhu Admin</h1>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female hospital administrator in a clean white medical environment. Her expression is focused yet compassionate, embodying the Suluhu brand's professional and calm personality. The lighting is soft and high-key, highlighting the clean oceanic blue accents of her uniform in a modern clinical setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAC05uy6VhTFrI5DNIEGSa2xALHyRFjRW5diOPKgZvu_wKeh0Eq27LuBANj03Djv4b5TfmL6mxySTt5-pBwd7vLyQEyk2MtxBNhZKmJF_aw-Voo75MHoDZoh87iSDF5VLIqkO2w7omXjggY7YInBYJPzgDPGHJ0SVxYz9pkWdNrk6GW-ry4dbCe3mqOWhcyM2Tudewk9jPKTaWvxsQjMk3xVwgRaPdwGf9hxpuUxnKbNcdWJJDhhyFLsg0j4i5AkgTKogIV2PFaFNQ"/>
+</div>
+</header>
+<div class="scroll-container pt-16">
+<!-- High-Urgency Header Section -->
+<section class="p-4 bg-error-container/30 border-b border-error-container"><div class="flex items-center justify-between mb-4"><div class="bg-error text-on-error px-3 py-1 rounded-full flex items-center gap-1.5 alert-pulse shadow-sm"><span class="material-symbols-outlined text-[16px] fill-icon">warning</span><span class="font-label-sm text-label-sm uppercase tracking-wider font-bold">Critical Urgency</span></div><div class="text-right"><p class="text-on-surface-variant font-label-sm text-label-sm">Alert ID: #SLH-882</p><p class="text-error font-bold text-[12px] uppercase">Active Risk</p></div></div><h2 class="font-headline-lg-mobile text-headline-lg-mobile text-error mb-4">Risk of Self-Harm</h2><div class="flex items-center gap-4 p-3 bg-surface-container-lowest rounded-xl border border-error-container/50"><div class="w-14 h-14 rounded-full overflow-hidden border-2 border-error-container"><img alt="Mercy Wanjiku" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUra0FKvGlTQu8RJ0MkFxmtEuaz22FPt7sMcnlZk7qZnENBD3G2WLsf6W9vgIzDspwIwLCHxlxK8hs5uevUgHu6uwJGVymG-SbM4IQ_wxguoMD60myJxoktUROhuK6a70oClkaSIXTwZLutFsDbbgn_2IvlB-u5dyKqoqF9NrGyGQnO1qrrIYuybfIC9Sf2S5s0Qe5mmjfOGfN87J3uZeumWnT4UxiL2zXP3ijooy2CsRviJ4qsH2skuA_R3FQDQjn6R75W-SZc0M"/></div><div><p class="font-headline-md text-[20px] text-on-surface">Mercy Wanjiku</p><p class="font-label-md text-label-md text-on-surface-variant">Patient ID: MRN-99283</p></div></div></section>
+<!-- Case Summary Cards -->
+<section class="p-margin-mobile space-y-4"><div class="grid grid-cols-2 gap-3 mb-4"><div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant"><p class="text-label-sm text-on-surface-variant mb-1">Safety Level</p><div class="flex items-center gap-1.5 text-error font-bold"><span class="material-symbols-outlined text-[18px]">security</span><span>Level 4</span></div></div><div class="bg-surface-container-low p-3 rounded-xl border border-outline-variant"><p class="text-label-sm text-on-surface-variant mb-1">Assigned Clinician</p><p class="text-on-surface font-bold text-label-md truncate">Dr. Silas Mwangi</p></div></div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant shadow-sm"><h3 class="font-label-md text-label-md text-primary mb-3 flex items-center gap-2"><span class="material-symbols-outlined text-[20px]">description</span>Incident Summary</h3><div class="space-y-3"><p class="font-body-md text-[15px] text-on-surface leading-relaxed">Triggered by <span class="font-bold">PHQ-9 daily check-in</span> response (Question 9 score: 3).</p><div class="p-3 bg-error-container/10 rounded-lg border-l-4 border-error"><p class="font-body-md text-[14px] italic text-on-surface-variant">"Overwhelmed by intrusive thoughts and lack of support system."</p></div><p class="font-body-md text-[14px] text-on-surface-variant">Automated screening flagged immediate risk at 08:12 AM.</p></div></div>
+<!-- Timeline Section -->
+<div class="mt-6">
+<h3 class="font-headline-md text-headline-md text-on-surface px-1 mb-4">Alert Timeline</h3>
+<div class="space-y-0 relative"><div class="relative pl-9 pb-8 timeline-line"><div class="absolute left-0 top-0 w-6 h-6 bg-error rounded-full flex items-center justify-center z-10 border-4 border-surface"><span class="material-symbols-outlined text-[12px] text-on-error fill-icon">bolt</span></div><div class="flex justify-between items-start"><div><h4 class="font-label-md text-on-surface font-bold">Generated</h4><p class="font-label-sm text-on-surface-variant">System Automated Flag</p></div><span class="font-label-sm text-outline">08:12 AM</span></div></div><div class="relative pl-9 pb-8 timeline-line"><div class="absolute left-0 top-0 w-6 h-6 bg-primary rounded-full flex items-center justify-center z-10 border-4 border-surface"><span class="material-symbols-outlined text-[12px] text-on-primary fill-icon">visibility</span></div><div class="flex justify-between items-start"><div><h4 class="font-label-md text-on-surface font-bold">In Review</h4><p class="font-label-sm text-on-surface-variant">Admin: Sarah J. (Triage)</p></div><span class="font-label-sm text-outline">08:45 AM</span></div></div><div class="relative pl-9 pb-8 timeline-line"><div class="absolute left-0 top-0 w-6 h-6 bg-secondary rounded-full flex items-center justify-center z-10 border-4 border-surface"><span class="material-symbols-outlined text-[12px] text-on-secondary fill-icon">forum</span></div><div class="flex justify-between items-start"><div><h4 class="font-label-md text-on-surface font-bold">Notified</h4><p class="font-label-sm text-on-surface-variant">Dr. Silas Mwangi</p></div><span class="font-label-sm text-outline">09:02 AM</span></div></div><div class="relative pl-9"><div class="absolute left-0 top-0 w-6 h-6 bg-surface-container-high rounded-full flex items-center justify-center z-10 border-4 border-surface"><div class="w-2 h-2 rounded-full bg-outline"></div></div><div class="flex justify-between items-start opacity-50"><div><h4 class="font-label-md text-on-surface font-bold">Pending</h4><p class="font-label-sm text-on-surface-variant">Clinical sign-off required</p></div></div></div></div>
+</div>
+</section>
+</div>
+<!-- Action Floating Bar -->
+<div class="absolute bottom-0 left-0 w-full p-4 bg-surface-container-lowest/80 backdrop-blur-md border-t border-outline-variant flex flex-col gap-3"><button class="w-full bg-primary text-on-primary font-bold text-label-md py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-all"><span class="material-symbols-outlined text-[22px]">support_agent</span>Contact Therapist</button><div class="grid grid-cols-2 gap-3"><button class="bg-surface-container-high border border-outline-variant text-on-surface font-bold text-label-md py-3.5 rounded-xl flex items-center justify-center gap-2 active:bg-surface-variant transition-colors"><span class="material-symbols-outlined text-[20px]">sync</span>Update</button><button class="bg-secondary text-on-secondary font-bold text-label-md py-3.5 rounded-xl flex items-center justify-center gap-2 active:opacity-90 transition-opacity"><span class="material-symbols-outlined text-[20px]">check_circle</span>Resolve</button></div></div>
+<!-- BottomNavBar (From Shared JSON) - Hidden on this detail view but structural for system -->
+<!-- Suppressed as per "Destination Rule" - This is a task-focused Detail View -->
+</div>
+<!-- UI Interaction Script -->
+<script>
+        // Micro-interaction for status updates
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('div');
+                ripple.className = 'absolute inset-0 bg-white/20 rounded-xl animate-ping pointer-events-none';
+                this.style.position = 'relative';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Atmospheric Scroll behavior
+        const scrollContainer = document.querySelector('.scroll-container');
+        const header = document.querySelector('header');
+        scrollContainer.addEventListener('scroll', () => {
+            if (scrollContainer.scrollTop > 20) {
+                header.classList.add('shadow-md');
+                header.classList.remove('bg-surface-container-low');
+                header.classList.add('bg-white');
+            } else {
+                header.classList.remove('shadow-md');
+                header.classList.remove('bg-white');
+                header.classList.add('bg-surface-container-low');
+            }
+        });
+    </script>
+</body></html>

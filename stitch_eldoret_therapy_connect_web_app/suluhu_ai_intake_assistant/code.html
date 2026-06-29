@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu - Intake Assessment</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#1b4f8c",
+                        "surface-container-highest": "#e1e3e4",
+                        "on-secondary-container": "#1f705f",
+                        "surface-dim": "#d8dadb",
+                        "secondary-container": "#a5f2db",
+                        "text-rich-slate": "#1C1E21",
+                        "surface-variant": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#eceeef",
+                        "outline-variant": "#c2c6d1",
+                        "on-secondary-fixed-variant": "#005142",
+                        "tertiary": "#003d52",
+                        "surface-soothing": "#F0F4F8",
+                        "on-tertiary-fixed-variant": "#004d67",
+                        "on-tertiary-container": "#7acaf2",
+                        "on-surface": "#191c1d",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#a7c8ff",
+                        "secondary-fixed-dim": "#89d5c0",
+                        "on-background": "#191c1d",
+                        "surface": "#f8fafb",
+                        "success-calm": "#2E8555",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-high": "#e6e8e9",
+                        "surface-tint": "#305f9d",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "surface-container-low": "#f2f4f5",
+                        "primary-fixed": "#d5e3ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#0d4784",
+                        "surface-bright": "#f8fafb",
+                        "on-error-container": "#93000a",
+                        "accent-teal-light": "#E8F3F1",
+                        "tertiary-fixed-dim": "#81d0f8",
+                        "primary": "#00386d",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed": "#c1e8ff",
+                        "on-primary-fixed": "#001c3b",
+                        "secondary": "#166a59",
+                        "on-surface-variant": "#424750",
+                        "outline": "#737781",
+                        "on-tertiary-fixed": "#001e2b",
+                        "inverse-on-surface": "#eff1f2",
+                        "background": "#f8fafb",
+                        "tertiary-container": "#005571",
+                        "on-primary-container": "#9cc2ff",
+                        "on-secondary-fixed": "#002019",
+                        "secondary-fixed": "#a5f2db",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "section-gap": "80px",
+                        "margin-desktop": "40px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "headline-lg": ["Manrope"],
+                        "display-lg": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col antialiased">
+<!-- TopNavBar Shared Component -->
+<header class="bg-surface sticky top-0 z-50 bg-surface-container-low">
+<div class="flex justify-between items-center px-margin-mobile md:px-margin-desktop w-full max-w-container-max mx-auto h-16">
+<!-- Brand Logo -->
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-bold text-primary">Suluhu</span>
+</div>
+<!-- Navigation Links (Hidden on mobile per prompt guidelines, but included for desktop structure) -->
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Sessions</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#">Resources</a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-primary transition-colors active:opacity-80">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional, soft-lit headshot of a person to serve as a generic user profile avatar. The background is a calm, neutral grey. The lighting is flattering and modern, conveying trust and stability consistent with a clinical mental health application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpRnMyLQ1VoIth1YbSfayMJPr3kIrUSicBykEpdYFYubNm0WYEwsu3ZrU01WPWKWYVVhTdKrBFlmbHPvlxoG713cGY02N2UjhnWoNAevLJbnnsq50nPiBUDHGz_u7ODWsJ7YAc8IKGU_-B6Oe04Gq_nvVs072gMrO_iWaglZHR6wjLGLeX8P5jp3uj2ZYCvAtV0ImMsX4avWxLf-uWRy2zf_JXMh8S83rEGisUUPzsjtrbI5OrvMw0_Z2X-3NoZKZlN6o5tTEZkGE"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Canvas: Intake Experience -->
+<main class="flex-grow flex flex-col items-center px-margin-mobile md:px-margin-desktop py-12">
+<div class="w-full max-w-[680px] flex flex-col gap-10">
+<!-- Progress Indicator -->
+<div class="w-full flex flex-col gap-2">
+<div class="flex justify-between items-center font-label-md text-label-md text-on-surface-variant">
+<span>Intake Assessment</span>
+<span>1 of 9</span>
+</div>
+<!-- Soft horizontal progress bar in Action Accent -->
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[11%] rounded-full transition-all duration-500 ease-in-out"></div>
+</div>
+</div>
+<!-- Chat Interface -->
+<div class="flex flex-col gap-8 mt-4">
+<!-- AI Message -->
+<div class="flex gap-4 items-start">
+<!-- AI Avatar -->
+<div class="w-12 h-12 rounded-full overflow-hidden shrink-0 flex items-center justify-center bg-accent-teal-light text-secondary border border-secondary/20 shadow-[0_4px_24px_rgba(22,106,89,0.08)]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<!-- Message Bubble -->
+<div class="bg-surface-soothing rounded-2xl rounded-tl-sm p-6 text-on-surface font-body-lg text-body-lg border border-outline-variant/30 leading-relaxed max-w-[90%] shadow-[0_2px_12px_rgba(27,79,140,0.03)]">
+                        Hello! I'm Asilimia. I'm here to help you find the best support. 
+                        <br/><br/>
+                        Over the last 2 weeks, how often have you been bothered by feeling down, depressed, or hopeless?
+                    </div>
+</div>
+<!-- User Response Area -->
+<div class="flex flex-col gap-3 pl-16">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-2 ml-1">Select one option</p>
+<!-- Response Chips / Buttons -->
+<button class="w-full text-left bg-secondary/10 hover:bg-secondary/20 text-secondary font-body-md text-body-md py-4 px-6 rounded-lg border border-secondary/20 transition-colors flex items-center justify-between group active:bg-secondary/30">
+<span>Not at all</span>
+</button>
+<button class="w-full text-left bg-secondary/10 hover:bg-secondary/20 text-secondary font-body-md text-body-md py-4 px-6 rounded-lg border border-secondary/20 transition-colors flex items-center justify-between group active:bg-secondary/30">
+<span>Several days</span>
+</button>
+<button class="w-full text-left bg-secondary/10 hover:bg-secondary/20 text-secondary font-body-md text-body-md py-4 px-6 rounded-lg border border-secondary/20 transition-colors flex items-center justify-between group active:bg-secondary/30">
+<span>More than half the days</span>
+</button>
+<button class="w-full text-left bg-secondary/10 hover:bg-secondary/20 text-secondary font-body-md text-body-md py-4 px-6 rounded-lg border border-secondary/20 transition-colors flex items-center justify-between group active:bg-secondary/30">
+<span>Nearly every day</span>
+</button>
+</div>
+</div>
+<!-- Supportive Context / Privacy Note -->
+<div class="mt-8 flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm justify-center bg-surface-container-low py-3 rounded-lg border border-surface-container-highest">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Your responses are private and securely stored.</span>
+</div>
+</div>
+</main>
+<!-- Footer Shared Component -->
+<footer class="bg-surface-dim mt-section-gap">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-gutter w-full bg-surface-container-high border-t border-surface-container-highest">
+<div class="font-label-sm text-label-sm text-on-surface mb-4 md:mb-0">
+                © 2024 Suluhu Kenya. Professional Mental Health Solutions.
+            </div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Legal</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-secondary transition-colors" href="#">Befrienders Kenya Hotline: +254 722 178 177</a>
+</div>
+</div>
+</footer>
+</body></html>

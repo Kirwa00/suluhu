@@ -1,0 +1,41 @@
+# Local development infrastructure for Suluhu Therapy Center.
+# Brings up PostgreSQL 15 and Redis 7. The apps run on the host (npm run dev)
+# and connect to these containers. Production uses managed equivalents.
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: suluhu-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-suluhu}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-suluhu_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-suluhu}
+      TZ: Africa/Nairobi
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'
+    volumes:
+      - suluhu_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-suluhu} -d ${POSTGRES_DB:-suluhu}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: suluhu-redis
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    ports:
+      - '${REDIS_PORT:-6379}:6379'
+    volumes:
+      - suluhu_redisdata:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  suluhu_pgdata:
+  suluhu_redisdata:

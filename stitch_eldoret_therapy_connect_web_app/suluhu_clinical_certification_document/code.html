@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Clinical Certification | Suluhu Therapy Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#001c3b",
+                        "error-container": "#ffdad6",
+                        "surface-container-low": "#f2f4f5",
+                        "surface": "#f8fafb",
+                        "primary": "#00386d",
+                        "tertiary-container": "#005571",
+                        "inverse-surface": "#2e3132",
+                        "background": "#f8fafb",
+                        "text-rich-slate": "#1C1E21",
+                        "primary-fixed": "#d5e3ff",
+                        "surface-container-highest": "#e1e3e4",
+                        "secondary": "#166a59",
+                        "surface-soothing": "#F0F4F8",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e6e8e9",
+                        "primary-container": "#1b4f8c",
+                        "outline": "#737781",
+                        "secondary-fixed-dim": "#89d5c0",
+                        "accent-teal-light": "#E8F3F1",
+                        "surface-container-lowest": "#ffffff",
+                        "outline-variant": "#c2c6d1",
+                        "on-tertiary-fixed-variant": "#004d67",
+                        "on-tertiary-fixed": "#001e2b",
+                        "on-error-container": "#93000a",
+                        "tertiary": "#003d52",
+                        "surface-bright": "#f8fafb",
+                        "on-secondary-fixed": "#002019",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#a5f2db",
+                        "on-tertiary-container": "#7acaf2",
+                        "on-primary-fixed-variant": "#0d4784",
+                        "on-surface-variant": "#424750",
+                        "surface-container": "#eceeef",
+                        "on-secondary-container": "#1f705f",
+                        "on-secondary-fixed-variant": "#005142",
+                        "tertiary-fixed": "#c1e8ff",
+                        "secondary-fixed": "#a5f2db",
+                        "on-secondary": "#ffffff",
+                        "surface-dim": "#d8dadb",
+                        "on-primary-container": "#9cc2ff",
+                        "inverse-on-surface": "#eff1f2",
+                        "surface-tint": "#305f9d",
+                        "inverse-primary": "#a7c8ff",
+                        "tertiary-fixed-dim": "#81d0f8",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e1e3e4",
+                        "on-background": "#191c1d",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "on-error": "#ffffff",
+                        "success-calm": "#2E8555",
+                        "on-surface": "#191c1d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "40px",
+                        "section-gap": "80px",
+                        "container-max": "1200px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "unit": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Manrope"],
+                        "headline-lg": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .cert-border {
+            border: 20px solid transparent;
+            border-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0H100V100H0V0ZM5 5V95H95V5H5Z' fill='%2300386d'/%3E%3C/svg%3E") 25 stretch;
+        }
+        .watermark {
+            opacity: 0.03;
+            pointer-events: none;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white !important; }
+            .a4-container { margin: 0; box-shadow: none; width: 100%; height: auto; }
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low font-body-md text-on-surface min-h-screen flex flex-col items-center py-12 px-4">
+<!-- Top Action Bar (Admin Context) -->
+<header class="no-print w-full max-w-[842px] mb-8 flex justify-between items-center bg-surface-bright p-4 rounded-xl shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary leading-tight">Admin Portal</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Reviewing Certification #STC-CERT-8821</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-on-primary rounded-lg font-label-md hover:bg-primary-container transition-all" onclick="window.print()">
+<span class="material-symbols-outlined text-[20px]">print</span>
+                Download PDF
+            </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-primary text-primary rounded-lg font-label-md hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined text-[20px]">share</span>
+                Share Link
+            </button>
+</div>
+</header>
+<!-- Certificate Container (A4 Aspect Ratio) -->
+<main class="a4-container relative w-full max-w-[842px] aspect-[1/1.414] bg-white shadow-2xl overflow-hidden cert-border p-8 md:p-12">
+<!-- Subtle Watermark Background -->
+<div class="watermark absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[500px]" style="font-variation-settings: 'FILL' 1;">psychology</span>
+</div>
+<!-- Content Shell -->
+<div class="relative h-full flex flex-col border-4 border-primary/20 p-8 md:p-14">
+<!-- Header -->
+<div class="text-center mb-12">
+<div class="flex flex-col items-center mb-6">
+<span class="material-symbols-outlined text-primary text-6xl mb-2" style="font-variation-settings: 'FILL' 1;">health_and_safety</span>
+<h2 class="font-headline-md text-headline-md text-primary tracking-[0.2em]">SULUHU THERAPY CENTER</h2>
+<div class="h-1 w-24 bg-secondary mt-2"></div>
+</div>
+<h3 class="font-display-lg text-display-lg text-primary-container mt-10 mb-2 uppercase">Certificate</h3>
+<p class="font-headline-md text-headline-md text-primary tracking-widest font-light">OF CLINICAL COMPETENCY</p>
+</div>
+<!-- Body Text -->
+<div class="text-center mb-12">
+<p class="font-body-lg text-body-lg text-on-surface-variant italic mb-6">This is to certify that</p>
+<h4 class="font-display-lg text-[40px] text-primary border-b-2 border-outline-variant inline-block px-12 pb-2 mb-6">Dr. Amina J. Mwangi</h4>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-lg mx-auto">
+                    has successfully completed the comprehensive clinical training module 
+                    <span class="block font-bold text-on-surface not-italic mt-2 text-2xl">Advanced Crisis Intervention &amp; Ethics</span>
+                    with a cumulative proficiency score of
+                </p>
+<div class="mt-4 flex justify-center items-center gap-2">
+<span class="font-headline-lg text-headline-lg text-secondary">98.5%</span>
+<span class="font-label-md text-label-md text-on-surface-variant uppercase tracking-tighter">Distinction</span>
+</div>
+</div>
+<!-- Competencies Grid -->
+<div class="grid grid-cols-2 gap-x-12 gap-y-4 mb-16 bg-surface-soothing/50 p-6 rounded-xl border border-outline-variant/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-xl">check_circle</span>
+<span class="font-label-md text-label-md text-on-surface">Clinical Triage &amp; Assessment</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-xl">check_circle</span>
+<span class="font-label-md text-label-md text-on-surface">HIPAA &amp; Kenya Data Protection Act 2019</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-xl">check_circle</span>
+<span class="font-label-md text-label-md text-on-surface">Trauma-Informed Modalities</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary text-xl">check_circle</span>
+<span class="font-label-md text-label-md text-on-surface">Immediate Crisis De-escalation</span>
+</div>
+</div>
+<!-- Signatures and Verification -->
+<div class="mt-auto grid grid-cols-3 items-end gap-8">
+<!-- Signature 1 -->
+<div class="text-center flex flex-col items-center">
+<div class="w-32 h-12 bg-contain bg-no-repeat bg-center mb-2" data-alt="A professional, clean digital signature in dark blue ink on a white background, looking like a real physician's handwriting with elegant loops. The style is formal, authoritative, and clean." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD2h7NbCIJ5do7QB6HCmyA-7X7UHCjjbs3ac3TE9e9ScxLQvc3OWVzW8FMjGnkfPOOa9MDhmZHgI6PtXuY7Y3dl9n1sMaCXm_ujrYgzbPsV_OCO3RWGC6kDDMq9ypXzsc6s_JRqcKeBCOfZ7egkiAzAh26fEXz225t8ZVfMWoxQ6F6w4kEuzdF5cgS4EMwkFz1o-GDHChYCRR8y95YoqthCMkVnJagXk4mO4FFHJ-eY-oeDX35GGgmS4eW1AWmB8cf2SYz_PzEdvBQ')"></div>
+<div class="w-full h-px bg-on-surface-variant/40 mb-2"></div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Dr. Silas Okoth</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Clinical Director</p>
+</div>
+<!-- QR Verification -->
+<div class="flex flex-col items-center justify-center pb-2">
+<div class="p-2 border border-outline-variant bg-white rounded-lg mb-2">
+<div class="w-20 h-20 bg-cover" data-alt="A high-contrast, clean QR code framed within a professional border. The style is modern, technical, and official, representing a secure digital verification point." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB5UFmjNxzLgJvVD5oLbOvNt-SiGwjczWgiCx44kA0AbvTxQ-htNOtfk8ZnbCXNItPg8OMLaiJSMz9hrsQ5cfsbNvc3iu47bKtS1oRNlfu0ywX8B69bGAWuwyjAyvbzRG1qacNkR-w13w7ylFoaqIs17tCao5Y6HOqQDgLfpNDAKsTne4Pt1YP11vK6oLvGHaMlLI3M49Hptjv2vjsBkbJcZYjEM1rsY24WuuJBEJJkN3rj9mOKNYSsYXMyrPxio_8gFXvcf_U4j3I')"></div>
+</div>
+<p class="font-label-sm text-[10px] text-on-surface-variant text-center uppercase tracking-tighter">
+                        Scan to Verify<br/>
+                        ID: STC-2024-8821
+                    </p>
+</div>
+<!-- Signature 2 -->
+<div class="text-center flex flex-col items-center">
+<div class="w-32 h-12 bg-contain bg-no-repeat bg-center mb-2" data-alt="A fluid, professional digital signature in dark teal ink. The handwriting is clear and sophisticated, appearing on a pristine white background. The aesthetic is corporate and reliable." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDNgZygnEVjZkvLPd7N-REvvMRyRDl6Zh7LoZFZGHEdjxWgwczsHfg2zYf586k8n0MyuiPW7M29n5W0-czavjVx-IYIisfpEbyx3RypZFjAyXUnapQk9WTnDwY4PoxKO_vkb-qPc0n1q-nTm-yN6p-14ktzpK7Sz9zFlETHvKGmmWifJokvozirBf1MtNKUJRiYhQ40t1NwrNwOYF6FANVbIerjx3nlKffBS7X06AEkgJyir2kTRGG5TZ8WSbfTXqIQwY9LQJJV96I')"></div>
+<div class="w-full h-px bg-on-surface-variant/40 mb-2"></div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Margaret Wanjiru</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Chief Operations Officer</p>
+</div>
+</div>
+<!-- Validity Footer -->
+<div class="mt-12 pt-6 border-t border-outline-variant/30 flex justify-between items-center text-on-surface-variant font-label-sm">
+<div class="flex gap-6">
+<p>Issued: <span class="text-on-surface font-bold">October 14, 2023</span></p>
+<p>Expires: <span class="text-on-surface font-bold">October 13, 2024</span></p>
+</div>
+<div class="flex items-center gap-1 opacity-50">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+<span class="truncate max-w-[120px]">HASH: a8f9...32e1</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Side Navigation (Admin Shell Integration) -->
+<nav class="no-print fixed left-0 top-0 h-screen w-64 bg-surface-container-low border-r border-outline-variant/30 flex flex-col py-8 px-4">
+<div class="mb-8 px-2">
+<p class="font-headline-md text-headline-md font-bold text-primary">Suluhu Admin</p>
+<p class="font-label-md text-label-md text-on-surface-variant">Backend Portal</p>
+</div>
+<ul class="space-y-1">
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">pending_actions</span>
+<span class="font-label-md">Applications</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-label-md">Therapists</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg text-primary font-bold border-r-4 border-primary bg-primary-container/10" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label-md">Verifications</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md">Analytics</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">Settings</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto space-y-4">
+<button class="w-full py-3 bg-primary text-on-primary rounded-xl font-label-md shadow-md hover:scale-[1.02] active:scale-95 transition-all">
+                Review Pending
+            </button>
+<div class="pt-4 border-t border-outline-variant/20">
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 p-3 text-on-surface-variant hover:text-error transition-colors" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md">Logout</span>
+</a>
+</div>
+</div>
+</nav>
+<!-- Floating UI Notification -->
+<div class="no-print fixed bottom-8 right-8 bg-on-surface text-surface py-3 px-6 rounded-full shadow-2xl flex items-center gap-3 translate-y-20 opacity-0 transition-all duration-500" id="toast">
+<span class="material-symbols-outlined text-success-calm">check_circle</span>
+<p class="font-label-md">Certificate verified successfully.</p>
+</div>
+<script>
+        // Micro-interaction for the toast
+        window.addEventListener('load', () => {
+            const toast = document.getElementById('toast');
+            setTimeout(() => {
+                toast.classList.remove('translate-y-20', 'opacity-0');
+            }, 1000);
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 5000);
+        });
+
+        // Hover effect for the certificate
+        const cert = document.querySelector('.a4-container');
+        cert.addEventListener('mouseenter', () => {
+            cert.style.transition = 'transform 0.5s ease-out';
+            cert.style.transform = 'translateY(-5px)';
+        });
+        cert.addEventListener('mouseleave', () => {
+            cert.style.transform = 'translateY(0)';
+        });
+    </script>
+</body></html>

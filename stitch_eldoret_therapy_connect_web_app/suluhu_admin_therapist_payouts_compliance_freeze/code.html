@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Therapist Payouts | Suluhu Therapy Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Shared Style & Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface": "#f8fafb",
+                    "on-primary": "#ffffff",
+                    "success-calm": "#2E8555",
+                    "on-secondary": "#ffffff",
+                    "primary-container": "#1b4f8c",
+                    "surface-container-high": "#e6e8e9",
+                    "tertiary-fixed": "#c1e8ff",
+                    "surface-container": "#eceeef",
+                    "secondary-fixed-dim": "#89d5c0",
+                    "outline-variant": "#c2c6d1",
+                    "surface-dim": "#d8dadb",
+                    "surface-bright": "#f8fafb",
+                    "on-tertiary-fixed-variant": "#004d67",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#002019",
+                    "surface-container-low": "#f2f4f5",
+                    "surface-container-highest": "#e1e3e4",
+                    "outline": "#737781",
+                    "on-surface-variant": "#424750",
+                    "text-rich-slate": "#1C1E21",
+                    "background": "#f8fafb",
+                    "on-surface": "#191c1d",
+                    "on-primary-container": "#9cc2ff",
+                    "inverse-surface": "#2e3132",
+                    "on-tertiary-container": "#7acaf2",
+                    "accent-teal-light": "#E8F3F1",
+                    "on-secondary-fixed-variant": "#005142",
+                    "tertiary-fixed-dim": "#81d0f8",
+                    "tertiary": "#003d52",
+                    "surface-variant": "#e1e3e4",
+                    "secondary": "#166a59",
+                    "inverse-on-surface": "#eff1f2",
+                    "secondary-container": "#a5f2db",
+                    "primary": "#00386d",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "inverse-primary": "#a7c8ff",
+                    "on-background": "#191c1d",
+                    "on-tertiary-fixed": "#001e2b",
+                    "primary-fixed-dim": "#a7c8ff",
+                    "error-container": "#ffdad6",
+                    "surface-soothing": "#F0F4F8",
+                    "on-error": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed": "#001c3b",
+                    "primary-fixed": "#d5e3ff",
+                    "on-primary-fixed-variant": "#0d4784",
+                    "tertiary-container": "#005571",
+                    "secondary-fixed": "#a5f2db",
+                    "on-secondary-container": "#1f705f",
+                    "surface-tint": "#305f9d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "80px",
+                    "unit": "8px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "container-max": "1200px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Manrope"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "display-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: transparent; }
+      ::-webkit-scrollbar-thumb { background: #c2c6d1; border-radius: 10px; }
+      ::-webkit-scrollbar-thumb:hover { background: #737781; }
+      
+      .frozen-row-indicator {
+        position: relative;
+      }
+      .frozen-row-indicator::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background-color: #ba1a1a;
+      }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased flex overflow-hidden">
+<!-- SideNavBar Anchor -->
+<nav class="flex flex-col h-screen fixed left-0 top-0 py-gutter px-4 z-40 bg-surface-container-low border-r border-outline-variant w-64">
+<div class="flex items-center gap-3 mb-10 px-2">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">psychology</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Admin Console</h1>
+<p class="font-label-md text-label-md text-on-surface-variant">Secure Portal</p>
+</div>
+</div>
+<div class="space-y-1 flex-1">
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-accent-teal-light transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Financial Overview
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-accent-teal-light transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="trending_up">trending_up</span>
+                Revenue Trends
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-accent-teal-light transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+                Payment Methods
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 bg-primary-container text-on-primary-container font-bold rounded-lg translate-x-1 transition-transform font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+                Therapist Payouts
+            </a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-accent-teal-light transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+                Audit Logs
+            </a>
+</div>
+<button class="bg-primary text-on-primary py-3 px-4 rounded-lg font-label-md text-label-md font-semibold mb-6 flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" style="font-size: 18px;">download</span>
+            Export Reports
+        </button>
+<div class="pt-6 border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+                Sign Out
+            </a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 h-screen flex flex-col overflow-hidden">
+<!-- TopNavBar Anchor -->
+<header class="flex justify-between items-center w-full px-margin-desktop h-16 sticky top-0 z-50 bg-surface-bright border-b border-outline-variant">
+<div class="flex items-center gap-4">
+<div class="font-headline-md text-headline-md font-bold text-primary">Suluhu Therapy Center</div>
+<div class="relative group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">search</span>
+<input class="bg-surface-container-low border-none rounded-full pl-10 pr-4 py-2 w-72 text-label-md focus:ring-2 focus:ring-primary-container transition-all" placeholder="Search therapists or transactions..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-4 text-on-surface-variant">
+<button class="hover:bg-surface-container-low p-2 rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="hover:bg-surface-container-low p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<button class="hover:bg-surface-container-low p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+</div>
+<div class="h-8 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="font-label-md text-label-md font-bold text-on-surface">Admin User</p>
+<p class="text-[10px] text-outline uppercase tracking-wider">Super Administrator</p>
+</div>
+<img class="w-10 h-10 rounded-full border-2 border-primary-container" data-alt="A professional headshot of a middle-aged female administrator with a friendly expression. She is wearing a soft blue blazer in a brightly lit, clean corporate office setting that emphasizes the calm and stable brand aesthetic of Suluhu Therapy Center. Soft daylight enters from a large window in the background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwdISUqPnzg5w_t-3d5-TbMgJHgzLXm_Bo4czUc5iscz9oqWSwX0jqnnmZvOvh5a-3nNAiiky2tBPrXlrmbxsrv5JsvXdOcfjj1-aOBopxo2Xk_5D--2QiquF3n9ZfY5RuoAXAMnsSchdcNUoMcbwSwkaXq_Jv5rw0nS27tClo_OgOaC30FzA1fQkO1jAsutCVo6x33L70tAHvgRSTZ-Y5PNxOdivupuVIai6qz1lGHSYVpAFCbaYdE7ZFiF0-DBoPaYhEehc-w_Y"/>
+</div>
+</div>
+</header>
+<!-- Payouts Content -->
+<div class="flex-1 overflow-y-auto p-margin-desktop bg-surface">
+<!-- Context Header -->
+<div class="mb-gutter flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-1">Therapist Payouts</h2>
+<p class="text-on-surface-variant font-body-md">Cycle: Oct 15 - Oct 31, 2023 • Scheduled Payout Date: Nov 1, 2023</p>
+</div>
+<div class="flex gap-3">
+<button class="px-4 py-2 border border-outline rounded-lg font-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-size: 18px;">filter_list</span>
+                        Filter Payouts
+                    </button>
+<button class="px-6 py-2 bg-primary text-on-primary rounded-lg font-label-md font-semibold hover:bg-primary-container transition-all shadow-sm">
+                        Process All Compliant Payouts
+                    </button>
+</div>
+</div>
+<!-- Compliance Alert Banner -->
+<div class="mb-gutter bg-error-container text-on-error-container p-6 rounded-xl flex items-start gap-4 border border-error/20">
+<span class="material-symbols-outlined text-error" style="font-variation-settings: 'FILL' 1;">warning</span>
+<div class="flex-1">
+<p class="font-headline-md text-headline-md mb-1" style="font-size: 18px;">Critical Compliance Issues Detected</p>
+<p class="font-body-md text-on-surface-variant leading-relaxed">
+                        The system has identified <strong>4 therapists</strong> with expired Professional Indemnity insurance or invalid licensing. In accordance with the Suluhu Governance Framework, their payouts have been <strong>automatically frozen</strong> to mitigate legal risk. Compliance overrides require senior administrator authorization.
+                    </p>
+</div>
+<div class="flex flex-col gap-2">
+<button class="bg-error text-on-error px-4 py-2 rounded-lg font-label-md font-semibold text-sm hover:opacity-90 transition-opacity whitespace-nowrap">
+                        Review All Frozen Accounts
+                    </button>
+</div>
+</div>
+<!-- Bento-style Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-gutter">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant">
+<p class="text-outline font-label-md uppercase tracking-widest mb-2">Total Payout Pool</p>
+<p class="font-headline-lg text-headline-lg text-primary">$142,500.00</p>
+<div class="mt-4 flex items-center gap-2 text-success-calm font-label-md">
+<span class="material-symbols-outlined" style="font-size: 16px;">trending_up</span>
+<span>+12% from last cycle</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant">
+<p class="text-outline font-label-md uppercase tracking-widest mb-2">Active Payees</p>
+<p class="font-headline-lg text-headline-lg text-on-surface">128 Therapists</p>
+<div class="mt-4 flex items-center gap-2 text-on-surface-variant font-label-md">
+<span class="material-symbols-outlined" style="font-size: 16px;">group</span>
+<span>4 Frozen pending review</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant">
+<p class="text-outline font-label-md uppercase tracking-widest mb-2">Processing Status</p>
+<p class="font-headline-lg text-headline-lg text-secondary">Scheduled</p>
+<div class="mt-4 flex items-center gap-2 text-on-surface-variant font-label-md">
+<span class="material-symbols-outlined" style="font-size: 16px;">schedule</span>
+<span>Next run in 14h 22m</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-error/30 bg-error/5">
+<p class="text-error font-label-md uppercase tracking-widest mb-2">Frozen Funds</p>
+<p class="font-headline-lg text-headline-lg text-error">$18,240.50</p>
+<div class="mt-4 flex items-center gap-2 text-error font-label-md">
+<span class="material-symbols-outlined" style="font-size: 16px;">gavel</span>
+<span>Legal Hold Active</span>
+</div>
+</div>
+</div>
+<!-- Data Dense Table -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-6 py-4 font-label-md text-outline font-bold uppercase tracking-wider">Therapist</th>
+<th class="px-6 py-4 font-label-md text-outline font-bold uppercase tracking-wider">Credentials State</th>
+<th class="px-6 py-4 font-label-md text-outline font-bold uppercase tracking-wider">Sessions</th>
+<th class="px-6 py-4 font-label-md text-outline font-bold uppercase tracking-wider">Payout Amount</th>
+<th class="px-6 py-4 font-label-md text-outline font-bold uppercase tracking-wider">Status</th>
+<th class="px-6 py-4 font-label-md text-outline font-bold uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Compliant Therapist -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A portrait of a male therapist with glasses and a friendly, supportive smile. He is in a clean, modern counseling office with soft plants and blue accents, following the Suluhu professional aesthetic. High-quality lighting, professional photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4vwZsGH4Qq7_Qy9O9jfyx79UVHvdnvyhHiaM923ocUAiEiEJHcm8vSO1p2RykeS3aDyMS0R_YvnZXcnp_u01DeP1Pou6Fwyi9f0Pcz0SYBgiSOHGpErrVgY1QEq3mmDU5HEGvPCkAKR8ZZehUBt206e9ZjFtyG2RvKxAdolOBrrda8CgOkvfN-C4KaOoG1Y9Z152DBSMoBxjqcsstW4LEZxGd7wDtz4ywXFtxdvtoSjRzfsRC-1GK3uYDCm3pz0Xp7g3HUUelhcM"/>
+<div>
+<p class="font-label-md text-on-surface font-bold">Dr. Aris Thorne</p>
+<p class="text-xs text-outline">Clinical Psychologist (LPC-129)</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-success-calm">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="text-label-md font-medium">Valid until Jan 2025</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant font-label-md">24 Sessions</td>
+<td class="px-6 py-4 text-on-surface font-bold">$3,840.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-secondary-container text-on-secondary-container">
+                                        READY
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline font-label-md">View Breakdown</button>
+</td>
+</tr>
+<!-- Frozen Therapist 1 -->
+<tr class="frozen-row-indicator bg-error/5 hover:bg-error/10 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover grayscale-[30%]" data-alt="A portrait of a female professional therapist with a thoughtful and calm expression. She has dark hair and is wearing a cream-colored sweater. The background is a blurred therapy room with soft, oceanic blue tones and natural light. High-end professional headshot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2crx5oDC9bVvvvCJbWLtraGb5B9JeLI4KvY7QhZQf0G3ZGufNY-c98sxmkKUP-6SGGinbZZ_-JhUIlzJlr_0TbOV6EKISNDP9hdn1uHCPfSrxJJ7mXdavl-T6tuIw46v48hkf02gzJN07y_91kBQ_boRmjoAFWV8jkULbFly9V-I2zg51T--ni7OlqhIh_j8r8GaKZwrFDHbqihmnaYmT-5eWZoOJF-bEoZ-sx2-83AeD2dYk8wRAk7t-muhYPX1YWql10yeFR1s"/>
+<div>
+<p class="font-label-md text-on-surface font-bold">Dr. Elena Rodriguez</p>
+<p class="text-xs text-outline">Trauma Specialist (MFT-882)</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">error</span>
+<span class="text-label-md font-bold">Indemnity Expired</span>
+</div>
+<p class="text-[10px] text-error/80 pl-6">Expired: Oct 12, 2023</p>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant font-label-md">31 Sessions</td>
+<td class="px-6 py-4 text-error font-bold">$4,960.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-error-container text-on-error-container">
+                                        PAYOUT FROZEN
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="px-3 py-1 bg-surface-container-lowest border border-error/40 text-error rounded-lg font-label-md text-xs font-bold hover:bg-error hover:text-on-error transition-all">Compliance Override</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+<span class="text-xs font-bold">Send Reminder</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Frozen Therapist 2 -->
+<tr class="frozen-row-indicator bg-error/5 hover:bg-error/10 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover grayscale-[30%]" data-alt="Professional headshot of a mature therapist with grey hair, wearing a navy blue shirt. He has a calm, stable expression and is set against a clean white wall with a single green plant. Cinematic lighting, soft shadows, Suluhu brand style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5jJ7MtsIWT-2w39CNtDPK7ZVvYn5-6BOdX6ubIMntM77qTppqlK6h9tn5FVqoKzdObrihLioOXi1oEZ3sgaLyr9t7u5PiUwzMD7D73btzcB4mLf1t5oAhieNzGBQgz0uzIu4qNk6kU0tb2xubjRF03HmCgTt7hOlPKGcfRRcr8n5ZWzG38uBnt1-A4_UeqlD4EEXEZ8KrugxG43ixvGgeJuSoHN3dvLBOSa-heKriSbAgJwBFdkvUI_HaNQGfR2hS1BXQp2Tyiyg"/>
+<div>
+<p class="font-label-md text-on-surface font-bold">Jameson Wu, PhD</p>
+<p class="text-xs text-outline">Cognitive Behavioral (PSY-554)</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex flex-col">
+<div class="flex items-center gap-2 text-error">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">error</span>
+<span class="text-label-md font-bold">License Verification Failed</span>
+</div>
+<p class="text-[10px] text-error/80 pl-6">State Board sync error</p>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant font-label-md">18 Sessions</td>
+<td class="px-6 py-4 text-error font-bold">$2,700.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-error-container text-on-error-container">
+                                        PAYOUT FROZEN
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex justify-end gap-2">
+<button class="px-3 py-1 bg-surface-container-lowest border border-error/40 text-error rounded-lg font-label-md text-xs font-bold hover:bg-error hover:text-on-error transition-all">Compliance Override</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+<span class="text-xs font-bold">Send Reminder</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Compliant Therapist -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A portrait of a young professional counselor with a gentle expression. She is wearing a soft teal blazer in a modern, brightly lit office environment. The image uses a light-mode aesthetic with clean lines and soft textures, conveying trust and reliability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4Q3XNoM0XreacsCuBU_H3R4WgyBkd_jFuc3187H5cg3iJ3a3jux_RgnlYivu4WQuRat_OAtj3XgSl9lIHFciYMHnLFDR45ctT2h91_vG5BkxKHITrP2Qk0aftLCKFiNYArojRCaDFrfSwcDJCIMyxNaDYTVRTrI0zxKA_AT2C_Un0YHlM3_oB1iX5m2Da2kHN1Ib8utf7oxTPGyAwbO5QJDLol-3vJ9Nc83fhvCk7dGn3974wvhVa8wvYAyoS2zVtbEQ2NqJBuaQ"/>
+<div>
+<p class="font-label-md text-on-surface font-bold">Sarah Jenkins, LCSW</p>
+<p class="text-xs text-outline">Youth &amp; Family (LCSW-912)</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2 text-success-calm">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+<span class="text-label-md font-medium">Valid until Oct 2024</span>
+</div>
+</td>
+<td class="px-6 py-4 text-on-surface-variant font-label-md">42 Sessions</td>
+<td class="px-6 py-4 text-on-surface font-bold">$6,720.00</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-secondary-container text-on-secondary-container">
+                                        READY
+                                    </span>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:underline font-label-md">View Breakdown</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / Footer -->
+<div class="px-6 py-4 bg-surface-container-low border-t border-outline-variant flex justify-between items-center">
+<div class="text-label-md text-on-surface-variant">
+                        Showing 1-4 of 128 therapists
+                    </div>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container-high transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 bg-primary-container text-on-primary-container rounded-lg font-bold">1</button>
+<button class="w-10 h-10 hover:bg-surface-container-high rounded-lg font-bold">2</button>
+<button class="w-10 h-10 hover:bg-surface-container-high rounded-lg font-bold">3</button>
+<button class="p-2 border border-outline-variant rounded-lg hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions for compliance override
+        document.querySelectorAll('button:contains("Compliance Override")').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const confirmed = confirm("Are you sure you want to override the compliance freeze for this payout? This action will be recorded in the audit logs.");
+                if (confirmed) {
+                    btn.closest('tr').classList.remove('bg-error/5', 'frozen-row-indicator');
+                    btn.closest('tr').classList.add('bg-success-calm/10');
+                    const statusBadge = btn.closest('tr').querySelector('.inline-flex');
+                    statusBadge.textContent = 'OVERRIDDEN';
+                    statusBadge.className = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-tertiary-fixed text-on-tertiary-fixed-variant';
+                    btn.innerHTML = '<span class="material-symbols-outlined text-[16px]">check</span> Confirmed';
+                    btn.disabled = true;
+                }
+            });
+        });
+
+        // Add support for :contains selector in vanilla JS for this demo
+        window.NodeList.prototype.forEach = Array.prototype.forEach;
+        document.querySelectorAll('button').forEach(btn => {
+            if(btn.textContent.includes('Compliance Override')) {
+               btn.onclick = function() {
+                  const row = this.closest('tr');
+                  const therapistName = row.querySelector('.font-bold').textContent;
+                  if(confirm(`Manually authorize payout for ${therapistName}?`)) {
+                    row.classList.remove('bg-error/5', 'frozen-row-indicator');
+                    const badge = row.querySelector('.inline-flex');
+                    badge.textContent = 'OVERRIDDEN';
+                    badge.classList.remove('bg-error-container', 'text-on-error-container');
+                    badge.classList.add('bg-tertiary-fixed', 'text-on-tertiary-fixed-variant');
+                    this.textContent = "Overridden";
+                    this.classList.replace('text-error', 'text-secondary');
+                    this.disabled = true;
+                  }
+               }
+            }
+            if(btn.textContent.includes('Send Reminder')) {
+                btn.onclick = function() {
+                    const therapistName = this.closest('tr').querySelector('.font-bold').textContent;
+                    this.innerHTML = '<span class="material-symbols-outlined text-[20px]">done</span> Sent';
+                    this.classList.add('text-success-calm');
+                    setTimeout(() => {
+                        this.innerHTML = '<span class="material-symbols-outlined text-[20px]">mail</span><span class="text-xs font-bold">Send Reminder</span>';
+                        this.classList.remove('text-success-calm');
+                    }, 2000);
+                }
+            }
+        });
+    </script>
+</body></html>

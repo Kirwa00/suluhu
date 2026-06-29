@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Client Dashboard - Eldoret Therapy Connect</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#57432a",
+                    "primary-container": "#e6c9a7",
+                    "on-primary-fixed": "#281904",
+                    "on-secondary-fixed": "#281901",
+                    "surface-container-highest": "#e8e1dd",
+                    "surface": "#fff8f4",
+                    "surface-variant": "#e8e1dd",
+                    "on-tertiary-container": "#4c5869",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#dec2a0",
+                    "surface-container-low": "#f9f2ee",
+                    "outline-variant": "#d1c4b9",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#fddeb5",
+                    "on-background": "#1e1b19",
+                    "tertiary-fixed-dim": "#bac7db",
+                    "on-error": "#ffffff",
+                    "on-surface": "#1e1b19",
+                    "surface-bright": "#fff8f4",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#eee7e3",
+                    "surface-tint": "#705b3f",
+                    "secondary-fixed-dim": "#e0c29a",
+                    "on-secondary-fixed-variant": "#584325",
+                    "on-tertiary-fixed": "#0f1c2b",
+                    "on-surface-variant": "#4d453d",
+                    "background": "#fff8f4",
+                    "on-tertiary-fixed-variant": "#3b4858",
+                    "tertiary-container": "#c2cfe3",
+                    "primary-fixed": "#fcdebb",
+                    "on-primary-container": "#695439",
+                    "on-primary": "#ffffff",
+                    "primary": "#705b3f",
+                    "on-secondary-container": "#765f3e",
+                    "inverse-surface": "#33302d",
+                    "inverse-on-surface": "#f6efeb",
+                    "primary-fixed-dim": "#dec2a0",
+                    "tertiary-fixed": "#d6e3f8",
+                    "outline": "#7f756b",
+                    "surface-container": "#f3ede8",
+                    "tertiary": "#535f70",
+                    "surface-dim": "#dfd9d5",
+                    "error": "#ba1a1a",
+                    "secondary": "#715b3a",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#fadbb2",
+                    "accent-coral": "#E98A6C"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "container-max": "1200px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "body-md": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "display-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #F8F8F8; /* Alabaster base as per style guidance */
+        }
+        .tonal-card {
+            background-color: #ffffff;
+            border: 1px solid #E6C9A7; /* Alabaster Cream border */
+            box-shadow: 0 4px 20px rgba(230, 201, 167, 0.1);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface w-full top-0 sticky border-b border-outline-variant dark:border-outline z-40">
+<div class="flex justify-between items-center px-gutter py-unit w-full max-w-container-max mx-auto h-16">
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim font-extrabold tracking-tight">Eldoret Therapy Connect</h1>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">settings</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A professional, warm portrait of a person in a brightly lit, minimalist office. They are wearing a neutral-colored sweater and smiling gently at the camera. The background is softly blurred with hints of indoor plants and warm wooden textures, embodying a sense of safety and professional approachable care." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnLmw1awWF49cgcZcRjwiABK1Ub2oZNEGr_fJiTVP0UYP_DZO0vquck6loQYtW4QkQrxpoS-5T80BsbdOUwTB8qwwivKxXZK1zH39tswHcWnBi4uyvDopgacKsJMhy1kUF7j9QTn1NfXCtGCk8omOYLDO6uUaawpji-prKogtwTUdfLi0wBLhaUrXm7zXBl5XcY2rl5ETZKfxJUGNk_pKH9AqKwaObTHrmQoaeoT5fR9n6anaBvgFJI2ScEIV1jhf9ic9ZTx6IfUI"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex max-w-container-max mx-auto">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen p-stack-md bg-surface-container-low dark:bg-surface-dim border-r border-outline-variant dark:border-outline w-64 fixed">
+<div class="flex items-center gap-3 mb-10 px-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" style="font-variation-settings: 'FILL' 1;">spa</span>
+</div>
+<div>
+<h2 class="font-headline-md text-primary font-bold leading-tight">Eldoret Therapy</h2>
+<p class="font-label-sm text-on-surface-variant opacity-70">Your Wellness Journey</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 flex-grow">
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-xl font-label-sm active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-xl font-label-sm transition-all active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">search_check</span>
+<span>Find a Therapist</span>
+</a>
+</div>
+<button class="w-full bg-accent-coral text-white py-3 rounded-xl font-label-sm mb-10 hover:brightness-110 transition-all">
+                Book Session
+            </button>
+<div class="flex flex-col gap-2 border-t border-outline-variant pt-6">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-xl font-label-sm transition-all" href="#">
+<span class="material-symbols-outlined">help</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-xl font-label-sm transition-all" href="#">
+<span class="material-symbols-outlined">shield</span>
+<span>Privacy</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow md:ml-64 px-margin-mobile md:px-margin-desktop py-stack-lg min-h-screen">
+<div class="max-w-2xl mx-auto">
+<!-- Greeting -->
+<section class="mb-stack-lg">
+<h2 class="font-display-lg text-primary mb-2">Welcome back, Alex.</h2>
+<p class="text-on-surface-variant font-body-lg">How are you feeling today?</p>
+</section>
+<!-- Featured Card: Next Session -->
+<section class="mb-stack-lg">
+<div class="tonal-card rounded-xl p-8 transition-transform hover:scale-[1.01] duration-300">
+<div class="flex justify-between items-start mb-6">
+<div>
+<span class="bg-tertiary-container text-on-tertiary-container px-3 py-1 rounded-full font-label-sm mb-4 inline-block">Upcoming</span>
+<h3 class="font-headline-md text-on-surface mb-1">Your Next Session</h3>
+<p class="text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                                    Oct 24th at 2:00 PM
+                                </p>
+</div>
+</div>
+<div class="flex items-center gap-4 mb-8 p-4 bg-surface-container-low rounded-xl">
+<div class="w-16 h-16 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A portrait of Dr. Jane Wambui, a kind-looking female therapist in her 40s with a warm and reassuring expression. She has short natural hair and is wearing a dark professional blazer. The background is a calm, minimal counseling room with soft, earth-toned decor and gentle lighting, conveying an atmosphere of deep trust and professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1KFR_1rgUlkRq41e7MnwXskdp39nRZOCNs-3JM_3rdAPcsdkvkmU_nFHoCrT9gaONpaE58mF6Yii2IEn9h3gW9VqhfZQw5-Q-8_WoY94rooIxZCEL9ZjS3b-dGYDvRRqYIKNHOOLNi950iXOrHFmJ1mYJrXIy0mlrjuNO9jtNQwepCo9ks5da5k2yf_hNbc0Fk6olwI4ZQPWJ0jn_6yiwQDIZ7hXajq33tT1SphXx-iQ8p251o-1rTrW0F5IkK_peImWLcEB59aY"/>
+</div>
+<div>
+<p class="font-headline-md text-primary text-lg">Dr. Jane Wambui</p>
+<p class="font-label-sm text-on-surface-variant">Senior Psychologist</p>
+</div>
+</div>
+<button class="w-full py-4 bg-primary text-white rounded-full font-label-sm flex items-center justify-center gap-2 hover:bg-opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">video_call</span>
+                            Join Session
+                        </button>
+</div>
+</section>
+<!-- Recent Reflections -->
+<section class="mb-stack-lg">
+<div class="flex items-center justify-between mb-4">
+<h4 class="font-headline-md text-primary text-xl">Recent Reflections</h4>
+<button class="text-primary font-label-sm hover:underline">View Journal</button>
+</div>
+<div class="tonal-card rounded-xl p-6 bg-secondary-container/10 border-dashed">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-secondary opacity-40">format_quote</span>
+<blockquote class="font-body-md text-on-surface italic leading-relaxed">
+                                "Feeling slightly more grounded today after the breathing exercises."
+                            </blockquote>
+</div>
+<div class="mt-4 flex items-center gap-2 text-on-surface-variant text-sm opacity-60 ml-10">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Yesterday, 8:45 PM</span>
+</div>
+</div>
+</section>
+<!-- Spacer for FAB on mobile -->
+<div class="h-24 md:hidden"></div>
+</div>
+</main>
+</div>
+<!-- Floating Action Button -->
+<button class="fixed bottom-8 right-8 md:bottom-12 md:right-12 z-50 flex items-center gap-3 bg-accent-coral text-white px-6 py-4 rounded-full shadow-lg hover:brightness-110 active:scale-95 transition-all animate-pulse group">
+<span class="material-symbols-outlined text-2xl group-hover:rotate-12 transition-transform">add_circle</span>
+<span class="font-label-sm whitespace-nowrap">Book New Appointment</span>
+</button>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-40 flex justify-around items-center px-4 py-2 pb-safe bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline shadow-sm">
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-6 py-1 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-sm">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant active:scale-90 transition-transform p-2" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-label-sm">Find a Therapist</span>
+</a>
+</nav>
+<!-- Footer -->
+<footer class="w-full py-stack-lg border-t border-outline-variant dark:border-outline bg-surface-container-lowest dark:bg-surface-dim mt-20">
+<div class="w-full flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-6">
+<p class="font-body-md text-body-md font-bold text-primary">Eldoret Therapy Connect</p>
+<div class="flex gap-8">
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Support Center</a>
+<a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors" href="#">Terms of Service</a>
+</div>
+<p class="font-label-sm text-on-surface-variant opacity-60">© 2024 Eldoret Therapy Connect. All rights reserved.</p>
+</div>
+</footer>
+<script>
+        // Simple intersection observer for subtle fade-in effects
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(10px)';
+            section.style.transition = 'all 0.6s ease-out';
+            observer.observe(section);
+        });
+    </script>
+</body></html>

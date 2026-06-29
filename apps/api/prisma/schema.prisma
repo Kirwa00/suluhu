@@ -1,0 +1,665 @@
+// Suluhu Therapy Center — Prisma schema.
+//
+// This file grows per milestone. M0/M1 establish identity, auth, and the
+// immutable audit trail. Later milestones add appointments, payments, intake,
+// sessions, clinical notes, messaging, mood, content, and notifications.
+//
+// Conventions:
+//   • UUID primary keys.
+//   • snake_case table/column names via @map / @@map (Postgres-idiomatic).
+//   • Soft delete via `deletedAt` on user-owned aggregates.
+//   • createdAt / updatedAt audit columns everywhere.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  // Runtime connection (pooled, e.g. Neon PgBouncer endpoint).
+  url       = env("DATABASE_URL")
+  // Direct connection for migrations / introspection (non-pooled).
+  directUrl = env("DIRECT_URL")
+}
+
+// ---------------------------------------------------------------------------
+// Enums (mirror packages/shared/src/enums.ts)
+// ---------------------------------------------------------------------------
+
+enum UserRole {
+  PATIENT
+  THERAPIST
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum UserStatus {
+  PENDING_VERIFICATION
+  ACTIVE
+  SUSPENDED
+  DEACTIVATED
+}
+
+enum Locale {
+  en
+  sw
+}
+
+enum Gender {
+  FEMALE
+  MALE
+  NON_BINARY
+  PREFER_NOT_TO_SAY
+}
+
+enum TherapistVerificationStatus {
+  PENDING
+  IN_REVIEW
+  APPROVED
+  REJECTED
+  SUSPENDED
+}
+
+enum VerificationPurpose {
+  PHONE_VERIFICATION
+  EMAIL_VERIFICATION
+  MFA_CHALLENGE
+  PASSWORD_RESET
+}
+
+enum CredentialDocumentType {
+  CPB_LICENSE
+  NATIONAL_ID
+  CERTIFICATE
+  CV
+  OTHER
+}
+
+enum AppointmentStatus {
+  PENDING_PAYMENT
+  SCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+enum PaymentMethod {
+  MPESA
+  AIRTEL
+  CARD
+  INSURANCE
+  FREE_SESSION
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+}
+
+enum RiskLevel {
+  MINIMAL
+  MILD
+  MODERATE
+  MODERATELY_SEVERE
+  SEVERE
+}
+
+enum ClinicalAlertType {
+  CRISIS
+  HIGH_RISK
+  SAFEGUARDING
+}
+
+enum ClinicalAlertStatus {
+  OPEN
+  ACKNOWLEDGED
+  RESOLVED
+}
+
+enum ClinicalNoteStatus {
+  DRAFT
+  FINALIZED
+}
+
+enum TreatmentPlanStatus {
+  ACTIVE
+  COMPLETED
+  ARCHIVED
+}
+
+enum ContentType {
+  ARTICLE
+  VIDEO
+  EXERCISE
+}
+
+enum PayoutStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+enum NotificationChannel {
+  SMS
+  EMAIL
+  PUSH
+  IN_APP
+}
+
+enum NotificationStatus {
+  QUEUED
+  SENT
+  DELIVERED
+  FAILED
+}
+
+// ---------------------------------------------------------------------------
+// Identity & auth
+// ---------------------------------------------------------------------------
+
+model User {
+  id           String     @id @default(uuid()) @db.Uuid
+  email        String     @unique
+  phone        String     @unique
+  passwordHash String     @map("password_hash")
+  role         UserRole   @default(PATIENT)
+  status       UserStatus @default(PENDING_VERIFICATION)
+
+  firstName String @map("first_name")
+  lastName  String @map("last_name")
+  locale    Locale @default(en)
+
+  emailVerifiedAt DateTime? @map("email_verified_at")
+  phoneVerifiedAt DateTime? @map("phone_verified_at")
+
+  // MFA (mandatory for therapists/admins; optional for patients — SDLC §7.2)
+  mfaEnabled    Boolean   @default(false) @map("mfa_enabled")
+  lastLoginAt   DateTime? @map("last_login_at")
+  failedLogins  Int       @default(0) @map("failed_logins")
+  lockedUntil   DateTime? @map("locked_until")
+
+  // Consent & compliance
+  acceptedTermsAt DateTime? @map("accepted_terms_at")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  patientProfile     PatientProfile?
+  therapistProfile   TherapistProfile?
+  refreshTokens      RefreshToken[]
+  verificationCodes  VerificationCode[]
+  auditLogs          AuditLog[]
+  appointmentsAsPatient   Appointment[] @relation("PatientAppointments")
+  appointmentsAsTherapist Appointment[] @relation("TherapistAppointments")
+  intakeAssessments       IntakeAssessment[]
+  clinicalAlerts          ClinicalAlert[] @relation("PatientAlerts")
+  notesAsPatient          ClinicalNote[]  @relation("PatientNotes")
+  notesAsTherapist        ClinicalNote[]  @relation("TherapistNotes")
+  plansAsPatient          TreatmentPlan[] @relation("PatientPlans")
+  plansAsTherapist        TreatmentPlan[] @relation("TherapistPlans")
+  conversationsAsPatient   Conversation[] @relation("PatientConversations")
+  conversationsAsTherapist Conversation[] @relation("TherapistConversations")
+  sentMessages             Message[]      @relation("SentMessages")
+  moodEntries              MoodEntry[]
+  authoredContent          ContentResource[] @relation("AuthoredContent")
+  payouts                  Payout[]       @relation("TherapistPayouts")
+  notifications            Notification[]
+
+  @@index([role])
+  @@index([status])
+  @@map("users")
+}
+
+model PatientProfile {
+  id     String @id @default(uuid()) @db.Uuid
+  userId String @unique @map("user_id") @db.Uuid
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // dateOfBirth is PHI — stored application-layer encrypted (ciphertext string)
+  dateOfBirthEnc   String? @map("date_of_birth_enc")
+  gender           Gender?
+  county           String?
+  emergencyContact String? @map("emergency_contact")
+
+  // Free-tier entitlement tracking (SDLC §13.2)
+  freeSessionsUsed Int @default(0) @map("free_sessions_used")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  @@map("patient_profiles")
+}
+
+model TherapistProfile {
+  id     String @id @default(uuid()) @db.Uuid
+  userId String @unique @map("user_id") @db.Uuid
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Credentials
+  cpbLicenseNumber   String?                     @map("cpb_license_number")
+  cpbExpiry          DateTime?                   @map("cpb_expiry")
+  verificationStatus TherapistVerificationStatus @default(PENDING) @map("verification_status")
+
+  // Public profile
+  title          String? // e.g. "Counselling Psychologist"
+  gender         Gender?
+  bio            String?
+  specialties    String[] @default([])
+  languages      String[] @default([])
+  yearsExperience Int?    @map("years_experience")
+  sessionRateKsh Int?     @map("session_rate_ksh")
+  bufferMins     Int      @default(15) @map("buffer_mins")
+  profilePhotoUrl String? @map("profile_photo_url")
+
+  // Aggregates surfaced in discovery
+  ratingAvg         Float @default(0) @map("rating_avg")
+  ratingCount       Int   @default(0) @map("rating_count")
+  sessionsCompleted Int   @default(0) @map("sessions_completed")
+
+  // Onboarding / review workflow
+  submittedAt      DateTime? @map("submitted_at")
+  reviewedAt       DateTime? @map("reviewed_at")
+  reviewedById     String?   @map("reviewed_by_id") @db.Uuid
+  rejectionReason  String?   @map("rejection_reason")
+  cpbVerifiedAt    DateTime? @map("cpb_verified_at")
+  cpbCheckResult   Json?     @map("cpb_check_result")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  availability TherapistAvailability[]
+  documents    TherapistDocument[]
+
+  @@index([verificationStatus])
+  @@map("therapist_profiles")
+}
+
+/// Weekly recurring availability windows (EAT). Consumed by discovery and,
+/// later, the booking engine (M3). dayOfWeek: 0 = Sunday … 6 = Saturday.
+model TherapistAvailability {
+  id          String           @id @default(uuid()) @db.Uuid
+  therapistId String           @map("therapist_id") @db.Uuid
+  therapist   TherapistProfile @relation(fields: [therapistId], references: [id], onDelete: Cascade)
+
+  dayOfWeek   Int     @map("day_of_week")
+  startTime   String  @map("start_time") // "HH:mm" 24h, EAT
+  endTime     String  @map("end_time")
+  isAvailable Boolean @default(true) @map("is_available")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([therapistId, dayOfWeek, startTime])
+  @@index([therapistId])
+  @@map("therapist_availability")
+}
+
+/// Uploaded credential documents (CPB license, national ID, certificates).
+/// In mock mode the URL points at a placeholder; production uses S3 keys.
+model TherapistDocument {
+  id          String                 @id @default(uuid()) @db.Uuid
+  therapistId String                 @map("therapist_id") @db.Uuid
+  therapist   TherapistProfile       @relation(fields: [therapistId], references: [id], onDelete: Cascade)
+
+  type         CredentialDocumentType
+  url          String
+  originalName String?                @map("original_name")
+  uploadedAt   DateTime               @default(now()) @map("uploaded_at")
+
+  @@index([therapistId])
+  @@map("therapist_documents")
+}
+
+/// Hashed, rotating refresh tokens. The raw token is never stored.
+model RefreshToken {
+  id        String @id @default(uuid()) @db.Uuid
+  userId    String @map("user_id") @db.Uuid
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  tokenHash String   @unique @map("token_hash")
+  // Rotation family id — lets us revoke a whole lineage on reuse detection.
+  familyId  String   @map("family_id") @db.Uuid
+  userAgent String?  @map("user_agent")
+  ipAddress String?  @map("ip_address")
+
+  expiresAt DateTime  @map("expires_at")
+  revokedAt DateTime? @map("revoked_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@index([familyId])
+  @@map("refresh_tokens")
+}
+
+/// One-time codes for phone/email verification, MFA, and password reset.
+model VerificationCode {
+  id      String @id @default(uuid()) @db.Uuid
+  userId  String @map("user_id") @db.Uuid
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  purpose   VerificationPurpose
+  codeHash  String   @map("code_hash")
+  attempts  Int      @default(0)
+  expiresAt DateTime @map("expires_at")
+  consumedAt DateTime? @map("consumed_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([userId, purpose])
+  @@map("verification_codes")
+}
+
+// ---------------------------------------------------------------------------
+// Immutable audit trail (SDLC §2.3, §7.3) — append-only; 7-year retention.
+// No update/delete permitted at the application layer.
+// ---------------------------------------------------------------------------
+
+model AuditLog {
+  id           String   @id @default(uuid()) @db.Uuid
+  userId       String?  @map("user_id") @db.Uuid
+  user         User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  action       String
+  resourceType String   @map("resource_type")
+  resourceId   String?  @map("resource_id")
+  // Whether PHI was accessed — drives compliance reporting.
+  phiAccessed  Boolean  @default(false) @map("phi_accessed")
+  ipAddress    String?  @map("ip_address")
+  userAgent    String?  @map("user_agent")
+  metadata     Json?
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@index([resourceType, resourceId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+// ---------------------------------------------------------------------------
+// Appointments & payments (M3)
+// ---------------------------------------------------------------------------
+
+model Appointment {
+  id          String @id @default(uuid()) @db.Uuid
+  patientId   String @map("patient_id") @db.Uuid
+  patient     User   @relation("PatientAppointments", fields: [patientId], references: [id])
+  therapistId String @map("therapist_id") @db.Uuid
+  therapist   User   @relation("TherapistAppointments", fields: [therapistId], references: [id])
+
+  scheduledAt  DateTime          @map("scheduled_at")
+  durationMins Int               @map("duration_mins")
+  status       AppointmentStatus @default(PENDING_PAYMENT)
+  priceKsh     Int               @map("price_ksh")
+  isFreeSession Boolean          @default(false) @map("is_free_session")
+
+  // Video session (M5)
+  videoRoomName  String?   @map("video_room_name")
+  videoRoomToken String?   @map("video_room_token")
+  startedAt      DateTime? @map("started_at")
+  endedAt        DateTime? @map("ended_at")
+
+  cancelledAt     DateTime? @map("cancelled_at")
+  cancelledById   String?   @map("cancelled_by_id") @db.Uuid
+  cancellationReason String? @map("cancellation_reason")
+
+  payment      Payment?
+  clinicalNote ClinicalNote?
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([patientId])
+  @@index([therapistId])
+  @@index([scheduledAt])
+  @@index([status])
+  @@map("appointments")
+}
+
+model Payment {
+  id            String @id @default(uuid()) @db.Uuid
+  appointmentId String @unique @map("appointment_id") @db.Uuid
+  appointment   Appointment @relation(fields: [appointmentId], references: [id], onDelete: Cascade)
+
+  amountKsh Int           @map("amount_ksh")
+  method    PaymentMethod
+  status    PaymentStatus @default(PENDING)
+
+  // M-Pesa Daraja STK Push correlation
+  mpesaCheckoutId String? @map("mpesa_checkout_id")
+  mpesaReceipt    String? @map("mpesa_receipt")
+  payerPhone      String? @map("payer_phone")
+
+  paidAt        DateTime? @map("paid_at")
+  failureReason String?   @map("failure_reason")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([mpesaCheckoutId])
+  @@map("payments")
+}
+
+// ---------------------------------------------------------------------------
+// Intake & clinical triage (M4)
+// ---------------------------------------------------------------------------
+
+model IntakeAssessment {
+  id        String @id @default(uuid()) @db.Uuid
+  patientId String @map("patient_id") @db.Uuid
+  patient   User   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  phq9Score Int @map("phq9_score")
+  gad7Score Int @map("gad7_score")
+  cageScore Int @map("cage_score")
+
+  riskLevel RiskLevel @map("risk_level")
+  crisisFlag Boolean  @default(false) @map("crisis_flag")
+
+  primaryConcern         String?  @map("primary_concern")
+  recommendedSpecialties String[] @default([]) @map("recommended_specialties")
+
+  // Raw answers retained for clinical review (sensitive — access audited).
+  answers Json
+
+  // AI-generated supportive summary (mock provider in dev).
+  aiSummary String? @map("ai_summary")
+
+  completedAt DateTime @default(now()) @map("completed_at")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([patientId])
+  @@map("intake_assessments")
+}
+
+model ClinicalAlert {
+  id        String @id @default(uuid()) @db.Uuid
+  patientId String @map("patient_id") @db.Uuid
+  patient   User   @relation("PatientAlerts", fields: [patientId], references: [id], onDelete: Cascade)
+
+  type     ClinicalAlertType
+  status   ClinicalAlertStatus @default(OPEN)
+  message  String
+  sourceType String?  @map("source_type") // e.g. "intake_assessment"
+  sourceId   String?  @map("source_id") @db.Uuid
+
+  acknowledgedAt DateTime? @map("acknowledged_at")
+  resolvedAt     DateTime? @map("resolved_at")
+  resolvedById   String?   @map("resolved_by_id") @db.Uuid
+  resolutionNote String?   @map("resolution_note")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([patientId])
+  @@map("clinical_alerts")
+}
+
+// ---------------------------------------------------------------------------
+// Clinical documentation (M6) — PHI fields encrypted at the application layer.
+// ---------------------------------------------------------------------------
+
+model ClinicalNote {
+  id            String       @id @default(uuid()) @db.Uuid
+  appointmentId String?      @unique @map("appointment_id") @db.Uuid
+  appointment   Appointment? @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+
+  patientId   String @map("patient_id") @db.Uuid
+  patient     User   @relation("PatientNotes", fields: [patientId], references: [id], onDelete: Cascade)
+  therapistId String @map("therapist_id") @db.Uuid
+  therapist   User   @relation("TherapistNotes", fields: [therapistId], references: [id], onDelete: Cascade)
+
+  noteType String @default("SOAP") @map("note_type")
+
+  // SOAP fields — ciphertext (AES-256-GCM via PhiCryptoService), §5.2.
+  subjectiveEnc     String? @map("subjective_enc")
+  objectiveEnc      String? @map("objective_enc")
+  assessmentEnc     String? @map("assessment_enc")
+  planEnc           String? @map("plan_enc")
+  riskAssessmentEnc String? @map("risk_assessment_enc")
+
+  status      ClinicalNoteStatus @default(DRAFT)
+  finalizedAt DateTime?          @map("finalized_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([patientId])
+  @@index([therapistId])
+  @@map("clinical_notes")
+}
+
+model TreatmentPlan {
+  id          String @id @default(uuid()) @db.Uuid
+  patientId   String @map("patient_id") @db.Uuid
+  patient     User   @relation("PatientPlans", fields: [patientId], references: [id], onDelete: Cascade)
+  therapistId String @map("therapist_id") @db.Uuid
+  therapist   User   @relation("TherapistPlans", fields: [therapistId], references: [id], onDelete: Cascade)
+
+  goals         String[] @default([])
+  interventions String[] @default([])
+  reviewDate    DateTime? @map("review_date")
+  status        TreatmentPlanStatus @default(ACTIVE)
+  summaryEnc    String?  @map("summary_enc")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([patientId])
+  @@index([therapistId])
+  @@map("treatment_plans")
+}
+
+// ---------------------------------------------------------------------------
+// Messaging, mood journal & content (M7)
+// ---------------------------------------------------------------------------
+
+model Conversation {
+  id          String @id @default(uuid()) @db.Uuid
+  patientId   String @map("patient_id") @db.Uuid
+  patient     User   @relation("PatientConversations", fields: [patientId], references: [id], onDelete: Cascade)
+  therapistId String @map("therapist_id") @db.Uuid
+  therapist   User   @relation("TherapistConversations", fields: [therapistId], references: [id], onDelete: Cascade)
+
+  lastMessageAt DateTime? @map("last_message_at")
+  createdAt     DateTime  @default(now()) @map("created_at")
+
+  messages Message[]
+
+  @@unique([patientId, therapistId])
+  @@map("conversations")
+}
+
+model Message {
+  id             String       @id @default(uuid()) @db.Uuid
+  conversationId String       @map("conversation_id") @db.Uuid
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  senderId       String       @map("sender_id") @db.Uuid
+  sender         User         @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+
+  // Message body is PHI — stored AES-256-GCM encrypted (§5.2).
+  bodyEnc String   @map("body_enc")
+  readAt  DateTime? @map("read_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([conversationId])
+  @@map("messages")
+}
+
+model MoodEntry {
+  id        String @id @default(uuid()) @db.Uuid
+  patientId String @map("patient_id") @db.Uuid
+  patient   User   @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  moodScore Int      @map("mood_score") // 1–10
+  noteEnc   String?  @map("note_enc")
+  tags      String[] @default([])
+  loggedAt  DateTime @default(now()) @map("logged_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([patientId])
+  @@map("mood_entries")
+}
+
+model ContentResource {
+  id        String      @id @default(uuid()) @db.Uuid
+  slug      String      @unique
+  title     String
+  summary   String
+  body      String      @db.Text
+  category  String
+  type      ContentType @default(ARTICLE)
+  language  Locale      @default(en)
+  published Boolean     @default(false)
+  authorId  String?     @map("author_id") @db.Uuid
+  author    User?       @relation("AuthoredContent", fields: [authorId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([published, category])
+  @@map("content_resources")
+}
+
+model Payout {
+  id          String       @id @default(uuid()) @db.Uuid
+  therapistId String       @map("therapist_id") @db.Uuid
+  therapist   User         @relation("TherapistPayouts", fields: [therapistId], references: [id], onDelete: Cascade)
+
+  amountKsh     Int          @map("amount_ksh")
+  sessionsCount Int          @map("sessions_count")
+  method        String       @default("MPESA_B2C")
+  status        PayoutStatus @default(PAID)
+  reference     String?
+  periodEnd     DateTime     @map("period_end")
+  createdById   String?      @map("created_by_id") @db.Uuid
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@index([therapistId])
+  @@map("payouts")
+}
+
+/// Delivered-notification log (SDLC §5.1). Records every SMS/email/push sent,
+/// e.g. appointment reminders from the BullMQ worker.
+model Notification {
+  id       String              @id @default(uuid()) @db.Uuid
+  userId   String              @map("user_id") @db.Uuid
+  user     User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  channel  NotificationChannel
+  template String
+  payload  Json?
+  status   NotificationStatus  @default(SENT)
+  sentAt   DateTime?           @map("sent_at")
+  createdAt DateTime           @default(now()) @map("created_at")
+
+  @@index([userId])
+  @@map("notifications")
+}

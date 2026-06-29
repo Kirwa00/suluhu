@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="sw"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu Admin - Hamisha Ripoti</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "background": "#f8fafb",
+                "accent-teal-light": "#E8F3F1",
+                "on-tertiary-fixed-variant": "#004d67",
+                "tertiary-fixed": "#c1e8ff",
+                "text-rich-slate": "#1C1E21",
+                "on-secondary-fixed-variant": "#005142",
+                "on-background": "#191c1d",
+                "surface-dim": "#d8dadb",
+                "primary-fixed-dim": "#a7c8ff",
+                "outline-variant": "#c2c6d1",
+                "surface": "#f8fafb",
+                "on-primary": "#ffffff",
+                "surface-container-highest": "#e1e3e4",
+                "on-error": "#ffffff",
+                "tertiary": "#003d52",
+                "tertiary-container": "#005571",
+                "secondary-fixed": "#a5f2db",
+                "secondary-container": "#a5f2db",
+                "on-error-container": "#93000a",
+                "surface-tint": "#305f9d",
+                "on-surface-variant": "#424750",
+                "on-primary-fixed": "#001c3b",
+                "error-container": "#ffdad6",
+                "surface-variant": "#e1e3e4",
+                "on-surface": "#191c1d",
+                "primary-fixed": "#d5e3ff",
+                "on-tertiary-fixed": "#001e2b",
+                "primary-container": "#1b4f8c",
+                "on-secondary-fixed": "#002019",
+                "tertiary-fixed-dim": "#81d0f8",
+                "error": "#ba1a1a",
+                "surface-container-lowest": "#ffffff",
+                "on-primary-fixed-variant": "#0d4784",
+                "success-calm": "#2E8555",
+                "on-primary-container": "#9cc2ff",
+                "primary": "#00386d",
+                "secondary": "#166a59",
+                "surface-container": "#eceeef",
+                "inverse-primary": "#a7c8ff",
+                "surface-soothing": "#F0F4F8",
+                "inverse-surface": "#2e3132",
+                "surface-bright": "#f8fafb",
+                "surface-container-low": "#f2f4f5",
+                "on-tertiary-container": "#7acaf2",
+                "outline": "#737781",
+                "on-tertiary": "#ffffff",
+                "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "margin-mobile": "16px",
+                "section-gap": "80px",
+                "unit": "8px",
+                "margin-desktop": "40px",
+                "container-max": "1200px",
+                "gutter": "24px"
+            },
+            "fontFamily": {
+                "headline-lg": ["Manrope"],
+                "headline-md": ["Manrope"],
+                "headline-lg-mobile": ["Manrope"],
+                "display-lg": ["Manrope"],
+                "label-md": ["Inter"],
+                "label-sm": ["Inter"],
+                "body-md": ["Inter"],
+                "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .glass-header {
+            backdrop-filter: blur(8px);
+            background-color: rgba(248, 250, 251, 0.9);
+        }
+        input[type="radio"]:checked + label {
+            border-color: #1b4f8c;
+            background-color: #f0f4f8;
+        }
+    </style>
+<style>
+        body {
+          min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- Top App Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface-container-low dark:bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<button class="p-2 -ml-2 rounded-full hover:bg-surface-variant transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-primary">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-on-primary-container">Hamisha Ripoti</h1>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img alt="Suluhu Admin Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFgiYvkxb-UuOxEFofz4dTr623VAcYA5vt4NvK8WiXWgl4_C5eE0HjO5maSV4ROVbumhVz3njdQ7F08zBWWlL082BqqgXj-96dnw2Z8WrI4e1yTuuddfhGBlc9Z0J7XhP2iHNMNdLMev19m6PR99dkTFTpXerzaipbPemAfdNS_2-GmmWJhGooPXVHreJ1aTz1oYnTFE5R8Daa4bGfEQcEcWsKKdObipRgFmKg7mSWFIsFC2-YVEgYathH1UXDpzZdE5BfBF07EPA"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 mt-16 mb-24 px-margin-mobile py-6 overflow-y-auto">
+<form class="space-y-8">
+<!-- Section 1: Report Type -->
+<section class="space-y-4">
+<h2 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">analytics</span>
+                    Aina ya Ripoti
+                </h2>
+<div class="relative">
+<select class="w-full h-14 pl-4 pr-10 bg-surface-soothing border-none rounded-xl text-on-surface appearance-none focus:ring-2 focus:ring-secondary">
+<option>Daftari la Utekelezaji wa Kliniki</option>
+<option>Financial Disbursement Summary</option>
+<option>Practitioner Activity Audit</option>
+<option>Patient Engagement Metrics</option>
+</select>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+<span class="material-symbols-outlined text-on-surface-variant">expand_more</span>
+</div>
+</div>
+</section>
+<!-- Section 2: Date Range -->
+<section class="space-y-4">
+<h2 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">calendar_today</span>
+                    Kipindi cha Tarehe
+                </h2>
+<!-- Presets -->
+<div class="flex gap-2 overflow-x-auto pb-2 hide-scrollbar">
+<button class="whitespace-nowrap px-4 py-2 bg-accent-teal-light text-secondary rounded-full border border-secondary font-label-md" type="button">Siku 7 Zilizopita</button>
+<button class="whitespace-nowrap px-4 py-2 bg-surface-container text-on-surface-variant rounded-full border border-outline-variant font-label-md" type="button">Siku 30 Zilizopita</button>
+<button class="whitespace-nowrap px-4 py-2 bg-surface-container text-on-surface-variant rounded-full border border-outline-variant font-label-md" type="button">Last Quarter</button>
+</div>
+<!-- Custom Range Inputs -->
+<div class="grid grid-cols-2 gap-3">
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant ml-1">Kutoka</label>
+<input class="w-full h-12 bg-surface-soothing border-none rounded-xl px-4 focus:ring-2 focus:ring-secondary" type="date"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-sm text-on-surface-variant ml-1">Mpaka</label>
+<input class="w-full h-12 bg-surface-soothing border-none rounded-xl px-4 focus:ring-2 focus:ring-secondary" type="date"/>
+</div>
+</div>
+</section>
+<!-- Section 3: Professional Filters -->
+<section class="space-y-4">
+<h2 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">filter_list</span>
+                    Vichujio vya Juu
+                </h2>
+<div class="grid grid-cols-1 gap-4">
+<div class="p-4 bg-surface-container-low rounded-xl space-y-3">
+<label class="font-label-md text-primary font-bold">Idara</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-secondary-container text-on-secondary-container rounded-lg font-label-sm">Saikolojia</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded-lg font-label-sm">Utabibu wa Akili</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded-lg font-label-sm">Ustawi wa Jamii</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant rounded-lg font-label-sm">Matibabu ya Watoto</span>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl space-y-3">
+<label class="font-label-md text-primary font-bold">Ngazi ya Tabibu</label>
+<select class="w-full h-10 bg-surface-soothing border-none rounded-lg px-3 font-body-md focus:ring-2 focus:ring-secondary">
+<option>Ngazi Zote</option>
+<option>Senior Consultant</option>
+<option>Associate Practitioner</option>
+<option>Intern / Trainee</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Section 4: Export Format -->
+<section class="space-y-4">
+<h2 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined">file_present</span>
+                    Mfumo wa Hamisisho
+                </h2>
+<div class="grid grid-cols-3 gap-3">
+<div class="relative">
+<input checked="" class="hidden peer" id="pdf" name="format" type="radio"/>
+<label class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-xl cursor-pointer hover:border-primary transition-all peer-checked:border-primary-container peer-checked:bg-primary-fixed" for="pdf">
+<span class="material-symbols-outlined text-3xl mb-1 text-primary">picture_as_pdf</span>
+<span class="font-label-sm text-center">PDF Salama</span>
+</label>
+</div>
+<div class="relative">
+<input class="hidden peer" id="csv" name="format" type="radio"/>
+<label class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-xl cursor-pointer hover:border-primary transition-all peer-checked:border-primary-container peer-checked:bg-primary-fixed" for="csv">
+<span class="material-symbols-outlined text-3xl mb-1 text-primary">csv</span>
+<span class="font-label-sm text-center">CSV</span>
+</label>
+</div>
+<div class="relative">
+<input class="hidden peer" id="excel" name="format" type="radio"/>
+<label class="flex flex-col items-center justify-center p-4 border border-outline-variant rounded-xl cursor-pointer hover:border-primary transition-all peer-checked:border-primary-container peer-checked:bg-primary-fixed" for="excel">
+<span class="material-symbols-outlined text-3xl mb-1 text-primary">table_view</span>
+<span class="font-label-sm text-center">Excel</span>
+</label>
+</div>
+</div>
+</section>
+<!-- Section 5: Recurrence & Privacy -->
+<section class="space-y-6 pt-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-xl">
+<div class="space-y-0.5">
+<p class="font-label-md text-primary font-bold">Panga Ripoti ya Kawaida</p>
+<p class="text-label-sm text-on-surface-variant">Tuma kwa barua pepe yako kila Jumatatu</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-success-calm"></div>
+</label>
+</div>
+<div class="flex gap-3 items-start p-4 bg-accent-teal-light rounded-xl border-l-4 border-secondary">
+<input class="mt-1 w-5 h-5 rounded border-secondary text-secondary focus:ring-secondary" id="privacy" type="checkbox"/>
+<label class="font-body-md text-secondary leading-tight" for="privacy">
+                        Nathibitisha kuwa hamisisho hili linatii **Sheria ya Kulinda Data ya Kenya (2019)** na litashughulikiwa kulingana na itifaki za usalama za ndani za Suluhu.
+                    </label>
+</div>
+</section>
+<!-- Action Buttons -->
+<div class="space-y-3 pt-4">
+<button class="w-full h-14 bg-primary-container text-on-primary-container font-headline-md rounded-xl shadow-sm active:scale-95 transition-all flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined">download</span>
+                    Tengeneza na Pakua
+                </button>
+<button class="w-full h-14 bg-transparent text-primary font-headline-md rounded-xl hover:bg-surface-variant active:scale-95 transition-all" type="button">
+                    Ghairi
+                </button>
+</div>
+</form>
+</main>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 py-3 bg-surface dark:bg-inverse-surface shadow-sm md:hidden">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Muhtasari</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-sm text-label-sm">Matabibu</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-sm text-label-sm">Fedha</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-3 py-1 transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment_turned_in</span>
+<span class="font-label-sm text-label-sm">Ukaguzi</span>
+</a>
+</nav>
+<!-- Micro-interaction for feedback -->
+<script>
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Inasindika...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Tayari';
+                btn.classList.replace('bg-primary-container', 'bg-success-calm');
+                btn.classList.replace('text-on-primary-container', 'text-white');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalContent;
+                    btn.classList.replace('bg-success-calm', 'bg-primary-container');
+                    btn.classList.replace('text-white', 'text-on-primary-container');
+                    btn.disabled = false;
+                }, 2000);
+            }, 1500);
+        });
+    </script>
+</body></html>

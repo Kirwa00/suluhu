@@ -1,0 +1,41 @@
+{
+  "name": "@suluhu/ui",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Suluhu design tokens (Wellness System + Crisis Core) and shared Tailwind preset.",
+  "type": "commonjs",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./tailwind-preset": {
+      "types": "./dist/tailwind-preset.d.ts",
+      "default": "./dist/tailwind-preset.js"
+    },
+    "./tokens": {
+      "types": "./dist/tokens.d.ts",
+      "default": "./dist/tokens.js"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "tsc -p tsconfig.build.json --watch",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit",
+    "lint": "eslint \"src/**/*.ts\"",
+    "clean": "rimraf dist"
+  },
+  "devDependencies": {
+    "@types/node": "20.16.11",
+    "eslint": "9.12.0",
+    "rimraf": "6.0.1",
+    "tailwindcss": "3.4.13",
+    "typescript": "5.6.3"
+  },
+  "peerDependencies": {
+    "tailwindcss": "^3.4.0"
+  }
+}

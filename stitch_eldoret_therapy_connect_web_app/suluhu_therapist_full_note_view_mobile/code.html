@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suluhu Therapist Portal - Clinical Note</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-container-lowest": "#ffffff",
+                "surface-container": "#eceeef",
+                "background": "#f8fafb",
+                "on-error": "#ffffff",
+                "on-secondary-fixed": "#002019",
+                "on-primary-container": "#9cc2ff",
+                "secondary-container": "#a5f2db",
+                "primary-fixed": "#d5e3ff",
+                "primary-container": "#1b4f8c",
+                "on-tertiary-fixed-variant": "#004d67",
+                "secondary-fixed-dim": "#89d5c0",
+                "secondary": "#166a59",
+                "error-container": "#ffdad6",
+                "outline": "#737781",
+                "surface-soothing": "#F0F4F8",
+                "surface": "#f8fafb",
+                "primary-fixed-dim": "#a7c8ff",
+                "accent-teal-light": "#E8F3F1",
+                "surface-variant": "#e1e3e4",
+                "text-rich-slate": "#1C1E21",
+                "inverse-on-surface": "#eff1f2",
+                "on-background": "#191c1d",
+                "on-primary": "#ffffff",
+                "inverse-primary": "#a7c8ff",
+                "on-secondary-fixed-variant": "#005142",
+                "surface-dim": "#d8dadb",
+                "error": "#ba1a1a",
+                "surface-tint": "#305f9d",
+                "on-tertiary-fixed": "#001e2b",
+                "secondary-fixed": "#a5f2db",
+                "on-tertiary-container": "#7acaf2",
+                "tertiary-fixed-dim": "#81d0f8",
+                "tertiary-fixed": "#c1e8ff",
+                "on-secondary": "#ffffff",
+                "primary": "#00386d",
+                "surface-container-highest": "#e1e3e4",
+                "surface-container-high": "#e6e8e9",
+                "tertiary-container": "#005571",
+                "on-error-container": "#93000a",
+                "on-secondary-container": "#1f705f",
+                "on-surface": "#191c1d",
+                "on-surface-variant": "#424750",
+                "surface-bright": "#f8fafb",
+                "tertiary": "#003d52",
+                "on-tertiary": "#ffffff",
+                "inverse-surface": "#2e3132",
+                "success-calm": "#2E8555",
+                "surface-container-low": "#f2f4f5",
+                "on-primary-fixed-variant": "#0d4784",
+                "on-primary-fixed": "#001c3b",
+                "outline-variant": "#c2c6d1"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "margin-mobile": "16px",
+                "gutter": "24px",
+                "container-max": "1200px",
+                "section-gap": "80px",
+                "unit": "8px",
+                "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                "headline-lg-mobile": ["Manrope"],
+                "body-md": ["Inter"],
+                "label-md": ["Inter"],
+                "display-lg": ["Manrope"],
+                "headline-md": ["Manrope"],
+                "body-lg": ["Inter"],
+                "label-sm": ["Inter"],
+                "headline-lg": ["Manrope"]
+            },
+            "fontSize": {
+                "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            user-select: none;
+        }
+        body {
+            -webkit-tap-highlight-color: transparent;
+            scroll-behavior: smooth;
+        }
+        .soap-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .soap-card:active {
+            transform: scale(0.98);
+        }
+        /* Custom scrollbar for clean UI */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #c2c6d1; border-radius: 10px; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface dark:bg-surface-dim transition-colors duration-150">
+<div class="flex items-center gap-4">
+<button aria-label="Go back" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-primary-container/10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed-dim">SOAP Note - Oct 24</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-primary-container/10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">print</span>
+</button>
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-primary-container/10 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">edit</span>
+</button>
+</div>
+</header>
+<main class="mt-20 px-margin-mobile max-w-container-max mx-auto space-y-6">
+<!-- Patient Context Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-4 shadow-sm">
+<div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 bg-primary-container/10 flex items-center justify-center">
+<img class="w-full h-full object-cover" data-alt="A professional medical profile portrait of a middle-aged Kenyan woman with a kind expression. She has natural hair styled neatly and is wearing a subtle olive green sweater. The background is a soft, out-of-focus clinical office with warm lighting, maintaining a calm and trustworthy healthcare aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5V3aeNisL8KoScByrG93e27PsDgp-wlNw8RE4_fB4VBkgUmGXaU__s70jcqCI1JlN3i3eHKs8tgsn0c8a40uNPA7HKJd1rq9wmxaa3Fpt5m2nBgPFWwBkkMKTUbnykvme1E9saetKqTNUOtBq8qqNEquEFpRKIXXEvfN_oUDx6u3ct-ZsanOh_9jQ1TWiEOPR4eDdmHfm80IRkApuveXCIaZjvL4ZIhcbXbRnd3VpOMBo30oSEaG-6RHhA30Inov7zAurAJbNfjA"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h2 class="font-headline-md text-[18px] text-primary leading-tight">Mercy Wanjiku</h2>
+<span class="bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full text-[10px] font-bold tracking-wider">SLH-882</span>
+</div>
+<p class="text-label-sm text-outline mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+                    Oct 24, 2023 • 14:00 - 14:45
+                </p>
+</div>
+</section>
+<!-- SOAP Content Area -->
+<div class="space-y-4">
+<!-- Subjective Section -->
+<article class="bg-surface-soothing rounded-xl p-5 border-l-4 border-primary shadow-sm">
+<div class="flex items-center gap-2 mb-3">
+<span class="text-primary font-bold tracking-widest text-[12px] uppercase">Subjective</span>
+</div>
+<p class="text-body-md text-on-surface leading-relaxed">
+                    Patient reports increased feelings of restlessness and "racing thoughts" over the last 3 days. States she is struggling to initiate sleep, taking approximately 90 minutes to drift off. Mentions significant work-related stress regarding an upcoming project deadline. Reports moderate chest tightness during high-stress peaks.
+                </p>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-white/60 border border-outline-variant rounded-full text-label-sm text-primary">Anxiety (Self-Reported)</span>
+<span class="px-3 py-1 bg-white/60 border border-outline-variant rounded-full text-label-sm text-primary">Insomnia symptoms</span>
+</div>
+</article>
+<!-- Objective Section -->
+<article class="bg-surface-container-low rounded-xl p-5 border-l-4 border-secondary shadow-sm">
+<div class="flex items-center gap-2 mb-3">
+<span class="text-secondary font-bold tracking-widest text-[12px] uppercase">Objective</span>
+</div>
+<div class="space-y-3">
+<p class="text-body-md text-on-surface leading-relaxed">
+                        Patient appeared neatly groomed and appropriate for the clinical setting. Speech was slightly rapid but coherent. Affect was congruent with reported anxious mood. No evidence of cognitive impairment or psychosis.
+                    </p>
+<div class="grid grid-cols-2 gap-3 pt-2">
+<div class="p-3 bg-white rounded-lg border border-outline-variant">
+<span class="block text-[10px] text-outline font-bold uppercase mb-1">Eye Contact</span>
+<span class="text-label-md text-on-surface">Avoidant at start</span>
+</div>
+<div class="p-3 bg-white rounded-lg border border-outline-variant">
+<span class="block text-[10px] text-outline font-bold uppercase mb-1">Psychomotor</span>
+<span class="text-label-md text-on-surface">Mild tapping</span>
+</div>
+</div>
+</div>
+</article>
+<!-- Assessment Section -->
+<article class="bg-surface-container-low rounded-xl p-5 border-l-4 border-primary-container shadow-sm">
+<div class="flex items-center gap-2 mb-3">
+<span class="text-primary-container font-bold tracking-widest text-[12px] uppercase">Assessment</span>
+</div>
+<div class="space-y-4">
+<p class="text-body-md text-on-surface leading-relaxed">
+                        Patient continues to meet criteria for Generalized Anxiety Disorder. Current symptoms appear exacerbated by professional environmental triggers. Patient demonstrates good insight and is receptive to cognitive-behavioral interventions. Progress toward Goal 1 (Anxiety Management) is stable but challenged by external stressors.
+                    </p>
+<div class="bg-primary-container text-on-primary-container p-3 rounded-lg flex items-center justify-between">
+<div>
+<span class="block text-[10px] font-bold uppercase opacity-80">Primary Diagnosis</span>
+<span class="text-label-md font-semibold">F41.1 - Generalized Anxiety Disorder (GAD)</span>
+</div>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+</article>
+<!-- Plan Section -->
+<article class="bg-accent-teal-light rounded-xl p-5 border-l-4 border-success-calm shadow-sm">
+<div class="flex items-center gap-2 mb-3">
+<span class="text-success-calm font-bold tracking-widest text-[12px] uppercase">Plan</span>
+</div>
+<ul class="space-y-3">
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-success-calm text-[20px]">assignment</span>
+<div class="text-body-md">
+<strong class="text-on-surface-variant">Homework:</strong> Practice 4-7-8 breathing technique twice daily and during acute stress periods.
+                        </div>
+</li>
+<li class="flex gap-3">
+<span class="material-symbols-outlined text-success-calm text-[20px]">event_repeat</span>
+<div class="text-body-md">
+<strong class="text-on-surface-variant">Follow-up:</strong> Next session scheduled for Oct 31, 2023 at 14:00. Continue CBT module on thought challenging.
+                        </div>
+</li>
+</ul>
+</article>
+</div>
+<!-- Governance Metadata -->
+<footer class="mt-8 mb-12 py-6 border-t border-outline-variant space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-[10px]">SM</div>
+<div>
+<p class="text-label-md font-semibold text-primary">Dr. Silas Mwangi</p>
+<p class="text-label-sm text-outline">Finalized • Oct 24, 2023 15:12</p>
+</div>
+</div>
+<div class="flex items-center gap-1 text-success-calm font-semibold text-[12px] bg-success-calm/10 px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                    VERIFIED
+                </div>
+</div>
+<div class="p-4 bg-surface-container rounded-lg text-center">
+<p class="text-label-sm text-outline italic">
+                    This clinical record is protected under mental health privacy laws and Suluhu security protocols. Reference ID: SLH-NOTES-09221-X
+                </p>
+</div>
+</footer>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline shadow-sm rounded-t-xl transition-all">
+<!-- Notes (Active) -->
+<a aria-label="Notes" class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl p-2 active:opacity-80 transition-opacity duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+<span class="font-label-sm text-label-sm mt-1">Notes</span>
+</a>
+<!-- Patients -->
+<a aria-label="Patients" class="flex flex-col items-center justify-center text-outline dark:text-outline-variant p-2 hover:text-primary dark:hover:text-primary-fixed active:opacity-80 transition-opacity duration-200" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-sm text-label-sm mt-1">Patients</span>
+</a>
+<!-- Calendar -->
+<a aria-label="Calendar" class="flex flex-col items-center justify-center text-outline dark:text-outline-variant p-2 hover:text-primary dark:hover:text-primary-fixed active:opacity-80 transition-opacity duration-200" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-sm text-label-sm mt-1">Calendar</span>
+</a>
+<!-- Settings -->
+<a aria-label="Settings" class="flex flex-col items-center justify-center text-outline dark:text-outline-variant p-2 hover:text-primary dark:hover:text-primary-fixed active:opacity-80 transition-opacity duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Settings</span>
+</a>
+</nav>
+<script>
+        // Simple Micro-interactions for therapy portal feel
+        document.querySelectorAll('article').forEach(card => {
+            card.addEventListener('click', () => {
+                // Subtle feedback for clinical review
+                console.log('Section focused for review');
+            });
+        });
+
+        // Safe touch areas for mobile
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('touchstart', function() {
+                this.classList.add('scale-95');
+            });
+            link.addEventListener('touchend', function() {
+                this.classList.remove('scale-95');
+            });
+        });
+    </script>
+</body></html>

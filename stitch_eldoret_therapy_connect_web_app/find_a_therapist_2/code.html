@@ -1,0 +1,303 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Find a Therapist - Eldoret Therapy Connect</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed-variant": "#57432a",
+                    "primary-container": "#e6c9a7",
+                    "on-primary-fixed": "#281904",
+                    "on-secondary-fixed": "#281901",
+                    "surface-container-highest": "#e8e1dd",
+                    "surface": "#fff8f4",
+                    "surface-variant": "#e8e1dd",
+                    "on-tertiary-container": "#4c5869",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#dec2a0",
+                    "surface-container-low": "#f9f2ee",
+                    "outline-variant": "#d1c4b9",
+                    "on-secondary": "#ffffff",
+                    "secondary-fixed": "#fddeb5",
+                    "on-background": "#1e1b19",
+                    "tertiary-fixed-dim": "#bac7db",
+                    "on-error": "#ffffff",
+                    "on-surface": "#1e1b19",
+                    "surface-bright": "#fff8f4",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#eee7e3",
+                    "surface-tint": "#705b3f",
+                    "secondary-fixed-dim": "#e0c29a",
+                    "on-secondary-fixed-variant": "#584325",
+                    "on-tertiary-fixed": "#0f1c2b",
+                    "on-surface-variant": "#4d453d",
+                    "background": "#fff8f4",
+                    "on-tertiary-fixed-variant": "#3b4858",
+                    "tertiary-container": "#c2cfe3",
+                    "primary-fixed": "#fcdebb",
+                    "on-primary-container": "#695439",
+                    "on-primary": "#ffffff",
+                    "primary": "#705b3f",
+                    "on-secondary-container": "#765f3e",
+                    "inverse-surface": "#33302d",
+                    "inverse-on-surface": "#f6efeb",
+                    "primary-fixed-dim": "#dec2a0",
+                    "tertiary-fixed": "#d6e3f8",
+                    "outline": "#7f756b",
+                    "surface-container": "#f3ede8",
+                    "tertiary": "#535f70",
+                    "surface-dim": "#dfd9d5",
+                    "error": "#ba1a1a",
+                    "secondary": "#715b3a",
+                    "error-container": "#ffdad6",
+                    "secondary-container": "#fadbb2",
+                    "accent-coral": "#E98A6C"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "stack-md": "16px",
+                    "gutter": "24px",
+                    "unit": "8px",
+                    "container-max": "1200px",
+                    "stack-sm": "8px",
+                    "stack-lg": "32px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px"
+            },
+            "fontFamily": {
+                    "body-md": ["Manrope"],
+                    "display-lg-mobile": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "label-sm": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "display-lg": ["Manrope"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .therapy-card-shadow {
+            box-shadow: 0 4px 20px -4px rgba(112, 91, 63, 0.04);
+        }
+        .therapy-card-shadow:hover {
+            box-shadow: 0 12px 30px -8px rgba(233, 138, 108, 0.12);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24 md:pb-0 md:pl-64">
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex flex-col h-screen p-stack-md bg-surface-container-low border-r border-outline-variant fixed left-0 top-0 w-64 z-40">
+<div class="mb-10 px-2">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Eldoret Therapy</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Your Wellness Journey</p>
+</div>
+<div class="space-y-2 flex-grow">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-xl transition-all font-label-sm text-label-sm" href="{{DATA:SCREEN:SCREEN_7}}">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-xl transition-transform active:translate-x-1 font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="search_check">search_check</span>
+                Find a Therapist
+            </a>
+</div>
+<div class="mt-auto pt-6 border-t border-outline-variant space-y-2">
+<button class="w-full bg-accent-coral text-white py-3 rounded-xl font-label-sm text-label-sm hover:opacity-90 transition-opacity mb-4">Book Session</button>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+                Privacy
+            </a>
+</div>
+</nav>
+<!-- TopNavBar (Search and User) -->
+<header class="w-full top-0 sticky z-30 bg-surface border-b border-outline-variant flex justify-between items-center px-gutter py-unit max-w-container-max mx-auto">
+<div class="flex items-center gap-4 flex-grow max-w-2xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-none rounded-full text-body-md focus:ring-2 focus:ring-primary-container transition-all" placeholder="Search by name or specialty" type="text">
+</div>
+</div>
+<div class="flex items-center gap-4 ml-gutter">
+<button class="p-2 text-primary hover:bg-surface-container-low rounded-full transition-colors active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full bg-primary-container overflow-hidden border-2 border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional close-up portrait of a diverse user with a friendly expression, captured in soft, warm studio lighting that complements the light mode aesthetic of the therapy app. The background is a clean, neutral cream color that feels organized and professional. This profile icon represents a user seeking personal wellness and mental health growth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH_rCenx925pIkcEItCiihf784boIYMP6Bfq4o9yEqXUw2xhSZ4WKHYMDCxUKHP7YxAEkqyw-c2560KMDPnyj92byUS8KZbLNE6UeuMpmo2f63dci0vzZcUKodiZH7-_39ZzsMlRYx4mzlMOp8FCZaLSXKpcJ-n9WABfcNxBl4oSjtmdWYfDYfReuf8sKnaPD0uBdJfXkbIuE9n6bE6nxXBECO4DqwwYjVMl4yqFoZwSXqS0w7kHf5OVt-R8Fpwqp0Xp0s5Zuunx8">
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="max-w-container-max mx-auto px-gutter py-stack-lg">
+<!-- Welcome / Title -->
+<section class="mb-stack-lg">
+<h2 class="font-headline-md text-headline-md text-primary mb-2">Find Your Specialist</h2>
+<p class="text-on-surface-variant font-body-md max-w-xl">Connect with licensed professionals in Eldoret who understand your journey. Filter by specialization or availability below.</p>
+</section>
+<!-- Filter Sections -->
+<div class="space-y-stack-md mb-stack-lg">
+<div>
+<p class="font-label-sm text-label-sm text-primary mb-3">Specialization</p>
+<div class="flex flex-wrap gap-2">
+<button class="px-5 py-2 rounded-full border border-primary bg-primary text-white text-label-sm hover:shadow-md transition-all">Anxiety</button>
+<button class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-sm hover:border-primary hover:text-primary transition-all">Depression</button>
+<button class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-sm hover:border-primary hover:text-primary transition-all">Trauma</button>
+<button class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-sm hover:border-primary hover:text-primary transition-all">Family</button>
+</div>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-primary mb-3">Availability</p>
+<div class="flex flex-wrap gap-2">
+<button class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-sm hover:border-primary hover:text-primary transition-all">Today</button>
+<button class="px-5 py-2 rounded-full border border-outline-variant text-on-surface-variant text-label-sm hover:border-primary hover:text-primary transition-all">This Week</button>
+</div>
+</div>
+</div>
+<!-- Therapist List (Bento-ish Grid for High End Feel) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Therapist Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 therapy-card-shadow transition-all group">
+<div class="flex items-start gap-4 mb-4">
+<div class="w-20 h-20 rounded-xl overflow-hidden shrink-0 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of Dr. Michael Mutua, a male therapist in his 40s with a kind and reassuring smile. He is wearing a professional yet approachable linen shirt. The background is a softly blurred office with warm wood tones and a potted plant, evoking a sense of safety and professional warmth in line with the therapy brand's identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVTttr5wpW2_94kQF7-UgD2P-s2F5AdcnUePliQD4YP-WKQnu97wAx6wgCOLIrEj4XmDO1fNS5WNqw-6f0WQyJEhT41o03m458_RBA5t95_XPbg1ItlT-ky8tiMNRH3nnwQCkLtZ6SXGE5gZ03J4Xyi1_zaCd5om2NynhVggDF5xJMTAXCf5ALJNDGRePV2sw0Sww2ACuamthX06H5FScnra1OpDZTkdKckzmFRqT32RdcNp_6_3UtkV4kqA6biVf0hJf01q3--no">
+</div>
+<div>
+<h3 class="font-headline-md text-body-lg font-bold text-on-surface group-hover:text-primary transition-colors">Dr. Michael Mutua</h3>
+<p class="text-primary font-label-sm">Trauma Specialist</p>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm">4.9 (124 reviews)</span>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 bg-tertiary-container/30 text-tertiary text-[12px] font-bold rounded-full">EMDR</span>
+<span class="px-3 py-1 bg-tertiary-container/30 text-tertiary text-[12px] font-bold rounded-full">PTSD</span>
+</div>
+<a href="{{DATA:SCREEN:SCREEN_7}}" class="w-full bg-accent-coral text-white py-3 rounded-xl font-label-sm transition-transform active:scale-95 group-hover:shadow-lg flex justify-center items-center">Book Session</a>
+</div>
+<!-- Therapist Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 therapy-card-shadow transition-all group">
+<div class="flex items-start gap-4 mb-4">
+<div class="w-20 h-20 rounded-xl overflow-hidden shrink-0 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional portrait of Sarah Ochieng, a female counselor with a warm, empathetic gaze. She is dressed in soft neutral tones. The image is bright with natural sunlight coming from a window, highlighting the minimalist and sanctuary-like atmosphere of her therapy room. The aesthetic is clean, modern, and deeply human." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVJUbSNEwfde6JL0JbwmljkdnmI6DKIjPBXc3XYQSD05f4eajVJ_raoQJ7STaAyaneqaTIQBN45VXmMHRFyU5lQ7ZJT_QecZhDbdW3LVh82WuUTuOERXL4VcBNFokhbrPf2M992iXh-APskjwDQv49h9XTblDa4BWVtS2OY4MLQS7v5FQOUQGqhP5dUXVJkDz0fk-XNCo_BqEym-Cd9hhKFhYqk45tKY8UjyHQSFYGPBqB0mw0UMZmTG_z48hCaBfedsICpwmZKKE">
+</div>
+<div>
+<h3 class="font-headline-md text-body-lg font-bold text-on-surface group-hover:text-primary transition-colors">Sarah Ochieng</h3>
+<p class="text-primary font-label-sm">Family &amp; Marriage Counselor</p>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm">4.8 (98 reviews)</span>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 bg-tertiary-container/30 text-tertiary text-[12px] font-bold rounded-full">Couples</span>
+<span class="px-3 py-1 bg-tertiary-container/30 text-tertiary text-[12px] font-bold rounded-full">Mediation</span>
+</div>
+<a href="{{DATA:SCREEN:SCREEN_7}}" class="w-full bg-accent-coral text-white py-3 rounded-xl font-label-sm transition-transform active:scale-95 group-hover:shadow-lg flex justify-center items-center">Book Session</a>
+</div>
+<!-- Therapist Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 therapy-card-shadow transition-all group">
+<div class="flex items-start gap-4 mb-4">
+<div class="w-20 h-20 rounded-xl overflow-hidden shrink-0 border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of David Kiprono, a male therapist with a calm and intellectual demeanor. He wears glasses and a smart casual sweater. The lighting is soft and ambient, casting a gentle glow that feels like a safe architectural extension of a therapy room. Earth tones and a high-key light mode style define the image." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0VtT-3zG1cuE1KuhLk4yy46C-U5C7czRb9HJZl9SUrwvC1wG1GwxwLUJo9rcXqEhNlNeTwnHQ_p3W56iOmWAdOMdfEYJ5Mb4vkg1elGcZAxCDTF0woUN-ea39JCNg61wNAhaq0T5XX9BcIgTZYqJXG-vDiaxBTwUtjIkGYPW8iNkjttpDk2KScsa0nRN0CqQPu4DIw9fndZYt8YMt4jTMLwmdeSFLTOkf9BY5j7BiMX55elQpy-Xeh6pQWS40zAB_gp3JPEfXm88">
+</div>
+<div>
+<h3 class="font-headline-md text-body-lg font-bold text-on-surface group-hover:text-primary transition-colors">David Kiprono</h3>
+<p class="text-primary font-label-sm">Anxiety &amp; Depression Specialist</p>
+<div class="flex items-center gap-1 text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-label-sm">5.0 (82 reviews)</span>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="px-3 py-1 bg-tertiary-container/30 text-tertiary text-[12px] font-bold rounded-full">CBT</span>
+<span class="px-3 py-1 bg-tertiary-container/30 text-tertiary text-[12px] font-bold rounded-full">Mindfulness</span>
+</div>
+<a href="{{DATA:SCREEN:SCREEN_7}}" class="w-full bg-accent-coral text-white py-3 rounded-xl font-label-sm transition-transform active:scale-95 group-hover:shadow-lg flex justify-center items-center">Book Session</a>
+</div>
+</div>
+</main>
+<!-- Footer Section -->
+<footer class="w-full py-stack-lg bg-surface-container-lowest border-t border-outline-variant">
+<div class="w-full flex flex-col md:flex-row justify-between items-center px-gutter max-w-container-max mx-auto gap-4">
+<div class="flex flex-col items-center md:items-start">
+<span class="font-body-md text-body-md font-bold text-primary">Eldoret Therapy Connect</span>
+<p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 Eldoret Therapy Connect. All rights reserved.</p>
+</div>
+<div class="flex gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Support Center</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 bg-surface border-t border-outline-variant shadow-sm flex justify-around items-center px-4 py-2 pb-safe rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container active:scale-90 transition-all px-4 py-1" href="{{DATA:SCREEN:SCREEN_7}}">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-[10px]">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-1 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="search" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-label-sm text-[10px]">Find</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for filter chips
+        const filterChips = document.querySelectorAll('.flex.flex-wrap button');
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                // Find sibling chips in the same container
+                const siblings = chip.parentElement.querySelectorAll('button');
+                siblings.forEach(s => {
+                    s.classList.remove('bg-primary', 'text-white');
+                    s.classList.add('border-outline-variant', 'text-on-surface-variant');
+                });
+                // Toggle active state
+                chip.classList.remove('border-outline-variant', 'text-on-surface-variant');
+                chip.classList.add('bg-primary', 'text-white', 'border-primary');
+            });
+        });
+    </script>
+
+
+</body></html>

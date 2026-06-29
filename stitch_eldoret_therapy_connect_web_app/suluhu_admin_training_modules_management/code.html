@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Training Modules | Suluhu Admin Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .scrollbar-hide::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-hide {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-soothing": "#F0F4F8",
+            "on-secondary-fixed-variant": "#005142",
+            "surface-dim": "#d8dadb",
+            "tertiary-fixed": "#c1e8ff",
+            "tertiary-fixed-dim": "#81d0f8",
+            "surface-tint": "#305f9d",
+            "inverse-primary": "#a7c8ff",
+            "on-surface-variant": "#424750",
+            "primary": "#00386d",
+            "on-primary-fixed": "#001c3b",
+            "secondary": "#166a59",
+            "on-secondary-container": "#1f705f",
+            "primary-fixed-dim": "#a7c8ff",
+            "background": "#f8fafb",
+            "text-rich-slate": "#1C1E21",
+            "surface-container-highest": "#e1e3e4",
+            "on-tertiary-fixed": "#001e2b",
+            "on-primary-container": "#9cc2ff",
+            "surface-container-high": "#e6e8e9",
+            "surface-bright": "#f8fafb",
+            "secondary-fixed": "#a5f2db",
+            "accent-teal-light": "#E8F3F1",
+            "inverse-on-surface": "#eff1f2",
+            "on-primary": "#ffffff",
+            "surface-container": "#eceeef",
+            "on-secondary": "#ffffff",
+            "success-calm": "#2E8555",
+            "tertiary-container": "#005571",
+            "on-surface": "#191c1d",
+            "surface": "#f8fafb",
+            "inverse-surface": "#2e3132",
+            "secondary-container": "#a5f2db",
+            "error-container": "#ffdad6",
+            "outline": "#737781",
+            "on-tertiary-fixed-variant": "#004d67",
+            "tertiary": "#003d52",
+            "surface-container-low": "#f2f4f5",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed": "#002019",
+            "primary-fixed": "#d5e3ff",
+            "primary-container": "#1b4f8c",
+            "on-primary-fixed-variant": "#0d4784",
+            "on-tertiary-container": "#7acaf2",
+            "on-background": "#191c1d",
+            "on-error-container": "#93000a",
+            "on-error": "#ffffff",
+            "error": "#ba1a1a",
+            "surface-variant": "#e1e3e4",
+            "secondary-fixed-dim": "#89d5c0",
+            "on-tertiary": "#ffffff",
+            "outline-variant": "#c2c6d1"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "section-gap": "80px",
+            "container-max": "1200px",
+            "unit": "8px",
+            "margin-desktop": "40px",
+            "margin-mobile": "16px",
+            "gutter": "24px"
+          },
+          "fontFamily": {
+            "label-sm": ["Inter"],
+            "headline-lg-mobile": ["Manrope"],
+            "headline-lg": ["Manrope"],
+            "body-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-md": ["Manrope"],
+            "display-lg": ["Manrope"]
+          },
+          "fontSize": {
+            "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+            "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+            "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+            "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+            "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+            "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+            "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background font-body-md text-on-surface antialiased overflow-x-hidden">
+<!-- Side Navigation Bar (Shared Component) -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col py-gutter px-4 border-r border-outline-variant/30 bg-surface-container-low z-50">
+<div class="mb-10 px-2">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Suluhu Admin</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Backend Portal</p>
+</div>
+<nav class="flex-grow space-y-1 overflow-y-auto scrollbar-hide">
+<!-- Applications is Active based on breadcrumbs/hierarchy -->
+<a class="flex items-center gap-3 px-3 py-3 text-primary font-bold border-r-4 border-primary bg-primary-container/10 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="pending_actions">pending_actions</span>
+<span class="font-label-md text-label-md">Applications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Therapists</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="verified_user">verified_user</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Verifications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors group" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md group-hover:text-primary">Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant/20 pt-6 space-y-1">
+<button class="w-full flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Help Center</span>
+</button>
+<button class="w-full flex items-center gap-3 px-3 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</button>
+</div>
+</aside>
+<!-- Top Navigation Bar (Shared Component) -->
+<header class="flex justify-between items-center w-full h-16 pl-72 pr-gutter sticky top-0 z-40 bg-surface-bright">
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="bg-surface-soothing border-none rounded-full py-2 pl-10 pr-4 text-label-md focus:ring-2 focus:ring-secondary-container transition-all w-64" placeholder="Search applications..." type="text"/>
+</div>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Direct Messages</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Audit Log</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95 shadow-sm">
+        Approve Application
+      </button>
+<button class="text-on-surface-variant p-2 hover:bg-surface-container transition-all rounded-full">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden bg-surface-container border border-outline-variant">
+<img class="h-full w-full object-cover" data-alt="A professional headshot of a female administrative executive in her 40s, looking directly at the camera with a calm and confident expression. The lighting is soft and natural, suggesting a high-end corporate office background with minimalist oceanic blue and teal accents. The style is crisp, modern, and trustworthy, reflecting the Suluhu brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDs1xqyh6aVTzxTPtaJYOFCj8yp5gxVTbmUb27xFMWxg0mlM_hTh3iTBmLGrRmxSr5z2tCEBxHSCWViapvkr2LauTNwgHK7cJF1xEOdNvBGF_q3_3k4P4MGzmgAonWr_avHfnwxHyl5pmtfqKaev_BZ7ePDdSkn7F9kZy7RHL19Qr8RNGBbA_pa4-RTkYZFh7X2vprZks-4-CPVWsV8Ou7KugniRuaOJyu3jkEseXXezYTIrsVieD6A4FchAHpS8kplP3bJIMGDVEc"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pl-64 pt-6 min-h-screen">
+<div class="max-w-[1400px] mx-auto px-gutter pb-section-gap">
+<!-- Breadcrumbs & Header -->
+<nav class="mb-6 flex items-center gap-2 text-label-sm text-outline">
+<a class="hover:text-primary transition-colors" href="#">Applications</a>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Dr. Sarah Jenkins</a>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-medium">Training</span>
+</nav>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-2">Therapist Training & Onboarding</h2>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1 bg-accent-teal-light rounded-full border border-secondary/20">
+<span class="material-symbols-outlined text-[18px] text-secondary" data-icon="person">person</span>
+<span class="text-label-md text-on-secondary-container font-medium">Dr. Sarah Jenkins</span>
+</div>
+<div class="flex items-center gap-2 px-3 py-1 bg-surface-container rounded-full">
+<span class="material-symbols-outlined text-[18px] text-outline" data-icon="fingerprint">fingerprint</span>
+<span class="text-label-md text-on-surface-variant">ID: SLH-TJ-0492</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-surface-container-high text-on-surface-variant px-5 py-2.5 rounded-lg font-label-md hover:bg-surface-container-highest transition-all flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+            Assign New Module
+          </button>
+<button class="bg-outline/20 text-outline cursor-not-allowed px-6 py-2.5 rounded-lg font-label-md flex items-center gap-2 border border-outline/30" disabled="">
+<span class="material-symbols-outlined" data-icon="task_alt">task_alt</span>
+            Authorize for Tier
+          </button>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Main Column: Progress & Modules -->
+<div class="col-span-12 lg:col-span-8 space-y-gutter">
+<!-- Summary Card -->
+<div class="bg-white rounded-xl border border-outline-variant/30 p-6 shadow-sm overflow-hidden relative">
+<div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-9xl text-primary" data-icon="analytics">analytics</span>
+</div>
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-label-md font-semibold text-on-surface-variant uppercase tracking-wider mb-1">Overall Completion</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-5xl font-extrabold text-primary">60%</span>
+<span class="text-label-md text-secondary font-medium">Pending Final Module</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-label-sm text-outline block mb-1">Last Activity</span>
+<span class="text-label-md font-medium text-on-surface">Today at 10:45 AM</span>
+</div>
+</div>
+<div class="w-full bg-surface-container h-3 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-primary to-secondary h-full rounded-full transition-all duration-1000 ease-out" style="width: 60%"></div>
+</div>
+</div>
+<!-- Modules Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Module 1 -->
+<div class="bg-white p-5 rounded-xl border border-outline-variant/30 hover:border-primary/30 transition-all group flex flex-col h-full">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-accent-teal-light rounded-lg text-secondary">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full text-[12px] font-semibold bg-success-calm/10 text-success-calm">Completed</span>
+</div>
+<h4 class="font-headline-md text-[18px] leading-tight mb-2 text-primary group-hover:text-primary-container transition-colors">Suluhu Clinical Safety & Triage</h4>
+<p class="text-label-sm text-on-surface-variant mb-auto line-clamp-2">Standard operating procedures for emergency interventions and triage protocols.</p>
+<div class="mt-6 pt-4 border-t border-outline-variant/20 flex justify-between items-center">
+<span class="text-label-sm text-outline">Date: Oct 12, 2023</span>
+<button class="text-primary font-semibold text-label-md hover:underline">Review Assessment</button>
+</div>
+</div>
+<!-- Module 2 -->
+<div class="bg-white p-5 rounded-xl border border-outline-variant/30 hover:border-primary/30 transition-all group flex flex-col h-full">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-fixed/30 rounded-lg text-primary">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full text-[12px] font-semibold bg-success-calm/10 text-success-calm">Completed</span>
+</div>
+<h4 class="font-headline-md text-[18px] leading-tight mb-2 text-primary group-hover:text-primary-container transition-colors">Kenya Data Protection Act (2019) Compliance</h4>
+<p class="text-label-sm text-on-surface-variant mb-auto line-clamp-2">Mandatory regulatory module for health data privacy and regional legislation.</p>
+<div class="mt-6 pt-4 border-t border-outline-variant/20 flex justify-between items-center">
+<span class="text-label-sm text-outline">Date: Oct 14, 2023</span>
+<button class="text-primary font-semibold text-label-md hover:underline">Review Assessment</button>
+</div>
+</div>
+<!-- Module 3 -->
+<div class="bg-white p-5 rounded-xl border-2 border-primary/20 bg-primary-fixed/5 shadow-sm transition-all group flex flex-col h-full">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-container rounded-lg text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full text-[12px] font-semibold bg-primary-container/20 text-primary">In Progress</span>
+</div>
+<h4 class="font-headline-md text-[18px] leading-tight mb-2 text-primary">AI Assistant Workflow Mastery</h4>
+<p class="text-label-sm text-on-surface-variant mb-auto">Learning to leverage Suluhu AI for clinical notes and patient insights.</p>
+<div class="mt-4 w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[45%]"></div>
+</div>
+<div class="mt-4 pt-4 border-t border-outline-variant/20 flex justify-between items-center">
+<span class="text-label-sm text-outline italic">Required by: Oct 20</span>
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-label-sm hover:bg-primary-container transition-all">View Progress</button>
+</div>
+</div>
+<!-- Module 4 -->
+<div class="bg-white p-5 rounded-xl border border-outline-variant/30 hover:border-primary/30 transition-all group flex flex-col h-full opacity-70 grayscale-[0.5]">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-surface-container rounded-lg text-outline">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full text-[12px] font-semibold bg-surface-container text-outline">Assigned</span>
+</div>
+<h4 class="font-headline-md text-[18px] leading-tight mb-2 text-on-surface">Trauma-Informed Care Standards</h4>
+<p class="text-label-sm text-on-surface-variant mb-auto">Evidence-based approaches for managing trauma and vicarious resilience.</p>
+<div class="mt-6 pt-4 border-t border-outline-variant/20 flex justify-between items-center">
+<span class="text-label-sm text-outline">Required by: Oct 25</span>
+<button class="text-outline font-semibold text-label-md cursor-not-allowed">Locked</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar: Assessment Results -->
+<div class="col-span-12 lg:col-span-4 space-y-gutter">
+<!-- Assessment Card -->
+<div class="bg-surface-soothing rounded-xl border border-outline-variant/30 p-6 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-6">
+<div class="p-2 bg-secondary rounded-lg text-white">
+<span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+</div>
+<h3 class="font-headline-md text-[20px] text-primary">Assessment Results</h3>
+</div>
+<div class="space-y-4 mb-8">
+<div class="bg-white p-4 rounded-lg border border-outline-variant/20">
+<div class="flex justify-between items-start mb-2">
+<span class="text-label-md font-medium text-on-surface max-w-[70%]">Clinical Safety Quiz</span>
+<span class="text-headline-md text-success-calm font-bold">95%</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-success-calm" data-icon="check_circle">check_circle</span>
+<span class="text-label-sm text-success-calm font-medium">Certified</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-lg border border-outline-variant/20">
+<div class="flex justify-between items-start mb-2">
+<span class="text-label-md font-medium text-on-surface max-w-[70%]">Data Protection Final</span>
+<span class="text-headline-md text-success-calm font-bold">88%</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-success-calm" data-icon="check_circle">check_circle</span>
+<span class="text-label-sm text-success-calm font-medium">Certified</span>
+</div>
+</div>
+<div class="p-4 rounded-lg border border-dashed border-outline-variant flex flex-col items-center justify-center text-center opacity-60">
+<span class="material-symbols-outlined text-outline mb-2" data-icon="hourglass_empty">hourglass_empty</span>
+<p class="text-label-sm text-outline">Workflow Mastery Quiz pending completion</p>
+</div>
+</div>
+<div class="mt-auto">
+<div class="bg-primary/5 rounded-xl p-5 border border-primary/10">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-primary" data-icon="info">info</span>
+<p class="text-label-sm font-semibold text-primary uppercase tracking-tight">Admin Note</p>
+</div>
+<p class="text-body-md text-on-surface-variant leading-relaxed">
+                  Sarah has exceeded the benchmark in all clinical assessments. Once the AI Workflow module is cleared, she will be eligible for <strong>Tier 2 Clinical Access</strong>.
+                </p>
+</div>
+</div>
+</div>
+<!-- Quick Action Card -->
+<div class="bg-white rounded-xl border border-outline-variant/30 p-6 shadow-sm overflow-hidden">
+<h4 class="text-label-md font-bold text-primary mb-4">Recent Feedback</h4>
+<div class="flex gap-4">
+<div class="h-10 w-10 rounded-full bg-secondary-fixed flex-shrink-0 flex items-center justify-center text-on-secondary-fixed">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+</div>
+<div class="space-y-1">
+<p class="text-label-sm text-on-surface font-medium italic">"Excellent understanding of triage logic. Quick adaptation to digital tools."</p>
+<p class="text-[11px] text-outline">— Lead Clinical Reviewer</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Interactive Logic for tooltips/simulations -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Small interaction to show active state on nav links
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          // Normal navigation would happen, here we just simulate UI reaction
+          console.log('Navigating to:', link.innerText);
+        });
+      });
+
+      // Simple animation for the progress bar on load
+      const progressBar = document.querySelector('.bg-gradient-to-r');
+      if (progressBar) {
+        progressBar.style.width = '0%';
+        setTimeout(() => {
+          progressBar.style.width = '60%';
+        }, 300);
+      }
+    });
+  </script>
+</body></html>
