@@ -4,7 +4,8 @@
   "private": true,
   "description": "Suluhu Therapy Center API — NestJS modular monolith.",
   "scripts": {
-    "build": "nest build",
+    "postinstall": "prisma generate",
+    "build": "prisma generate && nest build",
     "dev": "nest start --watch",
     "start": "node dist/main.js",
     "start:prod": "node dist/main.js",
