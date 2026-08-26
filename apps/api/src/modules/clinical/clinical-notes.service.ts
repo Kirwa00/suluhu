@@ -8,7 +8,6 @@ import {
 } from '@suluhu/shared';
 import { PrismaService } from '../../prisma/prisma.service';
 import { PhiCryptoService } from '../../common/crypto/phi-crypto.service';
-import { AppException } from '../../common/exceptions/app.exception';
 import { AuditService } from '../audit/audit.service';
 import { ClinicalAccessService } from './clinical-access.service';
 import { AI_SOAP_PROVIDER, type AiSoapProvider, type SoapDraft } from './providers/ai-soap.provider';
