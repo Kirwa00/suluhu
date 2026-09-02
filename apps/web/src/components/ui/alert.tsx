@@ -22,7 +22,11 @@ export function Alert({
   return (
     <div
       role={variant === 'error' ? 'alert' : 'status'}
-      className={cn('flex items-start gap-3 rounded-md border p-3 text-sm', styles[variant], className)}
+      className={cn(
+        'flex items-start gap-3 rounded-md border p-3 text-sm',
+        styles[variant],
+        className,
+      )}
       {...props}
     >
       <Icon className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />

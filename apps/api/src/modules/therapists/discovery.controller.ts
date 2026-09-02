@@ -15,7 +15,10 @@ export class DiscoveryController {
 
   @Get()
   @ApiOperation({ summary: 'Search therapists with filters' })
-  search(@Query(new ZodValidationPipe(therapistSearchSchema)) query: ReturnType<typeof therapistSearchSchema.parse>) {
+  search(
+    @Query(new ZodValidationPipe(therapistSearchSchema))
+    query: ReturnType<typeof therapistSearchSchema.parse>,
+  ) {
     return this.discovery.search(query);
   }
 

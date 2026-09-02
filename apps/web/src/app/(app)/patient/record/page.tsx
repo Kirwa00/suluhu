@@ -44,7 +44,9 @@ export default function PatientRecordPage() {
                   <div key={l as string} className="rounded-md bg-surface-soothing p-3">
                     <p className="font-display text-xl font-bold text-on-surface">
                       {s as number}
-                      <span className="text-sm font-normal text-on-surface-variant">/{m as number}</span>
+                      <span className="text-sm font-normal text-on-surface-variant">
+                        /{m as number}
+                      </span>
                     </p>
                     <p className="text-xs text-on-surface-variant">{l as string}</p>
                   </div>

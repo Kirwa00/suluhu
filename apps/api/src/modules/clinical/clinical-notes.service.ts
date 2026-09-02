@@ -10,7 +10,11 @@ import { PrismaService } from '../../prisma/prisma.service';
 import { PhiCryptoService } from '../../common/crypto/phi-crypto.service';
 import { AuditService } from '../audit/audit.service';
 import { ClinicalAccessService } from './clinical-access.service';
-import { AI_SOAP_PROVIDER, type AiSoapProvider, type SoapDraft } from './providers/ai-soap.provider';
+import {
+  AI_SOAP_PROVIDER,
+  type AiSoapProvider,
+  type SoapDraft,
+} from './providers/ai-soap.provider';
 import type { RequestContext } from '../auth/types';
 
 export interface SoapNoteView {
@@ -45,8 +49,15 @@ export class ClinicalNotesService {
     return value ? this.phi.decrypt(value) : '';
   }
 
-  async upsert(therapistUserId: string, input: SoapNoteInput, ctx: RequestContext): Promise<SoapNoteView> {
-    const appt = await this.access.assertTherapistOwnsAppointment(therapistUserId, input.appointmentId);
+  async upsert(
+    therapistUserId: string,
+    input: SoapNoteInput,
+    ctx: RequestContext,
+  ): Promise<SoapNoteView> {
+    const appt = await this.access.assertTherapistOwnsAppointment(
+      therapistUserId,
+      input.appointmentId,
+    );
     const finalizing = input.status === ClinicalNoteStatus.FINALIZED;
 
     const data = {
@@ -79,7 +90,11 @@ export class ClinicalNotesService {
     return this.toView(note, appt.scheduledAt);
   }
 
-  async getByAppointment(appointmentId: string, requester: AuthUser, ctx: RequestContext): Promise<SoapNoteView | null> {
+  async getByAppointment(
+    appointmentId: string,
+    requester: AuthUser,
+    ctx: RequestContext,
+  ): Promise<SoapNoteView | null> {
     const note = await this.prisma.clinicalNote.findUnique({
       where: { appointmentId },
       include: { appointment: { select: { scheduledAt: true } } },
@@ -118,7 +133,10 @@ export class ClinicalNotesService {
   }
 
   async draftAi(therapistUserId: string, req: AiDraftRequest): Promise<SoapDraft> {
-    const appt = await this.access.assertTherapistOwnsAppointment(therapistUserId, req.appointmentId);
+    const appt = await this.access.assertTherapistOwnsAppointment(
+      therapistUserId,
+      req.appointmentId,
+    );
     const [patient, intake] = await Promise.all([
       this.prisma.user.findUnique({ where: { id: appt.patientId }, select: { firstName: true } }),
       this.prisma.intakeAssessment.findFirst({

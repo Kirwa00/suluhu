@@ -30,7 +30,9 @@ export function StatCard({
           <p className="mt-1 font-display text-2xl font-bold text-on-surface">{value}</p>
           {hint && <p className="mt-1 text-xs text-on-surface-variant">{hint}</p>}
         </div>
-        <span className={cn('flex h-10 w-10 items-center justify-center rounded-md', toneClasses[tone])}>
+        <span
+          className={cn('flex h-10 w-10 items-center justify-center rounded-md', toneClasses[tone])}
+        >
           <Icon className="h-5 w-5" aria-hidden />
         </span>
       </div>

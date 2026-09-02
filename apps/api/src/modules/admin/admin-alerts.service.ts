@@ -99,7 +99,10 @@ export class AdminAlertsService {
   }
 
   private async ensureExists(id: string): Promise<void> {
-    const found = await this.prisma.clinicalAlert.findUnique({ where: { id }, select: { id: true } });
+    const found = await this.prisma.clinicalAlert.findUnique({
+      where: { id },
+      select: { id: true },
+    });
     if (!found) throw AppException.notFound('Alert not found');
   }
 }

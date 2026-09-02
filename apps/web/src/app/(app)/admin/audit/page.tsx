@@ -22,7 +22,10 @@ export default function AdminAuditPage() {
 
   return (
     <div>
-      <PageHeading title="Audit log" subtitle="Immutable record of all sensitive actions (7-year retention)." />
+      <PageHeading
+        title="Audit log"
+        subtitle="Immutable record of all sensitive actions (7-year retention)."
+      />
 
       <form
         className="mb-4 flex max-w-md gap-2"
@@ -32,7 +35,11 @@ export default function AdminAuditPage() {
           setQuery(action.trim());
         }}
       >
-        <Input placeholder="Filter by action (e.g. clinical_note)" value={action} onChange={(e) => setAction(e.target.value)} />
+        <Input
+          placeholder="Filter by action (e.g. clinical_note)"
+          value={action}
+          onChange={(e) => setAction(e.target.value)}
+        />
         <Button type="submit">Filter</Button>
       </form>
 
@@ -56,9 +63,13 @@ export default function AdminAuditPage() {
               <tbody>
                 {data.items.map((r) => (
                   <tr key={r.id} className="border-b border-outline-variant last:border-0">
-                    <td className="whitespace-nowrap p-3 text-on-surface-variant">{formatDateTimeEAT(r.createdAt)}</td>
+                    <td className="whitespace-nowrap p-3 text-on-surface-variant">
+                      {formatDateTimeEAT(r.createdAt)}
+                    </td>
                     <td className="p-3 text-on-surface">{r.actor}</td>
-                    <td className="p-3"><code className="text-xs text-tertiary">{r.action}</code></td>
+                    <td className="p-3">
+                      <code className="text-xs text-tertiary">{r.action}</code>
+                    </td>
                     <td className="p-3 text-on-surface-variant">{r.resourceType}</td>
                     <td className="p-3">
                       {r.phiAccessed && (
@@ -78,13 +89,24 @@ export default function AdminAuditPage() {
       {data && data.pagination.totalPages > 1 && (
         <div className="mt-4 flex items-center justify-between text-sm">
           <span className="text-on-surface-variant">
-            Page {data.pagination.page} of {data.pagination.totalPages} · {data.pagination.totalItems} entries
+            Page {data.pagination.page} of {data.pagination.totalPages} ·{' '}
+            {data.pagination.totalItems} entries
           </span>
           <div className="flex gap-2">
-            <Button variant="secondary" size="sm" disabled={!data.pagination.hasPreviousPage} onClick={() => setPage((p) => p - 1)}>
+            <Button
+              variant="secondary"
+              size="sm"
+              disabled={!data.pagination.hasPreviousPage}
+              onClick={() => setPage((p) => p - 1)}
+            >
               Previous
             </Button>
-            <Button variant="secondary" size="sm" disabled={!data.pagination.hasNextPage} onClick={() => setPage((p) => p + 1)}>
+            <Button
+              variant="secondary"
+              size="sm"
+              disabled={!data.pagination.hasNextPage}
+              onClick={() => setPage((p) => p + 1)}
+            >
               Next
             </Button>
           </div>

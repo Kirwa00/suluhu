@@ -120,9 +120,8 @@ export class PaymentsService implements OnModuleInit {
       return;
     }
     const success = stk.ResultCode === 0;
-    const receipt = stk.CallbackMetadata?.Item?.find(
-      (i) => i.Name === 'MpesaReceiptNumber',
-    )?.Value as string | undefined;
+    const receipt = stk.CallbackMetadata?.Item?.find((i) => i.Name === 'MpesaReceiptNumber')
+      ?.Value as string | undefined;
     await this.completeByCheckout({
       checkoutRequestId: stk.CheckoutRequestID,
       success,

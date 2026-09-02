@@ -59,9 +59,7 @@ export default function AdminApplicationReview() {
 
   if (isLoading) return <p className="text-on-surface-variant">Loading…</p>;
   if (!app)
-    return (
-      <Card className="p-10 text-center text-on-surface-variant">Application not found.</Card>
-    );
+    return <Card className="p-10 text-center text-on-surface-variant">Application not found.</Card>;
 
   const cpb = app.cpbCheck;
 
@@ -86,10 +84,16 @@ export default function AdminApplicationReview() {
               <Detail label="Email" value={app.email} />
               <Detail label="Phone" value={app.phone} />
               <Detail label="Gender" value={app.gender ? humanizeEnum(app.gender) : '—'} />
-              <Detail label="Experience" value={app.yearsExperience != null ? `${app.yearsExperience} years` : '—'} />
+              <Detail
+                label="Experience"
+                value={app.yearsExperience != null ? `${app.yearsExperience} years` : '—'}
+              />
               <Detail label="Session rate" value={formatKsh(app.sessionRateKsh)} />
               <Detail label="Languages" value={app.languages.join(', ') || '—'} />
-              <Detail label="Specialties" value={app.specialties.map(humanizeEnum).join(', ') || '—'} />
+              <Detail
+                label="Specialties"
+                value={app.specialties.map(humanizeEnum).join(', ') || '—'}
+              />
               <Detail label="Submitted" value={formatDate(app.submittedAt)} />
             </CardContent>
           </Card>
@@ -156,7 +160,11 @@ export default function AdminApplicationReview() {
                 onChange={(e) => setReason(e.target.value)}
                 rows={3}
               />
-              <Button className="w-full" onClick={() => decide('APPROVE')} disabled={mutation.isPending}>
+              <Button
+                className="w-full"
+                onClick={() => decide('APPROVE')}
+                disabled={mutation.isPending}
+              >
                 Approve
               </Button>
               <Button
