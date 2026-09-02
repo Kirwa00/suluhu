@@ -130,7 +130,11 @@ export class SessionsService {
     const roomName = appt.videoRoomName ?? (await this.ensureRoom(appt.id));
     await this.prisma.appointment.update({
       where: { id: appt.id },
-      data: { status: AppointmentStatus.IN_PROGRESS, startedAt: new Date(), videoRoomName: roomName },
+      data: {
+        status: AppointmentStatus.IN_PROGRESS,
+        startedAt: new Date(),
+        videoRoomName: roomName,
+      },
     });
     await this.audit.record({
       userId: user.id,
@@ -147,7 +151,10 @@ export class SessionsService {
     if (appt.therapistId !== user.id) {
       throw AppException.forbidden('Only the therapist can end the session');
     }
-    if (appt.status !== AppointmentStatus.IN_PROGRESS && appt.status !== AppointmentStatus.SCHEDULED) {
+    if (
+      appt.status !== AppointmentStatus.IN_PROGRESS &&
+      appt.status !== AppointmentStatus.SCHEDULED
+    ) {
       throw AppException.conflict('Session is not active');
     }
     await this.prisma.$transaction([

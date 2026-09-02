@@ -54,7 +54,10 @@ export default function TherapistDirectory() {
       <Card className="mb-6 p-4">
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
           <div className="relative lg:col-span-2">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-on-surface-variant" aria-hidden />
+            <Search
+              className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-on-surface-variant"
+              aria-hidden
+            />
             <Input
               className="pl-9"
               placeholder="Search by name or focus"
@@ -62,7 +65,11 @@ export default function TherapistDirectory() {
               onChange={(ev) => set('q', ev.target.value)}
             />
           </div>
-          <Select value={filters.specialty} onChange={(ev) => set('specialty', ev.target.value)} aria-label="Specialty">
+          <Select
+            value={filters.specialty}
+            onChange={(ev) => set('specialty', ev.target.value)}
+            aria-label="Specialty"
+          >
             <option value="">All specialties</option>
             {THERAPY_SPECIALTIES.map((s) => (
               <option key={s} value={s}>
@@ -70,7 +77,11 @@ export default function TherapistDirectory() {
               </option>
             ))}
           </Select>
-          <Select value={filters.language} onChange={(ev) => set('language', ev.target.value)} aria-label="Language">
+          <Select
+            value={filters.language}
+            onChange={(ev) => set('language', ev.target.value)}
+            aria-label="Language"
+          >
             <option value="">All languages</option>
             {SPOKEN_LANGUAGES.map((l) => (
               <option key={l} value={l}>
@@ -78,7 +89,11 @@ export default function TherapistDirectory() {
               </option>
             ))}
           </Select>
-          <Select value={filters.sort} onChange={(ev) => set('sort', ev.target.value)} aria-label="Sort">
+          <Select
+            value={filters.sort}
+            onChange={(ev) => set('sort', ev.target.value)}
+            aria-label="Sort"
+          >
             <option value="rating">Top rated</option>
             <option value="price_asc">Price: low to high</option>
             <option value="price_desc">Price: high to low</option>
@@ -86,7 +101,11 @@ export default function TherapistDirectory() {
           </Select>
         </div>
         <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:w-1/2">
-          <Select value={filters.gender} onChange={(ev) => set('gender', ev.target.value)} aria-label="Gender">
+          <Select
+            value={filters.gender}
+            onChange={(ev) => set('gender', ev.target.value)}
+            aria-label="Gender"
+          >
             <option value="">Any gender</option>
             {Object.values(Gender).map((g) => (
               <option key={g} value={g}>
@@ -106,7 +125,8 @@ export default function TherapistDirectory() {
       ) : (
         <>
           <p className="mb-4 text-sm text-on-surface-variant">
-            {data.pagination.totalItems} therapist{data.pagination.totalItems === 1 ? '' : 's'} found
+            {data.pagination.totalItems} therapist{data.pagination.totalItems === 1 ? '' : 's'}{' '}
+            found
           </p>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {data.items.map((t) => (
@@ -142,7 +162,9 @@ function TherapistResultCard({ t }: { t: TherapistCard }) {
             </span>
           ))}
         </div>
-        {t.bioSnippet && <p className="mt-3 line-clamp-2 text-sm text-on-surface-variant">{t.bioSnippet}</p>}
+        {t.bioSnippet && (
+          <p className="mt-3 line-clamp-2 text-sm text-on-surface-variant">{t.bioSnippet}</p>
+        )}
         <div className="mt-4 flex items-center justify-between">
           <span className="flex items-center gap-1 text-sm text-on-surface-variant">
             <Star className="h-4 w-4 fill-current text-secondary" aria-hidden />

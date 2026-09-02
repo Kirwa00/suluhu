@@ -120,7 +120,9 @@ export class DiscoveryService {
     };
   }
 
-  private orderBy(sort: TherapistSearchQuery['sort']): Prisma.TherapistProfileOrderByWithRelationInput {
+  private orderBy(
+    sort: TherapistSearchQuery['sort'],
+  ): Prisma.TherapistProfileOrderByWithRelationInput {
     switch (sort) {
       case 'price_asc':
         return { sessionRateKsh: 'asc' };

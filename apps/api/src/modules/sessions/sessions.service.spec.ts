@@ -4,8 +4,20 @@ import type { AuditService } from '../audit/audit.service';
 import { MockVideoProvider } from './providers/video.provider';
 import type { AuthUser } from '@suluhu/shared';
 
-const PATIENT: AuthUser = { id: 'pat', email: 'p@x', role: 'PATIENT', status: 'ACTIVE', mfaEnabled: false };
-const THERAPIST: AuthUser = { id: 'thr', email: 't@x', role: 'THERAPIST', status: 'ACTIVE', mfaEnabled: true };
+const PATIENT: AuthUser = {
+  id: 'pat',
+  email: 'p@x',
+  role: 'PATIENT',
+  status: 'ACTIVE',
+  mfaEnabled: false,
+};
+const THERAPIST: AuthUser = {
+  id: 'thr',
+  email: 't@x',
+  role: 'THERAPIST',
+  status: 'ACTIVE',
+  mfaEnabled: true,
+};
 
 function makeService(appt: Record<string, unknown>) {
   const prisma = {
@@ -81,8 +93,6 @@ describe('SessionsService.getAccess', () => {
     const svc = makeService(
       baseAppt({ status: 'SCHEDULED', scheduledAt: new Date(Date.now() + 5 * 60_000) }),
     );
-    await expect(
-      svc.getAccess('appt1', { ...PATIENT, id: 'intruder' }),
-    ).rejects.toThrow();
+    await expect(svc.getAccess('appt1', { ...PATIENT, id: 'intruder' })).rejects.toThrow();
   });
 });

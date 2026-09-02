@@ -15,7 +15,10 @@ export default function AdminPayoutsPage() {
   const [msg, setMsg] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const { data, isLoading } = useQuery({ queryKey: ['payouts'], queryFn: () => analyticsApi.payouts() });
+  const { data, isLoading } = useQuery({
+    queryKey: ['payouts'],
+    queryFn: () => analyticsApi.payouts(),
+  });
 
   const pay = useMutation({
     mutationFn: (therapistId: string) => analyticsApi.pay(therapistId),
@@ -30,8 +33,16 @@ export default function AdminPayoutsPage() {
   return (
     <div>
       <PageHeading title="Therapist payouts" subtitle="Settle pending balances via M-Pesa B2C." />
-      {msg && <Alert variant="success" className="mb-4">{msg}</Alert>}
-      {error && <Alert variant="error" className="mb-4">{error}</Alert>}
+      {msg && (
+        <Alert variant="success" className="mb-4">
+          {msg}
+        </Alert>
+      )}
+      {error && (
+        <Alert variant="error" className="mb-4">
+          {error}
+        </Alert>
+      )}
 
       <Card>
         <CardHeader>
@@ -57,9 +68,15 @@ export default function AdminPayoutsPage() {
                 {data.map((r) => (
                   <tr key={r.therapistId} className="border-b border-outline-variant last:border-0">
                     <td className="py-2 text-on-surface">{r.name}</td>
-                    <td className="py-2 text-right text-on-surface-variant">{formatKsh(r.netKsh)}</td>
-                    <td className="py-2 text-right text-on-surface-variant">{formatKsh(r.paidOutKsh)}</td>
-                    <td className="py-2 text-right font-medium text-on-surface">{formatKsh(r.pendingKsh)}</td>
+                    <td className="py-2 text-right text-on-surface-variant">
+                      {formatKsh(r.netKsh)}
+                    </td>
+                    <td className="py-2 text-right text-on-surface-variant">
+                      {formatKsh(r.paidOutKsh)}
+                    </td>
+                    <td className="py-2 text-right font-medium text-on-surface">
+                      {formatKsh(r.pendingKsh)}
+                    </td>
                     <td className="py-2 text-right">
                       <Button
                         size="sm"

@@ -107,7 +107,9 @@ export class AnalyticsService {
         where: { status: PaymentStatus.SUCCEEDED, appointment: { therapistId: therapistUserId } },
         orderBy: { paidAt: 'desc' },
         take: 10,
-        include: { appointment: { include: { patient: { select: { firstName: true, lastName: true } } } } },
+        include: {
+          appointment: { include: { patient: { select: { firstName: true, lastName: true } } } },
+        },
       }),
       this.prisma.payout.findMany({
         where: { therapistId: therapistUserId },

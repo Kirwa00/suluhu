@@ -79,7 +79,11 @@ export class OtpService {
         where: { id: record.id },
         data: { consumedAt: new Date() },
       });
-      throw new AppException(ErrorCode.AUTH_OTP_INVALID, 'Too many attempts. Request a new code.', 400);
+      throw new AppException(
+        ErrorCode.AUTH_OTP_INVALID,
+        'Too many attempts. Request a new code.',
+        400,
+      );
     }
 
     if (!timingSafeEqualHex(record.codeHash, hashCode(code))) {
@@ -101,7 +105,10 @@ export class OtpService {
     return randomInt(0, max).toString().padStart(OTP_LENGTH, '0');
   }
 
-  private async enforceRequestThrottle(userId: string, purpose: VerificationPurpose): Promise<void> {
+  private async enforceRequestThrottle(
+    userId: string,
+    purpose: VerificationPurpose,
+  ): Promise<void> {
     const key = `${REQUEST_THROTTLE_PREFIX}${userId}:${purpose}`;
     const count = await this.redis.incr(key);
     if (count === 1) {
@@ -118,7 +125,11 @@ export class OtpService {
 
   private async deliver(
     code: string,
-    params: { purpose: VerificationPurpose; deliverTo: { phone?: string; email?: string }; channel: Channel },
+    params: {
+      purpose: VerificationPurpose;
+      deliverTo: { phone?: string; email?: string };
+      channel: Channel;
+    },
   ): Promise<void> {
     const message = otpMessage(code, params.purpose);
     if (params.channel === 'sms' && params.deliverTo.phone) {

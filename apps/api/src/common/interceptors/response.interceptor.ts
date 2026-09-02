@@ -1,9 +1,4 @@
-import {
-  CallHandler,
-  ExecutionContext,
-  Injectable,
-  NestInterceptor,
-} from '@nestjs/common';
+import { CallHandler, ExecutionContext, Injectable, NestInterceptor } from '@nestjs/common';
 import { API_VERSION, type ApiResponse } from '@suluhu/shared';
 import type { Request } from 'express';
 import { Observable, map } from 'rxjs';

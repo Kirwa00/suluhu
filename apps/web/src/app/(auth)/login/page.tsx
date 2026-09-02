@@ -105,7 +105,11 @@ export default function LoginPage() {
           </form>
         ) : (
           <form onSubmit={onVerifyMfa} className="space-y-4" noValidate>
-            <Field label="Verification code" htmlFor="code" error={mfaForm.formState.errors.code?.message}>
+            <Field
+              label="Verification code"
+              htmlFor="code"
+              error={mfaForm.formState.errors.code?.message}
+            >
               <Input
                 id="code"
                 inputMode="numeric"

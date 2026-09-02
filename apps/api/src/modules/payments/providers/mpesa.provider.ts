@@ -49,9 +49,7 @@ export class MockMpesaProvider implements MpesaProvider {
 
   async initiateStkPush(req: StkPushRequest): Promise<StkPushResult> {
     const checkoutRequestId = `ws_CO_${randomUUID()}`;
-    this.logger.log(
-      `STK Push → ${req.phone} for KES ${req.amountKsh} (${req.accountReference})`,
-    );
+    this.logger.log(`STK Push → ${req.phone} for KES ${req.amountKsh} (${req.accountReference})`);
 
     // Simulate the customer approving the prompt ~2s later, then fire the
     // callback exactly as Daraja would. Always succeeds in mock mode.

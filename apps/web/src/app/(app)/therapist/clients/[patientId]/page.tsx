@@ -30,7 +30,10 @@ export default function ClientRecordPage() {
 
   return (
     <div className="max-w-4xl">
-      <Link href="/therapist/clients" className="inline-flex items-center gap-1.5 text-sm text-secondary hover:underline">
+      <Link
+        href="/therapist/clients"
+        className="inline-flex items-center gap-1.5 text-sm text-secondary hover:underline"
+      >
         <ArrowLeft className="h-4 w-4" aria-hidden />
         Back to clients
       </Link>
@@ -58,7 +61,9 @@ export default function ClientRecordPage() {
                 <Row label="CAGE" value={`${record.latestIntake.cageScore}/4`} />
                 <Row label="Risk" value={humanizeEnum(record.latestIntake.riskLevel)} />
                 {record.latestIntake.primaryConcern && (
-                  <p className="pt-2 text-on-surface-variant">“{record.latestIntake.primaryConcern}”</p>
+                  <p className="pt-2 text-on-surface-variant">
+                    “{record.latestIntake.primaryConcern}”
+                  </p>
                 )}
               </>
             ) : (
@@ -188,7 +193,12 @@ function NoteEditor({ appointmentId }: { appointmentId: string }) {
       <CardHeader>
         <div className="flex items-center justify-between">
           <CardTitle>SOAP note</CardTitle>
-          <Button variant="ghost" size="sm" onClick={() => ai.mutate()} disabled={ai.isPending || finalized}>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => ai.mutate()}
+            disabled={ai.isPending || finalized}
+          >
             <Sparkles className="h-4 w-4" aria-hidden />
             {ai.isPending ? 'Drafting…' : 'AI draft'}
           </Button>
@@ -221,7 +231,11 @@ function NoteEditor({ appointmentId }: { appointmentId: string }) {
 
         {!finalized && (
           <div className="flex gap-3">
-            <Button variant="secondary" onClick={() => save.mutate('DRAFT')} disabled={save.isPending}>
+            <Button
+              variant="secondary"
+              onClick={() => save.mutate('DRAFT')}
+              disabled={save.isPending}
+            >
               Save draft
             </Button>
             <Button onClick={() => save.mutate('FINALIZED')} disabled={save.isPending}>
@@ -263,8 +277,14 @@ function PlanEditor({ patientId }: { patientId: string }) {
     mutationFn: () =>
       clinicalApi.upsertPlan({
         patientId,
-        goals: goals.split('\n').map((g) => g.trim()).filter(Boolean),
-        interventions: interventions.split('\n').map((g) => g.trim()).filter(Boolean),
+        goals: goals
+          .split('\n')
+          .map((g) => g.trim())
+          .filter(Boolean),
+        interventions: interventions
+          .split('\n')
+          .map((g) => g.trim())
+          .filter(Boolean),
         reviewDate: reviewDate || undefined,
         status: status as 'ACTIVE' | 'COMPLETED' | 'ARCHIVED',
         summary: summary || undefined,
@@ -275,7 +295,8 @@ function PlanEditor({ patientId }: { patientId: string }) {
       queryClient.invalidateQueries({ queryKey: ['plan', patientId] });
       queryClient.invalidateQueries({ queryKey: ['record', patientId] });
     },
-    onError: (err) => setError(err instanceof ApiClientError ? err.message : 'Could not save plan.'),
+    onError: (err) =>
+      setError(err instanceof ApiClientError ? err.message : 'Could not save plan.'),
   });
 
   return (
@@ -287,14 +308,20 @@ function PlanEditor({ patientId }: { patientId: string }) {
         {error && <Alert variant="error">{error}</Alert>}
         {saved && <Alert variant="success">Treatment plan saved.</Alert>}
         <div>
-          <label className="mb-1 block text-sm font-medium text-on-surface">Goals (one per line)</label>
+          <label className="mb-1 block text-sm font-medium text-on-surface">
+            Goals (one per line)
+          </label>
           <Textarea rows={3} value={goals} onChange={(e) => setGoals(e.target.value)} />
         </div>
         <div>
           <label className="mb-1 block text-sm font-medium text-on-surface">
             Interventions (one per line)
           </label>
-          <Textarea rows={3} value={interventions} onChange={(e) => setInterventions(e.target.value)} />
+          <Textarea
+            rows={3}
+            value={interventions}
+            onChange={(e) => setInterventions(e.target.value)}
+          />
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
@@ -313,7 +340,9 @@ function PlanEditor({ patientId }: { patientId: string }) {
           </div>
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium text-on-surface">Summary (optional)</label>
+          <label className="mb-1 block text-sm font-medium text-on-surface">
+            Summary (optional)
+          </label>
           <Textarea rows={2} value={summary} onChange={(e) => setSummary(e.target.value)} />
         </div>
         <Button onClick={() => save.mutate()} disabled={save.isPending || !goals.trim()}>

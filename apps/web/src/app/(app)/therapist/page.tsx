@@ -18,10 +18,22 @@ export default function TherapistDashboard() {
   const { user } = useAuth();
   const name = user?.email.split('@')[0] ?? 'therapist';
 
-  const { data: upcoming } = useQuery({ queryKey: ['appointments', 'upcoming'], queryFn: () => appointmentsApi.list('upcoming') });
-  const { data: clients } = useQuery({ queryKey: ['clients'], queryFn: () => clinicalApi.clients() });
-  const { data: earnings } = useQuery({ queryKey: ['earnings'], queryFn: () => analyticsApi.therapistEarnings() });
-  const { data: onboarding } = useQuery({ queryKey: ['onboarding'], queryFn: () => therapistsApi.getOnboarding() });
+  const { data: upcoming } = useQuery({
+    queryKey: ['appointments', 'upcoming'],
+    queryFn: () => appointmentsApi.list('upcoming'),
+  });
+  const { data: clients } = useQuery({
+    queryKey: ['clients'],
+    queryFn: () => clinicalApi.clients(),
+  });
+  const { data: earnings } = useQuery({
+    queryKey: ['earnings'],
+    queryFn: () => analyticsApi.therapistEarnings(),
+  });
+  const { data: onboarding } = useQuery({
+    queryKey: ['onboarding'],
+    queryFn: () => therapistsApi.getOnboarding(),
+  });
 
   const notApproved = onboarding && onboarding.verificationStatus !== 'APPROVED';
 
@@ -39,10 +51,24 @@ export default function TherapistDashboard() {
       )}
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Upcoming sessions" value={String(upcoming?.length ?? 0)} icon={CalendarDays} />
+        <StatCard
+          label="Upcoming sessions"
+          value={String(upcoming?.length ?? 0)}
+          icon={CalendarDays}
+        />
         <StatCard label="Active clients" value={String(clients?.length ?? 0)} icon={Users} />
-        <StatCard label="Net earnings" value={formatKsh(earnings?.netKsh ?? 0)} icon={Wallet} tone="positive" />
-        <StatCard label="Pending payout" value={formatKsh(earnings?.pendingKsh ?? 0)} icon={Clock} tone={earnings && earnings.pendingKsh > 0 ? 'attention' : 'neutral'} />
+        <StatCard
+          label="Net earnings"
+          value={formatKsh(earnings?.netKsh ?? 0)}
+          icon={Wallet}
+          tone="positive"
+        />
+        <StatCard
+          label="Pending payout"
+          value={formatKsh(earnings?.pendingKsh ?? 0)}
+          icon={Clock}
+          tone={earnings && earnings.pendingKsh > 0 ? 'attention' : 'neutral'}
+        />
       </div>
 
       <Card className="mt-6">
@@ -59,7 +85,9 @@ export default function TherapistDashboard() {
                 <li key={a.id} className="flex items-center justify-between py-2">
                   <div>
                     <p className="text-sm font-medium text-on-surface">{a.patient.name}</p>
-                    <p className="text-xs text-on-surface-variant">{formatDateTimeEAT(a.scheduledAt)} · {a.durationMins} min</p>
+                    <p className="text-xs text-on-surface-variant">
+                      {formatDateTimeEAT(a.scheduledAt)} · {a.durationMins} min
+                    </p>
                   </div>
                   <Button asChild size="sm" variant="secondary">
                     <Link href={`/session/${a.id}`}>Open</Link>

@@ -88,7 +88,9 @@ export default function HomePage() {
 
       <footer className="border-t border-outline-variant bg-surface-container-lowest">
         <div className="container flex flex-col items-center justify-between gap-2 py-6 text-sm text-on-surface-variant sm:flex-row">
-          <span>© {new Date().getFullYear()} {t['brand.name']} · Eldoret, Kenya</span>
+          <span>
+            © {new Date().getFullYear()} {t['brand.name']} · Eldoret, Kenya
+          </span>
           <span>Kenya Data Protection Act 2019 compliant</span>
         </div>
       </footer>

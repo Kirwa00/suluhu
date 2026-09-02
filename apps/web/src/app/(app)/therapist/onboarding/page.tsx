@@ -69,9 +69,7 @@ export default function TherapistOnboardingPage() {
 
   const toggle = (field: 'specialties' | 'languages', value: string) => {
     const current = form.getValues(field);
-    const next = current.includes(value)
-      ? current.filter((v) => v !== value)
-      : [...current, value];
+    const next = current.includes(value) ? current.filter((v) => v !== value) : [...current, value];
     form.setValue(field, next, { shouldValidate: true });
   };
 
@@ -131,7 +129,11 @@ export default function TherapistOnboardingPage() {
           <form onSubmit={onSubmit} className="space-y-4" noValidate>
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Professional title" htmlFor="title" error={e.title?.message}>
-                <Input id="title" placeholder="Counselling Psychologist" {...form.register('title')} />
+                <Input
+                  id="title"
+                  placeholder="Counselling Psychologist"
+                  {...form.register('title')}
+                />
               </Field>
               <Field label="Gender" htmlFor="gender" error={e.gender?.message}>
                 <Select id="gender" {...form.register('gender')}>
@@ -145,8 +147,17 @@ export default function TherapistOnboardingPage() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="CPB license number" htmlFor="cpb" error={e.cpbLicenseNumber?.message} hint="Format: CPB/YYYY/NNNN">
-                <Input id="cpb" placeholder="CPB/2024/0002" {...form.register('cpbLicenseNumber')} />
+              <Field
+                label="CPB license number"
+                htmlFor="cpb"
+                error={e.cpbLicenseNumber?.message}
+                hint="Format: CPB/YYYY/NNNN"
+              >
+                <Input
+                  id="cpb"
+                  placeholder="CPB/2024/0002"
+                  {...form.register('cpbLicenseNumber')}
+                />
               </Field>
               <Field label="License expiry" htmlFor="cpbExpiry" error={e.cpbExpiry?.message}>
                 <Input id="cpbExpiry" type="date" {...form.register('cpbExpiry')} />
@@ -157,12 +168,28 @@ export default function TherapistOnboardingPage() {
               <Field label="Years of experience" htmlFor="years" error={e.yearsExperience?.message}>
                 <Input id="years" type="number" min={0} {...form.register('yearsExperience')} />
               </Field>
-              <Field label="Session rate (KES)" htmlFor="rate" error={e.sessionRateKsh?.message} hint="Between 1,000 and 5,000">
-                <Input id="rate" type="number" min={1000} max={5000} {...form.register('sessionRateKsh')} />
+              <Field
+                label="Session rate (KES)"
+                htmlFor="rate"
+                error={e.sessionRateKsh?.message}
+                hint="Between 1,000 and 5,000"
+              >
+                <Input
+                  id="rate"
+                  type="number"
+                  min={1000}
+                  max={5000}
+                  {...form.register('sessionRateKsh')}
+                />
               </Field>
             </div>
 
-            <Field label="About you" htmlFor="bio" error={e.bio?.message} hint="Min 40 characters — your approach, who you help.">
+            <Field
+              label="About you"
+              htmlFor="bio"
+              error={e.bio?.message}
+              hint="Min 40 characters — your approach, who you help."
+            >
               <Textarea id="bio" rows={5} {...form.register('bio')} />
             </Field>
 
@@ -187,7 +214,9 @@ export default function TherapistOnboardingPage() {
                   );
                 })}
               </div>
-              {e.specialties && <p className="mt-1 text-xs text-destructive">{e.specialties.message}</p>}
+              {e.specialties && (
+                <p className="mt-1 text-xs text-destructive">{e.specialties.message}</p>
+              )}
             </fieldset>
 
             <fieldset>
@@ -211,7 +240,9 @@ export default function TherapistOnboardingPage() {
                   );
                 })}
               </div>
-              {e.languages && <p className="mt-1 text-xs text-destructive">{e.languages.message}</p>}
+              {e.languages && (
+                <p className="mt-1 text-xs text-destructive">{e.languages.message}</p>
+              )}
             </fieldset>
 
             <Button type="submit" disabled={mutation.isPending}>

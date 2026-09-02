@@ -9,7 +9,10 @@ test.describe('Suluhu smoke tests', () => {
 
   test('get started leads to registration', async ({ page }) => {
     await page.goto('/');
-    await page.getByRole('link', { name: /Get started/i }).first().click();
+    await page
+      .getByRole('link', { name: /Get started/i })
+      .first()
+      .click();
     await expect(page).toHaveURL(/\/register/);
     await expect(page.getByLabel('Email')).toBeVisible();
   });

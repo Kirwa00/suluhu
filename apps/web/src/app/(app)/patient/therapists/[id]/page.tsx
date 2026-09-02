@@ -13,7 +13,11 @@ export default function TherapistProfilePage() {
   const params = useParams<{ id: string }>();
   const id = params.id;
 
-  const { data: t, isLoading, isError } = useQuery({
+  const {
+    data: t,
+    isLoading,
+    isError,
+  } = useQuery({
     queryKey: ['therapist', id],
     queryFn: () => therapistsApi.getDetail(id),
     enabled: Boolean(id),
@@ -59,7 +63,10 @@ export default function TherapistProfilePage() {
 
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {t.specialties.map((s) => (
-                  <span key={s} className="rounded-full bg-accent px-2.5 py-1 text-xs text-secondary">
+                  <span
+                    key={s}
+                    className="rounded-full bg-accent px-2.5 py-1 text-xs text-secondary"
+                  >
                     {humanizeEnum(s)}
                   </span>
                 ))}
