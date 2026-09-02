@@ -16,14 +16,7 @@ export function BrandLogo({
   const px = SIZES[size];
   return (
     <span className={cn('inline-flex items-center gap-2', className)}>
-      <Image
-        src="/brand/mark.png"
-        alt=""
-        width={px}
-        height={px}
-        priority
-        className="shrink-0"
-      />
+      <Image src="/brand/mark.png" alt="" width={px} height={px} priority className="shrink-0" />
       {wordmark ? (
         <span className="font-display text-xl font-bold text-primary">{wordmark}</span>
       ) : null}
