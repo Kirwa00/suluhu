@@ -11,15 +11,25 @@ import { PaymentsService } from './payments.service';
 export class PaymentsController {
   constructor(private readonly payments: PaymentsService) {}
 
-  /** Safaricom Daraja STK callback (public webhook). */
+  /** Safaricom Daraja STK callback (public webhook, direct-Daraja integrations only). */
   @Public()
   @Post('mpesa/callback')
   @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: 'M-Pesa STK Push result webhook' })
+  @ApiOperation({ summary: 'M-Pesa STK Push result webhook (direct Daraja)' })
   async callback(@Body() body: unknown) {
     await this.payments.handleDarajaCallback(body);
     // Daraja expects this acknowledgement shape.
     return { ResultCode: 0, ResultDesc: 'Accepted' };
+  }
+
+  /** PayHero STK callback (public webhook) — see MPESA_CALLBACK_URL. */
+  @Public()
+  @Post('payhero/callback')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'M-Pesa STK Push result webhook (via PayHero)' })
+  async payHeroCallback(@Body() body: unknown) {
+    await this.payments.handlePayHeroCallback(body);
+    return { success: true };
   }
 
   @Get('appointment/:appointmentId')

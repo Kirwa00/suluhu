@@ -40,6 +40,13 @@ export const envSchema = z.object({
   SMS_MODE: providerMode.default('mock'),
   EMAIL_MODE: providerMode.default('mock'),
 
+  // PayHero (M-Pesa Daraja aggregator) — required only when MPESA_MODE=live.
+  MPESA_CALLBACK_URL: z.string().url().optional(),
+  PAYHERO_API_USERNAME: z.string().optional(),
+  PAYHERO_API_PASSWORD: z.string().optional(),
+  PAYHERO_CHANNEL_ID: z.coerce.number().int().positive().optional(),
+  PAYHERO_BASE_URL: z.string().url().default('https://backend.payhero.co.ke'),
+
   BEFRIENDERS_KENYA_HOTLINE: z.string().default('0800723253'),
 });
 
@@ -53,5 +60,22 @@ export function validateEnv(raw: Record<string, unknown>): Env {
       .join('\n');
     throw new Error(`Invalid environment configuration:\n${issues}`);
   }
+
+  if (parsed.data.MPESA_MODE === 'live') {
+    const missing = (
+      [
+        'MPESA_CALLBACK_URL',
+        'PAYHERO_API_USERNAME',
+        'PAYHERO_API_PASSWORD',
+        'PAYHERO_CHANNEL_ID',
+      ] as const
+    ).filter((key) => parsed.data[key] === undefined);
+    if (missing.length > 0) {
+      throw new Error(
+        `Invalid environment configuration:\n  • MPESA_MODE=live requires: ${missing.join(', ')}`,
+      );
+    }
+  }
+
   return parsed.data;
 }

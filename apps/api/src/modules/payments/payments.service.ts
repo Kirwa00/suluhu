@@ -5,6 +5,7 @@ import { AppException } from '../../common/exceptions/app.exception';
 import { NotificationsService } from '../notifications/notifications.service';
 import { RemindersService } from '../notifications/reminders.service';
 import { MockMpesaProvider, MPESA_PROVIDER, type MpesaProvider } from './providers/mpesa.provider';
+import { parsePayHeroCallback } from './providers/payhero.provider';
 
 @Injectable()
 export class PaymentsService implements OnModuleInit {
@@ -127,6 +128,16 @@ export class PaymentsService implements OnModuleInit {
       success,
       receipt,
     });
+  }
+
+  /** Parses a PayHero STK callback and completes the payment. */
+  async handlePayHeroCallback(body: unknown): Promise<void> {
+    const result = parsePayHeroCallback(body);
+    if (!result) {
+      this.logger.warn(`Received malformed PayHero callback: ${JSON.stringify(body)}`);
+      return;
+    }
+    await this.completeByCheckout(result);
   }
 
   getByAppointment(appointmentId: string) {

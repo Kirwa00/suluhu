@@ -71,6 +71,17 @@ export class AppConfigService {
     };
   }
 
+  /** Only populated (and only valid) when `providers.mpesa === 'live'`. */
+  get payhero() {
+    return {
+      apiUsername: this.get('PAYHERO_API_USERNAME') ?? '',
+      apiPassword: this.get('PAYHERO_API_PASSWORD') ?? '',
+      channelId: this.get('PAYHERO_CHANNEL_ID') ?? 0,
+      callbackUrl: this.get('MPESA_CALLBACK_URL') ?? '',
+      baseUrl: this.get('PAYHERO_BASE_URL'),
+    };
+  }
+
   get crisis() {
     return { befriendersHotline: this.get('BEFRIENDERS_KENYA_HOTLINE') };
   }
