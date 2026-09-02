@@ -38,7 +38,11 @@ export default function AdminAlertsPage() {
       />
 
       <div className="mb-4 max-w-xs">
-        <Select value={status} onChange={(e) => setStatus(e.target.value)} aria-label="Filter status">
+        <Select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          aria-label="Filter status"
+        >
           {STATUSES.map((s) => (
             <option key={s} value={s}>
               {humanizeEnum(s)}
@@ -100,7 +104,10 @@ function AlertCard({
             <p className="text-sm text-on-surface-variant">{a.message}</p>
             <p className="mt-1 flex items-center gap-3 text-xs text-on-surface-variant">
               <span>{formatDateTimeEAT(a.createdAt)}</span>
-              <a href={`tel:${a.patientPhone}`} className="flex items-center gap-1 text-secondary hover:underline">
+              <a
+                href={`tel:${a.patientPhone}`}
+                className="flex items-center gap-1 text-secondary hover:underline"
+              >
                 <Phone className="h-3 w-3" aria-hidden />
                 {a.patientPhone}
               </a>

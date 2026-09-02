@@ -5,7 +5,10 @@ import { kenyanPhoneSchema, uuidSchema } from './common';
 const durationSchema = z.coerce
   .number()
   .int()
-  .refine((d) => (SESSION_DURATIONS_MINS as readonly number[]).includes(d), 'Unsupported session length');
+  .refine(
+    (d) => (SESSION_DURATIONS_MINS as readonly number[]).includes(d),
+    'Unsupported session length',
+  );
 
 /** Query available slots for a therapist over a date range (ISO dates, EAT). */
 export const slotQuerySchema = z

@@ -32,7 +32,9 @@ export default function ResourcesPage() {
                   <span className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-md bg-accent text-secondary">
                     <Icon className="h-5 w-5" aria-hidden />
                   </span>
-                  <p className="text-xs uppercase tracking-wide text-on-surface-variant">{r.category}</p>
+                  <p className="text-xs uppercase tracking-wide text-on-surface-variant">
+                    {r.category}
+                  </p>
                   <h2 className="mt-1 font-display font-semibold text-on-surface">{r.title}</h2>
                   <p className="mt-1 line-clamp-2 text-sm text-on-surface-variant">{r.summary}</p>
                 </Card>

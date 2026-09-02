@@ -53,9 +53,7 @@ export function AppointmentsPanel({ viewer }: { viewer: 'patient' | 'therapist' 
       {isLoading ? (
         <p className="text-on-surface-variant">Loading…</p>
       ) : !data || data.length === 0 ? (
-        <Card className="p-10 text-center text-on-surface-variant">
-          No {scope} sessions.
-        </Card>
+        <Card className="p-10 text-center text-on-surface-variant">No {scope} sessions.</Card>
       ) : (
         <div className="space-y-3">
           {data.map((a) => (
@@ -112,10 +110,17 @@ function AppointmentRow({
         </div>
       </div>
       <div className="flex items-center gap-3">
-        <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${statusStyles[a.status] ?? ''}`}>
+        <span
+          className={`rounded-full px-2.5 py-1 text-xs font-medium ${statusStyles[a.status] ?? ''}`}
+        >
           {humanizeEnum(a.status)}
         </span>
-        <Button variant="ghost" size="sm" onClick={() => message.mutate()} disabled={message.isPending}>
+        <Button
+          variant="ghost"
+          size="sm"
+          onClick={() => message.mutate()}
+          disabled={message.isPending}
+        >
           <MessageSquare className="h-4 w-4" aria-hidden />
           Message
         </Button>

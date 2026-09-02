@@ -85,7 +85,10 @@ export class TokenService {
       if (payload.purpose !== 'mfa') throw new Error('wrong purpose');
       return payload.sub;
     } catch {
-      throw AppException.unauthorized('MFA session expired, please log in again', ErrorCode.AUTH_TOKEN_EXPIRED);
+      throw AppException.unauthorized(
+        'MFA session expired, please log in again',
+        ErrorCode.AUTH_TOKEN_EXPIRED,
+      );
     }
   }
 

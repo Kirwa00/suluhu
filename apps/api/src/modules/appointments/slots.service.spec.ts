@@ -52,7 +52,11 @@ describe('SlotsService', () => {
 
   it('returns no slots for a day without availability', async () => {
     const service = new SlotsService(
-      makePrisma({ availability: [{ dayOfWeek: (weekday + 1) % 7, startTime: '09:00', endTime: '12:00', isAvailable: true }] }),
+      makePrisma({
+        availability: [
+          { dayOfWeek: (weekday + 1) % 7, startTime: '09:00', endTime: '12:00', isAvailable: true },
+        ],
+      }),
     );
     const days = await service.getSlots('t1', {
       from: FUTURE_DATE,

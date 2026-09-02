@@ -26,9 +26,27 @@ type Options = readonly { value: number; label: string }[];
 
 const STEPS = [
   { key: 'intro' as const, title: 'Welcome' },
-  { key: 'phq9' as const, title: 'How you’ve been feeling', preamble: PHQ9_PREAMBLE, questions: PHQ9_QUESTIONS, options: FREQUENCY_OPTIONS },
-  { key: 'gad7' as const, title: 'Worry & anxiety', preamble: GAD7_PREAMBLE, questions: GAD7_QUESTIONS, options: FREQUENCY_OPTIONS },
-  { key: 'cage' as const, title: 'A few more questions', preamble: CAGE_PREAMBLE, questions: CAGE_QUESTIONS, options: YES_NO_OPTIONS },
+  {
+    key: 'phq9' as const,
+    title: 'How you’ve been feeling',
+    preamble: PHQ9_PREAMBLE,
+    questions: PHQ9_QUESTIONS,
+    options: FREQUENCY_OPTIONS,
+  },
+  {
+    key: 'gad7' as const,
+    title: 'Worry & anxiety',
+    preamble: GAD7_PREAMBLE,
+    questions: GAD7_QUESTIONS,
+    options: FREQUENCY_OPTIONS,
+  },
+  {
+    key: 'cage' as const,
+    title: 'A few more questions',
+    preamble: CAGE_PREAMBLE,
+    questions: CAGE_QUESTIONS,
+    options: YES_NO_OPTIONS,
+  },
 ];
 
 export default function IntakePage() {
@@ -57,8 +75,7 @@ export default function IntakePage() {
 
   const current = STEPS[step]!;
   const answers = current.key === 'phq9' ? phq9 : current.key === 'gad7' ? gad7 : cage;
-  const setAnswers =
-    current.key === 'phq9' ? setPhq9 : current.key === 'gad7' ? setGad7 : setCage;
+  const setAnswers = current.key === 'phq9' ? setPhq9 : current.key === 'gad7' ? setGad7 : setCage;
   const allAnswered = current.key === 'intro' || answers.every((a) => a !== null);
   const isLast = step === STEPS.length - 1;
 
@@ -86,12 +103,16 @@ export default function IntakePage() {
           {current.key === 'intro' ? (
             <div className="space-y-4">
               <p className="text-on-surface-variant">
-                This is a private, judgement-free check-in. Your answers help us understand how you’re
-                doing and connect you with the right therapist. It takes about 3 minutes.
+                This is a private, judgement-free check-in. Your answers help us understand how
+                you’re doing and connect you with the right therapist. It takes about 3 minutes.
               </p>
               <div>
-                <label htmlFor="concern" className="mb-1.5 block text-sm font-medium text-on-surface">
-                  What’s brought you here today? <span className="text-on-surface-variant">(optional)</span>
+                <label
+                  htmlFor="concern"
+                  className="mb-1.5 block text-sm font-medium text-on-surface"
+                >
+                  What’s brought you here today?{' '}
+                  <span className="text-on-surface-variant">(optional)</span>
                 </label>
                 <Textarea
                   id="concern"
@@ -108,9 +129,7 @@ export default function IntakePage() {
               questions={current.questions!}
               options={current.options as Options}
               answers={answers}
-              onChange={(i, v) =>
-                setAnswers((prev) => prev.map((a, idx) => (idx === i ? v : a)))
-              }
+              onChange={(i, v) => setAnswers((prev) => prev.map((a, idx) => (idx === i ? v : a)))}
             />
           )}
 
@@ -221,15 +240,18 @@ function Results({ result }: { result: IntakeResult }) {
               <div key={label as string} className="rounded-md bg-surface-soothing p-3">
                 <p className="font-display text-xl font-bold text-on-surface">
                   {score as number}
-                  <span className="text-sm font-normal text-on-surface-variant">/{max as number}</span>
+                  <span className="text-sm font-normal text-on-surface-variant">
+                    /{max as number}
+                  </span>
                 </p>
                 <p className="text-xs text-on-surface-variant">{label as string}</p>
               </div>
             ))}
           </div>
           <p className="text-sm text-on-surface-variant">
-            Overall level: <strong className="text-on-surface">{humanizeEnum(result.riskLevel)}</strong>.
-            This is a screening, not a diagnosis — your therapist will explore it with you.
+            Overall level:{' '}
+            <strong className="text-on-surface">{humanizeEnum(result.riskLevel)}</strong>. This is a
+            screening, not a diagnosis — your therapist will explore it with you.
           </p>
         </CardContent>
       </Card>

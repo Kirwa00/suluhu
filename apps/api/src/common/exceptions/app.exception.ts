@@ -38,7 +38,10 @@ export class AppException extends HttpException {
     return new AppException(code, message, HttpStatus.CONFLICT);
   }
 
-  static validation(details: Record<string, string[]>, message = 'Validation failed'): AppException {
+  static validation(
+    details: Record<string, string[]>,
+    message = 'Validation failed',
+  ): AppException {
     return new AppException(ErrorCode.VALIDATION_FAILED, message, HttpStatus.BAD_REQUEST, details);
   }
 }

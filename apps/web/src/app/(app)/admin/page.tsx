@@ -13,14 +13,24 @@ import { formatKsh } from '@/lib/format';
 export default function AdminDashboard() {
   const { user } = useAuth();
   const name = user?.email.split('@')[0] ?? 'admin';
-  const { data } = useQuery({ queryKey: ['admin-metrics'], queryFn: () => analyticsApi.adminMetrics() });
+  const { data } = useQuery({
+    queryKey: ['admin-metrics'],
+    queryFn: () => analyticsApi.adminMetrics(),
+  });
 
   return (
     <div>
-      <PageHeading title="Operations overview" subtitle={`Signed in as ${name}. Platform health and compliance.`} />
+      <PageHeading
+        title="Operations overview"
+        subtitle={`Signed in as ${name}. Platform health and compliance.`}
+      />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Active therapists" value={String(data?.activeTherapists ?? '—')} icon={UserCheck} />
+        <StatCard
+          label="Active therapists"
+          value={String(data?.activeTherapists ?? '—')}
+          icon={UserCheck}
+        />
         <StatCard label="Patients" value={String(data?.patients ?? '—')} icon={Users} />
         <StatCard
           label="Pending verifications"
@@ -45,7 +55,9 @@ export default function AdminDashboard() {
           </CardHeader>
           <CardContent className="flex flex-wrap gap-3">
             <Button asChild variant="secondary">
-              <Link href="/admin/onboarding">Review onboarding ({data?.pendingVerifications ?? 0})</Link>
+              <Link href="/admin/onboarding">
+                Review onboarding ({data?.pendingVerifications ?? 0})
+              </Link>
             </Button>
             <Button asChild variant="secondary">
               <Link href="/admin/alerts">Clinical alerts ({data?.openAlerts ?? 0})</Link>

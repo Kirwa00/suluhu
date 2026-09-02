@@ -8,7 +8,12 @@ import { cn } from '@/lib/utils';
 export function LanguageSwitcher({ className }: { className?: string }) {
   const { locale, setLocale } = useLocale();
   return (
-    <div className={cn('inline-flex items-center gap-1 rounded-full border border-outline-variant p-0.5', className)}>
+    <div
+      className={cn(
+        'inline-flex items-center gap-1 rounded-full border border-outline-variant p-0.5',
+        className,
+      )}
+    >
       <Languages className="ml-1.5 h-3.5 w-3.5 text-on-surface-variant" aria-hidden />
       {(['en', 'sw'] as const).map((l) => (
         <button
@@ -18,7 +23,9 @@ export function LanguageSwitcher({ className }: { className?: string }) {
           aria-pressed={locale === l}
           className={cn(
             'rounded-full px-2 py-0.5 text-xs font-medium uppercase transition-colors',
-            locale === l ? 'bg-accent text-primary' : 'text-on-surface-variant hover:bg-surface-container',
+            locale === l
+              ? 'bg-accent text-primary'
+              : 'text-on-surface-variant hover:bg-surface-container',
           )}
         >
           {l}

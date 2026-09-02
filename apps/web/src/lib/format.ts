@@ -8,7 +8,15 @@ export function humanizeEnum(value: string): string {
     .join(' ');
 }
 
-export const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+export const DAY_NAMES = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
 
 export function dayName(day: number): string {
   return DAY_NAMES[day] ?? `Day ${day}`;

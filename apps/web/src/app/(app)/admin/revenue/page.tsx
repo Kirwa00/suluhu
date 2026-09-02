@@ -8,17 +8,39 @@ import { analyticsApi } from '@/lib/api/analytics-api';
 import { formatKsh } from '@/lib/format';
 
 export default function AdminRevenuePage() {
-  const { data: metrics } = useQuery({ queryKey: ['admin-metrics'], queryFn: () => analyticsApi.adminMetrics() });
-  const { data: rows } = useQuery({ queryKey: ['admin-revenue'], queryFn: () => analyticsApi.revenue() });
+  const { data: metrics } = useQuery({
+    queryKey: ['admin-metrics'],
+    queryFn: () => analyticsApi.adminMetrics(),
+  });
+  const { data: rows } = useQuery({
+    queryKey: ['admin-revenue'],
+    queryFn: () => analyticsApi.revenue(),
+  });
 
   return (
     <div>
-      <PageHeading title="Revenue" subtitle="Gross billings, platform commission, and therapist earnings." />
+      <PageHeading
+        title="Revenue"
+        subtitle="Gross billings, platform commission, and therapist earnings."
+      />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <StatCard label="Gross (MTD)" value={formatKsh(metrics?.revenue.grossMtdKsh ?? 0)} icon={CreditCard} tone="positive" />
-        <StatCard label="Platform net (MTD)" value={formatKsh(metrics?.revenue.platformNetMtdKsh ?? 0)} icon={Wallet} />
-        <StatCard label="Therapist earnings (MTD)" value={formatKsh(metrics?.revenue.therapistEarningsMtdKsh ?? 0)} icon={Users} />
+        <StatCard
+          label="Gross (MTD)"
+          value={formatKsh(metrics?.revenue.grossMtdKsh ?? 0)}
+          icon={CreditCard}
+          tone="positive"
+        />
+        <StatCard
+          label="Platform net (MTD)"
+          value={formatKsh(metrics?.revenue.platformNetMtdKsh ?? 0)}
+          icon={Wallet}
+        />
+        <StatCard
+          label="Therapist earnings (MTD)"
+          value={formatKsh(metrics?.revenue.therapistEarningsMtdKsh ?? 0)}
+          icon={Users}
+        />
         <StatCard
           label="Commission"
           value={metrics ? `${Math.round(metrics.revenue.commissionRate * 100)}%` : '—'}
@@ -50,7 +72,9 @@ export default function AdminRevenuePage() {
                     <td className="py-2 text-on-surface">{r.name}</td>
                     <td className="py-2 text-right text-on-surface-variant">{r.sessions}</td>
                     <td className="py-2 text-right text-on-surface">{formatKsh(r.grossKsh)}</td>
-                    <td className="py-2 text-right text-on-surface-variant">{formatKsh(r.netKsh)}</td>
+                    <td className="py-2 text-right text-on-surface-variant">
+                      {formatKsh(r.netKsh)}
+                    </td>
                   </tr>
                 ))}
               </tbody>

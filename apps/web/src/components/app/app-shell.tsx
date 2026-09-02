@@ -42,7 +42,10 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {/* Sidebar */}
       <aside className="hidden w-64 shrink-0 flex-col border-r border-outline-variant bg-surface-container-lowest md:flex">
         <div className="flex h-16 items-center px-6">
-          <Link href={dashboardPathForRole(user.role)} className="font-display text-lg font-bold text-primary">
+          <Link
+            href={dashboardPathForRole(user.role)}
+            className="font-display text-lg font-bold text-primary"
+          >
             Suluhu
           </Link>
         </div>

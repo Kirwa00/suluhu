@@ -48,21 +48,41 @@ export default function AdminContentPage() {
 
   return (
     <div className="max-w-3xl">
-      <PageHeading title="Psychoeducation content" subtitle="Publish articles and exercises for patients." />
+      <PageHeading
+        title="Psychoeducation content"
+        subtitle="Publish articles and exercises for patients."
+      />
 
       <Card className="mb-6">
         <CardHeader>
           <CardTitle>New resource</CardTitle>
         </CardHeader>
         <CardContent>
-          {error && <Alert variant="error" className="mb-4">{error}</Alert>}
-          {create.isSuccess && <Alert variant="success" className="mb-4">Resource published.</Alert>}
-          <form onSubmit={form.handleSubmit((v) => create.mutate(v))} className="space-y-4" noValidate>
+          {error && (
+            <Alert variant="error" className="mb-4">
+              {error}
+            </Alert>
+          )}
+          {create.isSuccess && (
+            <Alert variant="success" className="mb-4">
+              Resource published.
+            </Alert>
+          )}
+          <form
+            onSubmit={form.handleSubmit((v) => create.mutate(v))}
+            className="space-y-4"
+            noValidate
+          >
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Title" htmlFor="title" error={e.title?.message}>
                 <Input id="title" {...form.register('title')} />
               </Field>
-              <Field label="Slug" htmlFor="slug" error={e.slug?.message} hint="lowercase-with-hyphens">
+              <Field
+                label="Slug"
+                htmlFor="slug"
+                error={e.slug?.message}
+                hint="lowercase-with-hyphens"
+              >
                 <Input id="slug" {...form.register('slug')} />
               </Field>
             </div>
@@ -93,7 +113,11 @@ export default function AdminContentPage() {
               </Field>
             </div>
             <label className="flex items-center gap-2 text-sm text-on-surface">
-              <input type="checkbox" className="h-4 w-4 accent-[#1b4f8c]" {...form.register('published')} />
+              <input
+                type="checkbox"
+                className="h-4 w-4 accent-[#1b4f8c]"
+                {...form.register('published')}
+              />
               Publish immediately
             </label>
             <Button type="submit" disabled={create.isPending}>

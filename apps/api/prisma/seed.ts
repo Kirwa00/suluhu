@@ -115,7 +115,9 @@ async function main(): Promise<void> {
       create: { userId: patientUser.id, county: 'Uasin Gishu' },
     });
 
-    console.log(`Demo accounts ready: ${admin.email}, ${therapistUser.email}, ${patientUser.email}`);
+    console.log(
+      `Demo accounts ready: ${admin.email}, ${therapistUser.email}, ${patientUser.email}`,
+    );
   }
 
   // Psychoeducation library — published resources available to all patients.

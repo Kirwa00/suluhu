@@ -40,10 +40,18 @@ export default function MoodJournalPage() {
 
   return (
     <div className="max-w-3xl">
-      <PageHeading title="Mood journal" subtitle="A private space to track how you feel over time." />
+      <PageHeading
+        title="Mood journal"
+        subtitle="A private space to track how you feel over time."
+      />
 
       <div className="mb-6 grid gap-4 sm:grid-cols-2">
-        <StatCard label="Average mood" value={data?.average != null ? `${data.average}/10` : '—'} icon={Smile} tone="positive" />
+        <StatCard
+          label="Average mood"
+          value={data?.average != null ? `${data.average}/10` : '—'}
+          icon={Smile}
+          tone="positive"
+        />
         <StatCard label="Entries" value={String(data?.entries.length ?? 0)} icon={HeartPulse} />
       </div>
 
@@ -141,7 +149,9 @@ export default function MoodJournalPage() {
                     </p>
                     {e.note && <p className="text-sm text-on-surface-variant">{e.note}</p>}
                   </div>
-                  <span className="shrink-0 text-xs text-on-surface-variant">{formatDate(e.loggedAt)}</span>
+                  <span className="shrink-0 text-xs text-on-surface-variant">
+                    {formatDate(e.loggedAt)}
+                  </span>
                 </li>
               ))}
             </ul>

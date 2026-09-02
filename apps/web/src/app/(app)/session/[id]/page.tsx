@@ -1,15 +1,7 @@
 'use client';
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import {
-  Clock,
-  Loader2,
-  Mic,
-  MicOff,
-  PhoneOff,
-  Video as VideoIcon,
-  VideoOff,
-} from 'lucide-react';
+import { Clock, Loader2, Mic, MicOff, PhoneOff, Video as VideoIcon, VideoOff } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -71,7 +63,10 @@ export default function ConsultRoomPage() {
       <Card>
         <CardContent className="flex flex-col items-center gap-4 py-12 text-center">
           <StatusBody data={data} onStart={() => start.mutate()} starting={start.isPending} />
-          <Link href={data.isOwner ? '/therapist/schedule' : '/patient/sessions'} className="text-sm text-secondary hover:underline">
+          <Link
+            href={data.isOwner ? '/therapist/schedule' : '/patient/sessions'}
+            className="text-sm text-secondary hover:underline"
+          >
             Back to sessions
           </Link>
         </CardContent>
@@ -111,7 +106,9 @@ function StatusBody({
         <>
           <Loader2 className="h-12 w-12 animate-spin text-primary" aria-hidden />
           <div>
-            <p className="font-display text-xl font-semibold text-on-surface">You’re in the waiting room</p>
+            <p className="font-display text-xl font-semibold text-on-surface">
+              You’re in the waiting room
+            </p>
             <p className="text-on-surface-variant">
               {data.counterpartName} will admit you when they’re ready. Please hold on.
             </p>
@@ -137,7 +134,9 @@ function StatusBody({
       return (
         <>
           <PhoneOff className="h-12 w-12 text-on-surface-variant" aria-hidden />
-          <p className="font-display text-xl font-semibold text-on-surface">This session has ended</p>
+          <p className="font-display text-xl font-semibold text-on-surface">
+            This session has ended
+          </p>
         </>
       );
     case 'EXPIRED':
@@ -147,7 +146,11 @@ function StatusBody({
         </p>
       );
     case 'CANCELLED':
-      return <p className="font-display text-lg font-semibold text-on-surface">This session was cancelled.</p>;
+      return (
+        <p className="font-display text-lg font-semibold text-on-surface">
+          This session was cancelled.
+        </p>
+      );
     case 'UNPAID':
       return (
         <p className="font-display text-lg font-semibold text-on-surface">
@@ -198,7 +201,9 @@ function ConsultRoom({
         <button
           onClick={() => setMicOn((v) => !v)}
           className={`flex h-12 w-12 items-center justify-center rounded-full ${
-            micOn ? 'bg-surface-container text-on-surface' : 'bg-error-container text-on-error-container'
+            micOn
+              ? 'bg-surface-container text-on-surface'
+              : 'bg-error-container text-on-error-container'
           }`}
           aria-label={micOn ? 'Mute microphone' : 'Unmute microphone'}
         >
@@ -207,7 +212,9 @@ function ConsultRoom({
         <button
           onClick={() => setCamOn((v) => !v)}
           className={`flex h-12 w-12 items-center justify-center rounded-full ${
-            camOn ? 'bg-surface-container text-on-surface' : 'bg-error-container text-on-error-container'
+            camOn
+              ? 'bg-surface-container text-on-surface'
+              : 'bg-error-container text-on-error-container'
           }`}
           aria-label={camOn ? 'Turn camera off' : 'Turn camera on'}
         >
