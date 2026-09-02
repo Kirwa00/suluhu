@@ -41,6 +41,7 @@ jobs:
     env:
       NODE_ENV: test
       DATABASE_URL: postgresql://suluhu:suluhu_dev_password@localhost:5432/suluhu_test?schema=public
+      DIRECT_URL: postgresql://suluhu:suluhu_dev_password@localhost:5432/suluhu_test?schema=public
       REDIS_URL: redis://localhost:6379
       JWT_ACCESS_SECRET: ci-access-secret-ci-access-secret-32
       JWT_REFRESH_SECRET: ci-refresh-secret-ci-refresh-secret-32

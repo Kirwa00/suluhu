@@ -44,8 +44,14 @@ export class AuthService {
     });
     if (existing) {
       throw existing.email === email
-        ? AppException.conflict('An account with this email already exists', ErrorCode.AUTH_EMAIL_TAKEN)
-        : AppException.conflict('An account with this phone already exists', ErrorCode.AUTH_PHONE_TAKEN);
+        ? AppException.conflict(
+            'An account with this email already exists',
+            ErrorCode.AUTH_EMAIL_TAKEN,
+          )
+        : AppException.conflict(
+            'An account with this phone already exists',
+            ErrorCode.AUTH_PHONE_TAKEN,
+          );
     }
 
     const passwordHash = await this.passwords.hash(input.password);
@@ -261,7 +267,10 @@ export class AuthService {
     const user = await this.getUserOrThrow(userId);
     const ok = await this.passwords.compare(input.currentPassword, user.passwordHash);
     if (!ok) {
-      throw AppException.badRequest('Current password is incorrect', ErrorCode.AUTH_INVALID_CREDENTIALS);
+      throw AppException.badRequest(
+        'Current password is incorrect',
+        ErrorCode.AUTH_INVALID_CREDENTIALS,
+      );
     }
     const passwordHash = await this.passwords.hash(input.newPassword);
     await this.prisma.user.update({ where: { id: userId }, data: { passwordHash } });

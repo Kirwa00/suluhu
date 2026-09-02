@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { ShieldCheck, BadgeCheck, HeartHandshake, Phone } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { BrandLogo } from '@/components/brand-logo';
 import { getDictionary } from '@/i18n/dictionaries';
 
 /**
@@ -39,7 +40,7 @@ export default function HomePage() {
       </div>
 
       <header className="container flex items-center justify-between py-6">
-        <span className="font-display text-xl font-bold text-primary">{t['brand.name']}</span>
+        <BrandLogo wordmark={t['brand.name']} />
         <nav className="flex items-center gap-3">
           <Button asChild variant="ghost" size="sm">
             <Link href="/login">Log in</Link>
@@ -88,7 +89,9 @@ export default function HomePage() {
 
       <footer className="border-t border-outline-variant bg-surface-container-lowest">
         <div className="container flex flex-col items-center justify-between gap-2 py-6 text-sm text-on-surface-variant sm:flex-row">
-          <span>© {new Date().getFullYear()} {t['brand.name']} · Eldoret, Kenya</span>
+          <span>
+            © {new Date().getFullYear()} {t['brand.name']} · Eldoret, Kenya
+          </span>
           <span>Kenya Data Protection Act 2019 compliant</span>
         </div>
       </footer>

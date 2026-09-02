@@ -74,11 +74,17 @@ export function MessagesView() {
                     )}
                   >
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary-container text-sm font-semibold text-on-primary">
-                      {c.counterpartName.split(' ').map((n) => n[0]).join('').slice(0, 2)}
+                      {c.counterpartName
+                        .split(' ')
+                        .map((n) => n[0])
+                        .join('')
+                        .slice(0, 2)}
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className="flex items-center justify-between">
-                        <span className="truncate font-medium text-on-surface">{c.counterpartName}</span>
+                        <span className="truncate font-medium text-on-surface">
+                          {c.counterpartName}
+                        </span>
                         {c.unread > 0 && (
                           <span className="ml-2 rounded-full bg-primary px-1.5 text-xs text-on-primary">
                             {c.unread}
@@ -125,7 +131,12 @@ export function MessagesView() {
                       )}
                     >
                       <p className="whitespace-pre-wrap">{m.body}</p>
-                      <p className={cn('mt-1 text-[10px]', m.mine ? 'text-on-primary/70' : 'text-on-surface-variant')}>
+                      <p
+                        className={cn(
+                          'mt-1 text-[10px]',
+                          m.mine ? 'text-on-primary/70' : 'text-on-surface-variant',
+                        )}
+                      >
                         {formatDateTimeEAT(m.createdAt)}
                       </p>
                     </div>

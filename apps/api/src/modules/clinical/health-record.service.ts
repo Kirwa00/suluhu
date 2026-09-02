@@ -25,9 +25,7 @@ export class HealthRecordService {
     if (!patient) throw AppException.notFound('Patient not found');
 
     const isTherapist = requester.role === UserRole.THERAPIST;
-    const apptWhere = isTherapist
-      ? { patientId, therapistId: requester.id }
-      : { patientId };
+    const apptWhere = isTherapist ? { patientId, therapistId: requester.id } : { patientId };
 
     const [latestIntake, intakeHistory, appointments, plan, openAlerts, notesCount] =
       await Promise.all([
@@ -124,7 +122,10 @@ export class HealthRecordService {
       include: { patient: { select: { id: true, firstName: true, lastName: true } } },
     });
 
-    const byPatient = new Map<string, { id: string; name: string; lastSession: string; count: number }>();
+    const byPatient = new Map<
+      string,
+      { id: string; name: string; lastSession: string; count: number }
+    >();
     for (const a of appts) {
       const existing = byPatient.get(a.patientId);
       if (existing) {
@@ -147,7 +148,8 @@ export class HealthRecordService {
       select: { patientId: true, riskLevel: true, completedAt: true },
     });
     const latestRisk = new Map<string, string>();
-    for (const r of risks) if (!latestRisk.has(r.patientId)) latestRisk.set(r.patientId, r.riskLevel);
+    for (const r of risks)
+      if (!latestRisk.has(r.patientId)) latestRisk.set(r.patientId, r.riskLevel);
 
     return clients.map((c) => ({ ...c, riskLevel: latestRisk.get(c.id) ?? null }));
   }

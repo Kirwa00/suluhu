@@ -63,8 +63,7 @@ export default function BookingPage() {
     queryKey: ['payment', appointmentId],
     queryFn: () => appointmentsApi.paymentStatus(appointmentId as string),
     enabled: step === 'paying' && Boolean(appointmentId),
-    refetchInterval: (q) =>
-      q.state.data?.appointmentStatus === 'SCHEDULED' ? false : 2000,
+    refetchInterval: (q) => (q.state.data?.appointmentStatus === 'SCHEDULED' ? false : 2000),
   });
   useEffect(() => {
     if (step === 'paying' && payStatus?.appointmentStatus === 'SCHEDULED') {
@@ -110,9 +109,7 @@ export default function BookingPage() {
           <CardContent className="flex flex-col items-center gap-4 py-12 text-center">
             <Smartphone className="h-12 w-12 text-primary" aria-hidden />
             <div>
-              <p className="font-display text-xl font-semibold text-on-surface">
-                Check your phone
-              </p>
+              <p className="font-display text-xl font-semibold text-on-surface">Check your phone</p>
               <p className="text-on-surface-variant">
                 Enter your M-Pesa PIN to complete payment. This confirms automatically.
               </p>
@@ -210,7 +207,10 @@ export default function BookingPage() {
             <CardContent className="space-y-4">
               {!isFreeEligible && (
                 <div>
-                  <label htmlFor="phone" className="mb-1.5 block text-sm font-medium text-on-surface">
+                  <label
+                    htmlFor="phone"
+                    className="mb-1.5 block text-sm font-medium text-on-surface"
+                  >
                     M-Pesa phone (optional)
                   </label>
                   <Input

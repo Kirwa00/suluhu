@@ -7,6 +7,7 @@ import { LogOut, Menu, Phone } from 'lucide-react';
 import { BEFRIENDERS_KENYA_HOTLINE } from '@suluhu/shared';
 import { useAuth, dashboardPathForRole } from '@/lib/auth/auth-context';
 import { useT } from '@/i18n/locale-context';
+import { BrandLogo } from '@/components/brand-logo';
 import { navForRole } from './nav-config';
 import { LanguageSwitcher } from './language-switcher';
 import { cn } from '@/lib/utils';
@@ -42,8 +43,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       {/* Sidebar */}
       <aside className="hidden w-64 shrink-0 flex-col border-r border-outline-variant bg-surface-container-lowest md:flex">
         <div className="flex h-16 items-center px-6">
-          <Link href={dashboardPathForRole(user.role)} className="font-display text-lg font-bold text-primary">
-            Suluhu
+          <Link href={dashboardPathForRole(user.role)}>
+            <BrandLogo size="sm" wordmark="Suluhu" />
           </Link>
         </div>
         <nav className="flex-1 space-y-1 px-3 py-2">

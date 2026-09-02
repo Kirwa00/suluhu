@@ -28,8 +28,7 @@ export const AI_SUMMARY_PROVIDER = Symbol('AI_SUMMARY_PROVIDER');
 const TONE: Record<RiskLevel, string> = {
   MINIMAL:
     'Your responses suggest your mood and stress are in a manageable range right now. That’s good to hear.',
-  MILD:
-    'Your responses suggest you’ve been carrying some mild difficulty lately. Talking to someone can help you feel steadier.',
+  MILD: 'Your responses suggest you’ve been carrying some mild difficulty lately. Talking to someone can help you feel steadier.',
   MODERATE:
     'Your responses suggest a moderate level of distress. Connecting with a therapist soon would be a supportive next step.',
   MODERATELY_SEVERE:
@@ -46,10 +45,14 @@ export class MockAiSummaryProvider implements AiSummaryProvider {
     parts.push(TONE[req.riskLevel]);
 
     if (req.gad7Score >= 10) {
-      parts.push('You mentioned anxiety has been present — that’s something therapy can really help with.');
+      parts.push(
+        'You mentioned anxiety has been present — that’s something therapy can really help with.',
+      );
     }
     if (req.cageScore >= 2) {
-      parts.push('You also shared some concerns around alcohol; a counsellor can explore this with you without judgement.');
+      parts.push(
+        'You also shared some concerns around alcohol; a counsellor can explore this with you without judgement.',
+      );
     }
     if (req.primaryConcern) {
       parts.push(`You told us a little about what’s on your mind, and we’ll keep that in focus.`);
@@ -59,7 +62,9 @@ export class MockAiSummaryProvider implements AiSummaryProvider {
         'Because some of what you shared is serious, please know support is available right now — you are not alone.',
       );
     } else {
-      parts.push('We’ve suggested a few therapists who fit what you’re looking for. Take your time.');
+      parts.push(
+        'We’ve suggested a few therapists who fit what you’re looking for. Take your time.',
+      );
     }
     return parts.join(' ');
   }

@@ -12,7 +12,8 @@ export class ContentService {
     const where: Prisma.ContentResourceWhereInput = { published: true };
     if (filter.category) where.category = filter.category;
     if (filter.type) where.type = filter.type as Prisma.ContentResourceWhereInput['type'];
-    if (filter.language) where.language = filter.language as Prisma.ContentResourceWhereInput['language'];
+    if (filter.language)
+      where.language = filter.language as Prisma.ContentResourceWhereInput['language'];
 
     const rows = await this.prisma.contentResource.findMany({
       where,

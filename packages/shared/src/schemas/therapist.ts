@@ -15,21 +15,13 @@ export const SPOKEN_LANGUAGES = [
   'Kisii',
 ] as const;
 
-const timeOfDay = z
-  .string()
-  .regex(/^([01]\d|2[0-3]):[0-5]\d$/, 'Use 24-hour HH:mm');
+const timeOfDay = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, 'Use 24-hour HH:mm');
 
-const specialtyEnum = z.enum(
-  THERAPY_SPECIALTIES as [string, ...string[]],
-);
+const specialtyEnum = z.enum(THERAPY_SPECIALTIES as [string, ...string[]]);
 
 /** Therapist submits / updates their professional credentials & public profile. */
 export const submitCredentialsSchema = z.object({
-  cpbLicenseNumber: z
-    .string()
-    .trim()
-    .min(3, 'Enter your CPB license number')
-    .max(40),
+  cpbLicenseNumber: z.string().trim().min(3, 'Enter your CPB license number').max(40),
   cpbExpiry: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, 'Use the format YYYY-MM-DD')

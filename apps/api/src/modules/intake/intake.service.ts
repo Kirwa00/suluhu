@@ -13,10 +13,7 @@ import { AppException } from '../../common/exceptions/app.exception';
 import { AuditService } from '../audit/audit.service';
 import { NotificationsService } from '../notifications/notifications.service';
 import { AppConfigService } from '../../config/app-config.service';
-import {
-  AI_SUMMARY_PROVIDER,
-  type AiSummaryProvider,
-} from './providers/ai-summary.provider';
+import { AI_SUMMARY_PROVIDER, type AiSummaryProvider } from './providers/ai-summary.provider';
 import type { RequestContext } from '../auth/types';
 
 export interface TherapistMatch {

@@ -77,7 +77,9 @@ export default function SettingsPage() {
       <Card>
         <CardHeader>
           <CardTitle>Change password</CardTitle>
-          <CardDescription>For your security, you’ll be signed out of other devices.</CardDescription>
+          <CardDescription>
+            For your security, you’ll be signed out of other devices.
+          </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {pwError && <Alert variant="error">{pwError}</Alert>}

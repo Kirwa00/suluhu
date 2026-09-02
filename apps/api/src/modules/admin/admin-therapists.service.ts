@@ -47,7 +47,9 @@ export class AdminTherapistsService {
         orderBy: { submittedAt: 'asc' },
         skip,
         take: params.pageSize,
-        include: { user: { select: { firstName: true, lastName: true, email: true, phone: true } } },
+        include: {
+          user: { select: { firstName: true, lastName: true, email: true, phone: true } },
+        },
       }),
       this.prisma.therapistProfile.count({ where }),
     ]);
@@ -82,7 +84,9 @@ export class AdminTherapistsService {
     const r = await this.prisma.therapistProfile.findUnique({
       where: { id },
       include: {
-        user: { select: { firstName: true, lastName: true, email: true, phone: true, createdAt: true } },
+        user: {
+          select: { firstName: true, lastName: true, email: true, phone: true, createdAt: true },
+        },
         documents: true,
         availability: { orderBy: [{ dayOfWeek: 'asc' }, { startTime: 'asc' }] },
       },

@@ -132,7 +132,8 @@ export class MessagingService {
       },
     });
     if (!convo) throw AppException.notFound('Conversation not found');
-    if (convo.patientId !== user.id && convo.therapistId !== user.id) throw AppException.forbidden();
+    if (convo.patientId !== user.id && convo.therapistId !== user.id)
+      throw AppException.forbidden();
     return convo;
   }
 

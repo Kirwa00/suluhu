@@ -1,8 +1,5 @@
 import { Module } from '@nestjs/common';
-import {
-  AdminAnalyticsController,
-  TherapistEarningsController,
-} from './analytics.controller';
+import { AdminAnalyticsController, TherapistEarningsController } from './analytics.controller';
 import { AnalyticsService } from './analytics.service';
 
 @Module({

@@ -15,11 +15,17 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://suluhu.co.ke'),
   manifest: '/manifest.webmanifest',
   appleWebApp: { capable: true, title: 'Suluhu', statusBarStyle: 'default' },
-  icons: { icon: '/icon.svg', apple: '/icon.svg' },
+  icons: {
+    icon: [
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: '#1b4f8c',
+  themeColor: '#542cb8',
   width: 'device-width',
   initialScale: 1,
 };

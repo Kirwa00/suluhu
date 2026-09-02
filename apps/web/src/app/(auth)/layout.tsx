@@ -2,14 +2,15 @@ import Link from 'next/link';
 import { Phone } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { BEFRIENDERS_KENYA_HOTLINE } from '@suluhu/shared';
+import { BrandLogo } from '@/components/brand-logo';
 
 /** Calm, centered shell for all authentication screens. */
 export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-surface">
       <header className="container flex items-center justify-between py-6">
-        <Link href="/" className="font-display text-xl font-bold text-primary">
-          Suluhu Therapy Center
+        <Link href="/">
+          <BrandLogo />
         </Link>
         <a
           href={`tel:${BEFRIENDERS_KENYA_HOTLINE}`}

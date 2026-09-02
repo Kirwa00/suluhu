@@ -27,7 +27,11 @@ export default function AdminOnboardingQueue() {
       />
 
       <div className="mb-4 max-w-xs">
-        <Select value={status} onChange={(e) => setStatus(e.target.value)} aria-label="Filter by status">
+        <Select
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          aria-label="Filter by status"
+        >
           {Object.values(TherapistVerificationStatus).map((s) => (
             <option key={s} value={s}>
               {humanizeEnum(s)}

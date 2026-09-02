@@ -17,11 +17,17 @@ const riskStyles: Record<string, string> = {
 };
 
 export default function TherapistClientsPage() {
-  const { data, isLoading } = useQuery({ queryKey: ['clients'], queryFn: () => clinicalApi.clients() });
+  const { data, isLoading } = useQuery({
+    queryKey: ['clients'],
+    queryFn: () => clinicalApi.clients(),
+  });
 
   return (
     <div>
-      <PageHeading title="Clients" subtitle="Your caseload. Open a client to view their record and notes." />
+      <PageHeading
+        title="Clients"
+        subtitle="Your caseload. Open a client to view their record and notes."
+      />
 
       {isLoading ? (
         <p className="text-on-surface-variant">Loading…</p>
@@ -39,7 +45,11 @@ export default function TherapistClientsPage() {
             >
               <div className="flex items-center gap-3">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-container text-sm font-semibold text-on-primary">
-                  {c.name.split(' ').map((n) => n[0]).join('').slice(0, 2)}
+                  {c.name
+                    .split(' ')
+                    .map((n) => n[0])
+                    .join('')
+                    .slice(0, 2)}
                 </span>
                 <div>
                   <p className="font-medium text-on-surface">{c.name}</p>
@@ -50,7 +60,9 @@ export default function TherapistClientsPage() {
               </div>
               <div className="flex items-center gap-3">
                 {c.riskLevel && (
-                  <span className={`rounded-full px-2.5 py-1 text-xs font-medium ${riskStyles[c.riskLevel] ?? ''}`}>
+                  <span
+                    className={`rounded-full px-2.5 py-1 text-xs font-medium ${riskStyles[c.riskLevel] ?? ''}`}
+                  >
                     {humanizeEnum(c.riskLevel)}
                   </span>
                 )}

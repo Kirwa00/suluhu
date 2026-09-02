@@ -36,10 +36,7 @@ export class AuthController {
   @Public()
   @Post('register')
   @ApiOperation({ summary: 'Register a patient or therapist account' })
-  register(
-    @Body(new ZodValidationPipe(registerSchema)) dto: RegisterInput,
-    @Req() req: Request,
-  ) {
+  register(@Body(new ZodValidationPipe(registerSchema)) dto: RegisterInput, @Req() req: Request) {
     return this.auth.register(dto, ctx(req));
   }
 
@@ -55,7 +52,10 @@ export class AuthController {
   @Post('mfa/verify')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Complete login by verifying the MFA code' })
-  verifyMfa(@Body(new ZodValidationPipe(verifyMfaSchema)) dto: VerifyMfaInput, @Req() req: Request) {
+  verifyMfa(
+    @Body(new ZodValidationPipe(verifyMfaSchema)) dto: VerifyMfaInput,
+    @Req() req: Request,
+  ) {
     return this.auth.verifyMfa(dto.mfaToken, dto.code, ctx(req));
   }
 
@@ -70,7 +70,10 @@ export class AuthController {
   @Post('logout')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Revoke the current session' })
-  async logout(@Body('refreshToken') refreshToken: string | undefined, @Req() req: AuthenticatedRequest) {
+  async logout(
+    @Body('refreshToken') refreshToken: string | undefined,
+    @Req() req: AuthenticatedRequest,
+  ) {
     await this.auth.logout(refreshToken, req.authJti);
     return { success: true };
   }

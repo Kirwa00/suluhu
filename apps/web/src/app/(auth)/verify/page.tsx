@@ -62,7 +62,11 @@ export default function VerifyPhonePage() {
         {formError && <Alert variant="error">{formError}</Alert>}
         {resent && <Alert variant="success">A new code is on its way.</Alert>}
         <form onSubmit={onSubmit} className="space-y-4" noValidate>
-          <Field label="Verification code" htmlFor="code" error={form.formState.errors.code?.message}>
+          <Field
+            label="Verification code"
+            htmlFor="code"
+            error={form.formState.errors.code?.message}
+          >
             <Input
               id="code"
               inputMode="numeric"

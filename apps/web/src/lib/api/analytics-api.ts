@@ -49,8 +49,20 @@ export interface TherapistEarnings {
   pendingKsh: number;
   sessions: number;
   commissionRate: number;
-  transactions: { id: string; amountKsh: number; netKsh: number; patientName: string; paidAt: string | null }[];
-  payouts: { id: string; amountKsh: number; status: string; reference: string | null; createdAt: string }[];
+  transactions: {
+    id: string;
+    amountKsh: number;
+    netKsh: number;
+    patientName: string;
+    paidAt: string | null;
+  }[];
+  payouts: {
+    id: string;
+    amountKsh: number;
+    status: string;
+    reference: string | null;
+    createdAt: string;
+  }[];
 }
 
 function auth() {
@@ -78,7 +90,9 @@ export const analyticsApi = {
     if (params.action) sp.set('action', params.action);
     if (params.page) sp.set('page', String(params.page));
     sp.set('pageSize', '30');
-    return apiFetch<Paginated<AuditRow>>(`/admin/audit-log?${sp.toString()}`, { accessToken: auth() });
+    return apiFetch<Paginated<AuditRow>>(`/admin/audit-log?${sp.toString()}`, {
+      accessToken: auth(),
+    });
   },
   therapistEarnings() {
     return apiFetch<TherapistEarnings>('/therapist/earnings', { accessToken: auth() });

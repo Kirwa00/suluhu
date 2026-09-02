@@ -1,10 +1,5 @@
 import { z } from 'zod';
-import {
-  CAGE_ITEM_COUNT,
-  GAD7_ITEM_COUNT,
-  PHQ9_ITEM_COUNT,
-  SCREENING_ITEM_MAX,
-} from './clinical';
+import { CAGE_ITEM_COUNT, GAD7_ITEM_COUNT, PHQ9_ITEM_COUNT, SCREENING_ITEM_MAX } from './clinical';
 
 /**
  * Validated screening instruments (SDLC §12.1). Question wording follows the

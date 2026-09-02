@@ -224,13 +224,21 @@ export class AppointmentsService {
         title: row.therapist.therapistProfile?.title ?? null,
       },
       payment: row.payment
-        ? { status: row.payment.status, method: row.payment.method, amountKsh: row.payment.amountKsh }
+        ? {
+            status: row.payment.status,
+            method: row.payment.method,
+            amountKsh: row.payment.amountKsh,
+          }
         : null,
       cancellationReason: row.cancellationReason,
     };
   }
 
-  private async notifyFreeConfirmation(phone: string, firstName: string, when: Date): Promise<void> {
+  private async notifyFreeConfirmation(
+    phone: string,
+    firstName: string,
+    when: Date,
+  ): Promise<void> {
     const ts = when.toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' });
     await this.notifications.sendSms({
       to: phone,

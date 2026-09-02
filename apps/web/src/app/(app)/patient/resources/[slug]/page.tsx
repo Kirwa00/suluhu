@@ -17,7 +17,10 @@ export default function ResourceDetailPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <Link href="/patient/resources" className="inline-flex items-center gap-1.5 text-sm text-secondary hover:underline">
+      <Link
+        href="/patient/resources"
+        className="inline-flex items-center gap-1.5 text-sm text-secondary hover:underline"
+      >
         <ArrowLeft className="h-4 w-4" aria-hidden />
         Back to resources
       </Link>
