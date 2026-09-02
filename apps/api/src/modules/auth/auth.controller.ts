@@ -2,6 +2,12 @@ import { Body, Controller, Get, HttpCode, HttpStatus, Post, Req } from '@nestjs/
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Throttle } from '@nestjs/throttler';
 import {
+  AUTH_LOGIN_RATE_LIMIT,
+  AUTH_MFA_VERIFY_RATE_LIMIT,
+  AUTH_OTP_REQUEST_RATE_LIMIT,
+  AUTH_OTP_VERIFY_RATE_LIMIT,
+  AUTH_PASSWORD_FORGOT_RATE_LIMIT,
+  AUTH_RATE_LIMIT_TTL_MS,
   changePasswordSchema,
   loginSchema,
   registerSchema,
@@ -41,6 +47,7 @@ export class AuthController {
   }
 
   @Public()
+  @Throttle({ default: { limit: AUTH_LOGIN_RATE_LIMIT, ttl: AUTH_RATE_LIMIT_TTL_MS } })
   @Post('login')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Authenticate with email and password' })
@@ -49,6 +56,7 @@ export class AuthController {
   }
 
   @Public()
+  @Throttle({ default: { limit: AUTH_MFA_VERIFY_RATE_LIMIT, ttl: AUTH_RATE_LIMIT_TTL_MS } })
   @Post('mfa/verify')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Complete login by verifying the MFA code' })
@@ -78,6 +86,7 @@ export class AuthController {
     return { success: true };
   }
 
+  @Throttle({ default: { limit: AUTH_OTP_REQUEST_RATE_LIMIT, ttl: AUTH_RATE_LIMIT_TTL_MS } })
   @Post('otp/request')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Request a verification code (phone/email)' })
@@ -89,6 +98,7 @@ export class AuthController {
     return { sent: true };
   }
 
+  @Throttle({ default: { limit: AUTH_OTP_VERIFY_RATE_LIMIT, ttl: AUTH_RATE_LIMIT_TTL_MS } })
   @Post('otp/verify')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Verify a phone/email code' })
@@ -101,6 +111,7 @@ export class AuthController {
   }
 
   @Public()
+  @Throttle({ default: { limit: AUTH_PASSWORD_FORGOT_RATE_LIMIT, ttl: AUTH_RATE_LIMIT_TTL_MS } })
   @Post('password/forgot')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Request a password-reset code' })

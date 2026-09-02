@@ -1,10 +1,11 @@
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
-import { RATE_LIMIT_PER_USER_PER_MIN } from '@suluhu/shared';
 import { AppConfigModule } from './config/config.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { RedisModule } from './redis/redis.module';
+import { REDIS_CLIENT } from './redis/redis.constants';
+import { createThrottlerModuleOptions } from './redis/throttler-storage.factory';
 import { CryptoModule } from './common/crypto/crypto.module';
 import { HealthModule } from './health/health.module';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
@@ -44,7 +45,11 @@ import { RolesGuard } from './modules/auth/guards/roles.guard';
     CryptoModule,
     AuditModule,
     NotificationsModule,
-    ThrottlerModule.forRoot([{ name: 'default', ttl: 60_000, limit: RATE_LIMIT_PER_USER_PER_MIN }]),
+    ThrottlerModule.forRootAsync({
+      imports: [RedisModule],
+      inject: [REDIS_CLIENT],
+      useFactory: createThrottlerModuleOptions,
+    }),
     HealthModule,
     AuthModule,
     UsersModule,
