@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import type { AuthTokens, AuthUser } from '@suluhu/shared';
 import { randomBytes, createHash, randomUUID } from 'node:crypto';
@@ -19,6 +19,7 @@ const ACCESS_BLOCKLIST_PREFIX = 'auth:access:blocklist:';
  */
 @Injectable()
 export class TokenService {
+  private readonly logger = new Logger(TokenService.name);
   private readonly accessTtlSeconds: number;
   private readonly refreshTtlMs: number;
 
@@ -62,7 +63,14 @@ export class TokenService {
     } catch {
       throw AppException.unauthorized('Session expired or invalid', ErrorCode.AUTH_TOKEN_EXPIRED);
     }
-    if (await this.isAccessRevoked(payload.jti)) {
+
+    // SECURITY/AVAILABILITY DECISION:
+    // Access-token revocation is backed by Redis, but Redis availability must not
+    // become a hard dependency for every authenticated request. Access tokens have
+    // a short (~15 minute) TTL, so if Redis is temporarily unavailable we fail open
+    // and rely on JWT expiration. Revocation may therefore be temporarily delayed
+    // until Redis recovers or the token expires.
+    if (await this.isAccessRevokedFailOpen(payload.jti)) {
       throw AppException.unauthorized('Session has been revoked', ErrorCode.AUTH_TOKEN_INVALID);
     }
     return payload;
@@ -155,8 +163,20 @@ export class TokenService {
     await this.redis.set(`${ACCESS_BLOCKLIST_PREFIX}${jti}`, '1', 'EX', this.accessTtlSeconds);
   }
 
-  private async isAccessRevoked(jti: string): Promise<boolean> {
-    return (await this.redis.exists(`${ACCESS_BLOCKLIST_PREFIX}${jti}`)) === 1;
+  /**
+   * Checks the Redis blocklist for a revoked jti, failing open (treating the
+   * token as not-revoked) if Redis itself is unavailable rather than
+   * rejecting an otherwise valid, unexpired access token.
+   */
+  private async isAccessRevokedFailOpen(jti: string): Promise<boolean> {
+    try {
+      return (await this.redis.exists(`${ACCESS_BLOCKLIST_PREFIX}${jti}`)) === 1;
+    } catch (err) {
+      this.logger.warn(
+        `Redis unavailable — access-token revocation could not be checked; continuing under the fail-open policy (${(err as Error).message})`,
+      );
+      return false;
+    }
   }
 
   private async createRefreshToken(

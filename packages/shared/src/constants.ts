@@ -34,6 +34,14 @@ export const REMINDER_OFFSETS_MINUTES = [24 * 60, 60, 15] as const;
 export const RATE_LIMIT_PER_USER_PER_MIN = 100;
 export const RATE_LIMIT_PER_THERAPIST_PER_MIN = 1000;
 
+/** Stricter per-route limits on security-sensitive auth endpoints (anti-bruteforce). */
+export const AUTH_LOGIN_RATE_LIMIT = 5;
+export const AUTH_OTP_REQUEST_RATE_LIMIT = 3;
+export const AUTH_PASSWORD_FORGOT_RATE_LIMIT = 3;
+export const AUTH_MFA_VERIFY_RATE_LIMIT = 5;
+export const AUTH_OTP_VERIFY_RATE_LIMIT = 5;
+export const AUTH_RATE_LIMIT_TTL_MS = 60_000;
+
 /** Token lifetimes (§7.2). */
 export const ACCESS_TOKEN_TTL = '15m';
 export const REFRESH_TOKEN_TTL = '7d';

@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ErrorCode, UserRole, type AuthUser } from '@suluhu/shared';
 import { createHash } from 'node:crypto';
@@ -39,14 +40,16 @@ function makePrisma(overrides: { existing?: unknown } = {}) {
   };
 }
 
-function makeRedis(overrides: { exists?: number } = {}) {
+function makeRedis(overrides: { exists?: number; existsError?: Error } = {}) {
   return {
     set: jest.fn().mockResolvedValue('OK'),
-    exists: jest.fn().mockResolvedValue(overrides.exists ?? 0),
+    exists: overrides.existsError
+      ? jest.fn().mockRejectedValue(overrides.existsError)
+      : jest.fn().mockResolvedValue(overrides.exists ?? 0),
   };
 }
 
-function build(overrides: { existing?: unknown; exists?: number } = {}) {
+function build(overrides: { existing?: unknown; exists?: number; existsError?: Error } = {}) {
   const prisma = makePrisma(overrides);
   const redis = makeRedis(overrides);
   const service = new TokenService(
@@ -136,6 +139,24 @@ describe('TokenService', () => {
       code: ErrorCode.AUTH_TOKEN_INVALID,
     });
     expect(redis.exists).toHaveBeenCalledWith(expect.stringContaining('auth:access:blocklist:'));
+  });
+
+  it('fails open — allows a valid, unexpired token when Redis is unavailable for the revocation check', async () => {
+    const warn = jest.spyOn(Logger.prototype, 'warn').mockImplementation(() => undefined);
+    const { service, redis } = build({ existsError: new Error('Connection is closed.') });
+    const token = await service.signAccessToken(USER);
+
+    const payload = await service.verifyAccessToken(token);
+
+    expect(payload).toMatchObject({ sub: 'u1', email: 'asha@example.com' });
+    expect(redis.exists).toHaveBeenCalledWith(expect.stringContaining('auth:access:blocklist:'));
+    expect(warn).toHaveBeenCalledTimes(1);
+    const [message] = warn.mock.calls[0] as [string];
+    expect(message).toMatch(/redis unavailable/i);
+    expect(message).toMatch(/fail-open/i);
+    // Never log token/secret material, only the operational reason.
+    expect(message).not.toContain(token);
+    warn.mockRestore();
   });
 
   it('blocklists a jti for the access-token lifetime', async () => {
