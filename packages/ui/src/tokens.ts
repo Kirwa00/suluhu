@@ -1,31 +1,38 @@
 /**
  * Suluhu design tokens — the single source of truth for brand styling.
  *
- * Ported verbatim from the canonical Stitch design systems:
- *   • "Suluhu Wellness System" (primary application surfaces)
- *   • "Suluhu Crisis Core"      (adds Safety Amber for crisis screens)
+ * Brand colors are sourced from the official Suluhu Therapy Center logo:
+ *   • Primary   — the wordmark indigo (#542CB8)
+ *   • Secondary — the chain-link mark's spring green (#00E8A2)
+ *   • Tertiary  — a warm terracotta added as a complementary accent, not
+ *     present in the logo itself, used sparingly for warmth against the
+ *     cool primary/secondary pair.
  *
- * The earth-toned "Serene Connection" exploration was not adopted.
+ * Container/on-* variants are generated tints/shades of these three,
+ * checked against WCAG AA contrast (4.5:1 body text, 3:1 large/UI).
  */
 
 /** Raw brand palette (Wellness System) plus crisis additions. */
 export const palette = {
   // Brand
-  primary: '#00386d',
-  'primary-container': '#1b4f8c',
+  primary: '#542cb8',
+  // Note: unlike the *-container pattern below, primary-container is consumed
+  // across the app as a solid avatar/badge fill paired with `on-primary`
+  // (white) text — not a pale tint — so it stays mid-saturation, not light.
+  'primary-container': '#7656c6',
   'on-primary': '#ffffff',
-  'on-primary-container': '#9cc2ff',
-  'inverse-primary': '#a7c8ff',
+  'on-primary-container': '#ffffff',
+  'inverse-primary': '#b7a6e1',
 
-  secondary: '#166a59',
-  'secondary-container': '#a5f2db',
-  'on-secondary': '#ffffff',
-  'on-secondary-container': '#1f705f',
+  secondary: '#00e8a2',
+  'secondary-container': '#ccfaec',
+  'on-secondary': '#002a1d',
+  'on-secondary-container': '#00583e',
 
-  tertiary: '#003d52',
-  'tertiary-container': '#005571',
+  tertiary: '#ce4128',
+  'tertiary-container': '#f9e6e3',
   'on-tertiary': '#ffffff',
-  'on-tertiary-container': '#7acaf2',
+  'on-tertiary-container': '#942f1d',
 
   // Surfaces
   surface: '#f8fafb',
@@ -37,7 +44,7 @@ export const palette = {
   'surface-container-high': '#e6e8e9',
   'surface-container-highest': '#e1e3e4',
   'surface-soothing': '#f0f4f8',
-  'accent-teal-light': '#e8f3f1',
+  'accent-teal-light': '#e0fbf3',
 
   // Text / outlines
   'on-surface': '#191c1d',
@@ -87,8 +94,8 @@ export const spacing = {
 
 /** Soft ambient elevation — large blur, low opacity, primary-tinted. */
 export const boxShadow = {
-  ambient: '0px 4px 24px rgba(27, 79, 140, 0.06)',
-  'ambient-lg': '0px 12px 32px rgba(27, 79, 140, 0.08)',
+  ambient: '0px 4px 24px rgba(84, 44, 184, 0.07)',
+  'ambient-lg': '0px 12px 32px rgba(84, 44, 184, 0.10)',
 } as const;
 
 export const tokens = { palette, fontFamily, borderRadius, spacing, boxShadow } as const;
