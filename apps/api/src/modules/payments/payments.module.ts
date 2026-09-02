@@ -3,6 +3,7 @@ import { AppConfigService } from '../../config/app-config.service';
 import { PaymentsController } from './payments.controller';
 import { PaymentsService } from './payments.service';
 import { MockMpesaProvider, MPESA_PROVIDER, type MpesaProvider } from './providers/mpesa.provider';
+import { PayHeroProvider } from './providers/payhero.provider';
 
 @Module({
   controllers: [PaymentsController],
@@ -12,8 +13,9 @@ import { MockMpesaProvider, MPESA_PROVIDER, type MpesaProvider } from './provide
       provide: MPESA_PROVIDER,
       inject: [AppConfigService],
       useFactory: (config: AppConfigService): MpesaProvider => {
-        // Live Daraja adapter swaps in here when MPESA_MODE=live + credentials set.
-        void config;
+        if (config.providers.mpesa === 'live') {
+          return new PayHeroProvider(config.payhero);
+        }
         return new MockMpesaProvider();
       },
     },
