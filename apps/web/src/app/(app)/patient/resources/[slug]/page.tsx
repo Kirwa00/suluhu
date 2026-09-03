@@ -6,8 +6,10 @@ import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/card';
 import { contentApi } from '@/lib/api/engagement-api';
+import { useT } from '@/i18n/locale-context';
 
 export default function ResourceDetailPage() {
+  const t = useT();
   const { slug } = useParams<{ slug: string }>();
   const { data, isLoading, isError } = useQuery({
     queryKey: ['content', slug],
@@ -22,12 +24,14 @@ export default function ResourceDetailPage() {
         className="inline-flex items-center gap-1.5 text-sm text-secondary hover:underline"
       >
         <ArrowLeft className="h-4 w-4" aria-hidden />
-        Back to resources
+        {t('resourceDetail.back')}
       </Link>
       {isLoading ? (
-        <p className="mt-4 text-on-surface-variant">Loading…</p>
+        <p className="mt-4 text-on-surface-variant">{t('common.loading')}</p>
       ) : isError || !data ? (
-        <Card className="mt-4 p-10 text-center text-on-surface-variant">Resource not found.</Card>
+        <Card className="mt-4 p-10 text-center text-on-surface-variant">
+          {t('resourceDetail.notFound')}
+        </Card>
       ) : (
         <article className="mt-4">
           <p className="text-xs uppercase tracking-wide text-on-surface-variant">{data.category}</p>

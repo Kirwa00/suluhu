@@ -9,8 +9,10 @@ import { PageHeading } from '@/components/app/stat-card';
 import { ApiClientError } from '@/lib/api-client';
 import { analyticsApi } from '@/lib/api/analytics-api';
 import { formatKsh } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 export default function AdminPayoutsPage() {
+  const t = useT();
   const queryClient = useQueryClient();
   const [msg, setMsg] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -23,16 +25,18 @@ export default function AdminPayoutsPage() {
   const pay = useMutation({
     mutationFn: (therapistId: string) => analyticsApi.pay(therapistId),
     onSuccess: (r) => {
-      setMsg(`Paid out ${formatKsh(r.amountKsh)} (ref ${r.reference}).`);
+      setMsg(
+        t('payouts.paidOut', { amount: formatKsh(r.amountKsh), reference: r.reference ?? '—' }),
+      );
       setError(null);
       queryClient.invalidateQueries({ queryKey: ['payouts'] });
     },
-    onError: (err) => setError(err instanceof ApiClientError ? err.message : 'Payout failed.'),
+    onError: (err) => setError(err instanceof ApiClientError ? err.message : t('payouts.failed')),
   });
 
   return (
     <div>
-      <PageHeading title="Therapist payouts" subtitle="Settle pending balances via M-Pesa B2C." />
+      <PageHeading title={t('payouts.title')} subtitle={t('payouts.subtitle')} />
       {msg && (
         <Alert variant="success" className="mb-4">
           {msg}
@@ -46,22 +50,22 @@ export default function AdminPayoutsPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Payout queue</CardTitle>
+          <CardTitle>{t('payouts.queue.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           {isLoading ? (
-            <p className="text-sm text-on-surface-variant">Loading…</p>
+            <p className="text-sm text-on-surface-variant">{t('common.loading')}</p>
           ) : !data || data.length === 0 ? (
-            <p className="text-sm text-on-surface-variant">No therapists yet.</p>
+            <p className="text-sm text-on-surface-variant">{t('payouts.queue.empty')}</p>
           ) : (
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-outline-variant text-left text-on-surface-variant">
-                  <th className="py-2 font-medium">Therapist</th>
-                  <th className="py-2 text-right font-medium">Net earned</th>
-                  <th className="py-2 text-right font-medium">Paid out</th>
-                  <th className="py-2 text-right font-medium">Pending</th>
-                  <th className="py-2 text-right font-medium">Action</th>
+                  <th className="py-2 font-medium">{t('payouts.table.therapist')}</th>
+                  <th className="py-2 text-right font-medium">{t('payouts.table.netEarned')}</th>
+                  <th className="py-2 text-right font-medium">{t('payouts.table.paidOut')}</th>
+                  <th className="py-2 text-right font-medium">{t('payouts.table.pending')}</th>
+                  <th className="py-2 text-right font-medium">{t('payouts.table.action')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -83,7 +87,7 @@ export default function AdminPayoutsPage() {
                         disabled={r.pendingKsh <= 0 || pay.isPending}
                         onClick={() => pay.mutate(r.therapistId)}
                       >
-                        Pay
+                        {t('payouts.pay')}
                       </Button>
                     </td>
                   </tr>

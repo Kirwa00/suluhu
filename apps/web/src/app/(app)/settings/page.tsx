@@ -13,6 +13,9 @@ import { Input } from '@/components/ui/input';
 import { PageHeading } from '@/components/app/stat-card';
 import { ApiClientError } from '@/lib/api-client';
 import { usersApi } from '@/lib/api/users-api';
+import { humanizeEnum } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
+import type { MessageKey } from '@/i18n/dictionaries';
 
 function Row({ label, value }: { label: string; value: string }) {
   return (
@@ -24,6 +27,7 @@ function Row({ label, value }: { label: string; value: string }) {
 }
 
 export default function SettingsPage() {
+  const t = useT();
   const { data: profile, isLoading } = useQuery({
     queryKey: ['profile'],
     queryFn: () => usersApi.getProfile(),
@@ -44,31 +48,50 @@ export default function SettingsPage() {
       setPwSuccess(true);
       form.reset();
     } catch (err) {
-      setPwError(err instanceof ApiClientError ? err.message : 'Could not change password.');
+      setPwError(err instanceof ApiClientError ? err.message : t('settings.password.error'));
     }
   });
 
   return (
     <div className="max-w-3xl">
-      <PageHeading title="Settings" subtitle="Manage your account and security." />
+      <PageHeading title={t('settings.title')} subtitle={t('settings.subtitle')} />
 
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle>Profile</CardTitle>
-          <CardDescription>Your account details.</CardDescription>
+          <CardTitle>{t('settings.profile.title')}</CardTitle>
+          <CardDescription>{t('settings.profile.subtitle')}</CardDescription>
         </CardHeader>
         <CardContent>
           {isLoading || !profile ? (
-            <p className="text-sm text-on-surface-variant">Loading…</p>
+            <p className="text-sm text-on-surface-variant">{t('common.loading')}</p>
           ) : (
             <div>
-              <Row label="Name" value={`${profile.firstName} ${profile.lastName}`.trim() || '—'} />
-              <Row label="Email" value={profile.email} />
-              <Row label="Phone" value={profile.phone} />
-              <Row label="Role" value={profile.role} />
-              <Row label="Account status" value={profile.status} />
-              <Row label="Phone verified" value={profile.phoneVerified ? 'Yes' : 'No'} />
-              <Row label="Two-factor (MFA)" value={profile.mfaEnabled ? 'Enabled' : 'Disabled'} />
+              <Row
+                label={t('settings.profile.name')}
+                value={`${profile.firstName} ${profile.lastName}`.trim() || '—'}
+              />
+              <Row label={t('settings.profile.email')} value={profile.email} />
+              <Row label={t('settings.profile.phone')} value={profile.phone} />
+              <Row
+                label={t('settings.profile.role')}
+                value={t(`role.${profile.role}` as MessageKey)}
+              />
+              <Row
+                label={t('settings.profile.accountStatus')}
+                value={humanizeEnum(profile.status)}
+              />
+              <Row
+                label={t('settings.profile.phoneVerified')}
+                value={profile.phoneVerified ? t('settings.profile.yes') : t('settings.profile.no')}
+              />
+              <Row
+                label={t('settings.profile.mfa')}
+                value={
+                  profile.mfaEnabled
+                    ? t('settings.profile.enabled')
+                    : t('settings.profile.disabled')
+                }
+              />
             </div>
           )}
         </CardContent>
@@ -76,17 +99,15 @@ export default function SettingsPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Change password</CardTitle>
-          <CardDescription>
-            For your security, you’ll be signed out of other devices.
-          </CardDescription>
+          <CardTitle>{t('settings.password.title')}</CardTitle>
+          <CardDescription>{t('settings.password.subtitle')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {pwError && <Alert variant="error">{pwError}</Alert>}
-          {pwSuccess && <Alert variant="success">Password updated successfully.</Alert>}
+          {pwSuccess && <Alert variant="success">{t('settings.password.success')}</Alert>}
           <form onSubmit={onChangePassword} className="space-y-4" noValidate>
             <Field
-              label="Current password"
+              label={t('settings.password.current')}
               htmlFor="currentPassword"
               error={form.formState.errors.currentPassword?.message}
             >
@@ -98,10 +119,10 @@ export default function SettingsPage() {
               />
             </Field>
             <Field
-              label="New password"
+              label={t('settings.password.new')}
               htmlFor="newPassword"
               error={form.formState.errors.newPassword?.message}
-              hint="At least 8 characters with upper, lower and a number."
+              hint={t('settings.password.newHint')}
             >
               <Input
                 id="newPassword"
@@ -111,7 +132,9 @@ export default function SettingsPage() {
               />
             </Field>
             <Button type="submit" disabled={form.formState.isSubmitting}>
-              {form.formState.isSubmitting ? 'Updating…' : 'Update password'}
+              {form.formState.isSubmitting
+                ? t('settings.password.updating')
+                : t('settings.password.update')}
             </Button>
           </form>
         </CardContent>

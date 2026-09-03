@@ -6,8 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PageHeading, StatCard } from '@/components/app/stat-card';
 import { analyticsApi } from '@/lib/api/analytics-api';
 import { formatKsh } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 export default function AdminRevenuePage() {
+  const t = useT();
   const { data: metrics } = useQuery({
     queryKey: ['admin-metrics'],
     queryFn: () => analyticsApi.adminMetrics(),
@@ -19,51 +21,48 @@ export default function AdminRevenuePage() {
 
   return (
     <div>
-      <PageHeading
-        title="Revenue"
-        subtitle="Gross billings, platform commission, and therapist earnings."
-      />
+      <PageHeading title={t('revenue.title')} subtitle={t('revenue.subtitle')} />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          label="Gross (MTD)"
+          label={t('revenue.stat.grossMtd')}
           value={formatKsh(metrics?.revenue.grossMtdKsh ?? 0)}
           icon={CreditCard}
           tone="positive"
         />
         <StatCard
-          label="Platform net (MTD)"
+          label={t('revenue.stat.platformNetMtd')}
           value={formatKsh(metrics?.revenue.platformNetMtdKsh ?? 0)}
           icon={Wallet}
         />
         <StatCard
-          label="Therapist earnings (MTD)"
+          label={t('revenue.stat.therapistEarningsMtd')}
           value={formatKsh(metrics?.revenue.therapistEarningsMtdKsh ?? 0)}
           icon={Users}
         />
         <StatCard
-          label="Commission"
+          label={t('revenue.stat.commission')}
           value={metrics ? `${Math.round(metrics.revenue.commissionRate * 100)}%` : '—'}
-          hint={`${metrics?.revenue.paidSessionsMtd ?? 0} paid sessions MTD`}
+          hint={t('revenue.stat.paidSessionsMtd', { count: metrics?.revenue.paidSessionsMtd ?? 0 })}
           icon={Percent}
         />
       </div>
 
       <Card className="mt-6">
         <CardHeader>
-          <CardTitle>Revenue by therapist (all time)</CardTitle>
+          <CardTitle>{t('revenue.byTherapist.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           {!rows || rows.length === 0 ? (
-            <p className="text-sm text-on-surface-variant">No revenue yet.</p>
+            <p className="text-sm text-on-surface-variant">{t('revenue.byTherapist.empty')}</p>
           ) : (
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-outline-variant text-left text-on-surface-variant">
-                  <th className="py-2 font-medium">Therapist</th>
-                  <th className="py-2 text-right font-medium">Sessions</th>
-                  <th className="py-2 text-right font-medium">Gross</th>
-                  <th className="py-2 text-right font-medium">Therapist net</th>
+                  <th className="py-2 font-medium">{t('revenue.table.therapist')}</th>
+                  <th className="py-2 text-right font-medium">{t('revenue.table.sessions')}</th>
+                  <th className="py-2 text-right font-medium">{t('revenue.table.gross')}</th>
+                  <th className="py-2 text-right font-medium">{t('revenue.table.therapistNet')}</th>
                 </tr>
               </thead>
               <tbody>

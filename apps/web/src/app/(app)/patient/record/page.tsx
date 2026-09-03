@@ -6,8 +6,10 @@ import { PageHeading } from '@/components/app/stat-card';
 import { clinicalApi } from '@/lib/api/clinical-api';
 import { useAuth } from '@/lib/auth/auth-context';
 import { formatDate, formatDateTimeEAT, humanizeEnum } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 export default function PatientRecordPage() {
+  const t = useT();
   const { user } = useAuth();
   const patientId = user?.id;
 
@@ -22,16 +24,16 @@ export default function PatientRecordPage() {
     enabled: Boolean(patientId),
   });
 
-  if (!record) return <p className="text-on-surface-variant">Loading your record…</p>;
+  if (!record) return <p className="text-on-surface-variant">{t('patientRecord.loading')}</p>;
 
   return (
     <div className="max-w-3xl">
-      <PageHeading title="My health record" subtitle="Your wellbeing journey on Suluhu." />
+      <PageHeading title={t('patientRecord.title')} subtitle={t('patientRecord.subtitle')} />
 
       <div className="space-y-6">
         <Card>
           <CardHeader>
-            <CardTitle>Latest check-in</CardTitle>
+            <CardTitle>{t('patientRecord.checkin.title')}</CardTitle>
           </CardHeader>
           <CardContent className="text-sm">
             {record.latestIntake ? (
@@ -53,7 +55,7 @@ export default function PatientRecordPage() {
                 ))}
               </div>
             ) : (
-              <p className="text-on-surface-variant">No check-in yet.</p>
+              <p className="text-on-surface-variant">{t('patientRecord.checkin.empty')}</p>
             )}
           </CardContent>
         </Card>
@@ -61,10 +63,10 @@ export default function PatientRecordPage() {
         {record.treatmentPlan && (
           <Card>
             <CardHeader>
-              <CardTitle>Treatment plan</CardTitle>
+              <CardTitle>{t('patientRecord.plan.title')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2 text-sm">
-              <p className="font-medium text-on-surface">Goals</p>
+              <p className="font-medium text-on-surface">{t('patientRecord.plan.goals')}</p>
               <ul className="list-inside list-disc text-on-surface-variant">
                 {record.treatmentPlan.goals.map((g, i) => (
                   <li key={i}>{g}</li>
@@ -76,11 +78,11 @@ export default function PatientRecordPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Sessions</CardTitle>
+            <CardTitle>{t('patientRecord.sessions.title')}</CardTitle>
           </CardHeader>
           <CardContent>
             {record.appointments.length === 0 ? (
-              <p className="text-sm text-on-surface-variant">No sessions yet.</p>
+              <p className="text-sm text-on-surface-variant">{t('patientRecord.sessions.empty')}</p>
             ) : (
               <ul className="divide-y divide-outline-variant text-sm">
                 {record.appointments.map((a) => (
@@ -98,25 +100,25 @@ export default function PatientRecordPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Session notes</CardTitle>
+            <CardTitle>{t('patientRecord.notes.title')}</CardTitle>
           </CardHeader>
           <CardContent>
             {!notes || notes.length === 0 ? (
-              <p className="text-sm text-on-surface-variant">
-                Your therapist’s finalized notes will appear here.
-              </p>
+              <p className="text-sm text-on-surface-variant">{t('patientRecord.notes.empty')}</p>
             ) : (
               <div className="space-y-4">
                 {notes.map((n) => (
                   <div key={n.id} className="rounded-md border border-outline-variant p-4 text-sm">
                     <p className="mb-2 font-medium text-on-surface">
-                      {n.scheduledAt ? formatDate(n.scheduledAt) : 'Session note'}
+                      {n.scheduledAt
+                        ? formatDate(n.scheduledAt)
+                        : t('patientRecord.notes.sessionNote')}
                     </p>
                     {[
-                      ['Subjective', n.subjective],
-                      ['Objective', n.objective],
-                      ['Assessment', n.assessment],
-                      ['Plan', n.plan],
+                      [t('record.note.field.subjective'), n.subjective],
+                      [t('record.note.field.objective'), n.objective],
+                      [t('record.note.field.assessment'), n.assessment],
+                      [t('record.note.field.plan'), n.plan],
                     ].map(([l, v]) =>
                       v ? (
                         <p key={l as string} className="text-on-surface-variant">

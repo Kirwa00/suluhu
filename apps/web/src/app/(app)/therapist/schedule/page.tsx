@@ -11,6 +11,7 @@ import { PageHeading } from '@/components/app/stat-card';
 import { ApiClientError } from '@/lib/api-client';
 import { therapistsApi } from '@/lib/api/therapists-api';
 import { dayName } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 interface DayRow {
   dayOfWeek: number;
@@ -26,6 +27,7 @@ function emptyRows(): DayRow[] {
 }
 
 export default function TherapistSchedulePage() {
+  const t = useT();
   const queryClient = useQueryClient();
   const [rows, setRows] = useState<DayRow[]>(emptyRows());
   const [error, setError] = useState<string | null>(null);
@@ -61,7 +63,7 @@ export default function TherapistSchedulePage() {
       }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['availability'] }),
     onError: (err) =>
-      setError(err instanceof ApiClientError ? err.message : 'Could not save availability.'),
+      setError(err instanceof ApiClientError ? err.message : t('schedule.availability.error')),
   });
 
   const update = (dayOfWeek: number, patch: Partial<DayRow>) =>
@@ -69,21 +71,16 @@ export default function TherapistSchedulePage() {
 
   return (
     <div className="max-w-3xl">
-      <PageHeading
-        title="Schedule"
-        subtitle="Set your weekly availability (EAT) and view upcoming sessions."
-      />
+      <PageHeading title={t('schedule.title')} subtitle={t('schedule.subtitle')} />
 
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>Weekly availability</CardTitle>
-          <CardDescription>
-            Patients can book within these windows. Times are East Africa Time.
-          </CardDescription>
+          <CardTitle>{t('schedule.availability.title')}</CardTitle>
+          <CardDescription>{t('schedule.availability.subtitle')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-3">
           {error && <Alert variant="error">{error}</Alert>}
-          {save.isSuccess && <Alert variant="success">Availability saved.</Alert>}
+          {save.isSuccess && <Alert variant="success">{t('schedule.availability.saved')}</Alert>}
 
           {rows.map((r) => (
             <div
@@ -106,7 +103,7 @@ export default function TherapistSchedulePage() {
                 onChange={(e) => update(r.dayOfWeek, { startTime: e.target.value })}
                 className="w-32"
               />
-              <span className="text-on-surface-variant">to</span>
+              <span className="text-on-surface-variant">{t('schedule.to')}</span>
               <Input
                 type="time"
                 value={r.endTime}
@@ -118,12 +115,14 @@ export default function TherapistSchedulePage() {
           ))}
 
           <Button onClick={() => save.mutate()} disabled={save.isPending}>
-            {save.isPending ? 'Saving…' : 'Save availability'}
+            {save.isPending ? t('schedule.saving') : t('schedule.save')}
           </Button>
         </CardContent>
       </Card>
 
-      <h2 className="mb-4 font-display text-xl font-semibold text-on-surface">Sessions</h2>
+      <h2 className="mb-4 font-display text-xl font-semibold text-on-surface">
+        {t('schedule.sessionsHeading')}
+      </h2>
       <AppointmentsPanel viewer="therapist" />
     </div>
   );

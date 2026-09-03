@@ -9,9 +9,11 @@ import { PageHeading, StatCard } from '@/components/app/stat-card';
 import { analyticsApi } from '@/lib/api/analytics-api';
 import { useAuth } from '@/lib/auth/auth-context';
 import { formatKsh } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 export default function AdminDashboard() {
   const { user } = useAuth();
+  const t = useT();
   const name = user?.email.split('@')[0] ?? 'admin';
   const { data } = useQuery({
     queryKey: ['admin-metrics'],
@@ -21,27 +23,37 @@ export default function AdminDashboard() {
   return (
     <div>
       <PageHeading
-        title="Operations overview"
-        subtitle={`Signed in as ${name}. Platform health and compliance.`}
+        title={t('dashboard.admin.title')}
+        subtitle={t('dashboard.admin.subtitle', { name })}
       />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          label="Active therapists"
+          label={t('dashboard.admin.stat.activeTherapists')}
           value={String(data?.activeTherapists ?? '—')}
           icon={UserCheck}
         />
-        <StatCard label="Patients" value={String(data?.patients ?? '—')} icon={Users} />
         <StatCard
-          label="Pending verifications"
+          label={t('dashboard.admin.stat.patients')}
+          value={String(data?.patients ?? '—')}
+          icon={Users}
+        />
+        <StatCard
+          label={t('dashboard.admin.stat.pendingVerifications')}
           value={String(data?.pendingVerifications ?? '—')}
           icon={ShieldCheck}
           tone={data && data.pendingVerifications > 0 ? 'attention' : 'neutral'}
         />
         <StatCard
-          label="Revenue (MTD)"
+          label={t('dashboard.admin.stat.revenueMtd')}
           value={formatKsh(data?.revenue.grossMtdKsh ?? 0)}
-          hint={data ? `Platform: ${formatKsh(data.revenue.platformNetMtdKsh)}` : undefined}
+          hint={
+            data
+              ? t('dashboard.admin.stat.platformHint', {
+                  amount: formatKsh(data.revenue.platformNetMtdKsh),
+                })
+              : undefined
+          }
           icon={CreditCard}
           tone="positive"
         />
@@ -50,48 +62,54 @@ export default function AdminDashboard() {
       <div className="mt-6 grid gap-6 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>Quick actions</CardTitle>
-            <CardDescription>Jump to the areas that need attention.</CardDescription>
+            <CardTitle>{t('dashboard.admin.quickActions.title')}</CardTitle>
+            <CardDescription>{t('dashboard.admin.quickActions.subtitle')}</CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-3">
             <Button asChild variant="secondary">
               <Link href="/admin/onboarding">
-                Review onboarding ({data?.pendingVerifications ?? 0})
+                {t('dashboard.admin.quickActions.reviewOnboarding', {
+                  count: data?.pendingVerifications ?? 0,
+                })}
               </Link>
             </Button>
             <Button asChild variant="secondary">
-              <Link href="/admin/alerts">Clinical alerts ({data?.openAlerts ?? 0})</Link>
+              <Link href="/admin/alerts">
+                {t('dashboard.admin.quickActions.clinicalAlerts', {
+                  count: data?.openAlerts ?? 0,
+                })}
+              </Link>
             </Button>
             <Button asChild variant="secondary">
-              <Link href="/admin/payouts">Therapist payouts</Link>
+              <Link href="/admin/payouts">{t('dashboard.admin.quickActions.payouts')}</Link>
             </Button>
             <Button asChild variant="secondary">
-              <Link href="/admin/revenue">Revenue</Link>
+              <Link href="/admin/revenue">{t('dashboard.admin.quickActions.revenue')}</Link>
             </Button>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle>Compliance</CardTitle>
-            <CardDescription>Immutable audit trail &amp; alerts.</CardDescription>
+            <CardTitle>{t('dashboard.admin.compliance.title')}</CardTitle>
+            <CardDescription>{t('dashboard.admin.compliance.subtitle')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3 text-sm text-on-surface-variant">
             <div className="flex items-center justify-between">
-              <span>Open clinical alerts</span>
+              <span>{t('dashboard.admin.compliance.openAlerts')}</span>
               <span className="rounded-full bg-surface-container px-2 py-0.5 text-xs">
                 {data?.openAlerts ?? 0}
               </span>
             </div>
             <div className="flex items-center justify-between">
-              <span>Audit log</span>
+              <span>{t('dashboard.admin.compliance.auditLog')}</span>
               <Link href="/admin/audit" className="text-secondary hover:underline">
-                View
+                {t('dashboard.admin.compliance.view')}
               </Link>
             </div>
             <div className="flex items-center justify-between">
-              <span>Data residency</span>
+              <span>{t('dashboard.admin.compliance.dataResidency')}</span>
               <span className="rounded-full bg-secondary-container/50 px-2 py-0.5 text-xs text-on-secondary-container">
-                Africa
+                {t('dashboard.admin.compliance.africa')}
               </span>
             </div>
           </CardContent>

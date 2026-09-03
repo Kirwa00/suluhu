@@ -7,6 +7,7 @@ import { Card } from '@/components/ui/card';
 import { PageHeading } from '@/components/app/stat-card';
 import { clinicalApi } from '@/lib/api/clinical-api';
 import { formatDate, humanizeEnum } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 const riskStyles: Record<string, string> = {
   SEVERE: 'bg-error-container text-on-error-container',
@@ -17,6 +18,7 @@ const riskStyles: Record<string, string> = {
 };
 
 export default function TherapistClientsPage() {
+  const t = useT();
   const { data, isLoading } = useQuery({
     queryKey: ['clients'],
     queryFn: () => clinicalApi.clients(),
@@ -24,17 +26,12 @@ export default function TherapistClientsPage() {
 
   return (
     <div>
-      <PageHeading
-        title="Clients"
-        subtitle="Your caseload. Open a client to view their record and notes."
-      />
+      <PageHeading title={t('clients.title')} subtitle={t('clients.subtitle')} />
 
       {isLoading ? (
-        <p className="text-on-surface-variant">Loading…</p>
+        <p className="text-on-surface-variant">{t('common.loading')}</p>
       ) : !data || data.length === 0 ? (
-        <Card className="p-10 text-center text-on-surface-variant">
-          No clients yet. Patients appear here once they book with you.
-        </Card>
+        <Card className="p-10 text-center text-on-surface-variant">{t('clients.empty')}</Card>
       ) : (
         <Card className="divide-y divide-outline-variant">
           {data.map((c) => (
@@ -54,7 +51,10 @@ export default function TherapistClientsPage() {
                 <div>
                   <p className="font-medium text-on-surface">{c.name}</p>
                   <p className="text-sm text-on-surface-variant">
-                    {c.count} session{c.count === 1 ? '' : 's'} · last {formatDate(c.lastSession)}
+                    {t(c.count === 1 ? 'clients.meta.one' : 'clients.meta.other', {
+                      count: c.count,
+                      date: formatDate(c.lastSession),
+                    })}
                   </p>
                 </div>
               </div>

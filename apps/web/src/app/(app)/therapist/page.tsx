@@ -13,9 +13,11 @@ import { clinicalApi } from '@/lib/api/clinical-api';
 import { analyticsApi } from '@/lib/api/analytics-api';
 import { therapistsApi } from '@/lib/api/therapists-api';
 import { formatDateTimeEAT, formatKsh } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 export default function TherapistDashboard() {
   const { user } = useAuth();
+  const t = useT();
   const name = user?.email.split('@')[0] ?? 'therapist';
 
   const { data: upcoming } = useQuery({
@@ -39,32 +41,39 @@ export default function TherapistDashboard() {
 
   return (
     <div>
-      <PageHeading title={`Welcome, ${name}`} subtitle="Your caseload at a glance." />
+      <PageHeading
+        title={t('dashboard.therapist.welcome', { name })}
+        subtitle={t('dashboard.therapist.subtitle')}
+      />
 
       {notApproved && (
         <Link href="/therapist/onboarding" className="mb-6 block">
           <Alert variant="info">
-            <p className="font-medium">Complete your onboarding →</p>
-            <p>Verify your CPB license to start accepting clients and appear in discovery.</p>
+            <p className="font-medium">{t('dashboard.therapist.onboardingCta')}</p>
+            <p>{t('dashboard.therapist.onboardingBody')}</p>
           </Alert>
         </Link>
       )}
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          label="Upcoming sessions"
+          label={t('dashboard.therapist.stat.upcomingSessions')}
           value={String(upcoming?.length ?? 0)}
           icon={CalendarDays}
         />
-        <StatCard label="Active clients" value={String(clients?.length ?? 0)} icon={Users} />
         <StatCard
-          label="Net earnings"
+          label={t('dashboard.therapist.stat.activeClients')}
+          value={String(clients?.length ?? 0)}
+          icon={Users}
+        />
+        <StatCard
+          label={t('dashboard.therapist.stat.netEarnings')}
           value={formatKsh(earnings?.netKsh ?? 0)}
           icon={Wallet}
           tone="positive"
         />
         <StatCard
-          label="Pending payout"
+          label={t('dashboard.therapist.stat.pendingPayout')}
           value={formatKsh(earnings?.pendingKsh ?? 0)}
           icon={Clock}
           tone={earnings && earnings.pendingKsh > 0 ? 'attention' : 'neutral'}
@@ -73,12 +82,14 @@ export default function TherapistDashboard() {
 
       <Card className="mt-6">
         <CardHeader>
-          <CardTitle>Upcoming sessions</CardTitle>
-          <CardDescription>Your next appointments.</CardDescription>
+          <CardTitle>{t('dashboard.therapist.upcoming.title')}</CardTitle>
+          <CardDescription>{t('dashboard.therapist.upcoming.subtitle')}</CardDescription>
         </CardHeader>
         <CardContent>
           {!upcoming || upcoming.length === 0 ? (
-            <p className="text-sm text-on-surface-variant">No sessions scheduled.</p>
+            <p className="text-sm text-on-surface-variant">
+              {t('dashboard.therapist.upcoming.empty')}
+            </p>
           ) : (
             <ul className="divide-y divide-outline-variant">
               {upcoming.slice(0, 5).map((a) => (
@@ -86,11 +97,12 @@ export default function TherapistDashboard() {
                   <div>
                     <p className="text-sm font-medium text-on-surface">{a.patient.name}</p>
                     <p className="text-xs text-on-surface-variant">
-                      {formatDateTimeEAT(a.scheduledAt)} · {a.durationMins} min
+                      {formatDateTimeEAT(a.scheduledAt)} ·{' '}
+                      {t('appointments.duration', { mins: a.durationMins })}
                     </p>
                   </div>
                   <Button asChild size="sm" variant="secondary">
-                    <Link href={`/session/${a.id}`}>Open</Link>
+                    <Link href={`/session/${a.id}`}>{t('dashboard.therapist.upcoming.open')}</Link>
                   </Button>
                 </li>
               ))}

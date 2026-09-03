@@ -10,6 +10,7 @@ import { Card } from '@/components/ui/card';
 import { appointmentsApi, type AppointmentView } from '@/lib/api/appointments-api';
 import { messagingApi } from '@/lib/api/engagement-api';
 import { formatDateTimeEAT, formatKsh, humanizeEnum } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 const statusStyles: Record<string, string> = {
   SCHEDULED: 'bg-secondary-container/50 text-on-secondary-container',
@@ -21,6 +22,7 @@ const statusStyles: Record<string, string> = {
 };
 
 export function AppointmentsPanel({ viewer }: { viewer: 'patient' | 'therapist' }) {
+  const t = useT();
   const [scope, setScope] = useState<'upcoming' | 'past'>('upcoming');
   const queryClient = useQueryClient();
 
@@ -41,19 +43,21 @@ export function AppointmentsPanel({ viewer }: { viewer: 'patient' | 'therapist' 
           <button
             key={s}
             onClick={() => setScope(s)}
-            className={`rounded-md px-4 py-1.5 text-sm font-medium capitalize transition-colors ${
+            className={`rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${
               scope === s ? 'bg-accent text-primary' : 'text-on-surface-variant'
             }`}
           >
-            {s}
+            {s === 'upcoming' ? t('common.tab.upcoming') : t('common.tab.past')}
           </button>
         ))}
       </div>
 
       {isLoading ? (
-        <p className="text-on-surface-variant">Loading…</p>
+        <p className="text-on-surface-variant">{t('common.loading')}</p>
       ) : !data || data.length === 0 ? (
-        <Card className="p-10 text-center text-on-surface-variant">No {scope} sessions.</Card>
+        <Card className="p-10 text-center text-on-surface-variant">
+          {scope === 'upcoming' ? t('common.noUpcomingSessions') : t('common.noPastSessions')}
+        </Card>
       ) : (
         <div className="space-y-3">
           {data.map((a) => (
@@ -85,6 +89,7 @@ function AppointmentRow({
   onCancel: () => void;
   cancelling: boolean;
 }) {
+  const t = useT();
   const counterpart = viewer === 'patient' ? a.therapist.name : a.patient.name;
   const counterpartId = viewer === 'patient' ? a.therapistId : a.patientId;
   const router = useRouter();
@@ -102,10 +107,11 @@ function AppointmentRow({
           <p className="font-medium text-on-surface">{counterpart}</p>
           <p className="flex items-center gap-2 text-sm text-on-surface-variant">
             <Clock className="h-3.5 w-3.5" aria-hidden />
-            {formatDateTimeEAT(a.scheduledAt)} · {a.durationMins} min
+            {formatDateTimeEAT(a.scheduledAt)} ·{' '}
+            {t('appointments.duration', { mins: a.durationMins })}
           </p>
           <p className="text-sm text-on-surface-variant">
-            {a.isFreeSession ? 'Free session' : formatKsh(a.priceKsh)}
+            {a.isFreeSession ? t('common.freeSession') : formatKsh(a.priceKsh)}
           </p>
         </div>
       </div>
@@ -122,19 +128,19 @@ function AppointmentRow({
           disabled={message.isPending}
         >
           <MessageSquare className="h-4 w-4" aria-hidden />
-          Message
+          {t('common.message')}
         </Button>
         {(a.status === 'SCHEDULED' || a.status === 'IN_PROGRESS') && (
           <Button asChild size="sm">
             <Link href={`/session/${a.id}`}>
               <Video className="h-4 w-4" aria-hidden />
-              {a.status === 'IN_PROGRESS' ? 'Rejoin' : 'Join'}
+              {a.status === 'IN_PROGRESS' ? t('common.rejoin') : t('common.join')}
             </Link>
           </Button>
         )}
         {canCancel && (a.status === 'SCHEDULED' || a.status === 'PENDING_PAYMENT') && (
           <Button variant="secondary" size="sm" onClick={onCancel} disabled={cancelling}>
-            Cancel
+            {t('common.cancel')}
           </Button>
         )}
       </div>
