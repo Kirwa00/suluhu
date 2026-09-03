@@ -11,9 +11,11 @@ import { appointmentsApi } from '@/lib/api/appointments-api';
 import { moodApi } from '@/lib/api/engagement-api';
 import { usersApi } from '@/lib/api/users-api';
 import { formatDateTimeEAT } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 export default function PatientDashboard() {
   const { user } = useAuth();
+  const t = useT();
   const name = user?.email.split('@')[0] ?? 'there';
 
   const { data: upcoming } = useQuery({
@@ -32,26 +34,34 @@ export default function PatientDashboard() {
   return (
     <div>
       <PageHeading
-        title={`Karibu, ${name}`}
-        subtitle="Your space for calm, confidential support. Take your time."
+        title={t('dashboard.patient.welcome', { name })}
+        subtitle={t('dashboard.patient.subtitle')}
       />
 
       <div className="grid gap-4 sm:grid-cols-3">
         <StatCard
-          label="Upcoming sessions"
+          label={t('dashboard.patient.stat.upcomingSessions')}
           value={String(upcoming?.length ?? 0)}
           icon={CalendarDays}
         />
         <StatCard
-          label="Mood check-ins"
+          label={t('dashboard.patient.stat.moodCheckins')}
           value={String(mood?.entries.length ?? 0)}
-          hint={mood?.average != null ? `Avg ${mood.average}/10` : undefined}
+          hint={
+            mood?.average != null
+              ? t('dashboard.patient.stat.moodAvg', { avg: mood.average })
+              : undefined
+          }
           icon={HeartPulse}
         />
         <StatCard
-          label="Free session"
-          value={freeUsed > 0 ? 'Used' : 'Available'}
-          hint="First 30 min on us"
+          label={t('dashboard.patient.stat.freeSession')}
+          value={
+            freeUsed > 0
+              ? t('dashboard.patient.stat.freeSessionUsed')
+              : t('dashboard.patient.stat.freeSessionAvailable')
+          }
+          hint={t('dashboard.patient.stat.freeSessionHint')}
           icon={Sparkles}
           tone={freeUsed > 0 ? 'neutral' : 'positive'}
         />
@@ -60,9 +70,11 @@ export default function PatientDashboard() {
       <div className="mt-6 grid gap-6 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>Your next session</CardTitle>
+            <CardTitle>{t('dashboard.patient.nextSession.title')}</CardTitle>
             <CardDescription>
-              {next ? 'Upcoming appointment' : 'When you book a session, it will appear here.'}
+              {next
+                ? t('dashboard.patient.nextSession.upcoming')
+                : t('dashboard.patient.nextSession.empty')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -71,24 +83,31 @@ export default function PatientDashboard() {
                 <div>
                   <p className="font-medium text-on-surface">{next.therapist.name}</p>
                   <p className="text-sm text-on-surface-variant">
-                    {formatDateTimeEAT(next.scheduledAt)} · {next.durationMins} min
+                    {formatDateTimeEAT(next.scheduledAt)} ·{' '}
+                    {t('dashboard.patient.nextSession.duration', { mins: next.durationMins })}
                   </p>
                 </div>
                 <Button asChild size="sm">
-                  <Link href={`/session/${next.id}`}>Join</Link>
+                  <Link href={`/session/${next.id}`}>
+                    {t('dashboard.patient.nextSession.join')}
+                  </Link>
                 </Button>
               </div>
             ) : (
               <div className="flex flex-col items-center justify-center gap-4 rounded-md border border-dashed border-outline-variant bg-surface-soothing py-10 text-center">
                 <Compass className="h-8 w-8 text-secondary" aria-hidden />
                 <div>
-                  <p className="font-medium text-on-surface">You haven’t booked a session yet</p>
+                  <p className="font-medium text-on-surface">
+                    {t('dashboard.patient.nextSession.noneTitle')}
+                  </p>
                   <p className="text-sm text-on-surface-variant">
-                    Find a CPB-licensed therapist who fits your needs.
+                    {t('dashboard.patient.nextSession.noneBody')}
                   </p>
                 </div>
                 <Button asChild>
-                  <Link href="/patient/therapists">Find a therapist</Link>
+                  <Link href="/patient/therapists">
+                    {t('dashboard.patient.nextSession.findTherapist')}
+                  </Link>
                 </Button>
               </div>
             )}
@@ -97,23 +116,20 @@ export default function PatientDashboard() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Wellbeing check-in</CardTitle>
-            <CardDescription>A quick, private way to understand how you’re doing.</CardDescription>
+            <CardTitle>{t('dashboard.patient.checkin.title')}</CardTitle>
+            <CardDescription>{t('dashboard.patient.checkin.subtitle')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p className="text-sm text-on-surface-variant">
-              Complete a short, confidential assessment (PHQ-9 / GAD-7) and we’ll suggest the right
-              support — at your pace.
-            </p>
+            <p className="text-sm text-on-surface-variant">{t('dashboard.patient.checkin.body')}</p>
             <Button asChild variant="secondary" className="w-full">
-              <Link href="/patient/intake">Start check-in</Link>
+              <Link href="/patient/intake">{t('dashboard.patient.checkin.start')}</Link>
             </Button>
             <Link
               href="/patient/resources"
               className="flex items-center gap-2 text-sm text-secondary hover:underline"
             >
               <LibraryBig className="h-4 w-4" aria-hidden />
-              Explore self-help resources
+              {t('dashboard.patient.checkin.exploreResources')}
             </Link>
           </CardContent>
         </Card>

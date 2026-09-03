@@ -17,7 +17,7 @@ const STORAGE_KEY = 'suluhu.locale';
 interface LocaleContextValue {
   locale: Locale;
   setLocale: (l: Locale) => void;
-  t: (key: MessageKey) => string;
+  t: (key: MessageKey, params?: Record<string, string | number>) => string;
 }
 
 const LocaleContext = createContext<LocaleContextValue | null>(null);
@@ -37,7 +37,13 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const t = useCallback(
-    (key: MessageKey) => dictionaries[locale][key] ?? dictionaries.en[key] ?? key,
+    (key: MessageKey, params?: Record<string, string | number>) => {
+      const message = dictionaries[locale][key] ?? dictionaries.en[key] ?? key;
+      if (!params) return message;
+      return message.replace(/\{(\w+)\}/g, (match, token: string) =>
+        token in params ? String(params[token]) : match,
+      );
+    },
     [locale],
   );
 
@@ -52,6 +58,6 @@ export function useLocale(): LocaleContextValue {
 }
 
 /** Convenience hook returning just the translate function. */
-export function useT(): (key: MessageKey) => string {
+export function useT(): LocaleContextValue['t'] {
   return useLocale().t;
 }
