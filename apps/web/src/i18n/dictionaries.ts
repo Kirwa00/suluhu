@@ -918,7 +918,7 @@ export const dictionaries = {
     'therapistDirectory.filter.language': 'Lugha',
     'therapistDirectory.filter.allLanguages': 'Lugha zote',
     'therapistDirectory.filter.sort': 'Panga',
-    'therapistDirectory.sort.rating': 'Waliopigiwa kura zaidi',
+    'therapistDirectory.sort.rating': 'Kiwango cha juu',
     'therapistDirectory.sort.priceAsc': 'Bei: chini kwenda juu',
     'therapistDirectory.sort.priceDesc': 'Bei: juu kwenda chini',
     'therapistDirectory.sort.experience': 'Wenye uzoefu zaidi',
@@ -1040,4 +1040,21 @@ export type MessageKey = keyof (typeof dictionaries)['en'];
 
 export function getDictionary(locale: Locale) {
   return dictionaries[locale] ?? dictionaries.en;
+}
+
+/**
+ * Resolve a message key to its localized text, substituting `{token}`
+ * placeholders from `params`. Falls back to the English string, then the
+ * raw key, when a translation is missing for the given locale.
+ */
+export function translate(
+  locale: Locale,
+  key: MessageKey,
+  params?: Record<string, string | number>,
+): string {
+  const message = getDictionary(locale)[key] ?? dictionaries.en[key] ?? key;
+  if (!params) return message;
+  return message.replace(/\{(\w+)\}/g, (match: string, token: string) =>
+    token in params ? String(params[token]) : match,
+  );
 }
