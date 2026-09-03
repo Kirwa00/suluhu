@@ -9,8 +9,10 @@ import { Input } from '@/components/ui/input';
 import { PageHeading } from '@/components/app/stat-card';
 import { analyticsApi } from '@/lib/api/analytics-api';
 import { formatDateTimeEAT } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 export default function AdminAuditPage() {
+  const t = useT();
   const [action, setAction] = useState('');
   const [query, setQuery] = useState('');
   const [page, setPage] = useState(1);
@@ -22,10 +24,7 @@ export default function AdminAuditPage() {
 
   return (
     <div>
-      <PageHeading
-        title="Audit log"
-        subtitle="Immutable record of all sensitive actions (7-year retention)."
-      />
+      <PageHeading title={t('audit.title')} subtitle={t('audit.subtitle')} />
 
       <form
         className="mb-4 flex max-w-md gap-2"
@@ -36,28 +35,28 @@ export default function AdminAuditPage() {
         }}
       >
         <Input
-          placeholder="Filter by action (e.g. clinical_note)"
+          placeholder={t('audit.filterPlaceholder')}
           value={action}
           onChange={(e) => setAction(e.target.value)}
         />
-        <Button type="submit">Filter</Button>
+        <Button type="submit">{t('audit.filter')}</Button>
       </form>
 
       <Card>
         <CardContent className="overflow-x-auto p-0">
           {isLoading ? (
-            <p className="p-6 text-sm text-on-surface-variant">Loading…</p>
+            <p className="p-6 text-sm text-on-surface-variant">{t('common.loading')}</p>
           ) : !data || data.items.length === 0 ? (
-            <p className="p-6 text-sm text-on-surface-variant">No audit entries.</p>
+            <p className="p-6 text-sm text-on-surface-variant">{t('audit.empty')}</p>
           ) : (
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-outline-variant text-left text-on-surface-variant">
-                  <th className="p-3 font-medium">When</th>
-                  <th className="p-3 font-medium">Actor</th>
-                  <th className="p-3 font-medium">Action</th>
-                  <th className="p-3 font-medium">Resource</th>
-                  <th className="p-3 font-medium">PHI</th>
+                  <th className="p-3 font-medium">{t('audit.table.when')}</th>
+                  <th className="p-3 font-medium">{t('audit.table.actor')}</th>
+                  <th className="p-3 font-medium">{t('audit.table.action')}</th>
+                  <th className="p-3 font-medium">{t('audit.table.resource')}</th>
+                  <th className="p-3 font-medium">{t('audit.table.phi')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -89,8 +88,11 @@ export default function AdminAuditPage() {
       {data && data.pagination.totalPages > 1 && (
         <div className="mt-4 flex items-center justify-between text-sm">
           <span className="text-on-surface-variant">
-            Page {data.pagination.page} of {data.pagination.totalPages} ·{' '}
-            {data.pagination.totalItems} entries
+            {t('audit.pagination', {
+              page: data.pagination.page,
+              totalPages: data.pagination.totalPages,
+              totalItems: data.pagination.totalItems,
+            })}
           </span>
           <div className="flex gap-2">
             <Button
@@ -99,7 +101,7 @@ export default function AdminAuditPage() {
               disabled={!data.pagination.hasPreviousPage}
               onClick={() => setPage((p) => p - 1)}
             >
-              Previous
+              {t('audit.previous')}
             </Button>
             <Button
               variant="secondary"
@@ -107,7 +109,7 @@ export default function AdminAuditPage() {
               disabled={!data.pagination.hasNextPage}
               onClick={() => setPage((p) => p + 1)}
             >
-              Next
+              {t('audit.next')}
             </Button>
           </div>
         </div>

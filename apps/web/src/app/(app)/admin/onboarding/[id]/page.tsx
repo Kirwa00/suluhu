@@ -13,6 +13,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { ApiClientError } from '@/lib/api-client';
 import { adminApi } from '@/lib/api/admin-api';
 import { dayName, formatDate, formatKsh, humanizeEnum } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 function Detail({ label, value }: { label: string; value: string }) {
   return (
@@ -24,6 +25,7 @@ function Detail({ label, value }: { label: string; value: string }) {
 }
 
 export default function AdminApplicationReview() {
+  const t = useT();
   const params = useParams<{ id: string }>();
   const id = params.id;
   const router = useRouter();
@@ -45,21 +47,23 @@ export default function AdminApplicationReview() {
       router.push('/admin/onboarding');
     },
     onError: (err) =>
-      setError(err instanceof ApiClientError ? err.message : 'Action failed. Try again.'),
+      setError(err instanceof ApiClientError ? err.message : t('adminReview.actionFailed')),
   });
 
   const decide = (decision: ReviewDecisionInput['decision']) => {
     setError(null);
     if (decision !== 'APPROVE' && reason.trim().length < 5) {
-      setError('Please provide a reason (at least 5 characters).');
+      setError(t('adminReview.reasonRequired'));
       return;
     }
     mutation.mutate({ decision, reason: reason.trim() || undefined });
   };
 
-  if (isLoading) return <p className="text-on-surface-variant">Loading…</p>;
+  if (isLoading) return <p className="text-on-surface-variant">{t('common.loading')}</p>;
   if (!app)
-    return <Card className="p-10 text-center text-on-surface-variant">Application not found.</Card>;
+    return (
+      <Card className="p-10 text-center text-on-surface-variant">{t('adminReview.notFound')}</Card>
+    );
 
   const cpb = app.cpbCheck;
 
@@ -70,7 +74,7 @@ export default function AdminApplicationReview() {
         className="inline-flex items-center gap-1.5 text-sm text-secondary hover:underline"
       >
         <ArrowLeft className="h-4 w-4" aria-hidden />
-        Back to queue
+        {t('adminReview.backToQueue')}
       </Link>
 
       <div className="mt-4 grid gap-6 lg:grid-cols-3">
@@ -80,28 +84,44 @@ export default function AdminApplicationReview() {
               <CardTitle>{app.name}</CardTitle>
             </CardHeader>
             <CardContent>
-              <Detail label="Title" value={app.title ?? '—'} />
-              <Detail label="Email" value={app.email} />
-              <Detail label="Phone" value={app.phone} />
-              <Detail label="Gender" value={app.gender ? humanizeEnum(app.gender) : '—'} />
+              <Detail label={t('adminReview.detail.title')} value={app.title ?? '—'} />
+              <Detail label={t('adminReview.detail.email')} value={app.email} />
+              <Detail label={t('adminReview.detail.phone')} value={app.phone} />
               <Detail
-                label="Experience"
-                value={app.yearsExperience != null ? `${app.yearsExperience} years` : '—'}
+                label={t('adminReview.detail.gender')}
+                value={app.gender ? humanizeEnum(app.gender) : '—'}
               />
-              <Detail label="Session rate" value={formatKsh(app.sessionRateKsh)} />
-              <Detail label="Languages" value={app.languages.join(', ') || '—'} />
               <Detail
-                label="Specialties"
+                label={t('adminReview.detail.experience')}
+                value={
+                  app.yearsExperience != null
+                    ? t('adminReview.detail.experienceYears', { years: app.yearsExperience })
+                    : '—'
+                }
+              />
+              <Detail
+                label={t('adminReview.detail.sessionRate')}
+                value={formatKsh(app.sessionRateKsh)}
+              />
+              <Detail
+                label={t('adminReview.detail.languages')}
+                value={app.languages.join(', ') || '—'}
+              />
+              <Detail
+                label={t('adminReview.detail.specialties')}
                 value={app.specialties.map(humanizeEnum).join(', ') || '—'}
               />
-              <Detail label="Submitted" value={formatDate(app.submittedAt)} />
+              <Detail
+                label={t('adminReview.detail.submitted')}
+                value={formatDate(app.submittedAt)}
+              />
             </CardContent>
           </Card>
 
           {app.bio && (
             <Card>
               <CardHeader>
-                <CardTitle>About</CardTitle>
+                <CardTitle>{t('adminReview.about.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="whitespace-pre-line text-on-surface-variant">{app.bio}</p>
@@ -112,7 +132,7 @@ export default function AdminApplicationReview() {
           {app.availability.length > 0 && (
             <Card>
               <CardHeader>
-                <CardTitle>Availability</CardTitle>
+                <CardTitle>{t('adminReview.availability.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-1 text-sm">
@@ -133,29 +153,32 @@ export default function AdminApplicationReview() {
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>CPB license check</CardTitle>
+              <CardTitle>{t('adminReview.cpb.title')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-2">
-              <Detail label="License" value={app.cpbLicenseNumber ?? '—'} />
-              <Detail label="Expiry" value={formatDate(app.cpbExpiry)} />
+              <Detail label={t('adminReview.cpb.license')} value={app.cpbLicenseNumber ?? '—'} />
+              <Detail label={t('adminReview.cpb.expiry')} value={formatDate(app.cpbExpiry)} />
               {cpb ? (
                 <Alert variant={cpb.valid ? 'success' : 'error'}>
-                  Automated check: {cpb.valid ? 'Valid' : 'Not valid'} — {cpb.status}
+                  {t('adminReview.cpb.automatedCheck', {
+                    result: cpb.valid ? t('adminReview.cpb.valid') : t('adminReview.cpb.notValid'),
+                    status: cpb.status,
+                  })}
                 </Alert>
               ) : (
-                <Alert variant="info">No automated check on record.</Alert>
+                <Alert variant="info">{t('adminReview.cpb.none')}</Alert>
               )}
             </CardContent>
           </Card>
 
           <Card>
             <CardHeader>
-              <CardTitle>Decision</CardTitle>
+              <CardTitle>{t('adminReview.decision.title')}</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               {error && <Alert variant="error">{error}</Alert>}
               <Textarea
-                placeholder="Reason (required for reject/suspend)"
+                placeholder={t('adminReview.decision.reasonPlaceholder')}
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
                 rows={3}
@@ -165,7 +188,7 @@ export default function AdminApplicationReview() {
                 onClick={() => decide('APPROVE')}
                 disabled={mutation.isPending}
               >
-                Approve
+                {t('adminReview.decision.approve')}
               </Button>
               <Button
                 className="w-full"
@@ -173,7 +196,7 @@ export default function AdminApplicationReview() {
                 onClick={() => decide('REJECT')}
                 disabled={mutation.isPending}
               >
-                Reject
+                {t('adminReview.decision.reject')}
               </Button>
               <Button
                 className="w-full"
@@ -181,7 +204,7 @@ export default function AdminApplicationReview() {
                 onClick={() => decide('SUSPEND')}
                 disabled={mutation.isPending}
               >
-                Suspend
+                {t('adminReview.decision.suspend')}
               </Button>
             </CardContent>
           </Card>

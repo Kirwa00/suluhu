@@ -9,10 +9,18 @@ import { Select } from '@/components/ui/select';
 import { PageHeading } from '@/components/app/stat-card';
 import { adminApi, type AlertItem } from '@/lib/api/admin-api';
 import { formatDateTimeEAT, humanizeEnum } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
-const STATUSES = ['OPEN', 'ACKNOWLEDGED', 'RESOLVED'];
+const STATUSES = ['OPEN', 'ACKNOWLEDGED', 'RESOLVED'] as const;
+
+const STATUS_LABEL_KEY = {
+  OPEN: 'alerts.status.OPEN',
+  ACKNOWLEDGED: 'alerts.status.ACKNOWLEDGED',
+  RESOLVED: 'alerts.status.RESOLVED',
+} as const;
 
 export default function AdminAlertsPage() {
+  const t = useT();
   const [status, setStatus] = useState('OPEN');
   const queryClient = useQueryClient();
 
@@ -32,30 +40,29 @@ export default function AdminAlertsPage() {
 
   return (
     <div>
-      <PageHeading
-        title="Clinical alerts"
-        subtitle="Crisis and high-risk escalations from patient intake. Respond promptly."
-      />
+      <PageHeading title={t('alerts.title')} subtitle={t('alerts.subtitle')} />
 
       <div className="mb-4 max-w-xs">
         <Select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          aria-label="Filter status"
+          aria-label={t('alerts.filterLabel')}
         >
           {STATUSES.map((s) => (
             <option key={s} value={s}>
-              {humanizeEnum(s)}
+              {t(STATUS_LABEL_KEY[s])}
             </option>
           ))}
         </Select>
       </div>
 
       {isLoading ? (
-        <p className="text-on-surface-variant">Loading…</p>
+        <p className="text-on-surface-variant">{t('common.loading')}</p>
       ) : !data || data.items.length === 0 ? (
         <Card className="p-10 text-center text-on-surface-variant">
-          No {humanizeEnum(status).toLowerCase()} alerts.
+          {t('alerts.empty', {
+            status: t(STATUS_LABEL_KEY[status as keyof typeof STATUS_LABEL_KEY]).toLowerCase(),
+          })}
         </Card>
       ) : (
         <div className="space-y-3">
@@ -85,6 +92,7 @@ function AlertCard({
   onResolve: () => void;
   busy: boolean;
 }) {
+  const t = useT();
   const crisis = a.type === 'CRISIS';
   return (
     <Card className={`p-4 ${crisis ? 'border-safety-amber' : ''}`}>
@@ -117,17 +125,17 @@ function AlertCard({
         <div className="flex shrink-0 items-center gap-2">
           {a.status === 'OPEN' && (
             <Button variant="secondary" size="sm" onClick={onAck} disabled={busy}>
-              Acknowledge
+              {t('alerts.acknowledge')}
             </Button>
           )}
           {a.status !== 'RESOLVED' && (
             <Button size="sm" onClick={onResolve} disabled={busy}>
-              Resolve
+              {t('alerts.resolve')}
             </Button>
           )}
           {a.status === 'RESOLVED' && (
             <span className="rounded-full bg-secondary-container/50 px-2 py-1 text-xs text-on-secondary-container">
-              Resolved
+              {t('alerts.status.RESOLVED')}
             </span>
           )}
         </div>

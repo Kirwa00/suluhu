@@ -23,6 +23,7 @@ import { PageHeading } from '@/components/app/stat-card';
 import { ApiClientError } from '@/lib/api-client';
 import { therapistsApi } from '@/lib/api/therapists-api';
 import { humanizeEnum } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 const statusTone: Record<string, 'info' | 'success' | 'error'> = {
   PENDING: 'info',
@@ -33,6 +34,7 @@ const statusTone: Record<string, 'info' | 'success' | 'error'> = {
 };
 
 export default function TherapistOnboardingPage() {
+  const t = useT();
   const queryClient = useQueryClient();
   const { data: status } = useQuery({
     queryKey: ['onboarding'],
@@ -79,26 +81,35 @@ export default function TherapistOnboardingPage() {
 
   return (
     <div className="max-w-3xl">
-      <PageHeading
-        title="Therapist onboarding"
-        subtitle="Submit your CPB credentials and profile. Our team verifies every therapist before activation."
-      />
+      <PageHeading title={t('onboarding.title')} subtitle={t('onboarding.subtitle')} />
 
       {status && (
         <Alert variant={statusTone[status.verificationStatus] ?? 'info'} className="mb-6">
-          <p className="font-medium">Status: {humanizeEnum(status.verificationStatus)}</p>
-          {status.rejectionReason && <p>Reason: {status.rejectionReason}</p>}
+          <p className="font-medium">
+            {t('onboarding.status', { status: humanizeEnum(status.verificationStatus) })}
+          </p>
+          {status.rejectionReason && (
+            <p>{t('onboarding.reason', { reason: status.rejectionReason })}</p>
+          )}
           {status.cpbCheck && (
             <p>
-              CPB check: {status.cpbCheck.valid ? 'valid' : 'not valid'} ({status.cpbCheck.status})
+              {t('onboarding.cpbCheck.line', {
+                result: status.cpbCheck.valid
+                  ? t('onboarding.cpbCheck.valid')
+                  : t('onboarding.cpbCheck.notValid'),
+                status: status.cpbCheck.status,
+              })}
             </p>
           )}
           <ul className="mt-2 space-y-1">
             {[
-              ['Credentials submitted', status.checklist.credentialsSubmitted],
-              ['CPB checked', status.checklist.cpbChecked],
-              ['Availability set', status.checklist.availabilitySet],
-              ['Approved', status.checklist.approved],
+              [
+                t('onboarding.checklist.credentialsSubmitted'),
+                status.checklist.credentialsSubmitted,
+              ],
+              [t('onboarding.checklist.cpbChecked'), status.checklist.cpbChecked],
+              [t('onboarding.checklist.availabilitySet'), status.checklist.availabilitySet],
+              [t('onboarding.checklist.approved'), status.checklist.approved],
             ].map(([label, done]) => (
               <li key={label as string} className="flex items-center gap-2">
                 {done ? (
@@ -115,27 +126,27 @@ export default function TherapistOnboardingPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Professional details</CardTitle>
-          <CardDescription>
-            Provide accurate information matching your CPB registration.
-          </CardDescription>
+          <CardTitle>{t('onboarding.details.title')}</CardTitle>
+          <CardDescription>{t('onboarding.details.subtitle')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {submitError && <Alert variant="error">{submitError}</Alert>}
-          {mutation.isSuccess && (
-            <Alert variant="success">Submitted for review. We’ll notify you by email.</Alert>
-          )}
+          {mutation.isSuccess && <Alert variant="success">{t('onboarding.submitted')}</Alert>}
 
           <form onSubmit={onSubmit} className="space-y-4" noValidate>
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Professional title" htmlFor="title" error={e.title?.message}>
+              <Field label={t('onboarding.field.title')} htmlFor="title" error={e.title?.message}>
                 <Input
                   id="title"
                   placeholder="Counselling Psychologist"
                   {...form.register('title')}
                 />
               </Field>
-              <Field label="Gender" htmlFor="gender" error={e.gender?.message}>
+              <Field
+                label={t('onboarding.field.gender')}
+                htmlFor="gender"
+                error={e.gender?.message}
+              >
                 <Select id="gender" {...form.register('gender')}>
                   {Object.values(Gender).map((g) => (
                     <option key={g} value={g}>
@@ -148,10 +159,10 @@ export default function TherapistOnboardingPage() {
 
             <div className="grid gap-4 sm:grid-cols-2">
               <Field
-                label="CPB license number"
+                label={t('onboarding.field.cpbLicense')}
                 htmlFor="cpb"
                 error={e.cpbLicenseNumber?.message}
-                hint="Format: CPB/YYYY/NNNN"
+                hint={t('onboarding.field.cpbLicenseHint')}
               >
                 <Input
                   id="cpb"
@@ -159,20 +170,28 @@ export default function TherapistOnboardingPage() {
                   {...form.register('cpbLicenseNumber')}
                 />
               </Field>
-              <Field label="License expiry" htmlFor="cpbExpiry" error={e.cpbExpiry?.message}>
+              <Field
+                label={t('onboarding.field.cpbExpiry')}
+                htmlFor="cpbExpiry"
+                error={e.cpbExpiry?.message}
+              >
                 <Input id="cpbExpiry" type="date" {...form.register('cpbExpiry')} />
               </Field>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Years of experience" htmlFor="years" error={e.yearsExperience?.message}>
+              <Field
+                label={t('onboarding.field.yearsExperience')}
+                htmlFor="years"
+                error={e.yearsExperience?.message}
+              >
                 <Input id="years" type="number" min={0} {...form.register('yearsExperience')} />
               </Field>
               <Field
-                label="Session rate (KES)"
+                label={t('onboarding.field.sessionRate')}
                 htmlFor="rate"
                 error={e.sessionRateKsh?.message}
-                hint="Between 1,000 and 5,000"
+                hint={t('onboarding.field.sessionRateHint')}
               >
                 <Input
                   id="rate"
@@ -185,16 +204,18 @@ export default function TherapistOnboardingPage() {
             </div>
 
             <Field
-              label="About you"
+              label={t('onboarding.field.bio')}
               htmlFor="bio"
               error={e.bio?.message}
-              hint="Min 40 characters — your approach, who you help."
+              hint={t('onboarding.field.bioHint')}
             >
               <Textarea id="bio" rows={5} {...form.register('bio')} />
             </Field>
 
             <fieldset>
-              <legend className="mb-2 text-sm font-medium text-on-surface">Specialties</legend>
+              <legend className="mb-2 text-sm font-medium text-on-surface">
+                {t('onboarding.specialties')}
+              </legend>
               <div className="flex flex-wrap gap-2">
                 {THERAPY_SPECIALTIES.map((s) => {
                   const active = specialties.includes(s);
@@ -220,7 +241,9 @@ export default function TherapistOnboardingPage() {
             </fieldset>
 
             <fieldset>
-              <legend className="mb-2 text-sm font-medium text-on-surface">Languages</legend>
+              <legend className="mb-2 text-sm font-medium text-on-surface">
+                {t('onboarding.languages')}
+              </legend>
               <div className="flex flex-wrap gap-2">
                 {SPOKEN_LANGUAGES.map((l) => {
                   const active = languages.includes(l);
@@ -246,7 +269,7 @@ export default function TherapistOnboardingPage() {
             </fieldset>
 
             <Button type="submit" disabled={mutation.isPending}>
-              {mutation.isPending ? 'Submitting…' : 'Submit for review'}
+              {mutation.isPending ? t('onboarding.submitting') : t('onboarding.submit')}
             </Button>
           </form>
         </CardContent>

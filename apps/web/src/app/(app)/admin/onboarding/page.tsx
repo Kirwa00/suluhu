@@ -10,8 +10,10 @@ import { Select } from '@/components/ui/select';
 import { PageHeading } from '@/components/app/stat-card';
 import { adminApi } from '@/lib/api/admin-api';
 import { formatDate, humanizeEnum } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 export default function AdminOnboardingQueue() {
+  const t = useT();
   const [status, setStatus] = useState<string>(TherapistVerificationStatus.IN_REVIEW);
 
   const { data, isLoading } = useQuery({
@@ -21,16 +23,13 @@ export default function AdminOnboardingQueue() {
 
   return (
     <div>
-      <PageHeading
-        title="Therapist onboarding"
-        subtitle="Review CPB credentials and approve therapists for the platform."
-      />
+      <PageHeading title={t('adminOnboarding.title')} subtitle={t('adminOnboarding.subtitle')} />
 
       <div className="mb-4 max-w-xs">
         <Select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          aria-label="Filter by status"
+          aria-label={t('adminOnboarding.filterLabel')}
         >
           {Object.values(TherapistVerificationStatus).map((s) => (
             <option key={s} value={s}>
@@ -41,10 +40,10 @@ export default function AdminOnboardingQueue() {
       </div>
 
       {isLoading ? (
-        <p className="text-on-surface-variant">Loading…</p>
+        <p className="text-on-surface-variant">{t('common.loading')}</p>
       ) : !data || data.items.length === 0 ? (
         <Card className="p-10 text-center text-on-surface-variant">
-          No applications with status “{humanizeEnum(status)}”.
+          {t('adminOnboarding.empty', { status: humanizeEnum(status) })}
         </Card>
       ) : (
         <Card className="divide-y divide-outline-variant">
@@ -69,7 +68,7 @@ export default function AdminOnboardingQueue() {
                         : 'bg-error-container text-on-error-container'
                     }`}
                   >
-                    CPB {app.cpbCheck.status}
+                    {t('adminOnboarding.cpbStatus', { status: app.cpbCheck.status })}
                   </span>
                 )}
                 <span className="hidden text-sm text-on-surface-variant sm:inline">

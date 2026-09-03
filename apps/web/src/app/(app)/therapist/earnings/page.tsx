@@ -6,8 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { PageHeading, StatCard } from '@/components/app/stat-card';
 import { analyticsApi } from '@/lib/api/analytics-api';
 import { formatDate, formatKsh, humanizeEnum } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 export default function TherapistEarningsPage() {
+  const t = useT();
   const { data } = useQuery({
     queryKey: ['earnings'],
     queryFn: () => analyticsApi.therapistEarnings(),
@@ -15,51 +17,54 @@ export default function TherapistEarningsPage() {
 
   return (
     <div className="max-w-3xl">
-      <PageHeading
-        title="Earnings"
-        subtitle="Your net earnings after the platform commission, and payout history."
-      />
+      <PageHeading title={t('earnings.title')} subtitle={t('earnings.subtitle')} />
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
-          label="Net earned"
+          label={t('earnings.stat.netEarned')}
           value={formatKsh(data?.netKsh ?? 0)}
           icon={Wallet}
           tone="positive"
         />
         <StatCard
-          label="Pending payout"
+          label={t('earnings.stat.pendingPayout')}
           value={formatKsh(data?.pendingKsh ?? 0)}
           icon={Clock}
           tone={data && data.pendingKsh > 0 ? 'attention' : 'neutral'}
         />
-        <StatCard label="Paid out" value={formatKsh(data?.paidOutKsh ?? 0)} icon={CheckCircle2} />
         <StatCard
-          label="Commission"
+          label={t('earnings.stat.paidOut')}
+          value={formatKsh(data?.paidOutKsh ?? 0)}
+          icon={CheckCircle2}
+        />
+        <StatCard
+          label={t('earnings.stat.commission')}
           value={data ? `${Math.round(data.commissionRate * 100)}%` : '—'}
-          hint={`${data?.sessions ?? 0} paid sessions`}
+          hint={t('earnings.stat.paidSessions', { count: data?.sessions ?? 0 })}
           icon={Percent}
         />
       </div>
 
       <Card className="mt-6">
         <CardHeader>
-          <CardTitle>Recent transactions</CardTitle>
+          <CardTitle>{t('earnings.transactions.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           {!data || data.transactions.length === 0 ? (
-            <p className="text-sm text-on-surface-variant">No paid sessions yet.</p>
+            <p className="text-sm text-on-surface-variant">{t('earnings.transactions.empty')}</p>
           ) : (
             <ul className="divide-y divide-outline-variant text-sm">
-              {data.transactions.map((t) => (
-                <li key={t.id} className="flex items-center justify-between py-2">
+              {data.transactions.map((tx) => (
+                <li key={tx.id} className="flex items-center justify-between py-2">
                   <div>
-                    <p className="text-on-surface">{t.patientName}</p>
-                    <p className="text-xs text-on-surface-variant">{formatDate(t.paidAt)}</p>
+                    <p className="text-on-surface">{tx.patientName}</p>
+                    <p className="text-xs text-on-surface-variant">{formatDate(tx.paidAt)}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-medium text-on-surface">{formatKsh(t.netKsh)}</p>
-                    <p className="text-xs text-on-surface-variant">of {formatKsh(t.amountKsh)}</p>
+                    <p className="font-medium text-on-surface">{formatKsh(tx.netKsh)}</p>
+                    <p className="text-xs text-on-surface-variant">
+                      {t('earnings.transactions.of', { amount: formatKsh(tx.amountKsh) })}
+                    </p>
                   </div>
                 </li>
               ))}
@@ -70,11 +75,11 @@ export default function TherapistEarningsPage() {
 
       <Card className="mt-6">
         <CardHeader>
-          <CardTitle>Payout history</CardTitle>
+          <CardTitle>{t('earnings.payouts.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           {!data || data.payouts.length === 0 ? (
-            <p className="text-sm text-on-surface-variant">No payouts yet.</p>
+            <p className="text-sm text-on-surface-variant">{t('earnings.payouts.empty')}</p>
           ) : (
             <ul className="divide-y divide-outline-variant text-sm">
               {data.payouts.map((p) => (

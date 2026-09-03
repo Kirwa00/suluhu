@@ -10,6 +10,7 @@ import { PageHeading, StatCard } from '@/components/app/stat-card';
 import { HeartPulse, Smile } from 'lucide-react';
 import { moodApi } from '@/lib/api/engagement-api';
 import { formatDate } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 function moodColor(score: number): string {
   if (score <= 3) return 'bg-destructive';
@@ -18,6 +19,7 @@ function moodColor(score: number): string {
 }
 
 export default function MoodJournalPage() {
+  const t = useT();
   const queryClient = useQueryClient();
   const [score, setScore] = useState(5);
   const [tags, setTags] = useState<string[]>([]);
@@ -35,36 +37,37 @@ export default function MoodJournalPage() {
     },
   });
 
-  const toggleTag = (t: string) =>
-    setTags((prev) => (prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t]));
+  const toggleTag = (tag: string) =>
+    setTags((prev) => (prev.includes(tag) ? prev.filter((x) => x !== tag) : [...prev, tag]));
 
   return (
     <div className="max-w-3xl">
-      <PageHeading
-        title="Mood journal"
-        subtitle="A private space to track how you feel over time."
-      />
+      <PageHeading title={t('mood.title')} subtitle={t('mood.subtitle')} />
 
       <div className="mb-6 grid gap-4 sm:grid-cols-2">
         <StatCard
-          label="Average mood"
+          label={t('mood.stat.average')}
           value={data?.average != null ? `${data.average}/10` : '—'}
           icon={Smile}
           tone="positive"
         />
-        <StatCard label="Entries" value={String(data?.entries.length ?? 0)} icon={HeartPulse} />
+        <StatCard
+          label={t('mood.stat.entries')}
+          value={String(data?.entries.length ?? 0)}
+          icon={HeartPulse}
+        />
       </div>
 
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle>How are you feeling right now?</CardTitle>
+          <CardTitle>{t('mood.checkin.title')}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-5">
           <div>
             <div className="mb-2 flex items-center justify-between text-sm text-on-surface-variant">
-              <span>Low</span>
+              <span>{t('mood.low')}</span>
               <span className="font-display text-2xl font-bold text-on-surface">{score}</span>
-              <span>Great</span>
+              <span>{t('mood.great')}</span>
             </div>
             <input
               type="range"
@@ -73,38 +76,38 @@ export default function MoodJournalPage() {
               value={score}
               onChange={(e) => setScore(Number(e.target.value))}
               className="w-full accent-[#1b4f8c]"
-              aria-label="Mood score"
+              aria-label={t('mood.scoreLabel')}
             />
           </div>
 
           <div>
-            <p className="mb-2 text-sm font-medium text-on-surface">Tags</p>
+            <p className="mb-2 text-sm font-medium text-on-surface">{t('mood.tags')}</p>
             <div className="flex flex-wrap gap-2">
-              {MOOD_TAGS.map((t) => (
+              {MOOD_TAGS.map((tag) => (
                 <button
-                  key={t}
+                  key={tag}
                   type="button"
-                  onClick={() => toggleTag(t)}
+                  onClick={() => toggleTag(tag)}
                   className={`rounded-full border px-3 py-1 text-sm capitalize transition-colors ${
-                    tags.includes(t)
+                    tags.includes(tag)
                       ? 'border-secondary bg-secondary-container/50 text-on-secondary-container'
                       : 'border-outline-variant text-on-surface-variant hover:bg-surface-container'
                   }`}
                 >
-                  {t}
+                  {tag}
                 </button>
               ))}
             </div>
           </div>
 
           <Textarea
-            placeholder="Anything you'd like to note? (private)"
+            placeholder={t('mood.notePlaceholder')}
             value={note}
             onChange={(e) => setNote(e.target.value)}
             rows={3}
           />
           <Button onClick={() => log.mutate()} disabled={log.isPending}>
-            {log.isPending ? 'Saving…' : 'Log mood'}
+            {log.isPending ? t('mood.saving') : t('mood.log')}
           </Button>
         </CardContent>
       </Card>
@@ -112,7 +115,7 @@ export default function MoodJournalPage() {
       {data && data.trend.length > 0 && (
         <Card className="mb-6">
           <CardHeader>
-            <CardTitle>Your trend</CardTitle>
+            <CardTitle>{t('mood.trend.title')}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex h-32 items-end gap-1">
@@ -131,11 +134,11 @@ export default function MoodJournalPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Recent entries</CardTitle>
+          <CardTitle>{t('mood.entries.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           {!data || data.entries.length === 0 ? (
-            <p className="text-sm text-on-surface-variant">No entries yet.</p>
+            <p className="text-sm text-on-surface-variant">{t('mood.entries.empty')}</p>
           ) : (
             <ul className="divide-y divide-outline-variant">
               {data.entries.map((e) => (

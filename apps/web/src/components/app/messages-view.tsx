@@ -11,8 +11,10 @@ import { PageHeading } from '@/components/app/stat-card';
 import { messagingApi } from '@/lib/api/engagement-api';
 import { cn } from '@/lib/utils';
 import { formatDateTimeEAT } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 export function MessagesView() {
+  const t = useT();
   const params = useSearchParams();
   const queryClient = useQueryClient();
   const [selected, setSelected] = useState<string | null>(params.get('c'));
@@ -54,14 +56,12 @@ export function MessagesView() {
 
   return (
     <div>
-      <PageHeading title="Messages" subtitle="Secure, encrypted messaging with your care team." />
+      <PageHeading title={t('messages.title')} subtitle={t('messages.subtitle')} />
       <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
         {/* Conversation list */}
         <Card className="overflow-hidden">
           {!conversations || conversations.length === 0 ? (
-            <p className="p-6 text-sm text-on-surface-variant">
-              No conversations yet. Start one from a booked session.
-            </p>
+            <p className="p-6 text-sm text-on-surface-variant">{t('messages.noConversations')}</p>
           ) : (
             <ul className="divide-y divide-outline-variant">
               {conversations.map((c) => (
@@ -92,7 +92,7 @@ export function MessagesView() {
                         )}
                       </span>
                       <span className="block truncate text-sm text-on-surface-variant">
-                        {c.lastMessage ?? 'No messages yet'}
+                        {c.lastMessage ?? t('messages.noMessagesYet')}
                       </span>
                     </span>
                   </button>
@@ -107,7 +107,7 @@ export function MessagesView() {
           {!selected || !thread ? (
             <div className="flex flex-1 flex-col items-center justify-center gap-2 text-on-surface-variant">
               <MessageSquare className="h-10 w-10" aria-hidden />
-              <p>Select a conversation</p>
+              <p>{t('messages.selectConversation')}</p>
             </div>
           ) : (
             <>
@@ -117,7 +117,7 @@ export function MessagesView() {
               <div className="flex-1 space-y-3 overflow-y-auto p-4">
                 {thread.messages.length === 0 && (
                   <p className="text-center text-sm text-on-surface-variant">
-                    Say hello — messages are private and encrypted.
+                    {t('messages.sayHello')}
                   </p>
                 )}
                 {thread.messages.map((m) => (
@@ -154,10 +154,14 @@ export function MessagesView() {
                 <Input
                   value={draft}
                   onChange={(e) => setDraft(e.target.value)}
-                  placeholder="Type a message…"
-                  aria-label="Message"
+                  placeholder={t('messages.typeMessage')}
+                  aria-label={t('messages.title')}
                 />
-                <Button type="submit" disabled={!draft.trim() || send.isPending} aria-label="Send">
+                <Button
+                  type="submit"
+                  disabled={!draft.trim() || send.isPending}
+                  aria-label={t('messages.send')}
+                >
                   <Send className="h-4 w-4" />
                 </Button>
               </form>

@@ -21,28 +21,30 @@ import { Textarea } from '@/components/ui/textarea';
 import { ApiClientError } from '@/lib/api-client';
 import { intakeApi, type IntakeResult } from '@/lib/api/intake-api';
 import { formatKsh, humanizeEnum } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
+import type { MessageKey } from '@/i18n/dictionaries';
 
 type Options = readonly { value: number; label: string }[];
 
 const STEPS = [
-  { key: 'intro' as const, title: 'Welcome' },
+  { key: 'intro' as const, titleKey: 'intake.step.welcome' as MessageKey },
   {
     key: 'phq9' as const,
-    title: 'How you’ve been feeling',
+    titleKey: 'intake.step.phq9' as MessageKey,
     preamble: PHQ9_PREAMBLE,
     questions: PHQ9_QUESTIONS,
     options: FREQUENCY_OPTIONS,
   },
   {
     key: 'gad7' as const,
-    title: 'Worry & anxiety',
+    titleKey: 'intake.step.gad7' as MessageKey,
     preamble: GAD7_PREAMBLE,
     questions: GAD7_QUESTIONS,
     options: FREQUENCY_OPTIONS,
   },
   {
     key: 'cage' as const,
-    title: 'A few more questions',
+    titleKey: 'intake.step.cage' as MessageKey,
     preamble: CAGE_PREAMBLE,
     questions: CAGE_QUESTIONS,
     options: YES_NO_OPTIONS,
@@ -50,6 +52,7 @@ const STEPS = [
 ];
 
 export default function IntakePage() {
+  const t = useT();
   const [step, setStep] = useState(0);
   const [concern, setConcern] = useState('');
   const [phq9, setPhq9] = useState<(number | null)[]>(Array(9).fill(null));
@@ -68,7 +71,7 @@ export default function IntakePage() {
       }),
     onSuccess: (r) => setResult(r),
     onError: (err) =>
-      setError(err instanceof ApiClientError ? err.message : 'Could not submit. Try again.'),
+      setError(err instanceof ApiClientError ? err.message : t('intake.submitError')),
   });
 
   if (result) return <Results result={result} />;
@@ -89,35 +92,32 @@ export default function IntakePage() {
           />
         </div>
         <p className="text-sm text-on-surface-variant">
-          Step {step + 1} of {STEPS.length} · Take your time, there are no wrong answers.
+          {t('intake.step', { step: step + 1, total: STEPS.length })}
         </p>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">{current.title}</CardTitle>
+          <CardTitle className="text-2xl">{t(current.titleKey)}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
           {error && <Alert variant="error">{error}</Alert>}
 
           {current.key === 'intro' ? (
             <div className="space-y-4">
-              <p className="text-on-surface-variant">
-                This is a private, judgement-free check-in. Your answers help us understand how
-                you’re doing and connect you with the right therapist. It takes about 3 minutes.
-              </p>
+              <p className="text-on-surface-variant">{t('intake.intro.body')}</p>
               <div>
                 <label
                   htmlFor="concern"
                   className="mb-1.5 block text-sm font-medium text-on-surface"
                 >
-                  What’s brought you here today?{' '}
-                  <span className="text-on-surface-variant">(optional)</span>
+                  {t('intake.intro.concernLabel')}{' '}
+                  <span className="text-on-surface-variant">{t('intake.intro.optional')}</span>
                 </label>
                 <Textarea
                   id="concern"
                   rows={4}
-                  placeholder="Share as much or as little as you like…"
+                  placeholder={t('intake.intro.concernPlaceholder')}
                   value={concern}
                   onChange={(e) => setConcern(e.target.value)}
                 />
@@ -139,15 +139,15 @@ export default function IntakePage() {
               onClick={() => setStep((s) => Math.max(0, s - 1))}
               disabled={step === 0 || submit.isPending}
             >
-              Back
+              {t('intake.back')}
             </Button>
             {isLast ? (
               <Button onClick={() => submit.mutate()} disabled={!allAnswered || submit.isPending}>
-                {submit.isPending ? 'Submitting…' : 'See my results'}
+                {submit.isPending ? t('intake.submitting') : t('intake.seeResults')}
               </Button>
             ) : (
               <Button onClick={() => setStep((s) => s + 1)} disabled={!allAnswered}>
-                Continue
+                {t('intake.continue')}
               </Button>
             )}
           </div>
@@ -204,21 +204,24 @@ function QuestionGroup({
 }
 
 function Results({ result }: { result: IntakeResult }) {
+  const t = useT();
   return (
     <div className="mx-auto max-w-2xl space-y-6">
-      <h1 className="font-display text-2xl font-bold text-on-surface">Your check-in results</h1>
+      <h1 className="font-display text-2xl font-bold text-on-surface">
+        {t('intake.results.title')}
+      </h1>
 
       {result.crisisFlag && result.crisisResources && (
         <Card className="border-safety-amber bg-tertiary-fixed/40">
           <CardContent className="space-y-3 pt-6">
             <p className="font-display text-lg font-semibold text-on-surface">
-              You don’t have to face this alone
+              {t('intake.results.crisis.title')}
             </p>
             <p className="text-on-surface-variant">{result.crisisResources.message}</p>
             <Button asChild variant="crisis" size="lg" className="w-full sm:w-auto">
               <a href={`tel:${result.crisisResources.hotline}`}>
                 <Phone className="h-5 w-5" aria-hidden />
-                Call Befrienders Kenya now ({result.crisisResources.hotline})
+                {t('intake.results.crisis.call', { hotline: result.crisisResources.hotline })}
               </a>
             </Button>
           </CardContent>
@@ -227,15 +230,15 @@ function Results({ result }: { result: IntakeResult }) {
 
       <Card>
         <CardHeader>
-          <CardTitle>What we heard</CardTitle>
+          <CardTitle>{t('intake.results.heard.title')}</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
           {result.aiSummary && <p className="text-on-surface-variant">{result.aiSummary}</p>}
           <div className="grid grid-cols-3 gap-3 text-center">
             {[
-              ['Depression (PHQ-9)', result.phq9Score, 27],
-              ['Anxiety (GAD-7)', result.gad7Score, 21],
-              ['Alcohol (CAGE)', result.cageScore, 4],
+              [t('intake.results.depression'), result.phq9Score, 27],
+              [t('intake.results.anxiety'), result.gad7Score, 21],
+              [t('intake.results.alcohol'), result.cageScore, 4],
             ].map(([label, score, max]) => (
               <div key={label as string} className="rounded-md bg-surface-soothing p-3">
                 <p className="font-display text-xl font-bold text-on-surface">
@@ -249,22 +252,20 @@ function Results({ result }: { result: IntakeResult }) {
             ))}
           </div>
           <p className="text-sm text-on-surface-variant">
-            Overall level:{' '}
-            <strong className="text-on-surface">{humanizeEnum(result.riskLevel)}</strong>. This is a
-            screening, not a diagnosis — your therapist will explore it with you.
+            {t('intake.results.overallLevelLabel')}{' '}
+            <strong className="text-on-surface">{humanizeEnum(result.riskLevel)}</strong>.{' '}
+            {t('intake.results.overallLevelBody')}
           </p>
         </CardContent>
       </Card>
 
       <Card>
         <CardHeader>
-          <CardTitle>Recommended therapists</CardTitle>
+          <CardTitle>{t('intake.results.recommended.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           {result.matches.length === 0 ? (
-            <p className="text-on-surface-variant">
-              We’ll match you with a therapist shortly. You can also browse all therapists.
-            </p>
+            <p className="text-on-surface-variant">{t('intake.results.recommended.empty')}</p>
           ) : (
             <div className="space-y-3">
               {result.matches.map((m) => (
@@ -283,7 +284,9 @@ function Results({ result }: { result: IntakeResult }) {
                       {formatKsh(m.sessionRateKsh)}
                     </span>
                     <Button asChild size="sm">
-                      <Link href={`/patient/therapists/${m.id}/book`}>Book</Link>
+                      <Link href={`/patient/therapists/${m.id}/book`}>
+                        {t('intake.results.book')}
+                      </Link>
                     </Button>
                   </div>
                 </div>
@@ -292,7 +295,7 @@ function Results({ result }: { result: IntakeResult }) {
           )}
           <div className="mt-4">
             <Link href="/patient/therapists" className="text-sm text-secondary hover:underline">
-              Browse all therapists →
+              {t('intake.results.browseAll')}
             </Link>
           </div>
         </CardContent>

@@ -40,7 +40,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
     (key: MessageKey, params?: Record<string, string | number>) => {
       const message = dictionaries[locale][key] ?? dictionaries.en[key] ?? key;
       if (!params) return message;
-      return message.replace(/\{(\w+)\}/g, (match, token: string) =>
+      return message.replace(/\{(\w+)\}/g, (match: string, token: string) =>
         token in params ? String(params[token]) : match,
       );
     },

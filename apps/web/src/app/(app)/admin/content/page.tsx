@@ -15,8 +15,10 @@ import { PageHeading } from '@/components/app/stat-card';
 import { ApiClientError } from '@/lib/api-client';
 import { contentApi } from '@/lib/api/engagement-api';
 import { formatDate, humanizeEnum } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 export default function AdminContentPage() {
+  const t = useT();
   const queryClient = useQueryClient();
   const { data } = useQuery({ queryKey: ['admin-content'], queryFn: () => contentApi.adminList() });
 
@@ -48,14 +50,11 @@ export default function AdminContentPage() {
 
   return (
     <div className="max-w-3xl">
-      <PageHeading
-        title="Psychoeducation content"
-        subtitle="Publish articles and exercises for patients."
-      />
+      <PageHeading title={t('content.title')} subtitle={t('content.subtitle')} />
 
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle>New resource</CardTitle>
+          <CardTitle>{t('content.new.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           {error && (
@@ -65,7 +64,7 @@ export default function AdminContentPage() {
           )}
           {create.isSuccess && (
             <Alert variant="success" className="mb-4">
-              Resource published.
+              {t('content.published')}
             </Alert>
           )}
           <form
@@ -74,38 +73,42 @@ export default function AdminContentPage() {
             noValidate
           >
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Title" htmlFor="title" error={e.title?.message}>
+              <Field label={t('content.field.title')} htmlFor="title" error={e.title?.message}>
                 <Input id="title" {...form.register('title')} />
               </Field>
               <Field
-                label="Slug"
+                label={t('content.field.slug')}
                 htmlFor="slug"
                 error={e.slug?.message}
-                hint="lowercase-with-hyphens"
+                hint={t('content.field.slugHint')}
               >
                 <Input id="slug" {...form.register('slug')} />
               </Field>
             </div>
-            <Field label="Summary" htmlFor="summary" error={e.summary?.message}>
+            <Field label={t('content.field.summary')} htmlFor="summary" error={e.summary?.message}>
               <Input id="summary" {...form.register('summary')} />
             </Field>
-            <Field label="Body" htmlFor="body" error={e.body?.message}>
+            <Field label={t('content.field.body')} htmlFor="body" error={e.body?.message}>
               <Textarea id="body" rows={6} {...form.register('body')} />
             </Field>
             <div className="grid gap-4 sm:grid-cols-3">
-              <Field label="Category" htmlFor="category" error={e.category?.message}>
+              <Field
+                label={t('content.field.category')}
+                htmlFor="category"
+                error={e.category?.message}
+              >
                 <Input id="category" placeholder="Anxiety" {...form.register('category')} />
               </Field>
-              <Field label="Type" htmlFor="type">
+              <Field label={t('content.field.type')} htmlFor="type">
                 <Select id="type" {...form.register('type')}>
-                  {CONTENT_TYPES.map((t) => (
-                    <option key={t} value={t}>
-                      {humanizeEnum(t)}
+                  {CONTENT_TYPES.map((ct) => (
+                    <option key={ct} value={ct}>
+                      {humanizeEnum(ct)}
                     </option>
                   ))}
                 </Select>
               </Field>
-              <Field label="Language" htmlFor="language">
+              <Field label={t('content.field.language')} htmlFor="language">
                 <Select id="language" {...form.register('language')}>
                   <option value="en">English</option>
                   <option value="sw">Swahili</option>
@@ -118,10 +121,10 @@ export default function AdminContentPage() {
                 className="h-4 w-4 accent-[#1b4f8c]"
                 {...form.register('published')}
               />
-              Publish immediately
+              {t('content.publishNow')}
             </label>
             <Button type="submit" disabled={create.isPending}>
-              {create.isPending ? 'Saving…' : 'Create resource'}
+              {create.isPending ? t('content.saving') : t('content.create')}
             </Button>
           </form>
         </CardContent>
@@ -129,11 +132,11 @@ export default function AdminContentPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>All resources</CardTitle>
+          <CardTitle>{t('content.all.title')}</CardTitle>
         </CardHeader>
         <CardContent>
           {!data || data.length === 0 ? (
-            <p className="text-sm text-on-surface-variant">No resources yet.</p>
+            <p className="text-sm text-on-surface-variant">{t('content.all.empty')}</p>
           ) : (
             <ul className="divide-y divide-outline-variant">
               {data.map((r) => (
@@ -151,7 +154,7 @@ export default function AdminContentPage() {
                         : 'bg-surface-container text-on-surface-variant'
                     }`}
                   >
-                    {r.published ? 'Published' : 'Draft'}
+                    {r.published ? t('content.published.badge') : t('content.draft.badge')}
                   </span>
                 </li>
               ))}

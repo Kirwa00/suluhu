@@ -6,22 +6,21 @@ import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 import { PageHeading } from '@/components/app/stat-card';
 import { contentApi } from '@/lib/api/engagement-api';
+import { useT } from '@/i18n/locale-context';
 
 const typeIcon = { ARTICLE: BookOpen, VIDEO: PlayCircle, EXERCISE: Dumbbell } as const;
 
 export default function ResourcesPage() {
+  const t = useT();
   const { data, isLoading } = useQuery({ queryKey: ['content'], queryFn: () => contentApi.list() });
 
   return (
     <div>
-      <PageHeading
-        title="Resources"
-        subtitle="Self-help articles and exercises to support your wellbeing."
-      />
+      <PageHeading title={t('resources.title')} subtitle={t('resources.subtitle')} />
       {isLoading ? (
-        <p className="text-on-surface-variant">Loading…</p>
+        <p className="text-on-surface-variant">{t('common.loading')}</p>
       ) : !data || data.length === 0 ? (
-        <Card className="p-10 text-center text-on-surface-variant">No resources yet.</Card>
+        <Card className="p-10 text-center text-on-surface-variant">{t('resources.empty')}</Card>
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {data.map((r) => {

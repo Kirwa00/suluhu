@@ -9,8 +9,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { sessionsApi, type SessionAccess } from '@/lib/api/sessions-api';
 import { formatDateTimeEAT } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 export default function ConsultRoomPage() {
+  const t = useT();
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
   const queryClient = useQueryClient();
@@ -67,7 +69,7 @@ export default function ConsultRoomPage() {
             href={data.isOwner ? '/therapist/schedule' : '/patient/sessions'}
             className="text-sm text-secondary hover:underline"
           >
-            Back to sessions
+            {t('session.backToSessions')}
           </Link>
         </CardContent>
       </Card>
@@ -84,19 +86,25 @@ function StatusBody({
   onStart: () => void;
   starting: boolean;
 }) {
+  const t = useT();
   switch (data.phase) {
     case 'EARLY':
       return (
         <>
           <Clock className="h-12 w-12 text-primary" aria-hidden />
           <div>
-            <p className="font-display text-xl font-semibold text-on-surface">Not started yet</p>
+            <p className="font-display text-xl font-semibold text-on-surface">
+              {t('session.status.notStarted')}
+            </p>
             <p className="text-on-surface-variant">
-              Your session with {data.counterpartName} begins {formatDateTimeEAT(data.scheduledAt)}.
+              {t('session.status.beginsAt', {
+                name: data.counterpartName,
+                time: formatDateTimeEAT(data.scheduledAt),
+              })}
               {typeof data.startsInMinutes === 'number' && data.startsInMinutes > 0
-                ? ` (~${data.startsInMinutes} min)`
+                ? t('session.status.startsIn', { mins: data.startsInMinutes })
                 : ''}{' '}
-              You can join 15 minutes before.
+              {t('session.status.joinEarly')}
             </p>
           </div>
         </>
@@ -107,10 +115,10 @@ function StatusBody({
           <Loader2 className="h-12 w-12 animate-spin text-primary" aria-hidden />
           <div>
             <p className="font-display text-xl font-semibold text-on-surface">
-              You’re in the waiting room
+              {t('session.status.waitingRoom.title')}
             </p>
             <p className="text-on-surface-variant">
-              {data.counterpartName} will admit you when they’re ready. Please hold on.
+              {t('session.status.waitingRoom.body', { name: data.counterpartName })}
             </p>
           </div>
         </>
@@ -120,13 +128,15 @@ function StatusBody({
         <>
           <VideoIcon className="h-12 w-12 text-secondary" aria-hidden />
           <div>
-            <p className="font-display text-xl font-semibold text-on-surface">Ready to begin</p>
+            <p className="font-display text-xl font-semibold text-on-surface">
+              {t('session.status.ready.title')}
+            </p>
             <p className="text-on-surface-variant">
-              Your patient {data.counterpartName} may be waiting. Start when you’re ready.
+              {t('session.status.ready.body', { name: data.counterpartName })}
             </p>
           </div>
           <Button size="lg" onClick={onStart} disabled={starting}>
-            {starting ? 'Starting…' : 'Start session'}
+            {starting ? t('session.status.starting') : t('session.status.startSession')}
           </Button>
         </>
       );
@@ -135,26 +145,26 @@ function StatusBody({
         <>
           <PhoneOff className="h-12 w-12 text-on-surface-variant" aria-hidden />
           <p className="font-display text-xl font-semibold text-on-surface">
-            This session has ended
+            {t('session.status.ended')}
           </p>
         </>
       );
     case 'EXPIRED':
       return (
         <p className="font-display text-lg font-semibold text-on-surface">
-          The join window for this session has closed.
+          {t('session.status.expired')}
         </p>
       );
     case 'CANCELLED':
       return (
         <p className="font-display text-lg font-semibold text-on-surface">
-          This session was cancelled.
+          {t('session.status.cancelled')}
         </p>
       );
     case 'UNPAID':
       return (
         <p className="font-display text-lg font-semibold text-on-surface">
-          Payment is still pending for this session.
+          {t('session.status.unpaid')}
         </p>
       );
     default:
@@ -173,6 +183,7 @@ function ConsultRoom({
   onEnd?: () => void;
   ending: boolean;
 }) {
+  const t = useT();
   const [micOn, setMicOn] = useState(true);
   const [camOn, setCamOn] = useState(true);
 
@@ -180,19 +191,20 @@ function ConsultRoom({
     <div className="mx-auto max-w-5xl">
       <div className="mb-3 flex items-center justify-between">
         <p className="font-display text-lg font-semibold text-on-surface">
-          Session with {data.counterpartName}
+          {t('session.room.title', { name: data.counterpartName })}
         </p>
         <span className="flex items-center gap-1.5 rounded-full bg-secondary-container/50 px-3 py-1 text-xs font-medium text-on-secondary-container">
-          <span className="h-2 w-2 animate-pulse rounded-full bg-success-calm" /> Live
+          <span className="h-2 w-2 animate-pulse rounded-full bg-success-calm" />{' '}
+          {t('session.room.live')}
         </span>
       </div>
 
       {/* Video stage (mock provider — real Daily.co iframe mounts here in production). */}
       <div className="relative grid gap-3 rounded-xl bg-inverse-surface p-3 sm:grid-cols-2">
         <VideoTile label={data.counterpartName} muted={false} />
-        <VideoTile label="You" muted={!micOn} cameraOff={!camOn} />
+        <VideoTile label={t('session.room.you')} muted={!micOn} cameraOff={!camOn} />
         <p className="absolute bottom-1 left-1/2 -translate-x-1/2 text-[10px] text-inverse-on-surface/50">
-          Secure WebRTC room · {data.roomUrl}
+          {t('session.room.secureRoom', { url: data.roomUrl ?? '' })}
         </p>
       </div>
 
@@ -205,7 +217,7 @@ function ConsultRoom({
               ? 'bg-surface-container text-on-surface'
               : 'bg-error-container text-on-error-container'
           }`}
-          aria-label={micOn ? 'Mute microphone' : 'Unmute microphone'}
+          aria-label={micOn ? t('session.room.muteAria') : t('session.room.unmuteAria')}
         >
           {micOn ? <Mic className="h-5 w-5" /> : <MicOff className="h-5 w-5" />}
         </button>
@@ -216,23 +228,22 @@ function ConsultRoom({
               ? 'bg-surface-container text-on-surface'
               : 'bg-error-container text-on-error-container'
           }`}
-          aria-label={camOn ? 'Turn camera off' : 'Turn camera on'}
+          aria-label={camOn ? t('session.room.cameraOffAria') : t('session.room.cameraOnAria')}
         >
           {camOn ? <VideoIcon className="h-5 w-5" /> : <VideoOff className="h-5 w-5" />}
         </button>
         <Button variant="destructive" onClick={onLeave} className="h-12 rounded-full px-6">
           <PhoneOff className="h-5 w-5" />
-          Leave
+          {t('session.room.leave')}
         </Button>
         {onEnd && (
           <Button onClick={onEnd} disabled={ending} className="h-12 rounded-full px-6">
-            {ending ? 'Ending…' : 'End session'}
+            {ending ? t('session.room.ending') : t('session.room.endSession')}
           </Button>
         )}
       </div>
       <p className="mt-3 text-center text-xs text-on-surface-variant">
-        This is a simulated consult room (mock video provider). With Daily.co credentials, the live
-        encrypted video mounts in the stage above.
+        {t('session.room.mockNotice')}
       </p>
     </div>
   );

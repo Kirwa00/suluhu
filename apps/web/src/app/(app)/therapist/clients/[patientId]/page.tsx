@@ -15,8 +15,10 @@ import { PageHeading } from '@/components/app/stat-card';
 import { ApiClientError } from '@/lib/api-client';
 import { clinicalApi } from '@/lib/api/clinical-api';
 import { formatDateTimeEAT, humanizeEnum } from '@/lib/format';
+import { useT } from '@/i18n/locale-context';
 
 export default function ClientRecordPage() {
+  const t = useT();
   const { patientId } = useParams<{ patientId: string }>();
   const [selectedAppt, setSelectedAppt] = useState<string | null>(null);
 
@@ -26,7 +28,7 @@ export default function ClientRecordPage() {
     enabled: Boolean(patientId),
   });
 
-  if (isLoading || !record) return <p className="text-on-surface-variant">Loading record…</p>;
+  if (isLoading || !record) return <p className="text-on-surface-variant">{t('common.loading')}</p>;
 
   return (
     <div className="max-w-4xl">
@@ -35,13 +37,15 @@ export default function ClientRecordPage() {
         className="inline-flex items-center gap-1.5 text-sm text-secondary hover:underline"
       >
         <ArrowLeft className="h-4 w-4" aria-hidden />
-        Back to clients
+        {t('record.backToClients')}
       </Link>
-      <PageHeading title={record.patient.name} subtitle="Patient health record" />
+      <PageHeading title={record.patient.name} subtitle={t('record.subtitle')} />
 
       {record.openAlerts.length > 0 && (
         <Alert variant="error" className="mb-6">
-          <p className="font-medium">{record.openAlerts.length} open clinical alert(s)</p>
+          <p className="font-medium">
+            {t('record.openAlerts', { count: record.openAlerts.length })}
+          </p>
           {record.openAlerts.map((a) => (
             <p key={a.id}>· {a.message}</p>
           ))}
@@ -51,7 +55,7 @@ export default function ClientRecordPage() {
       <div className="grid gap-6 lg:grid-cols-3">
         <Card className="lg:col-span-1">
           <CardHeader>
-            <CardTitle>Latest intake</CardTitle>
+            <CardTitle>{t('record.latestIntake.title')}</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-sm">
             {record.latestIntake ? (
@@ -59,7 +63,10 @@ export default function ClientRecordPage() {
                 <Row label="PHQ-9" value={`${record.latestIntake.phq9Score}/27`} />
                 <Row label="GAD-7" value={`${record.latestIntake.gad7Score}/21`} />
                 <Row label="CAGE" value={`${record.latestIntake.cageScore}/4`} />
-                <Row label="Risk" value={humanizeEnum(record.latestIntake.riskLevel)} />
+                <Row
+                  label={t('record.latestIntake.risk')}
+                  value={humanizeEnum(record.latestIntake.riskLevel)}
+                />
                 {record.latestIntake.primaryConcern && (
                   <p className="pt-2 text-on-surface-variant">
                     “{record.latestIntake.primaryConcern}”
@@ -67,7 +74,7 @@ export default function ClientRecordPage() {
                 )}
               </>
             ) : (
-              <p className="text-on-surface-variant">No intake on record.</p>
+              <p className="text-on-surface-variant">{t('record.latestIntake.empty')}</p>
             )}
           </CardContent>
         </Card>
@@ -75,11 +82,11 @@ export default function ClientRecordPage() {
         <div className="space-y-6 lg:col-span-2">
           <Card>
             <CardHeader>
-              <CardTitle>Sessions &amp; notes</CardTitle>
+              <CardTitle>{t('record.sessions.title')}</CardTitle>
             </CardHeader>
             <CardContent>
               {record.appointments.length === 0 ? (
-                <p className="text-sm text-on-surface-variant">No sessions yet.</p>
+                <p className="text-sm text-on-surface-variant">{t('record.sessions.empty')}</p>
               ) : (
                 <ul className="divide-y divide-outline-variant">
                   {record.appointments.map((a) => (
@@ -89,7 +96,8 @@ export default function ClientRecordPage() {
                           {formatDateTimeEAT(a.scheduledAt)}
                         </p>
                         <p className="text-xs text-on-surface-variant">
-                          {a.durationMins} min · {humanizeEnum(a.status)}
+                          {t('appointments.duration', { mins: a.durationMins })} ·{' '}
+                          {humanizeEnum(a.status)}
                         </p>
                       </div>
                       <Button
@@ -97,7 +105,9 @@ export default function ClientRecordPage() {
                         size="sm"
                         onClick={() => setSelectedAppt(a.id)}
                       >
-                        {selectedAppt === a.id ? 'Editing' : 'SOAP note'}
+                        {selectedAppt === a.id
+                          ? t('record.sessions.editing')
+                          : t('record.sessions.soapNote')}
                       </Button>
                     </li>
                   ))}
@@ -125,6 +135,7 @@ function Row({ label, value }: { label: string; value: string }) {
 }
 
 function NoteEditor({ appointmentId }: { appointmentId: string }) {
+  const t = useT();
   const queryClient = useQueryClient();
   const [fields, setFields] = useState({
     subjective: '',
@@ -179,7 +190,8 @@ function NoteEditor({ appointmentId }: { appointmentId: string }) {
       setStatus(n.status);
       queryClient.invalidateQueries({ queryKey: ['note', appointmentId] });
     },
-    onError: (err) => setError(err instanceof ApiClientError ? err.message : 'Could not save.'),
+    onError: (err) =>
+      setError(err instanceof ApiClientError ? err.message : t('record.note.error')),
   });
 
   const set = (k: keyof typeof fields, v: string) => {
@@ -192,7 +204,7 @@ function NoteEditor({ appointmentId }: { appointmentId: string }) {
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle>SOAP note</CardTitle>
+          <CardTitle>{t('record.sessions.soapNote')}</CardTitle>
           <Button
             variant="ghost"
             size="sm"
@@ -200,22 +212,26 @@ function NoteEditor({ appointmentId }: { appointmentId: string }) {
             disabled={ai.isPending || finalized}
           >
             <Sparkles className="h-4 w-4" aria-hidden />
-            {ai.isPending ? 'Drafting…' : 'AI draft'}
+            {ai.isPending ? t('record.note.drafting') : t('record.note.aiDraft')}
           </Button>
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
         {error && <Alert variant="error">{error}</Alert>}
-        {saved && <Alert variant="success">Note saved ({humanizeEnum(status)}).</Alert>}
-        {finalized && <Alert variant="info">This note is finalized and locked.</Alert>}
+        {saved && (
+          <Alert variant="success">
+            {t('record.note.saved', { status: humanizeEnum(status) })}
+          </Alert>
+        )}
+        {finalized && <Alert variant="info">{t('record.note.finalizedLocked')}</Alert>}
 
         {(
           [
-            ['subjective', 'Subjective'],
-            ['objective', 'Objective'],
-            ['assessment', 'Assessment'],
-            ['plan', 'Plan'],
-            ['riskAssessment', 'Risk assessment'],
+            ['subjective', t('record.note.field.subjective')],
+            ['objective', t('record.note.field.objective')],
+            ['assessment', t('record.note.field.assessment')],
+            ['plan', t('record.note.field.plan')],
+            ['riskAssessment', t('record.note.field.riskAssessment')],
           ] as const
         ).map(([key, label]) => (
           <div key={key}>
@@ -236,10 +252,10 @@ function NoteEditor({ appointmentId }: { appointmentId: string }) {
               onClick={() => save.mutate('DRAFT')}
               disabled={save.isPending}
             >
-              Save draft
+              {t('record.note.saveDraft')}
             </Button>
             <Button onClick={() => save.mutate('FINALIZED')} disabled={save.isPending}>
-              Finalize
+              {t('record.note.finalize')}
             </Button>
           </div>
         )}
@@ -249,6 +265,7 @@ function NoteEditor({ appointmentId }: { appointmentId: string }) {
 }
 
 function PlanEditor({ patientId }: { patientId: string }) {
+  const t = useT();
   const queryClient = useQueryClient();
   const [goals, setGoals] = useState('');
   const [interventions, setInterventions] = useState('');
@@ -296,26 +313,26 @@ function PlanEditor({ patientId }: { patientId: string }) {
       queryClient.invalidateQueries({ queryKey: ['record', patientId] });
     },
     onError: (err) =>
-      setError(err instanceof ApiClientError ? err.message : 'Could not save plan.'),
+      setError(err instanceof ApiClientError ? err.message : t('record.plan.error')),
   });
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Treatment plan</CardTitle>
+        <CardTitle>{t('record.plan.title')}</CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
         {error && <Alert variant="error">{error}</Alert>}
-        {saved && <Alert variant="success">Treatment plan saved.</Alert>}
+        {saved && <Alert variant="success">{t('record.plan.saved')}</Alert>}
         <div>
           <label className="mb-1 block text-sm font-medium text-on-surface">
-            Goals (one per line)
+            {t('record.plan.goals')}
           </label>
           <Textarea rows={3} value={goals} onChange={(e) => setGoals(e.target.value)} />
         </div>
         <div>
           <label className="mb-1 block text-sm font-medium text-on-surface">
-            Interventions (one per line)
+            {t('record.plan.interventions')}
           </label>
           <Textarea
             rows={3}
@@ -325,11 +342,15 @@ function PlanEditor({ patientId }: { patientId: string }) {
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="mb-1 block text-sm font-medium text-on-surface">Review date</label>
+            <label className="mb-1 block text-sm font-medium text-on-surface">
+              {t('record.plan.reviewDate')}
+            </label>
             <Input type="date" value={reviewDate} onChange={(e) => setReviewDate(e.target.value)} />
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-on-surface">Status</label>
+            <label className="mb-1 block text-sm font-medium text-on-surface">
+              {t('record.plan.status')}
+            </label>
             <Select value={status} onChange={(e) => setStatus(e.target.value)}>
               {['ACTIVE', 'COMPLETED', 'ARCHIVED'].map((s) => (
                 <option key={s} value={s}>
@@ -341,12 +362,12 @@ function PlanEditor({ patientId }: { patientId: string }) {
         </div>
         <div>
           <label className="mb-1 block text-sm font-medium text-on-surface">
-            Summary (optional)
+            {t('record.plan.summary')}
           </label>
           <Textarea rows={2} value={summary} onChange={(e) => setSummary(e.target.value)} />
         </div>
         <Button onClick={() => save.mutate()} disabled={save.isPending || !goals.trim()}>
-          {save.isPending ? 'Saving…' : 'Save treatment plan'}
+          {save.isPending ? t('record.plan.saving') : t('record.plan.save')}
         </Button>
       </CardContent>
     </Card>
