@@ -10,7 +10,7 @@ import {
   useState,
   type ReactNode,
 } from 'react';
-import { dictionaries, type MessageKey } from './dictionaries';
+import { translate, type MessageKey } from './dictionaries';
 
 const STORAGE_KEY = 'suluhu.locale';
 
@@ -37,13 +37,7 @@ export function LocaleProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const t = useCallback(
-    (key: MessageKey, params?: Record<string, string | number>) => {
-      const message = dictionaries[locale][key] ?? dictionaries.en[key] ?? key;
-      if (!params) return message;
-      return message.replace(/\{(\w+)\}/g, (match: string, token: string) =>
-        token in params ? String(params[token]) : match,
-      );
-    },
+    (key: MessageKey, params?: Record<string, string | number>) => translate(locale, key, params),
     [locale],
   );
 
