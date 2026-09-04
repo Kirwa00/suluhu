@@ -45,7 +45,7 @@ jobs:
       REDIS_URL: redis://localhost:6379
       JWT_ACCESS_SECRET: ci-access-secret-ci-access-secret-32
       JWT_REFRESH_SECRET: ci-refresh-secret-ci-refresh-secret-32
-      PHI_ENCRYPTION_KEY: Y2ktdGVzdC1waGkta2V5LTMyLWJ5dGVzLWxvbmchIQ==
+      PHI_ENCRYPTION_KEY: Y2ktdGVzdC1waGkta2V5LTMyLWJ5dGVzLWxvbmchISE=
       PROVIDER_MODE: mock
 
     steps:
