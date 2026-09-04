@@ -96,7 +96,7 @@ jobs:
         run: |
           for i in $(seq 1 30); do
             code=$(curl -s -o /dev/null -w '%{http_code}' -X POST http://localhost:4000/api/v1/auth/login \
-              -H "Content-Type: application/json" -d '{}')
+              -H "Content-Type: application/json" -d '{}' || true)
             if [ "$code" = "400" ]; then
               echo "API is up"
               exit 0
