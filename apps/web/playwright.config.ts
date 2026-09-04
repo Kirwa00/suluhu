@@ -11,7 +11,11 @@ export default defineConfig({
   timeout: 30_000,
   fullyParallel: true,
   retries: process.env.CI ? 1 : 0,
-  reporter: 'list',
+  // The auth-throttling policy (apps/api) allows 5 logins/min; several spec
+  // files logging in concurrently across workers can trip it. The suite is
+  // small enough that serializing in CI costs little.
+  workers: process.env.CI ? 1 : undefined,
+  reporter: process.env.CI ? [['list'], ['html', { open: 'never' }]] : 'list',
   use: {
     baseURL: process.env.E2E_BASE_URL ?? 'http://localhost:3000',
     trace: 'on-first-retry',
