@@ -82,6 +82,15 @@ export class AppConfigService {
     };
   }
 
+  /** Only populated (and only valid) when `providers.video === 'live'`. */
+  get daily() {
+    return {
+      apiKey: this.get('DAILY_API_KEY') ?? '',
+      domain: this.get('DAILY_DOMAIN') ?? '',
+      baseUrl: this.get('DAILY_BASE_URL'),
+    };
+  }
+
   get crisis() {
     return { befriendersHotline: this.get('BEFRIENDERS_KENYA_HOTLINE') };
   }

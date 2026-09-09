@@ -3,6 +3,7 @@ import { AppConfigService } from '../../config/app-config.service';
 import { SessionsController } from './sessions.controller';
 import { SessionsService } from './sessions.service';
 import { MockVideoProvider, VIDEO_PROVIDER, type VideoProvider } from './providers/video.provider';
+import { DailyVideoProvider } from './providers/daily.provider';
 
 @Module({
   controllers: [SessionsController],
@@ -12,8 +13,9 @@ import { MockVideoProvider, VIDEO_PROVIDER, type VideoProvider } from './provide
       provide: VIDEO_PROVIDER,
       inject: [AppConfigService],
       useFactory: (config: AppConfigService): VideoProvider => {
-        // Live Daily.co adapter swaps in when VIDEO_MODE=live + DAILY_API_KEY set.
-        void config;
+        if (config.providers.video === 'live') {
+          return new DailyVideoProvider(config.daily);
+        }
         return new MockVideoProvider();
       },
     },
