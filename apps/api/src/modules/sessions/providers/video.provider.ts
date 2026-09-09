@@ -31,6 +31,8 @@ export interface VideoProvider {
   readonly mode: 'mock' | 'live';
   createRoom(opts: { appointmentId: string }): Promise<VideoRoom>;
   createToken(opts: CreateTokenOptions): Promise<VideoToken>;
+  /** URL a participant loads to join `roomName`, for rooms persisted earlier. */
+  roomUrl(roomName: string): string;
 }
 
 export const VIDEO_PROVIDER = Symbol('VIDEO_PROVIDER');
@@ -39,10 +41,14 @@ export class MockVideoProvider implements VideoProvider {
   readonly mode = 'mock' as const;
   private readonly logger = new Logger('MockVideo');
 
+  roomUrl(roomName: string): string {
+    return `https://mock.daily.co/${roomName}`;
+  }
+
   async createRoom(opts: { appointmentId: string }): Promise<VideoRoom> {
     const roomName = `suluhu-${opts.appointmentId.slice(0, 8)}-${randomBytes(4).toString('hex')}`;
     this.logger.log(`Created video room ${roomName}`);
-    return { roomName, roomUrl: `https://mock.daily.co/${roomName}` };
+    return { roomName, roomUrl: this.roomUrl(roomName) };
   }
 
   async createToken(opts: CreateTokenOptions): Promise<VideoToken> {

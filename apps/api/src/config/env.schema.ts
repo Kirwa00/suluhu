@@ -47,6 +47,11 @@ export const envSchema = z.object({
   PAYHERO_CHANNEL_ID: z.coerce.number().int().positive().optional(),
   PAYHERO_BASE_URL: z.string().url().default('https://backend.payhero.co.ke'),
 
+  // Daily.co video — required only when VIDEO_MODE=live.
+  DAILY_API_KEY: z.string().optional(),
+  DAILY_DOMAIN: z.string().optional(),
+  DAILY_BASE_URL: z.string().url().default('https://api.daily.co/v1'),
+
   BEFRIENDERS_KENYA_HOTLINE: z.string().default('0800723253'),
 });
 
@@ -73,6 +78,15 @@ export function validateEnv(raw: Record<string, unknown>): Env {
     if (missing.length > 0) {
       throw new Error(
         `Invalid environment configuration:\n  • MPESA_MODE=live requires: ${missing.join(', ')}`,
+      );
+    }
+  }
+
+  if (parsed.data.VIDEO_MODE === 'live') {
+    const missing = (['DAILY_API_KEY', 'DAILY_DOMAIN'] as const).filter((key) => !parsed.data[key]);
+    if (missing.length > 0) {
+      throw new Error(
+        `Invalid environment configuration:\n  • VIDEO_MODE=live requires: ${missing.join(', ')}`,
       );
     }
   }

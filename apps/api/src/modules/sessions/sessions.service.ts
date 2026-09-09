@@ -108,7 +108,7 @@ export class SessionsService {
       isOwner,
       ttlSeconds,
     });
-    const roomUrl = `https://mock.daily.co/${roomName}`;
+    const roomUrl = this.video.roomUrl(roomName);
 
     return {
       ...base,
