@@ -1,4 +1,5 @@
 import type { CallHandler, ExecutionContext } from '@nestjs/common';
+import { StreamableFile } from '@nestjs/common';
 import { API_VERSION, type ApiResponse } from '@suluhu/shared';
 import { firstValueFrom, of } from 'rxjs';
 import { ResponseInterceptor } from './response.interceptor';
@@ -18,7 +19,9 @@ async function intercept<T>(
   request: Record<string, unknown> = { requestId: 'req1' },
 ): Promise<ApiResponse<T>> {
   const interceptor = new ResponseInterceptor<T>();
-  return firstValueFrom(interceptor.intercept(contextWith(request), handlerFor(data)));
+  return firstValueFrom(interceptor.intercept(contextWith(request), handlerFor(data))) as Promise<
+    ApiResponse<T>
+  >;
 }
 
 describe('ResponseInterceptor', () => {
@@ -44,5 +47,14 @@ describe('ResponseInterceptor', () => {
   it('preserves falsy-but-present payloads', async () => {
     expect((await intercept(0)).data).toBe(0);
     expect((await intercept(false)).data).toBe(false);
+  });
+
+  it('passes a StreamableFile through unwrapped, for binary downloads', async () => {
+    const file = new StreamableFile(Buffer.from('pdf-bytes'));
+    const interceptor = new ResponseInterceptor<StreamableFile>();
+    const result = await firstValueFrom(
+      interceptor.intercept(contextWith({ requestId: 'req1' }), handlerFor(file)),
+    );
+    expect(result).toBe(file);
   });
 });

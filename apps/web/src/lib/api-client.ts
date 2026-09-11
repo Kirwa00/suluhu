@@ -27,15 +27,17 @@ export interface RequestOptions extends Omit<RequestInit, 'body'> {
  */
 export async function apiFetch<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const { body, accessToken, headers, ...rest } = options;
+  const isFormData = body instanceof FormData;
 
   const response = await fetch(`${API_BASE}${path}`, {
     ...rest,
     headers: {
-      'Content-Type': 'application/json',
+      // A FormData body needs the browser to set its own multipart boundary.
+      ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
       ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
       ...headers,
     },
-    body: body !== undefined ? JSON.stringify(body) : undefined,
+    body: body === undefined ? undefined : isFormData ? body : JSON.stringify(body),
     credentials: 'include',
   });
 
@@ -57,4 +59,35 @@ export async function apiFetch<T>(path: string, options: RequestOptions = {}): P
   }
 
   return envelope.data as T;
+}
+
+/**
+ * Fetches a raw binary response (e.g. a document download) rather than the
+ * JSON envelope — the API returns the file bytes directly for these routes.
+ */
+export async function apiFetchBlob(
+  path: string,
+  options: { accessToken?: string } = {},
+): Promise<{ blob: Blob; filename: string | null }> {
+  const response = await fetch(`${API_BASE}${path}`, {
+    headers: options.accessToken ? { Authorization: `Bearer ${options.accessToken}` } : {},
+    credentials: 'include',
+  });
+
+  if (!response.ok) {
+    let message = 'Request failed';
+    try {
+      const envelope = (await response.json()) as ApiResponse<unknown>;
+      message = envelope.error?.message ?? message;
+    } catch {
+      // Response wasn't JSON (e.g. the file streamed partially) — keep the default message.
+    }
+    throw new ApiClientError('INTERNAL', message, response.status);
+  }
+
+  const disposition = response.headers.get('content-disposition');
+  const match = disposition?.match(/filename\*?=(?:UTF-8'')?"?([^";]+)"?/);
+  const filename = match?.[1] ? decodeURIComponent(match[1]) : null;
+
+  return { blob: await response.blob(), filename };
 }

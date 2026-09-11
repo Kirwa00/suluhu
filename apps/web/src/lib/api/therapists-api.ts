@@ -1,10 +1,12 @@
 import type {
+  CredentialDocumentType,
   Paginated,
   SetAvailabilityInput,
   SubmitCredentialsInput,
+  TherapistDocumentView,
   TherapistSearchQuery,
 } from '@suluhu/shared';
-import { apiFetch } from '@/lib/api-client';
+import { apiFetch, apiFetchBlob } from '@/lib/api-client';
 import { tokenStore } from '@/lib/auth/token-store';
 
 export interface OnboardingStatus {
@@ -92,5 +94,24 @@ export const therapistsApi = {
   },
   getDetail(id: string) {
     return apiFetch<TherapistDetail>(`/therapists/${id}`, { accessToken: auth() });
+  },
+  uploadDocument(file: File, type: CredentialDocumentType) {
+    const form = new FormData();
+    form.append('file', file);
+    form.append('type', type);
+    return apiFetch<TherapistDocumentView>('/therapists/me/documents', {
+      method: 'POST',
+      body: form,
+      accessToken: auth(),
+    });
+  },
+  listDocuments() {
+    return apiFetch<TherapistDocumentView[]>('/therapists/me/documents', { accessToken: auth() });
+  },
+  async downloadDocument(id: string) {
+    const { blob, filename } = await apiFetchBlob(`/therapists/documents/${id}/download`, {
+      accessToken: auth(),
+    });
+    return { blob, filename };
   },
 };

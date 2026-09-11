@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import type { ReviewDecisionInput } from '@suluhu/shared';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Download, FileText } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -12,6 +12,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Textarea } from '@/components/ui/textarea';
 import { ApiClientError } from '@/lib/api-client';
 import { adminApi } from '@/lib/api/admin-api';
+import { therapistsApi } from '@/lib/api/therapists-api';
+import { saveBlob } from '@/lib/download-blob';
 import { dayName, formatDate, formatKsh, humanizeEnum } from '@/lib/format';
 import { useT } from '@/i18n/locale-context';
 
@@ -58,6 +60,11 @@ export default function AdminApplicationReview() {
     }
     mutation.mutate({ decision, reason: reason.trim() || undefined });
   };
+
+  const download = useMutation({
+    mutationFn: (documentId: string) => therapistsApi.downloadDocument(documentId),
+    onSuccess: ({ blob, filename }) => saveBlob(blob, filename ?? 'document'),
+  });
 
   if (isLoading) return <p className="text-on-surface-variant">{t('common.loading')}</p>;
   if (!app)
@@ -167,6 +174,45 @@ export default function AdminApplicationReview() {
                 </Alert>
               ) : (
                 <Alert variant="info">{t('adminReview.cpb.none')}</Alert>
+              )}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>{t('adminReview.documents.title')}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {app.documents.length === 0 ? (
+                <p className="text-sm text-on-surface-variant">
+                  {t('adminReview.documents.empty')}
+                </p>
+              ) : (
+                <ul className="divide-y divide-outline-variant">
+                  {app.documents.map((d) => (
+                    <li key={d.id} className="flex items-center justify-between py-2 text-sm">
+                      <span className="flex items-center gap-2">
+                        <FileText className="h-4 w-4 text-on-surface-variant" aria-hidden />
+                        <span>
+                          <span className="block font-medium text-on-surface">
+                            {humanizeEnum(d.type)}
+                          </span>
+                          <span className="text-xs text-on-surface-variant">
+                            {d.originalName} · {formatDate(d.uploadedAt)}
+                          </span>
+                        </span>
+                      </span>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => download.mutate(d.id)}
+                        disabled={download.isPending}
+                      >
+                        <Download className="h-4 w-4" aria-hidden />
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
               )}
             </CardContent>
           </Card>

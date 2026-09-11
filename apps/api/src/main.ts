@@ -20,6 +20,10 @@ async function bootstrap(): Promise<void> {
     origin: config.http.corsOrigins,
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    // Content-Disposition isn't in the CORS-safelisted response headers by
+    // default, so without this the browser can read a file download but not
+    // its filename (apiFetchBlob relies on it — see therapist document downloads).
+    exposedHeaders: ['Content-Disposition'],
   });
 
   app.setGlobalPrefix('api/v1');

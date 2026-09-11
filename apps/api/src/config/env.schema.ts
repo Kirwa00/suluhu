@@ -53,6 +53,10 @@ export const envSchema = z.object({
   DAILY_BASE_URL: z.string().url().default('https://api.daily.co/v1'),
 
   BEFRIENDERS_KENYA_HOTLINE: z.string().default('0800723253'),
+
+  // Therapist credential document storage. Local disk by default; production
+  // can point this at a mounted volume or swap the storage service for S3.
+  DOCUMENT_STORAGE_DIR: z.string().default('./storage/therapist-documents'),
 });
 
 export type Env = z.infer<typeof envSchema>;

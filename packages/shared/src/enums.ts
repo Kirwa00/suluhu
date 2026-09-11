@@ -55,6 +55,17 @@ export const TherapistVerificationStatus = {
 export type TherapistVerificationStatus =
   (typeof TherapistVerificationStatus)[keyof typeof TherapistVerificationStatus];
 
+export const CredentialDocumentType = {
+  CPB_LICENSE: 'CPB_LICENSE',
+  NATIONAL_ID: 'NATIONAL_ID',
+  CERTIFICATE: 'CERTIFICATE',
+  CV: 'CV',
+  OTHER: 'OTHER',
+} as const;
+export type CredentialDocumentType =
+  (typeof CredentialDocumentType)[keyof typeof CredentialDocumentType];
+export const CREDENTIAL_DOCUMENT_TYPES = Object.values(CredentialDocumentType);
+
 export const AppointmentStatus = {
   PENDING_PAYMENT: 'PENDING_PAYMENT',
   SCHEDULED: 'SCHEDULED',
