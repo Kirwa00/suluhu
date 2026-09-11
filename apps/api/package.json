@@ -16,13 +16,13 @@
     "test:cov": "jest --coverage",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate deploy",
-    "db:migrate:dev": "prisma migrate dev",
-    "db:seed": "ts-node prisma/seed.ts",
-    "db:studio": "prisma studio"
+    "db:migrate": "node scripts/with-root-env.mjs prisma migrate deploy",
+    "db:migrate:dev": "node scripts/with-root-env.mjs prisma migrate dev",
+    "db:seed": "node scripts/with-root-env.mjs ts-node prisma/seed.ts",
+    "db:studio": "node scripts/with-root-env.mjs prisma studio"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "node scripts/with-root-env.mjs ts-node prisma/seed.ts"
   },
   "dependencies": {
     "@nest-lab/throttler-storage-redis": "1.2.0",

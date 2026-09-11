@@ -57,8 +57,18 @@ export const envSchema = z.object({
 
 export type Env = z.infer<typeof envSchema>;
 
+/**
+ * Treats a blank variable as absent. `.env` files carry empty placeholders for
+ * credentials that are only needed in live mode (`PAYHERO_CHANNEL_ID=`), and an
+ * empty string would otherwise coerce to `0`/`''` and fail validation — or
+ * suppress a field's default — instead of being ignored.
+ */
+function dropBlanks(raw: Record<string, unknown>): Record<string, unknown> {
+  return Object.fromEntries(Object.entries(raw).filter(([, v]) => v !== ''));
+}
+
 export function validateEnv(raw: Record<string, unknown>): Env {
-  const parsed = envSchema.safeParse(raw);
+  const parsed = envSchema.safeParse(dropBlanks(raw));
   if (!parsed.success) {
     const issues = parsed.error.issues
       .map((i) => `  • ${i.path.join('.')}: ${i.message}`)
