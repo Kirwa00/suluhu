@@ -111,7 +111,12 @@ export class AdminTherapistsService {
       submittedAt: r.submittedAt?.toISOString() ?? null,
       reviewedAt: r.reviewedAt?.toISOString() ?? null,
       rejectionReason: r.rejectionReason,
-      documents: r.documents,
+      documents: r.documents.map((d) => ({
+        id: d.id,
+        type: d.type,
+        originalName: d.originalName,
+        uploadedAt: d.uploadedAt.toISOString(),
+      })),
       availability: r.availability,
     };
   }

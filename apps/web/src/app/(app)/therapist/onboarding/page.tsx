@@ -3,14 +3,16 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
+  CREDENTIAL_DOCUMENT_TYPES,
+  CredentialDocumentType,
   Gender,
   SPOKEN_LANGUAGES,
   THERAPY_SPECIALTIES,
   submitCredentialsSchema,
   type SubmitCredentialsInput,
 } from '@suluhu/shared';
-import { CheckCircle2, Circle } from 'lucide-react';
-import { useEffect } from 'react';
+import { CheckCircle2, Circle, Download, FileText, UploadCloud } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
@@ -22,7 +24,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { PageHeading } from '@/components/app/stat-card';
 import { ApiClientError } from '@/lib/api-client';
 import { therapistsApi } from '@/lib/api/therapists-api';
-import { humanizeEnum } from '@/lib/format';
+import { saveBlob } from '@/lib/download-blob';
+import { formatDate, humanizeEnum } from '@/lib/format';
 import { useT } from '@/i18n/locale-context';
 
 const statusTone: Record<string, 'info' | 'success' | 'error'> = {
@@ -274,6 +277,112 @@ export default function TherapistOnboardingPage() {
           </form>
         </CardContent>
       </Card>
+
+      <DocumentsCard />
     </div>
+  );
+}
+
+function DocumentsCard() {
+  const t = useT();
+  const queryClient = useQueryClient();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [type, setType] = useState<CredentialDocumentType>(CredentialDocumentType.CPB_LICENSE);
+  const [error, setError] = useState<string | null>(null);
+
+  const { data: documents } = useQuery({
+    queryKey: ['therapist-documents'],
+    queryFn: () => therapistsApi.listDocuments(),
+  });
+
+  const upload = useMutation({
+    mutationFn: (file: File) => therapistsApi.uploadDocument(file, type),
+    onSuccess: () => {
+      setError(null);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      queryClient.invalidateQueries({ queryKey: ['therapist-documents'] });
+    },
+    onError: (err) =>
+      setError(err instanceof ApiClientError ? err.message : t('onboarding.documents.error')),
+  });
+
+  const download = useMutation({
+    mutationFn: (id: string) => therapistsApi.downloadDocument(id),
+    onSuccess: ({ blob, filename }) => saveBlob(blob, filename ?? 'document'),
+  });
+
+  const onPick = (file: File | undefined) => {
+    if (file) upload.mutate(file);
+  };
+
+  return (
+    <Card className="mt-6">
+      <CardHeader>
+        <CardTitle>{t('onboarding.documents.title')}</CardTitle>
+        <CardDescription>{t('onboarding.documents.subtitle')}</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        {error && <Alert variant="error">{error}</Alert>}
+
+        {documents && documents.length > 0 && (
+          <ul className="divide-y divide-outline-variant rounded-md border border-outline-variant">
+            {documents.map((d) => (
+              <li key={d.id} className="flex items-center justify-between px-3 py-2 text-sm">
+                <span className="flex items-center gap-2">
+                  <FileText className="h-4 w-4 text-on-surface-variant" aria-hidden />
+                  <span className="font-medium text-on-surface">{humanizeEnum(d.type)}</span>
+                  <span className="text-on-surface-variant">
+                    {d.originalName} · {formatDate(d.uploadedAt)}
+                  </span>
+                </span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => download.mutate(d.id)}
+                  disabled={download.isPending}
+                >
+                  <Download className="h-4 w-4" aria-hidden />
+                </Button>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="flex flex-wrap items-end gap-3">
+          <Field label={t('onboarding.documents.type')} htmlFor="docType">
+            <Select
+              id="docType"
+              value={type}
+              onChange={(e) => setType(e.target.value as CredentialDocumentType)}
+            >
+              {CREDENTIAL_DOCUMENT_TYPES.map((dt) => (
+                <option key={dt} value={dt}>
+                  {humanizeEnum(dt)}
+                </option>
+              ))}
+            </Select>
+          </Field>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={upload.isPending}
+          >
+            <UploadCloud className="h-4 w-4" aria-hidden />
+            {upload.isPending
+              ? t('onboarding.documents.uploading')
+              : t('onboarding.documents.upload')}
+          </Button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="application/pdf,image/jpeg,image/png"
+            className="hidden"
+            onChange={(e) => onPick(e.target.files?.[0])}
+          />
+        </div>
+        <p className="text-xs text-on-surface-variant">{t('onboarding.documents.hint')}</p>
+      </CardContent>
+    </Card>
   );
 }

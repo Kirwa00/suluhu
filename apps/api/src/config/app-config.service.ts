@@ -94,4 +94,8 @@ export class AppConfigService {
   get crisis() {
     return { befriendersHotline: this.get('BEFRIENDERS_KENYA_HOTLINE') };
   }
+
+  get documentStorage() {
+    return { dir: this.get('DOCUMENT_STORAGE_DIR') };
+  }
 }

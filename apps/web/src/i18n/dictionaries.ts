@@ -211,6 +211,14 @@ export const dictionaries = {
     'onboarding.languages': 'Languages',
     'onboarding.submitting': 'Submitting…',
     'onboarding.submit': 'Submit for review',
+    'onboarding.documents.title': 'Credential documents',
+    'onboarding.documents.subtitle':
+      'Upload your CPB license, national ID, certificates, and CV — an admin reviews these alongside your application.',
+    'onboarding.documents.type': 'Document type',
+    'onboarding.documents.upload': 'Upload document',
+    'onboarding.documents.uploading': 'Uploading…',
+    'onboarding.documents.hint': 'PDF, JPG, or PNG — up to 10MB.',
+    'onboarding.documents.error': 'Upload failed. Try again.',
 
     // Therapist client record
     'record.backToClients': 'Back to clients',
@@ -277,6 +285,8 @@ export const dictionaries = {
     'adminReview.cpb.valid': 'Valid',
     'adminReview.cpb.notValid': 'Not valid',
     'adminReview.cpb.none': 'No automated check on record.',
+    'adminReview.documents.title': 'Documents',
+    'adminReview.documents.empty': 'No documents uploaded yet.',
     'adminReview.decision.title': 'Decision',
     'adminReview.decision.reasonPlaceholder': 'Reason (required for reject/suspend)',
     'adminReview.decision.approve': 'Approve',
@@ -722,6 +732,14 @@ export const dictionaries = {
     'onboarding.languages': 'Lugha',
     'onboarding.submitting': 'Inawasilisha…',
     'onboarding.submit': 'Wasilisha kwa mapitio',
+    'onboarding.documents.title': 'Nyaraka za vyeti',
+    'onboarding.documents.subtitle':
+      'Pakia leseni yako ya CPB, kitambulisho cha taifa, vyeti, na wasifu wako (CV) — msimamizi atapitia hivi pamoja na ombi lako.',
+    'onboarding.documents.type': 'Aina ya hati',
+    'onboarding.documents.upload': 'Pakia hati',
+    'onboarding.documents.uploading': 'Inapakia…',
+    'onboarding.documents.hint': 'PDF, JPG, au PNG — hadi MB 10.',
+    'onboarding.documents.error': 'Upakiaji umeshindikana. Jaribu tena.',
 
     // Therapist client record
     'record.backToClients': 'Rudi kwa wateja',
@@ -788,6 +806,8 @@ export const dictionaries = {
     'adminReview.cpb.valid': 'Sahihi',
     'adminReview.cpb.notValid': 'Si sahihi',
     'adminReview.cpb.none': 'Hakuna ukaguzi wa kiotomatiki kwenye rekodi.',
+    'adminReview.documents.title': 'Nyaraka',
+    'adminReview.documents.empty': 'Hakuna hati zilizopakiwa bado.',
     'adminReview.decision.title': 'Uamuzi',
     'adminReview.decision.reasonPlaceholder': 'Sababu (inahitajika kwa kukataa/kusimamisha)',
     'adminReview.decision.approve': 'Idhinisha',

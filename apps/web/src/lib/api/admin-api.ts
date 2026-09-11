@@ -24,7 +24,7 @@ export interface ApplicationDetail extends ApplicationListItem {
   cpbExpiry: string | null;
   reviewedAt: string | null;
   rejectionReason: string | null;
-  documents: { id: string; type: string; url: string; originalName: string | null }[];
+  documents: { id: string; type: string; originalName: string | null; uploadedAt: string }[];
   availability: { dayOfWeek: number; startTime: string; endTime: string }[];
 }
 

@@ -1,5 +1,10 @@
 import { z } from 'zod';
-import { Gender, TherapistVerificationStatus, THERAPY_SPECIALTIES } from '../enums';
+import {
+  CredentialDocumentType,
+  Gender,
+  TherapistVerificationStatus,
+  THERAPY_SPECIALTIES,
+} from '../enums';
 import { SESSION_RATE_MAX_KSH, SESSION_RATE_MIN_KSH } from '../constants';
 import { paginationQuerySchema } from './common';
 
@@ -82,4 +87,17 @@ export const reviewDecisionSchema = z
   });
 export type ReviewDecisionInput = z.infer<typeof reviewDecisionSchema>;
 
-export { TherapistVerificationStatus };
+/** Metadata accompanying a document upload (the file itself travels as multipart). */
+export const uploadDocumentSchema = z.object({
+  type: z.nativeEnum(CredentialDocumentType),
+});
+export type UploadDocumentInput = z.infer<typeof uploadDocumentSchema>;
+
+export interface TherapistDocumentView {
+  id: string;
+  type: CredentialDocumentType;
+  originalName: string | null;
+  uploadedAt: string;
+}
+
+export { TherapistVerificationStatus, CredentialDocumentType };
