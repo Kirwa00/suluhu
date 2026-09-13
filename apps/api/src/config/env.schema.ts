@@ -52,6 +52,18 @@ export const envSchema = z.object({
   DAILY_DOMAIN: z.string().optional(),
   DAILY_BASE_URL: z.string().url().default('https://api.daily.co/v1'),
 
+  // Africa's Talking SMS — required only when SMS_MODE=live.
+  AT_USERNAME: z.string().optional(),
+  AT_API_KEY: z.string().optional(),
+  AT_SENDER_ID: z.string().optional(),
+
+  // SMTP email (SES, Mailgun, Postmark, ...) — required only when EMAIL_MODE=live.
+  SMTP_HOST: z.string().optional(),
+  SMTP_PORT: z.coerce.number().int().positive().default(587),
+  SMTP_USER: z.string().optional(),
+  SMTP_PASSWORD: z.string().optional(),
+  EMAIL_FROM: z.string().default('Suluhu Therapy Center <no-reply@suluhu.co.ke>'),
+
   BEFRIENDERS_KENYA_HOTLINE: z.string().default('0800723253'),
 
   // Therapist credential document storage. Local disk by default; production
@@ -101,6 +113,26 @@ export function validateEnv(raw: Record<string, unknown>): Env {
     if (missing.length > 0) {
       throw new Error(
         `Invalid environment configuration:\n  • VIDEO_MODE=live requires: ${missing.join(', ')}`,
+      );
+    }
+  }
+
+  if (parsed.data.SMS_MODE === 'live') {
+    const missing = (['AT_USERNAME', 'AT_API_KEY'] as const).filter((key) => !parsed.data[key]);
+    if (missing.length > 0) {
+      throw new Error(
+        `Invalid environment configuration:\n  • SMS_MODE=live requires: ${missing.join(', ')}`,
+      );
+    }
+  }
+
+  if (parsed.data.EMAIL_MODE === 'live') {
+    const missing = (['SMTP_HOST', 'SMTP_USER', 'SMTP_PASSWORD'] as const).filter(
+      (key) => !parsed.data[key],
+    );
+    if (missing.length > 0) {
+      throw new Error(
+        `Invalid environment configuration:\n  • EMAIL_MODE=live requires: ${missing.join(', ')}`,
       );
     }
   }

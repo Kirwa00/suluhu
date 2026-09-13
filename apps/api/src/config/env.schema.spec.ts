@@ -56,4 +56,29 @@ describe('validateEnv', () => {
         .DAILY_DOMAIN,
     ).toBe('suluhu');
   });
+
+  it("requires the Africa's Talking credentials when SMS_MODE=live", () => {
+    expect(() => validateEnv({ ...BASE, SMS_MODE: 'live' })).toThrow(
+      /SMS_MODE=live requires: AT_USERNAME, AT_API_KEY/,
+    );
+    expect(
+      validateEnv({ ...BASE, SMS_MODE: 'live', AT_USERNAME: 'sandbox', AT_API_KEY: 'k' })
+        .AT_USERNAME,
+    ).toBe('sandbox');
+  });
+
+  it('requires SMTP credentials when EMAIL_MODE=live', () => {
+    expect(() =>
+      validateEnv({ ...BASE, EMAIL_MODE: 'live', SMTP_HOST: 'smtp.example.com' }),
+    ).toThrow(/EMAIL_MODE=live requires: SMTP_USER, SMTP_PASSWORD/);
+    expect(
+      validateEnv({
+        ...BASE,
+        EMAIL_MODE: 'live',
+        SMTP_HOST: 'smtp.example.com',
+        SMTP_USER: 'apikey',
+        SMTP_PASSWORD: 'secret',
+      }).SMTP_HOST,
+    ).toBe('smtp.example.com');
+  });
 });

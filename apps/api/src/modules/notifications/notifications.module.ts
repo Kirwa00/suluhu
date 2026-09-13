@@ -1,9 +1,11 @@
-import { Global, Logger, Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { AppConfigService } from '../../config/app-config.service';
 import { NotificationsService } from './notifications.service';
 import { RemindersService } from './reminders.service';
 import { MockSmsProvider } from './providers/mock-sms.provider';
 import { MockEmailProvider } from './providers/mock-email.provider';
+import { AfricasTalkingSmsProvider } from './providers/africas-talking-sms.provider';
+import { SmtpEmailProvider } from './providers/smtp-email.provider';
 import {
   EMAIL_PROVIDER,
   SMS_PROVIDER,
@@ -11,11 +13,7 @@ import {
   type SmsProvider,
 } from './providers/notification.types';
 
-/**
- * Wires notification channels based on provider mode. Live adapters (Africa's
- * Talking, SES) land in the dedicated Notifications milestone; until then the
- * mock adapters keep every dependent flow runnable.
- */
+/** Wires notification channels to the live adapter when SMS_MODE/EMAIL_MODE=live. */
 @Global()
 @Module({
   providers: [
@@ -26,7 +24,7 @@ import {
       inject: [AppConfigService],
       useFactory: (config: AppConfigService): SmsProvider => {
         if (config.providers.sms === 'live') {
-          new Logger('Notifications').warn('Live SMS provider not yet configured; using mock');
+          return new AfricasTalkingSmsProvider(config.africasTalking);
         }
         return new MockSmsProvider();
       },
@@ -36,7 +34,7 @@ import {
       inject: [AppConfigService],
       useFactory: (config: AppConfigService): EmailProvider => {
         if (config.providers.email === 'live') {
-          new Logger('Notifications').warn('Live email provider not yet configured; using mock');
+          return new SmtpEmailProvider(config.smtp);
         }
         return new MockEmailProvider();
       },
