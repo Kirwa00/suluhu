@@ -91,6 +91,26 @@ export class AppConfigService {
     };
   }
 
+  /** Only populated (and only valid) when `providers.sms === 'live'`. */
+  get africasTalking() {
+    return {
+      username: this.get('AT_USERNAME') ?? '',
+      apiKey: this.get('AT_API_KEY') ?? '',
+      senderId: this.get('AT_SENDER_ID') || undefined,
+    };
+  }
+
+  /** Only populated (and only valid) when `providers.email === 'live'`. */
+  get smtp() {
+    return {
+      host: this.get('SMTP_HOST') ?? '',
+      port: this.get('SMTP_PORT'),
+      user: this.get('SMTP_USER') ?? '',
+      password: this.get('SMTP_PASSWORD') ?? '',
+      from: this.get('EMAIL_FROM'),
+    };
+  }
+
   get crisis() {
     return { befriendersHotline: this.get('BEFRIENDERS_KENYA_HOTLINE') };
   }
