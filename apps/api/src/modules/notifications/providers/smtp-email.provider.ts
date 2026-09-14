@@ -3,9 +3,9 @@ import { createTransport, type Transporter } from 'nodemailer';
 import type { EmailMessage, EmailProvider, SendResult } from './notification.types';
 
 /**
- * SMTP email — live provider. Works with any SMTP relay, including AWS SES's
- * SMTP interface (the common choice), Mailgun, Postmark, etc. — the platform
- * isn't locked to a single vendor's SDK.
+ * SMTP email — live provider. Works with any SMTP relay — Resend (recommended,
+ * see .env.example), AWS SES's SMTP interface, Mailgun, Postmark, etc. — the
+ * platform isn't locked to a single vendor's SDK.
  */
 
 export interface SmtpConfig {
