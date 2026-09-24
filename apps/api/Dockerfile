@@ -10,6 +10,9 @@ COPY package.json package-lock.json turbo.json tsconfig.base.json ./
 COPY packages/shared/package.json packages/shared/
 COPY packages/ui/package.json packages/ui/
 COPY apps/api/package.json apps/api/
+# apps/api's postinstall runs `prisma generate`, so the schema must be in place
+# before npm ci.
+COPY apps/api/prisma apps/api/prisma
 RUN npm ci
 
 # ---- build ----
@@ -27,7 +30,8 @@ FROM node:20-alpine AS runtime
 WORKDIR /app
 ENV NODE_ENV=production
 RUN apk add --no-cache openssl tini \
-  && addgroup -S suluhu && adduser -S suluhu -G suluhu
+  && addgroup -S suluhu && adduser -S suluhu -G suluhu \
+  && mkdir -p /data/therapist-documents && chown -R suluhu:suluhu /data
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/packages/shared/dist ./packages/shared/dist
 COPY --from=build /app/packages/shared/package.json ./packages/shared/package.json
