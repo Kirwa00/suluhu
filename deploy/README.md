@@ -1,14 +1,17 @@
 # Deploying Suluhu on a single Docker host
 
-Target layout: one server (e.g. Hetzner CPX31 — 4 vCPU / 8 GB) running the whole
-stack under Docker Compose, with Cloudflare fronting DNS for `suluhutherapy.com`.
+Target layout: one server (e.g. Hetzner CPX31, or an equivalent self-managed
+VPS — 4 vCPU / 8 GB) running the whole stack under Docker Compose, with
+Cloudflare fronting DNS for `suluhutherapy.co.ke`, the canonical domain.
+`suluhutherapy.com` is a secondary domain that 301-redirects to it.
 
 ```
 Cloudflare (proxied)
-  ├── suluhutherapy.com      →  Caddy :443  →  web :3000   (Next.js)
-  └── api.suluhutherapy.com  →  Caddy :443  →  api :4000   (NestJS)
-                                 api → postgres:5432, redis:6379 (internal only)
-                                 api → /data/therapist-documents (named volume)
+  ├── suluhutherapy.co.ke      →  Caddy :443  →  web :3000   (Next.js)
+  ├── api.suluhutherapy.co.ke  →  Caddy :443  →  api :4000   (NestJS)
+  └── suluhutherapy.com        →  Caddy :443  →  301 redirect to suluhutherapy.co.ke
+                                   api → postgres:5432, redis:6379 (internal only)
+                                   api → /data/therapist-documents (named volume)
 ```
 
 Postgres, Redis and both apps are only reachable through Caddy; nothing but
@@ -47,17 +50,30 @@ a copy in a password manager before the first patient record exists.
 
 ## 3. DNS (Cloudflare)
 
-| Type | Name  | Content       | Proxy |
-| ---- | ----- | ------------- | ----- |
-| A    | `@`   | *server IPv4* | on    |
-| A    | `api` | *server IPv4* | on    |
-| AAAA | `@`   | *server IPv6* | on    |
-| AAAA | `api` | *server IPv6* | on    |
+Add both `suluhutherapy.co.ke` and `suluhutherapy.com` as separate sites in
+Cloudflare (they're independent domains, each with their own DNS zone):
 
-Set SSL/TLS mode to **Full (strict)** — Caddy gets a real Let's Encrypt
-certificate over HTTP-01, which Cloudflare forwards. "Flexible" would break the
-API (redirect loops) and leave the origin hop unencrypted. Leave *Always Use
-HTTPS* on.
+| Domain               | Type | Name  | Content       | Proxy |
+| --------------------- | ---- | ----- | ------------- | ----- |
+| suluhutherapy.co.ke    | A    | `@`   | *server IPv4* | on    |
+| suluhutherapy.co.ke    | A    | `api` | *server IPv4* | on    |
+| suluhutherapy.co.ke    | AAAA | `@`   | *server IPv6* | on    |
+| suluhutherapy.co.ke    | AAAA | `api` | *server IPv6* | on    |
+| suluhutherapy.com      | A    | `@`   | *server IPv4* | on    |
+| suluhutherapy.com      | AAAA | `@`   | *server IPv6* | on    |
+
+(`suluhutherapy.com` only needs the apex record — Caddy serves it purely to
+301-redirect to the `.co.ke` site, there's no `api.suluhutherapy.com`.)
+
+Set SSL/TLS mode to **Full (strict)** on *both* Cloudflare sites — Caddy gets a
+real Let's Encrypt certificate per domain over HTTP-01, which Cloudflare
+forwards. "Flexible" would break the API (redirect loops) and leave the origin
+hop unencrypted. Leave *Always Use HTTPS* on for both.
+
+No Cloudflare account? Point the same records at the VPS's IP through
+whichever registrar/DNS panel holds each domain instead — Caddy issues its own
+Let's Encrypt certificates automatically either way, you just lose Cloudflare's
+proxying/DDoS protection.
 
 ## 4. First deploy
 
@@ -65,7 +81,8 @@ HTTPS* on.
 cd /opt/suluhu
 docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build
 docker compose -f docker-compose.prod.yml --env-file .env.production run --rm migrate
-curl -fsS https://api.suluhutherapy.com/api/v1/health
+curl -fsS https://api.suluhutherapy.co.ke/api/v1/health
+curl -fsSI https://suluhutherapy.com    # should 301 to suluhutherapy.co.ke
 ```
 
 `npm run db:seed` is development demo data (patients, therapists, the
@@ -100,6 +117,6 @@ Restore is `gunzip -c dump.sql.gz | docker compose ... exec -T postgres psql -U 
 
 Each integration is a flag in `.env.production`; flip one at a time and restart
 the API. `MPESA_MODE=live` additionally needs the PayHero callback
-(`https://api.suluhutherapy.com/api/v1/payments/mpesa/callback`) registered with
-PayHero, and `SMS_MODE=live` gates therapist/admin OTP login — until it is live,
-those OTPs only appear in the API logs.
+(`https://api.suluhutherapy.co.ke/api/v1/payments/mpesa/callback`) registered
+with PayHero, and `SMS_MODE=live` gates therapist/admin OTP login — until it is
+live, those OTPs only appear in the API logs.

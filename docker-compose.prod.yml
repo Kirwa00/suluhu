@@ -1,6 +1,7 @@
 # Single-host production stack (e.g. a Hetzner CPX31 running Docker).
 # Everything except Caddy stays on the internal network; Caddy terminates TLS
-# for suluhutherapy.com (web) and api.suluhutherapy.com (API).
+# for suluhutherapy.co.ke (web), api.suluhutherapy.co.ke (API), and redirects
+# suluhutherapy.com to the .co.ke site.
 #
 #   cp .env.production.example .env.production   # fill in, then:
 #   docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build
@@ -19,6 +20,7 @@ services:
     environment:
       WEB_DOMAIN: ${WEB_DOMAIN}
       API_DOMAIN: ${API_DOMAIN}
+      WEB_DOMAIN_REDIRECT: ${WEB_DOMAIN_REDIRECT}
     depends_on:
       - web
       - api
