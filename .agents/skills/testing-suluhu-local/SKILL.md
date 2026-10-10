@@ -63,6 +63,20 @@ until the therapist clicks "Start session"; the patient page polls every 4 s onl
 Once IN_SESSION the patient page does NOT poll, so after the therapist ends the session the
 patient must reload to see "This session has ended".
 
+## Reaching the admin therapist-verification queue
+A fresh seed leaves the queue empty: the seeded therapist is `APPROVED` with
+`submitted_at = null`, while `AdminTherapistsService.listApplications` filters
+`submittedAt: { not: null }`. To reach the review UI (test data only):
+
+```bash
+docker exec suluhu-postgres psql -U suluhu -d suluhu \
+  -c "update therapist_profiles set submitted_at = now(), verification_status = 'IN_REVIEW';"
+```
+
+## After a box restart
+Docker volumes persist, so Postgres/Redis data and migrations survive — only restart
+`npm run dev` (and re-login, since tokens live in `localStorage`).
+
 ## Reading room URLs / tokens as evidence
 Open DevTools → Network, filter `session`, click the `GET /api/v1/sessions/:id` or
 `POST /api/v1/sessions/:id/start` request → Preview. `roomUrl` is plain text; the token is
