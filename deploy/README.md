@@ -91,6 +91,34 @@ admin directly instead.
 
 ## 5. Redeploys
 
+### Automatic, via GitHub Actions (recommended)
+
+`.github/workflows/deploy.yml` SSHes into the server and redeploys after every
+push to `main` that passes CI — no manual step needed once it's set up.
+
+One-time setup:
+
+1. Generate a dedicated deploy key (don't reuse a personal key) and add the
+   **public** half to the server's `~/.ssh/authorized_keys` (or your
+   provider's panel, if it offers one):
+   ```bash
+   ssh-keygen -t ed25519 -f suluhu_deploy_key -N "" -C "github-actions-deploy"
+   ```
+2. In the repo on GitHub: **Settings → Secrets and variables → Actions**, add:
+   - `VPS_HOST` — the server's IP address
+   - `VPS_USER` — `root`, or your non-root deploy user once hardened (see §1)
+   - `VPS_SSH_KEY` — the **private** half of the key from step 1, pasted
+     directly into this field (never into a commit, a PR, or anywhere else)
+3. Push to `main`. The `Deploy` workflow run shows progress under the repo's
+   **Actions** tab, and finishes with a live health-check against
+   `https://api.suluhutherapy.co.ke/api/v1/health`.
+
+The workflow runs `git reset --hard origin/main` on the server, so `/opt/suluhu`
+on the box is deploy-only — don't hand-edit files there, they'll be discarded
+on the next push.
+
+### Manual (fallback, or before the workflow is set up)
+
 ```bash
 cd /opt/suluhu && git pull
 docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build
