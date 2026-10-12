@@ -9,7 +9,7 @@ COPY package.json package-lock.json turbo.json tsconfig.base.json ./
 COPY packages/shared/package.json packages/shared/
 COPY packages/ui/package.json packages/ui/
 COPY apps/web/package.json apps/web/
-RUN npm ci
+RUN npm ci --fetch-retries=5 && test -x node_modules/.bin/tsc
 
 # ---- build ----
 FROM node:20-alpine AS build
