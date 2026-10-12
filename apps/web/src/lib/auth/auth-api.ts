@@ -1,6 +1,7 @@
 import type {
   AuthTokens,
   AuthUser,
+  GoogleRegisterInput,
   LoginInput,
   LoginResult,
   RegisterInput,
@@ -21,6 +22,17 @@ export const authApi = {
 
   login(input: LoginInput) {
     return apiFetch<LoginResult>('/auth/login', { method: 'POST', body: input });
+  },
+
+  google(credential: string) {
+    return apiFetch<LoginResult>('/auth/google', { method: 'POST', body: { credential } });
+  },
+
+  googleRegister(input: GoogleRegisterInput) {
+    return apiFetch<{ user: AuthUser; tokens: AuthTokens }>('/auth/google/register', {
+      method: 'POST',
+      body: input,
+    });
   },
 
   verifyMfa(mfaToken: string, code: string) {

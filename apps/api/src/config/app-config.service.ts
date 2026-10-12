@@ -111,6 +111,11 @@ export class AppConfigService {
     };
   }
 
+  /** `clientId` is empty when Sign in with Google is disabled. */
+  get google() {
+    return { clientId: this.get('GOOGLE_CLIENT_ID') ?? '' };
+  }
+
   get crisis() {
     return { befriendersHotline: this.get('BEFRIENDERS_KENYA_HOTLINE') };
   }

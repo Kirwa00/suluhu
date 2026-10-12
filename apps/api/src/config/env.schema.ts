@@ -64,6 +64,9 @@ export const envSchema = z.object({
   SMTP_PASSWORD: z.string().optional(),
   EMAIL_FROM: z.string().default('Suluhu Therapy Center <no-reply@suluhu.co.ke>'),
 
+  // Sign in with Google — the OAuth Web client ID. Google login is disabled when unset.
+  GOOGLE_CLIENT_ID: z.string().optional(),
+
   BEFRIENDERS_KENYA_HOTLINE: z.string().default('0800723253'),
 
   // Therapist credential document storage. Local disk by default; production
