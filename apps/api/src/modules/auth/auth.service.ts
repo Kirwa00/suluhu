@@ -8,17 +8,20 @@ import {
   type AuthTokens,
   type AuthUser,
   type ChangePasswordInput,
+  type GoogleRegisterInput,
   type LoginInput,
   type LoginResult,
   type RegisterInput,
 } from '@suluhu/shared';
-import type { User } from '@prisma/client';
+import type { Prisma, User } from '@prisma/client';
+import { randomBytes } from 'node:crypto';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AppException } from '../../common/exceptions/app.exception';
 import { AuditService } from '../audit/audit.service';
 import { PasswordService } from './services/password.service';
 import { TokenService, toAuthUser } from './services/token.service';
 import { OtpService } from './services/otp.service';
+import { GoogleIdentityService } from './services/google-identity.service';
 import type { RequestContext } from './types';
 
 const MAX_FAILED_LOGINS = 5;
@@ -32,11 +35,13 @@ export class AuthService {
     private readonly tokens: TokenService,
     private readonly otp: OtpService,
     private readonly audit: AuditService,
+    private readonly google: GoogleIdentityService,
   ) {}
 
   async register(
     input: RegisterInput,
     ctx: RequestContext,
+    extra: Pick<Prisma.UserCreateInput, 'googleSub' | 'emailVerifiedAt'> = {},
   ): Promise<{ user: AuthUser; tokens: AuthTokens }> {
     const email = input.email.toLowerCase();
     const existing = await this.prisma.user.findFirst({
@@ -70,6 +75,7 @@ export class AuthService {
         locale: input.locale === 'sw' ? 'sw' : 'en',
         mfaEnabled,
         acceptedTermsAt: new Date(),
+        ...extra,
         ...(role === UserRole.PATIENT
           ? { patientProfile: { create: {} } }
           : { therapistProfile: { create: {} } }),
@@ -111,15 +117,7 @@ export class AuthService {
       throw invalid();
     }
 
-    if (user.lockedUntil && user.lockedUntil > new Date()) {
-      throw AppException.unauthorized(
-        'Account temporarily locked due to failed attempts. Try again later.',
-        ErrorCode.ACCOUNT_SUSPENDED,
-      );
-    }
-    if (user.status === UserStatus.SUSPENDED || user.status === UserStatus.DEACTIVATED) {
-      throw AppException.unauthorized('Account is not active', ErrorCode.ACCOUNT_SUSPENDED);
-    }
+    this.assertCanSignIn(user);
 
     const ok = await this.passwords.compare(input.password, user.passwordHash);
     if (!ok) {
@@ -132,26 +130,71 @@ export class AuthService {
       data: { failedLogins: 0, lockedUntil: null },
     });
 
-    if (user.mfaEnabled) {
-      await this.otp.issue({
-        userId: user.id,
-        purpose: VerificationPurpose.MFA_CHALLENGE,
-        deliverTo: { phone: user.phone },
-        channel: 'sms',
+    return this.startSession(user, ctx);
+  }
+
+  /**
+   * Sign in with a Google ID token. Matches the linked Google account first, then
+   * links an existing account with the same (Google-verified) email. Unknown
+   * emails get SIGNUP_REQUIRED so the client can collect a phone number.
+   */
+  async loginWithGoogle(credential: string, ctx: RequestContext): Promise<LoginResult> {
+    const identity = await this.google.verify(credential);
+    let user = await this.prisma.user.findFirst({
+      where: { googleSub: identity.sub, deletedAt: null },
+    });
+
+    if (!user) {
+      const byEmail = await this.prisma.user.findFirst({
+        where: { email: identity.email, deletedAt: null },
       });
-      const mfaToken = await this.tokens.signMfaChallenge(user.id);
+      if (!byEmail) {
+        return {
+          status: 'SIGNUP_REQUIRED',
+          profile: {
+            email: identity.email,
+            firstName: identity.firstName,
+            lastName: identity.lastName,
+          },
+        };
+      }
+      if (byEmail.googleSub) {
+        throw AppException.unauthorized(
+          'This account is linked to a different Google account',
+          ErrorCode.AUTH_INVALID_CREDENTIALS,
+        );
+      }
+      this.assertCanSignIn(byEmail);
+      user = await this.prisma.user.update({
+        where: { id: byEmail.id },
+        data: { googleSub: identity.sub, emailVerifiedAt: byEmail.emailVerifiedAt ?? new Date() },
+      });
       await this.audit.record({
         userId: user.id,
-        action: 'auth.login.mfa_challenge',
+        action: 'auth.google.link',
         resourceType: 'user',
         resourceId: user.id,
         ...ctx,
       });
-      return { status: 'MFA_REQUIRED', mfaToken };
     }
 
-    const session = await this.completeLogin(user, ctx);
-    return { status: 'AUTHENTICATED', ...session };
+    this.assertCanSignIn(user);
+    return this.startSession(user, ctx);
+  }
+
+  /** Create an account from a Google ID token plus the fields Google doesn't provide (phone). */
+  async registerWithGoogle(
+    input: GoogleRegisterInput,
+    ctx: RequestContext,
+  ): Promise<{ user: AuthUser; tokens: AuthTokens }> {
+    const { credential, ...rest } = input;
+    const identity = await this.google.verify(credential);
+    // Unusable random password: the user signs in with Google, or sets one via "forgot password".
+    return this.register(
+      { ...rest, email: identity.email, password: randomBytes(32).toString('base64url') },
+      ctx,
+      { googleSub: identity.sub, emailVerifiedAt: new Date() },
+    );
   }
 
   async verifyMfa(
@@ -282,6 +325,41 @@ export class AuthService {
       resourceId: userId,
       ...ctx,
     });
+  }
+
+  private assertCanSignIn(user: User): void {
+    if (user.lockedUntil && user.lockedUntil > new Date()) {
+      throw AppException.unauthorized(
+        'Account temporarily locked due to failed attempts. Try again later.',
+        ErrorCode.ACCOUNT_SUSPENDED,
+      );
+    }
+    if (user.status === UserStatus.SUSPENDED || user.status === UserStatus.DEACTIVATED) {
+      throw AppException.unauthorized('Account is not active', ErrorCode.ACCOUNT_SUSPENDED);
+    }
+  }
+
+  private async startSession(user: User, ctx: RequestContext): Promise<LoginResult> {
+    if (user.mfaEnabled) {
+      await this.otp.issue({
+        userId: user.id,
+        purpose: VerificationPurpose.MFA_CHALLENGE,
+        deliverTo: { phone: user.phone },
+        channel: 'sms',
+      });
+      const mfaToken = await this.tokens.signMfaChallenge(user.id);
+      await this.audit.record({
+        userId: user.id,
+        action: 'auth.login.mfa_challenge',
+        resourceType: 'user',
+        resourceId: user.id,
+        ...ctx,
+      });
+      return { status: 'MFA_REQUIRED', mfaToken };
+    }
+
+    const session = await this.completeLogin(user, ctx);
+    return { status: 'AUTHENTICATED', ...session };
   }
 
   private async completeLogin(

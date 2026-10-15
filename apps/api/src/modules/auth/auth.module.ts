@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 import { PasswordService } from './services/password.service';
 import { TokenService } from './services/token.service';
 import { OtpService } from './services/otp.service';
+import { GoogleIdentityService } from './services/google-identity.service';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { RolesGuard } from './guards/roles.guard';
 
@@ -16,7 +17,15 @@ import { RolesGuard } from './guards/roles.guard';
 @Module({
   imports: [JwtModule.register({})],
   controllers: [AuthController],
-  providers: [AuthService, PasswordService, TokenService, OtpService, JwtAuthGuard, RolesGuard],
+  providers: [
+    AuthService,
+    PasswordService,
+    TokenService,
+    OtpService,
+    GoogleIdentityService,
+    JwtAuthGuard,
+    RolesGuard,
+  ],
   exports: [TokenService, JwtAuthGuard, RolesGuard],
 })
 export class AuthModule {}

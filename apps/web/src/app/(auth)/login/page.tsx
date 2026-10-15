@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { GoogleSignInButton } from '@/components/auth/google-sign-in-button';
 import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,6 +15,7 @@ import { Field } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { authApi, ApiClientError } from '@/lib/auth/auth-api';
 import { dashboardPathForRole, useAuth } from '@/lib/auth/auth-context';
+import { pendingGoogleSignup } from '@/lib/auth/google-signup';
 
 const mfaFormSchema = z.object({ code: otpCodeSchema });
 type MfaForm = z.infer<typeof mfaFormSchema>;
@@ -38,12 +40,35 @@ export default function LoginPage() {
         setMfaToken(result.mfaToken);
         return;
       }
+      if (result.status !== 'AUTHENTICATED') return;
       setSession(result.user, result.tokens);
       router.replace(dashboardPathForRole(result.user.role));
     } catch (err) {
       setFormError(err instanceof ApiClientError ? err.message : 'Unable to sign in. Try again.');
     }
   });
+
+  const onGoogleCredential = async (credential: string) => {
+    setFormError(null);
+    try {
+      const result = await authApi.google(credential);
+      if (result.status === 'MFA_REQUIRED') {
+        setMfaToken(result.mfaToken);
+        return;
+      }
+      if (result.status === 'SIGNUP_REQUIRED') {
+        pendingGoogleSignup.save({ credential, profile: result.profile });
+        router.push('/register?google=1');
+        return;
+      }
+      setSession(result.user, result.tokens);
+      router.replace(dashboardPathForRole(result.user.role));
+    } catch (err) {
+      setFormError(
+        err instanceof ApiClientError ? err.message : 'Google sign-in failed. Try again.',
+      );
+    }
+  };
 
   const onVerifyMfa = mfaForm.handleSubmit(async ({ code }) => {
     if (!mfaToken) return;
@@ -71,38 +96,45 @@ export default function LoginPage() {
         {formError && <Alert variant="error">{formError}</Alert>}
 
         {!mfaToken ? (
-          <form onSubmit={onLogin} className="space-y-4" noValidate>
-            <Field label="Email" htmlFor="email" error={loginForm.formState.errors.email?.message}>
-              <Input
-                id="email"
-                type="email"
-                autoComplete="email"
-                aria-invalid={!!loginForm.formState.errors.email}
-                {...loginForm.register('email')}
-              />
-            </Field>
-            <Field
-              label="Password"
-              htmlFor="password"
-              error={loginForm.formState.errors.password?.message}
-            >
-              <Input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                aria-invalid={!!loginForm.formState.errors.password}
-                {...loginForm.register('password')}
-              />
-            </Field>
-            <div className="flex justify-end">
-              <Link href="/forgot-password" className="text-sm text-secondary hover:underline">
-                Forgot password?
-              </Link>
-            </div>
-            <Button type="submit" className="w-full" disabled={loginForm.formState.isSubmitting}>
-              {loginForm.formState.isSubmitting ? 'Signing in…' : 'Sign in'}
-            </Button>
-          </form>
+          <>
+            <form onSubmit={onLogin} className="space-y-4" noValidate>
+              <Field
+                label="Email"
+                htmlFor="email"
+                error={loginForm.formState.errors.email?.message}
+              >
+                <Input
+                  id="email"
+                  type="email"
+                  autoComplete="email"
+                  aria-invalid={!!loginForm.formState.errors.email}
+                  {...loginForm.register('email')}
+                />
+              </Field>
+              <Field
+                label="Password"
+                htmlFor="password"
+                error={loginForm.formState.errors.password?.message}
+              >
+                <Input
+                  id="password"
+                  type="password"
+                  autoComplete="current-password"
+                  aria-invalid={!!loginForm.formState.errors.password}
+                  {...loginForm.register('password')}
+                />
+              </Field>
+              <div className="flex justify-end">
+                <Link href="/forgot-password" className="text-sm text-secondary hover:underline">
+                  Forgot password?
+                </Link>
+              </div>
+              <Button type="submit" className="w-full" disabled={loginForm.formState.isSubmitting}>
+                {loginForm.formState.isSubmitting ? 'Signing in…' : 'Sign in'}
+              </Button>
+            </form>
+            <GoogleSignInButton onCredential={onGoogleCredential} />
+          </>
         ) : (
           <form onSubmit={onVerifyMfa} className="space-y-4" noValidate>
             <Field

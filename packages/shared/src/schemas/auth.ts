@@ -19,6 +19,18 @@ export const registerSchema = z.object({
 });
 export type RegisterInput = z.infer<typeof registerSchema>;
 
+/** A Google Identity Services ID token (the `credential` from the Sign in with Google button). */
+export const googleLoginSchema = z.object({
+  credential: z.string().min(1, 'Google credential is required'),
+});
+export type GoogleLoginInput = z.infer<typeof googleLoginSchema>;
+
+/** Sign-up with Google: email and name come from the verified ID token; no password. */
+export const googleRegisterSchema = registerSchema
+  .omit({ email: true, password: true })
+  .extend({ credential: z.string().min(1, 'Google credential is required') });
+export type GoogleRegisterInput = z.infer<typeof googleRegisterSchema>;
+
 export const loginSchema = z.object({
   email: emailSchema,
   password: z.string().min(1, 'Password is required'),
@@ -91,4 +103,11 @@ export interface AuthTokens {
 
 export type LoginResult =
   | { status: 'AUTHENTICATED'; user: AuthUser; tokens: AuthTokens }
-  | { status: 'MFA_REQUIRED'; mfaToken: string };
+  | { status: 'MFA_REQUIRED'; mfaToken: string }
+  | { status: 'SIGNUP_REQUIRED'; profile: GoogleProfile };
+
+export interface GoogleProfile {
+  email: string;
+  firstName: string;
+  lastName: string;
+}
