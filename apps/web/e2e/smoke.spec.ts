@@ -3,14 +3,15 @@ import { expect, test } from '@playwright/test';
 test.describe('Suluhu smoke tests', () => {
   test('landing page renders the hero and crisis line', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByRole('heading', { name: /You are not alone/i })).toBeVisible();
-    await expect(page.getByText(/Befrienders Kenya: 0800 723 253/i)).toBeVisible();
+    await expect(page.getByRole('heading', { name: /okay to not be okay/i })).toBeVisible();
+    await expect(page.getByText(/In crisis right now\? Call Befrienders Kenya/i)).toBeVisible();
+    await expect(page.getByRole('link', { name: '0800 723 253' }).first()).toBeVisible();
   });
 
-  test('get started leads to registration', async ({ page }) => {
+  test('free session CTA leads to registration', async ({ page }) => {
     await page.goto('/');
     await page
-      .getByRole('link', { name: /Get started/i })
+      .getByRole('link', { name: /Start with a free session/i })
       .first()
       .click();
     await expect(page).toHaveURL(/\/register/);
