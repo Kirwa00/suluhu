@@ -41,6 +41,6 @@ COPY --from=build /app/apps/api/prisma ./apps/api/prisma
 USER suluhu
 EXPOSE 4000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
-  CMD wget -qO- http://localhost:4000/api/v1/health/live || exit 1
+  CMD wget -qO- http://127.0.0.1:4000/api/v1/health/live || exit 1
 ENTRYPOINT ["/sbin/tini", "--"]
 CMD ["node", "apps/api/dist/main.js"]
