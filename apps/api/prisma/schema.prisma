@@ -166,6 +166,7 @@ model User {
   email        String     @unique
   phone        String     @unique
   passwordHash String     @map("password_hash")
+  googleSub    String?    @unique @map("google_sub")
   role         UserRole   @default(PATIENT)
   status       UserStatus @default(PENDING_VERIFICATION)
 

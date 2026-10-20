@@ -4,15 +4,20 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { registerSchema, UserRole, type RegisterInput } from '@suluhu/shared';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { GoogleSignInButton } from '@/components/auth/google-sign-in-button';
 import { Alert } from '@/components/ui/alert';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Field } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { authApi, ApiClientError } from '@/lib/auth/auth-api';
-import { useAuth } from '@/lib/auth/auth-context';
+import { dashboardPathForRole, useAuth } from '@/lib/auth/auth-context';
+import { pendingGoogleSignup, type PendingGoogleSignup } from '@/lib/auth/google-signup';
+
+// Satisfies the password rule in the shared form schema; never sent for Google sign-ups.
+const GOOGLE_PLACEHOLDER_PASSWORD = 'GoogleSignup1';
 
 function RegisterForm() {
   const router = useRouter();
@@ -20,6 +25,7 @@ function RegisterForm() {
   const { setSession } = useAuth();
   const isTherapist = params.get('role') === 'therapist';
   const [formError, setFormError] = useState<string | null>(null);
+  const [google, setGoogle] = useState<PendingGoogleSignup | null>(null);
 
   const form = useForm<RegisterInput>({
     resolver: zodResolver(registerSchema),
@@ -35,10 +41,58 @@ function RegisterForm() {
     },
   });
 
+  const applyGoogleIdentity = (pending: PendingGoogleSignup) => {
+    setGoogle(pending);
+    form.setValue('email', pending.profile.email);
+    form.setValue('password', GOOGLE_PLACEHOLDER_PASSWORD);
+    if (pending.profile.firstName) form.setValue('firstName', pending.profile.firstName);
+    if (pending.profile.lastName) form.setValue('lastName', pending.profile.lastName);
+  };
+
+  useEffect(() => {
+    if (params.get('google') !== '1') return;
+    const pending = pendingGoogleSignup.read();
+    if (pending) applyGoogleIdentity(pending);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
+
+  const onGoogleCredential = async (credential: string) => {
+    setFormError(null);
+    try {
+      const result = await authApi.google(credential);
+      if (result.status === 'SIGNUP_REQUIRED') {
+        applyGoogleIdentity({ credential, profile: result.profile });
+        return;
+      }
+      if (result.status === 'MFA_REQUIRED') {
+        router.push('/login');
+        return;
+      }
+      setSession(result.user, result.tokens);
+      router.replace(dashboardPathForRole(result.user.role));
+    } catch (err) {
+      setFormError(
+        err instanceof ApiClientError ? err.message : 'Google sign-up failed. Try again.',
+      );
+    }
+  };
+
   const onSubmit = form.handleSubmit(async (values) => {
     setFormError(null);
     try {
-      const result = await authApi.register(values);
+      const { firstName, lastName, phone, role, locale, acceptedTerms } = values;
+      const result = google
+        ? await authApi.googleRegister({
+            firstName,
+            lastName,
+            phone,
+            role,
+            locale,
+            acceptedTerms,
+            credential: google.credential,
+          })
+        : await authApi.register(values);
+      pendingGoogleSignup.clear();
       setSession(result.user, result.tokens);
       router.replace('/verify');
     } catch (err) {
@@ -79,7 +133,13 @@ function RegisterForm() {
             </Field>
           </div>
           <Field label="Email" htmlFor="email" error={e.email?.message}>
-            <Input id="email" type="email" autoComplete="email" {...form.register('email')} />
+            <Input
+              id="email"
+              type="email"
+              autoComplete="email"
+              readOnly={!!google}
+              {...form.register('email')}
+            />
           </Field>
           <Field
             label="Phone"
@@ -89,19 +149,21 @@ function RegisterForm() {
           >
             <Input id="phone" type="tel" autoComplete="tel" {...form.register('phone')} />
           </Field>
-          <Field
-            label="Password"
-            htmlFor="password"
-            error={e.password?.message}
-            hint="At least 8 characters with upper, lower and a number."
-          >
-            <Input
-              id="password"
-              type="password"
-              autoComplete="new-password"
-              {...form.register('password')}
-            />
-          </Field>
+          {!google && (
+            <Field
+              label="Password"
+              htmlFor="password"
+              error={e.password?.message}
+              hint="At least 8 characters with upper, lower and a number."
+            >
+              <Input
+                id="password"
+                type="password"
+                autoComplete="new-password"
+                {...form.register('password')}
+              />
+            </Field>
+          )}
 
           <label className="flex items-start gap-2 text-sm text-on-surface-variant">
             <input
@@ -129,6 +191,8 @@ function RegisterForm() {
             {form.formState.isSubmitting ? 'Creating account…' : 'Create account'}
           </Button>
         </form>
+
+        {!google && <GoogleSignInButton onCredential={onGoogleCredential} text="signup_with" />}
 
         <p className="text-center text-sm text-on-surface-variant">
           Already have an account?{' '}

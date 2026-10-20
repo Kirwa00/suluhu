@@ -9,6 +9,8 @@ import {
   AUTH_PASSWORD_FORGOT_RATE_LIMIT,
   AUTH_RATE_LIMIT_TTL_MS,
   changePasswordSchema,
+  googleLoginSchema,
+  googleRegisterSchema,
   loginSchema,
   registerSchema,
   requestOtpSchema,
@@ -17,6 +19,8 @@ import {
   verifyMfaSchema,
   verifyOtpSchema,
   type ChangePasswordInput,
+  type GoogleLoginInput,
+  type GoogleRegisterInput,
   type LoginInput,
   type RegisterInput,
   type RequestOtpInput,
@@ -53,6 +57,29 @@ export class AuthController {
   @ApiOperation({ summary: 'Authenticate with email and password' })
   login(@Body(new ZodValidationPipe(loginSchema)) dto: LoginInput, @Req() req: Request) {
     return this.auth.login(dto, ctx(req));
+  }
+
+  @Public()
+  @Throttle({ default: { limit: AUTH_LOGIN_RATE_LIMIT, ttl: AUTH_RATE_LIMIT_TTL_MS } })
+  @Post('google')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Sign in with a Google ID token' })
+  google(
+    @Body(new ZodValidationPipe(googleLoginSchema)) dto: GoogleLoginInput,
+    @Req() req: Request,
+  ) {
+    return this.auth.loginWithGoogle(dto.credential, ctx(req));
+  }
+
+  @Public()
+  @Throttle({ default: { limit: AUTH_LOGIN_RATE_LIMIT, ttl: AUTH_RATE_LIMIT_TTL_MS } })
+  @Post('google/register')
+  @ApiOperation({ summary: 'Create an account from a Google ID token' })
+  googleRegister(
+    @Body(new ZodValidationPipe(googleRegisterSchema)) dto: GoogleRegisterInput,
+    @Req() req: Request,
+  ) {
+    return this.auth.registerWithGoogle(dto, ctx(req));
   }
 
   @Public()
