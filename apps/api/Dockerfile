@@ -13,7 +13,7 @@ COPY apps/api/package.json apps/api/
 # apps/api's postinstall runs `prisma generate`, so the schema must be in place
 # before npm ci.
 COPY apps/api/prisma apps/api/prisma
-RUN npm ci
+RUN npm ci --fetch-retries=5 && test -x node_modules/.bin/tsc
 
 # ---- build ----
 FROM node:20-alpine AS build
