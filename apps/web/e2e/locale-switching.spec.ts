@@ -30,7 +30,10 @@ test.describe('locale switching', () => {
     const otpResponse = await request.get(
       `${API_BASE}/api/v1/auth/test/otp?to=${encodeURIComponent(PATIENT_EMAIL)}`,
     );
-    const { code } = await otpResponse.json();
+    // Responses are wrapped in the API's standard {success, data, meta, error} envelope.
+    const {
+      data: { code },
+    } = await otpResponse.json();
     await page.getByLabel('Verification code').fill(code);
     await page.getByRole('button', { name: /^Verify & continue$/i }).click();
 
