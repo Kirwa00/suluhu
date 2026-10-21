@@ -8,6 +8,7 @@ import {
   AUTH_OTP_VERIFY_RATE_LIMIT,
   AUTH_PASSWORD_FORGOT_RATE_LIMIT,
   AUTH_RATE_LIMIT_TTL_MS,
+  RATE_LIMIT_PER_USER_PER_MIN,
   changePasswordSchema,
   googleLoginSchema,
   googleRegisterSchema,
@@ -94,7 +95,9 @@ export class AuthController {
     return this.auth.verifyMfa(dto.mfaToken, dto.code, ctx(req));
   }
 
+  // Called on page loads to restore the session; the strict class limit logged users out.
   @Public()
+  @Throttle({ default: { limit: RATE_LIMIT_PER_USER_PER_MIN, ttl: AUTH_RATE_LIMIT_TTL_MS } })
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Exchange a refresh token for new tokens' })
@@ -173,6 +176,7 @@ export class AuthController {
     return { changed: true };
   }
 
+  @Throttle({ default: { limit: RATE_LIMIT_PER_USER_PER_MIN, ttl: AUTH_RATE_LIMIT_TTL_MS } })
   @Get('me')
   @ApiOperation({ summary: 'Return the authenticated principal' })
   me(@CurrentUser() user: AuthenticatedRequest['user']) {
