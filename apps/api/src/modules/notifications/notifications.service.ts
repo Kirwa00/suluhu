@@ -7,6 +7,8 @@ import {
   type SmsMessage,
   type SmsProvider,
 } from './providers/notification.types';
+import { MockEmailProvider } from './providers/mock-email.provider';
+import { MockSmsProvider } from './providers/mock-sms.provider';
 
 /**
  * Facade over notification channels. Higher-level modules (auth, appointments)
@@ -26,5 +28,21 @@ export class NotificationsService {
 
   sendEmail(message: EmailMessage) {
     return this.email.send(message);
+  }
+
+  /**
+   * Test-only: the last message sent to a recipient, when the configured
+   * provider is the mock one (SMS_MODE/EMAIL_MODE !== 'live'). Undefined
+   * otherwise — live providers never retain message content.
+   */
+  getLastMockMessage(to: string): string | undefined {
+    if (this.sms instanceof MockSmsProvider) {
+      const sms = this.sms.getLast(to);
+      if (sms) return sms;
+    }
+    if (this.email instanceof MockEmailProvider) {
+      return this.email.getLast(to);
+    }
+    return undefined;
   }
 }
