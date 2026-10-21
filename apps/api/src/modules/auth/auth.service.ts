@@ -344,8 +344,8 @@ export class AuthService {
       await this.otp.issue({
         userId: user.id,
         purpose: VerificationPurpose.MFA_CHALLENGE,
-        deliverTo: { phone: user.phone },
-        channel: 'sms',
+        deliverTo: { email: user.email },
+        channel: 'email',
       });
       const mfaToken = await this.tokens.signMfaChallenge(user.id);
       await this.audit.record({

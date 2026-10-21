@@ -88,7 +88,7 @@ export default function LoginPage() {
         <CardTitle className="text-2xl">{mfaToken ? 'Verify it’s you' : 'Welcome back'}</CardTitle>
         <CardDescription>
           {mfaToken
-            ? 'Enter the 6-digit code we sent to your phone.'
+            ? 'Enter the 6-digit code we sent to your email.'
             : 'Sign in to continue your care journey.'}
         </CardDescription>
       </CardHeader>

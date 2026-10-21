@@ -60,7 +60,7 @@ function setup(found: { bySub?: User | null; byEmail?: User | null } = {}) {
     audit as never,
     google as never,
   );
-  return { service, prisma, tokens, google, audit };
+  return { service, prisma, tokens, otp, google, audit };
 }
 
 describe('AuthService Google sign-in', () => {
@@ -91,14 +91,28 @@ describe('AuthService Google sign-in', () => {
     await expect(service.loginWithGoogle('cred', CTX)).rejects.toThrow('different Google account');
   });
 
-  it('keeps the SMS step for MFA roles', async () => {
+  it('keeps the MFA step, delivered by email', async () => {
     const therapist = makeUser({ googleSub: 'g-123', role: UserRole.THERAPIST, mfaEnabled: true });
-    const { service, tokens } = setup({ bySub: therapist });
+    const { service, tokens, otp } = setup({ bySub: therapist });
     await expect(service.loginWithGoogle('cred', CTX)).resolves.toEqual({
       status: 'MFA_REQUIRED',
       mfaToken: 'mfa-token',
     });
     expect(tokens.issueTokens).not.toHaveBeenCalled();
+    expect(otp.issue).toHaveBeenCalledWith(
+      expect.objectContaining({ channel: 'email', deliverTo: { email: 'asha@example.com' } }),
+    );
+  });
+
+  it('requires MFA for patients too (mfaEnabled defaults true for every role)', async () => {
+    const patient = makeUser({ googleSub: 'g-123', role: UserRole.PATIENT, mfaEnabled: true });
+    const { service, tokens, otp } = setup({ bySub: patient });
+    await expect(service.loginWithGoogle('cred', CTX)).resolves.toEqual({
+      status: 'MFA_REQUIRED',
+      mfaToken: 'mfa-token',
+    });
+    expect(tokens.issueTokens).not.toHaveBeenCalled();
+    expect(otp.issue).toHaveBeenCalledWith(expect.objectContaining({ channel: 'email' }));
   });
 
   it('blocks suspended accounts', async () => {
