@@ -15,8 +15,9 @@ export const UserRole = {
 export type UserRole = (typeof UserRole)[keyof typeof UserRole];
 export const USER_ROLES = Object.values(UserRole);
 
-/** Roles for whom MFA is mandatory (SDLC §7.2). */
+/** Roles for whom MFA is mandatory (SDLC §7.2). Email OTP on every login, all roles. */
 export const MFA_REQUIRED_ROLES: readonly UserRole[] = [
+  UserRole.PATIENT,
   UserRole.THERAPIST,
   UserRole.ADMIN,
   UserRole.SUPER_ADMIN,

@@ -177,8 +177,8 @@ model User {
   emailVerifiedAt DateTime? @map("email_verified_at")
   phoneVerifiedAt DateTime? @map("phone_verified_at")
 
-  // MFA (mandatory for therapists/admins; optional for patients — SDLC §7.2)
-  mfaEnabled    Boolean   @default(false) @map("mfa_enabled")
+  // MFA (mandatory for all roles — email OTP on every login — SDLC §7.2)
+  mfaEnabled    Boolean   @default(true) @map("mfa_enabled")
   lastLoginAt   DateTime? @map("last_login_at")
   failedLogins  Int       @default(0) @map("failed_logins")
   lockedUntil   DateTime? @map("locked_until")

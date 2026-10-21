@@ -34,7 +34,7 @@ async function upsertUser(input: {
       emailVerifiedAt: new Date(),
       phoneVerifiedAt: new Date(),
       acceptedTermsAt: new Date(),
-      mfaEnabled: input.role !== UserRole.PATIENT,
+      mfaEnabled: true,
     },
   });
 }

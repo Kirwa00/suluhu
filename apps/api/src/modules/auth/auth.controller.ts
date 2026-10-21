@@ -1,5 +1,5 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Post, Req } from '@nestjs/common';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, HttpCode, HttpStatus, Post, Query, Req } from '@nestjs/common';
+import { ApiExcludeEndpoint, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Throttle } from '@nestjs/throttler';
 import {
   AUTH_LOGIN_RATE_LIMIT,
@@ -8,6 +8,7 @@ import {
   AUTH_OTP_VERIFY_RATE_LIMIT,
   AUTH_PASSWORD_FORGOT_RATE_LIMIT,
   AUTH_RATE_LIMIT_TTL_MS,
+  OTP_LENGTH,
   RATE_LIMIT_PER_USER_PER_MIN,
   changePasswordSchema,
   googleLoginSchema,
@@ -32,6 +33,8 @@ import {
 } from '@suluhu/shared';
 import type { Request } from 'express';
 import { ZodValidationPipe } from '../../common/pipes/zod-validation.pipe';
+import { AppException } from '../../common/exceptions/app.exception';
+import { NotificationsService } from '../notifications/notifications.service';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { Public } from './decorators/public.decorator';
@@ -42,7 +45,10 @@ import type { AuthenticatedRequest, RequestContext } from './types';
 @Throttle({ default: { limit: 10, ttl: 60_000 } })
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly auth: AuthService) {}
+  constructor(
+    private readonly auth: AuthService,
+    private readonly notifications: NotificationsService,
+  ) {}
 
   @Public()
   @Post('register')
@@ -181,6 +187,27 @@ export class AuthController {
   @ApiOperation({ summary: 'Return the authenticated principal' })
   me(@CurrentUser() user: AuthenticatedRequest['user']) {
     return user;
+  }
+
+  /**
+   * Test-only: retrieves the OTP code last sent to `to` via a mock provider,
+   * so e2e tests can complete MFA/verification flows without a real SMS/email
+   * provider. Hard-gated to NODE_ENV==='test' — 404s otherwise, including in
+   * development, so this never exists outside CI/test runs.
+   */
+  @Public()
+  @Get('test/otp')
+  @ApiExcludeEndpoint()
+  testOtp(@Query('to') to: string) {
+    if (process.env.NODE_ENV !== 'test') {
+      throw AppException.notFound();
+    }
+    const message = this.notifications.getLastMockMessage(to);
+    const match = message?.match(new RegExp(`is (\\d{${OTP_LENGTH}})\\.`));
+    if (!match) {
+      throw AppException.notFound('No code found for this recipient');
+    }
+    return { code: match[1] };
   }
 }
 
